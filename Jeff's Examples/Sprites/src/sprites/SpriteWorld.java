@@ -2,7 +2,7 @@
  * SpriteWorld.java
  * Jeff Ondich, 10/29/14.
  *
- * The Application subclass for the Sprite sample for CS257.
+ * The Application subclass for the Sprite dorf_fortress for CS257.
  */
 package sprites;
 

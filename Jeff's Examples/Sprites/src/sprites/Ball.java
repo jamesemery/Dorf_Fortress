@@ -2,7 +2,7 @@
  * Ball.java
  * Jeff Ondich, 10/29/14.
  *
- * A sample subclass of Sprite for CS257.
+ * A dorf_fortress subclass of Sprite for CS257.
  */
 package sprites;
 

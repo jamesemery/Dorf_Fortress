@@ -2,7 +2,7 @@
  * Sprite.java
  * Jeff Ondich, 10/29/14.
  *
- * The sprite superclass for the JavaFX sprites sample for CS257.
+ * The sprite superclass for the JavaFX sprites dorf_fortress for CS257.
  */
 package sprites;
 
