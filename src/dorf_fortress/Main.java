@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -38,11 +40,22 @@ public class Main extends Application {
         primaryStage.setTitle("Dorf Fortress");
         Scene platformerBasics = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
-        //Testing basic drawing functionality
-        Actor dorfActor = new Actor("sprites/BasicDorf.png", 32, 32);
-        dorfActor.setX(34);
-        dorfActor.setY(100);
-        root.getChildren().add(dorfActor);
+        //Make a tiled background.
+        BackgroundImage myBI= new BackgroundImage(
+                new Image("sprites/BasicTile.png"),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+        Region platformerBasicsRegion = new Region();
+        platformerBasicsRegion.setPrefSize(SCENE_WIDTH, SCENE_HEIGHT);
+        platformerBasicsRegion.setBackground(new Background(myBI));
+        root.getChildren().add(platformerBasicsRegion);
+
+        //Make a Dorf!
+        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand");
+        ferdinand.setX(34);
+        ferdinand.setY(100);
+        root.getChildren().add(ferdinand);
 
         primaryStage.setScene(platformerBasics);
         primaryStage.show();
