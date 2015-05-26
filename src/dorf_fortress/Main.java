@@ -3,6 +3,7 @@ package dorf_fortress;
 import javafx.application.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -26,10 +27,23 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
+        //Example code for loading from an fxml file. We might need this for
+        //the main menu?
+        //FXMLLoader.load(getClass().getResource("sample.fxml"));
+        //In the meantime, we'll just do this...
+        Group root = new Group();
+        //...and fill in the objects by hand. That's much nicer to do for our
+        //actual platformer.
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Dorf Fortress");
         Scene platformerBasics = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+
+        //Testing basic drawing functionality
+        Actor dorfActor = new Actor("sprites/BasicDorf.png", 32, 32);
+        dorfActor.setX(34);
+        dorfActor.setY(100);
+        root.getChildren().add(dorfActor);
+
         primaryStage.setScene(platformerBasics);
         primaryStage.show();
     }
