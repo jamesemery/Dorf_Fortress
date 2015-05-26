@@ -5,5 +5,5 @@ package dorf_fortress;
  * Abstract subclass of Actor; moves programmatically rather then via player
  * controls.
  */
-public class Enemy extends Actor {
-}
+//public class Enemy extends Actor {
+//}
