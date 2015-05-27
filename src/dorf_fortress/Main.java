@@ -61,7 +61,7 @@ public class Main extends Application {
         Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand");
         ferdinand.setX(34);
         ferdinand.setY(100);
-        root.getChildren().add(ferdinand);
+        root.getChildren().add(ferdinand.getSprite());
 
         //Set up the controller. (Hopefully)
         GameController controller = new GameController(ferdinand);

@@ -42,6 +42,7 @@ public class GameController implements EventHandler<KeyEvent> {
 
     private void updateAnimation() {
         //step.
+        dorf_obj.updateSprite();
         //We do know that this bit actually works, though; I tried it and
         //just called dorf_obj.right() every step, which worked pretty well.
     }
