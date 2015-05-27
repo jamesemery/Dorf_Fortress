@@ -5,10 +5,9 @@ package dorf_fortress;
  * Controllable hero of the game; subclass of Actor.
  */
 public class Dorf extends Actor {
-    double STEP_SIZE = 5;
+    double STEP_SIZE = 1;
     String name;
-
-
+    InputBuffer inputSource;
 
     /**
      * Calls Actor's constructor with no name.
@@ -18,6 +17,7 @@ public class Dorf extends Actor {
      */
     public Dorf(String image_location, int hitbox_width, int hitbox_height) {
         super(image_location, hitbox_width, hitbox_height);
+        inputSource = InputBuffer.getInstance();
     }
 
     /**
@@ -33,17 +33,31 @@ public class Dorf extends Actor {
         this.name = name;
     }
 
+    public void step(){
+        if (inputSource.getInput("left")) {
+            this.left();
+        }
+        if (inputSource.getInput("right")) {
+            this.right();
+        }
+        if (inputSource.getInput("up")) {
+            this.left();
+        }
+        this.x += this.x_velocity;
+        this.y += this.y_velocity;
+    }
+
     public void left() {
+        this.x_velocity -= STEP_SIZE;
         this.setX(this.getX() - this.STEP_SIZE);
     }
 
     public void right() {
+        this.x_velocity += STEP_SIZE;
         this.setX(this.getX() + this.STEP_SIZE);
     }
 
     public void up() {
-        if (this.getY() > 0) {
-            this.setY(this.getY() - this.STEP_SIZE);
-        }
+        this.y_velocity += STEP_SIZE;
     }
 }

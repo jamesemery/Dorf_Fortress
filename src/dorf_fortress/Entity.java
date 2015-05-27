@@ -11,7 +11,6 @@ public class Entity {
     double x_velocity = 0;
     double y_velocity = 0;
 
-
     public Entity (String sprite_location, int hitbox_width, int hitbox_height) {
         this.sprite = new Sprite (sprite_location, hitbox_width, hitbox_height);
         //this.hitbox = new Hitbox(some arguments or something);

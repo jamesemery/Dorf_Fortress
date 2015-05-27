@@ -12,6 +12,7 @@ public class GameController implements EventHandler<KeyEvent> {
     final private double FRAMES_PER_SECOND = .5;
     private Timer timer;
     public Dorf dorf_obj;
+
     public InputBuffer inputStore;
 
     public GameController(Dorf dorfObj) {
@@ -21,7 +22,7 @@ public class GameController implements EventHandler<KeyEvent> {
 
     public void initialize() {
         this.setUpAnimationTimer();
-        inputStore = new InputBuffer();
+        inputStore = InputBuffer.getInstance();
     }
 
     private void setUpAnimationTimer() {
