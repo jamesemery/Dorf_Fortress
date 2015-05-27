@@ -27,4 +27,16 @@ public class Dorf extends Actor {
         super(image_location, hitbox_width, hitbox_height);
         this.name = name;
     }
+
+    public void left() {
+
+    }
+
+    public void right() {
+        
+    }
+
+    public void up() {
+
+    }
 }
