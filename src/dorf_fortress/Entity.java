@@ -38,9 +38,10 @@ public class Entity {
 
     public void step() {
         this.x += this.x_velocity;
-        this.y += this.y_velocity;
+        this.y -= this.y_velocity;
     }
     public void updateSprite() {
+        this.step();
         this.sprite.update(this.x, this.y);
     }
 }

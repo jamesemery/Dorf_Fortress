@@ -40,7 +40,7 @@ public class Actor extends Entity {
     }
 
     public void step() {
-        //do stuff
+        super.step();
     }
 
     public void die() {

@@ -31,8 +31,14 @@ public class Dorf extends Actor {
                 String name) {
         super(image_location, hitbox_width, hitbox_height, name);
         this.name = name;
+        inputSource = InputBuffer.getInstance();
     }
 
+    /**
+     * Handles user specific modifications to the to change velocity
+     * accordingly then calls the actor step method
+     */
+    @Override
     public void step(){
         if (inputSource.getInput("left")) {
             this.left();
@@ -41,10 +47,12 @@ public class Dorf extends Actor {
             this.right();
         }
         if (inputSource.getInput("up")) {
-            this.left();
+            this.up();
         }
-        this.x += this.x_velocity;
-        this.y += this.y_velocity;
+        if (inputSource.getInput("down")) {
+            this.down();
+        }
+        super.step();
     }
 
     public void left() {
@@ -59,5 +67,8 @@ public class Dorf extends Actor {
 
     public void up() {
         this.y_velocity += STEP_SIZE;
+    }
+    public void down() {
+        this.y_velocity -= STEP_SIZE;
     }
 }

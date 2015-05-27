@@ -9,7 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameController implements EventHandler<KeyEvent> {
-    final private double FRAMES_PER_SECOND = .5;
+    final private double FRAMES_PER_SECOND = 20;
     private Timer timer;
     public Dorf dorf_obj;
 
