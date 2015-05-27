@@ -8,6 +8,8 @@ public class Entity {
     //Hitbox hitbox;
     double x;
     double y;
+    double x_velocity = 0;
+    double y_velocity = 0;
 
     public Entity (String sprite_location, int hitbox_width, int hitbox_height) {
         this.sprite = new Sprite (sprite_location, hitbox_width, hitbox_height);
@@ -34,6 +36,10 @@ public class Entity {
         return this.sprite;
     }
 
+    public void step() {
+        this.x += this.x_velocity;
+        this.y += this.y_velocity;
+    }
     public void updateSprite() {
         this.sprite.update(this.x, this.y);
     }
