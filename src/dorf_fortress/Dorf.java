@@ -55,16 +55,15 @@ public class Dorf extends Actor {
         super.step();
     }
 
+
     public void left() {
         this.x_velocity -= STEP_SIZE;
         this.setX(this.getX() - this.STEP_SIZE);
     }
-
     public void right() {
         this.x_velocity += STEP_SIZE;
         this.setX(this.getX() + this.STEP_SIZE);
     }
-
     public void up() {
         this.y_velocity += STEP_SIZE;
     }
