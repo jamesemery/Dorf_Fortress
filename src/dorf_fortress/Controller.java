@@ -15,6 +15,7 @@ public class Controller implements EventHandler<KeyEvent> {
 
     public Controller(Dorf dorfObj) {
         this.dorf_obj = dorfObj;
+        this.setUpAnimationTimer();
     }
 
     public void initialize() {
@@ -40,7 +41,9 @@ public class Controller implements EventHandler<KeyEvent> {
     }
 
     private void updateAnimation() {
-        //step
+        //step.
+        //We do know that this bit actually works, though; I tried it and
+        //just called dorf_obj.right() every step, which worked pretty well.
     }
 
     @Override

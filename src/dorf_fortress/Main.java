@@ -64,10 +64,12 @@ public class Main extends Application {
         root.getChildren().add(ferdinand);
 
         //Set up the controller. (Hopefully)
-        Controller controller = new Controller();
+        Controller controller = new Controller(ferdinand);
+        controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.
         root.setOnKeyPressed(controller);
+        root.requestFocus();
 
         primaryStage.setScene(platformerBasics);
         primaryStage.show();
@@ -78,43 +80,4 @@ public class Main extends Application {
         launch(args);
     }
 
-    private void setUpAnimationTimer() {
-        TimerTask timerTask = new TimerTask() {
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        updateAnimation();
-                    }
-                });
-            }
-        };
-
-        final long startTimeInMilliseconds = 0;
-        final long repetitionPeriodInMilliseconds = 100;
-        long frameTimeInMilliseconds = (long) (1000.0 / FRAMES_PER_SECOND);
-        Timer timer = new java.util.Timer();
-        timer.schedule(timerTask, 0, frameTimeInMilliseconds);
-    }
-
-    private void updateAnimation() {
-        /*for (Sprite sprite : this.spriteList) {
-            // Change sprite's velocity to create a bounce if it has hit a wall.
-            Point2D position = sprite.getPosition();
-            Point2D size = sprite.getSize();
-            Point2D velocity = sprite.getVelocity();
-            if (position.getX() + size.getX() >= SCENE_WIDTH && velocity.getX() > 0) {
-                sprite.setVelocity(-velocity.getX(), velocity.getY());
-            } else if (position.getX() < 0 && velocity.getX() < 0) {
-                sprite.setVelocity(-velocity.getX(), velocity.getY());
-            } else if (position.getY() + size.getY() >= SCENE_HEIGHT && velocity.getY() > 0) {
-                sprite.setVelocity(velocity.getX(), -velocity.getY());
-            } else if (position.getY() < 0 && velocity.getY() < 0) {
-                sprite.setVelocity(velocity.getX(), -velocity.getY());
-                sprite.makeSound();
-            }
-
-            // Move the sprite.
-            sprite.step();
-        }*/
-    }
 }

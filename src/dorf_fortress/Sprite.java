@@ -13,10 +13,21 @@ public class Sprite extends ImageView {
      * the location of the image; then creates its own Hitbox object.
      * @param sprite_Location
      */
+    private double abstract_x;
+    private double abstract_y;
+
     public Sprite (String sprite_Location, int hitbox_width, int hitbox_height) {
         //ImageView's constructor
         super(sprite_Location);
         //TODO generate a hitbox object.
+    }
+
+    public double getAbstract_x() {
+        return abstract_x;
+    }
+
+    public double getAbstract_y() {
+        return abstract_y;
     }
 
     //hitbox stuff. That's really all we need to add here.

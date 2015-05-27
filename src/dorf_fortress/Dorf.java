@@ -5,6 +5,8 @@ package dorf_fortress;
  * Controllable hero of the game; subclass of Actor.
  */
 public class Dorf extends Actor {
+    double STEP_SIZE = 5;
+
     /**
      * Calls Actor's constructor with no name.
      * @param image_location
@@ -29,14 +31,16 @@ public class Dorf extends Actor {
     }
 
     public void left() {
-
+        this.setX(this.getX() - this.STEP_SIZE);
     }
 
     public void right() {
-        
+        this.setX(this.getX() + this.STEP_SIZE);
     }
 
     public void up() {
-
+        if (this.getY() > 0) {
+            this.setY(this.getY() - this.STEP_SIZE);
+        }
     }
 }
