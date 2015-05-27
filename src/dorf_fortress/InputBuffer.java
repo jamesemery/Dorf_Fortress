@@ -13,8 +13,11 @@ import java.util.HashSet;
  * Created by jamie on 5/27/15.
  */
 public class InputBuffer {
-    private Set<String> storedInput = new HashSet<String>();
+    private Set<String> storedInput;
 
+    public InputBuffer(){
+        storedInput = new HashSet<String>();
+    }
 
     public void addInput(String input){
         storedInput.add(input);

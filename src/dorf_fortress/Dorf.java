@@ -6,6 +6,9 @@ package dorf_fortress;
  */
 public class Dorf extends Actor {
     double STEP_SIZE = 5;
+    String name;
+
+
 
     /**
      * Calls Actor's constructor with no name.

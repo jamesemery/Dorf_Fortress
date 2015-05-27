@@ -6,8 +6,10 @@ import javafx.scene.Node;
  * Created by Joe Adkisson on 5/24/2015.
  * Superclass that contains both the controllable character and enemy objects.
  */
-public class Actor extends Sprite {
-    public String name = "";
+public class Actor {
+    double xCor;
+    double yCor;
+
 
     /**
      * Calls Sprite's constructor, which makes the image and a hitbox object.
@@ -19,8 +21,7 @@ public class Actor extends Sprite {
      * @param hitbox_height
      */
     public Actor(String sprite_location, int hitbox_width, int hitbox_height) {
-        super(sprite_location, hitbox_width, hitbox_height);
-        this.name = "";
+
     }
 
     /**
