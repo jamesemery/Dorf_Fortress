@@ -8,12 +8,12 @@ import javafx.scene.input.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Controller implements EventHandler<KeyEvent> {
+public class GameController implements EventHandler<KeyEvent> {
     final private double FRAMES_PER_SECOND = 20.0;
     private Timer timer;
     public Dorf dorf_obj;
 
-    public Controller(Dorf dorfObj) {
+    public GameController(Dorf dorfObj) {
         this.dorf_obj = dorfObj;
         this.setUpAnimationTimer();
     }

@@ -64,7 +64,7 @@ public class Main extends Application {
         root.getChildren().add(ferdinand);
 
         //Set up the controller. (Hopefully)
-        Controller controller = new Controller(ferdinand);
+        GameController controller = new GameController(ferdinand);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.
