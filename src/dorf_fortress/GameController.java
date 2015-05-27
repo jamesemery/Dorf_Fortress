@@ -9,9 +9,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameController implements EventHandler<KeyEvent> {
-    final private double FRAMES_PER_SECOND = 20.0;
+    final private double FRAMES_PER_SECOND = 20;
     private Timer timer;
     public Dorf dorf_obj;
+
+    public InputBuffer inputStore;
 
     public GameController(Dorf dorfObj) {
         this.dorf_obj = dorfObj;
@@ -20,6 +22,7 @@ public class GameController implements EventHandler<KeyEvent> {
 
     public void initialize() {
         this.setUpAnimationTimer();
+        inputStore = InputBuffer.getInstance();
     }
 
     private void setUpAnimationTimer() {
@@ -28,6 +31,7 @@ public class GameController implements EventHandler<KeyEvent> {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         updateAnimation();
+                        inputStore.reset();
                     }
                 });
             }
@@ -42,6 +46,8 @@ public class GameController implements EventHandler<KeyEvent> {
 
     private void updateAnimation() {
         //step.
+
+        dorf_obj.updateSprite();
         //We do know that this bit actually works, though; I tried it and
         //just called dorf_obj.right() every step, which worked pretty well.
     }
@@ -50,13 +56,16 @@ public class GameController implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.LEFT || code == KeyCode.A) {
-            dorf_obj.left();
+            inputStore.addInput("left");
             keyEvent.consume();
         } else if (code == KeyCode.RIGHT || code == KeyCode.D) {
-            dorf_obj.right();
+            inputStore.addInput("right");
             keyEvent.consume();
         } else if (code == KeyCode.UP || code == KeyCode.W) {
-            dorf_obj.up();
+            inputStore.addInput("up");
+            keyEvent.consume();
+        } else if (code == KeyCode.DOWN || code == KeyCode.S) {
+            inputStore.addInput("down");
             keyEvent.consume();
         }
     }

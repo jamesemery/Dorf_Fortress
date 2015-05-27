@@ -6,5 +6,5 @@ package dorf_fortress;
  * These can move, but cannot be killed or otherwise altered by the player,
  * hence the difference from Enemy.
  */
-//public class Obstacle extends Sprite {
+//public class Obstacle extends Entity {
 //}
