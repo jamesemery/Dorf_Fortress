@@ -39,8 +39,22 @@ public class Actor extends Entity {
         this.name = name;
     }
 
+    /**
+     * A method for actors affected by gravity; called during the step() method.
+     * This will probably be moved or overwritten, but I want somewhere to work
+     * on the gravity.
+     */
+    public void fall() {
+
+    }
+
+    /**
+     * Actor's step() method accounts for the effects of gravity and then just
+     * moves according to its velocity.
+     */
     public void step() {
-        //do stuff
+        fall();
+        super.step();
     }
 
     public void die() {
