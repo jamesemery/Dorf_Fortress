@@ -35,6 +35,9 @@ public class Entity {
         return this.sprite;
     }
 
+    public void step() {
+        //do nothing; this will be overwritten by subclasses.
+    }
     public void updateSprite() {
         this.sprite.update(this.x, this.y);
     }
