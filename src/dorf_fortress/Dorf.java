@@ -43,6 +43,8 @@ public class Dorf extends Actor {
         if (inputSource.getInput("up")) {
             this.left();
         }
+        this.x += this.x_velocity;
+        this.y += this.y_velocity;
     }
 
     public void left() {
