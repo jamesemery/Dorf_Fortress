@@ -29,7 +29,7 @@ public class Dorf extends Actor {
      */
     public Dorf(String image_location, int hitbox_width, int hitbox_height,
                 String name) {
-        super(image_location, hitbox_width, hitbox_height);
+        super(image_location, hitbox_width, hitbox_height, name);
         this.name = name;
     }
 
