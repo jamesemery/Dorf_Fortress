@@ -108,7 +108,7 @@ public class Dorf extends Actor {
      * Adds to the upwards velocity.
      */
     public void up() {
-        if (onPlatform) {
+        if (this.onPlatform) {
             this.y_velocity += PLATFORM_JUMP_BOOST;
             System.out.println("Jump");
         }
