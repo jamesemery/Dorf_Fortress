@@ -72,6 +72,7 @@ public abstract class Entity {
             }
         }
         this.setY(y - this.y_velocity);
+
     }
 
     public void updateSprite() {
