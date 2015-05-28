@@ -17,7 +17,7 @@ public class Model {
         this.controller = controller;
         entities = new ArrayList<Entity>();
         //Make a Dorf!
-        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32,
+        Dorf ferdinand = new Dorf("sprites/BrownDorf.png", 32, 32,
                 "Ferdinand",this);
         ferdinand.setX(34);
         ferdinand.setY(100);
