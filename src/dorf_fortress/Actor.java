@@ -8,6 +8,8 @@ import javafx.scene.Node;
  */
 public class Actor extends Entity {
     public String name = "";
+    public final double GRAVITY_CONSTANT = .09;
+    public boolean isOnPlatform = true;
 
     /**
      * Calls Sprite's constructor, which makes the image and a hitbox object.
@@ -45,7 +47,7 @@ public class Actor extends Entity {
      * on the gravity.
      */
     public void fall() {
-
+        y_velocity -= GRAVITY_CONSTANT;
     }
 
     /**
@@ -60,4 +62,8 @@ public class Actor extends Entity {
     public void die() {
         //do stuff
     }
+
+    //in current implementation the dorf will never act upon something else
+    // colliding with it but it might in the future so this is left here
+    public void collides(Entity projectile) {};
 }

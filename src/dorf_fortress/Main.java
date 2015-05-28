@@ -63,8 +63,15 @@ public class Main extends Application {
         ferdinand.setY(100);
         root.getChildren().add(ferdinand.getSprite());
 
+        //Make a Platform?
+        Platform platty = new Platform("sprites/BasicDorf.png",32,32,400,400);
+        platty.setX(400);
+        platty.setY(400);
+        root.getChildren().add(platty.getSprite());
+
+
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(ferdinand);
+        GameController controller = new GameController(ferdinand,platty);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.
