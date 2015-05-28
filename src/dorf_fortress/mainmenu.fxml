@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.MainMenuController">
    <children>
       <Text layoutX="167.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dorf Fortress" textAlignment="CENTER">
          <font>
@@ -14,7 +14,7 @@
          </font>
       </Text>
       <Separator layoutX="200.0" layoutY="303.0" prefHeight="30.0" prefWidth="200.0" />
-      <Button layoutX="230.0" layoutY="333.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="141.0" text="Begin" textAlignment="CENTER">
+      <Button layoutX="230.0" layoutY="333.0" mnemonicParsing="false" onAction="#whenBeginClicked" prefHeight="29.0" prefWidth="141.0" text="Begin" textAlignment="CENTER">
          <font>
             <Font name="Alegreya SC" size="13.0" />
          </font>
@@ -27,7 +27,7 @@
       </Label>
       <StackPane layoutX="264.0" layoutY="125.0" prefHeight="75.0" prefWidth="75.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 2; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
          <children>
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="menu_dorf_sprite" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../sprites/BasicDorf.png" />
                </image>
