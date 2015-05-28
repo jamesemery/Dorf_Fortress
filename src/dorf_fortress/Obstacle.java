@@ -10,8 +10,8 @@ package dorf_fortress;
 public abstract class Obstacle extends Entity {
 
     public Obstacle(String sprite_location, int hitbox_width, int hitbox_height,
-                 Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, simulation);
+                 Model simulation, double x, double y) {
+        super(sprite_location, hitbox_width, hitbox_height, simulation, x, y);
     }
 
     public abstract void collidesX(Dorf ferdinand);

@@ -28,7 +28,9 @@ public abstract class Entity {
                 hitbox_height);
         this.simulation = simulation;
         hitbox_checker = false;
-        makeHitbox(hitbox_width,hitbox_height);
+        this.height = hitbox_height;
+        this.width = hitbox_width;
+        makeHitbox();
         this.setX(x);
         this.setY(y);
         initial_x = x;
@@ -39,7 +41,7 @@ public abstract class Entity {
 
     }
 
-    protected abstract void makeHitbox(int widtht, int height);
+    protected abstract void makeHitbox();
 
     public void reset() {
         setX(initial_x);

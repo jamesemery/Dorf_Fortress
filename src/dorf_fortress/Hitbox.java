@@ -13,7 +13,7 @@ public abstract class Hitbox {
 
     abstract void setY(double y);
 
-    //this returns true if the given hitbox intersects with this current hitbox
+    //this returns true if t he given hitbox intersects with this current hitbox
     public abstract boolean intersects(Hitbox h);
 
 

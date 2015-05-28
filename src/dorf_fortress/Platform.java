@@ -46,8 +46,8 @@ public class Platform extends Entity {
         }
     }
 
-    public void makeHitbox(int width, int height) {
-        this.hitbox = new PlatformHitbox(width,height);
+    public void makeHitbox() {
+        this.hitbox = new PlatformHitbox(this.width,this.height);
     }
 }
 

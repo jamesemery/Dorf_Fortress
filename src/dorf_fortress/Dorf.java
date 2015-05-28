@@ -36,8 +36,8 @@ public class Dorf extends Actor {
     /**
      * Makes a specifc dorf hitbox
      */
-    protected void makeHitbox(int width, int height) {
-        this.hitbox = new DorfHitbox(width, height);
+    protected void makeHitbox() {
+        this.hitbox = new DorfHitbox(this.width, this.height);
     }
 
 

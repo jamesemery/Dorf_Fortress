@@ -13,7 +13,7 @@ public class PlatformHitbox extends Hitbox {
 
     public PlatformHitbox(double width, double height){
         hitboxRectangles = new Rectangle[1];
-        hitboxRectangles[0] = new Rectangle(x, y, width, height);
+        hitboxRectangles[0] = new Rectangle(width, height);
     }
 
     void setX(double newx){
