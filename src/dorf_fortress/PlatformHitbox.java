@@ -11,9 +11,7 @@ public class PlatformHitbox extends Hitbox {
     double x;
     double y;
 
-    public PlatformHitbox(double x, double y, double width, double height){
-        this.x = x;
-        this.y = y;
+    public PlatformHitbox(double width, double height){
         hitboxRectangles = new Rectangle[1];
         hitboxRectangles[0] = new Rectangle(x, y, width, height);
     }

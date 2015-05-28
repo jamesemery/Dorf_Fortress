@@ -54,7 +54,7 @@ public class Main extends Application {
         root.getChildren().add(platformerBasicsRegion);
 
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(root);
+        GameController controller = new GameController(root, SCENE_HEIGHT);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.

@@ -8,12 +8,9 @@ public class Platform extends Entity {
 
     public Platform(String sprite_location, int hitbox_width, int
             hitbox_height, double x, double y, Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, simulation);
-        hitbox = new PlatformHitbox(x,y,hitbox_width,hitbox_height);
+        super(sprite_location, hitbox_width, hitbox_height, simulation, x, y);
         this.height = hitbox_height;
         this.width = hitbox_width;
-        this.setX(x);
-        this.setY(y);
     }
 
     @Override
@@ -47,6 +44,10 @@ public class Platform extends Entity {
             projectile.setX(this.getX() + this.width + 0.01);
             projectile.setX_velocity(this.getX_velocity());
         }
+    }
+
+    public void makeHitbox(int width, int height) {
+        this.hitbox = new PlatformHitbox(width,height);
     }
 }
 

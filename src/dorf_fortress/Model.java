@@ -7,20 +7,20 @@ import java.util.ArrayList;
  * Created by jamie on 5/27/15.
  */
 public class Model {
-    List<Entity> entities;
-    Dorf player;
-    GameController controller;
+    private List<Entity> entities;
+    private Dorf player;
+    private GameController controller;
+    public static double SCENE_HEIGHT;
 
 
 
-    public Model(GameController controller) {
+    public Model(GameController controller, double sceneHeight) {
+        this.SCENE_HEIGHT = sceneHeight;
         this.controller = controller;
         entities = new ArrayList<Entity>();
         //Make a Dorf!
-        Dorf ferdinand = new Dorf("sprites/BrownDorf.png", 32, 32,
-                "Ferdinand",this);
-        ferdinand.setX(34);
-        ferdinand.setY(100);
+        Dorf ferdinand = new Dorf("sprites/BrownDorf.png", 32, 32, this, 34,
+                100);
         this.player = ferdinand;
         controller.addSpriteToRoot(ferdinand.getSprite());
 
@@ -84,5 +84,16 @@ public class Model {
         }
         player.updateSprite();
     }
+
+    // restets the level to the initial conditions for every entity contained
+    // in the set
+    public void reset() {
+        for (Entity i : entities){
+            i.reset();
+        }
+        player.reset();
+    }
+
+
 }
 

@@ -21,10 +21,10 @@ public class GameController implements EventHandler<KeyEvent> {
     Group root;
 
 
-    public GameController(Group root) {
+    public GameController(Group root, double sceneHeight) {
         this.root = root;
         spriteList = new ArrayList<Sprite>();
-        this.simulation = new Model(this);
+        this.simulation = new Model(this, sceneHeight);
         this.setUpAnimationTimer();
     }
 
