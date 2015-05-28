@@ -8,9 +8,10 @@ import javafx.scene.Node;
  */
 public class Actor extends Entity {
     public String name = "";
-    public final double GRAVITY_CONSTANT = .1;
+    public final double GRAVITY_CONSTANT = 0.1;
     public final double TERMINAL_VELOCITY = -7.5;
     public boolean isOnPlatform = true;
+    boolean onPlatform;
 
     /**
      * Calls Sprite's constructor, which makes the image and a hitbox object.
@@ -69,5 +70,8 @@ public class Actor extends Entity {
 
     //in current implementation the dorf will never act upon something else
     // colliding with it but it might in the future so this is left here
-    public void collides(Entity projectile) {};
+    public void collidesX(Entity projectile) {};
+    public void collidesY(Entity projectile) {};
+
+    public void setOnPlatform(boolean val) {isOnPlatform = val;}
 }
