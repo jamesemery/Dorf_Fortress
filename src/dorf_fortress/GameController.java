@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameController implements EventHandler<KeyEvent> {
-    final private double FRAMES_PER_SECOND = 20;
+    final private double FRAMES_PER_SECOND = 40;
     private Timer timer;
     public Model simulation;
     public InputBuffer inputStore;
