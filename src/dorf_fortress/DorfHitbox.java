@@ -11,7 +11,7 @@ public class DorfHitbox extends Hitbox {
     double x;
     double y;
 
-    public DorfHitbox(double x, double y, double height, double width){
+    public DorfHitbox(double x, double y, double width, double height){
         this.x = x;
         this.y = y;
         hitboxRectangles = new Rectangle[1];
