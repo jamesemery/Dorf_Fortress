@@ -25,12 +25,16 @@ public class Model {
         controller.addSpriteToRoot(ferdinand.getSprite());
 
         //Make a Platform?
-        Platform platty = new Platform("sprites/128x32platform.png",128,32,400,
+        Platform platty = new Platform("sprites/128x32platform.png",128,32,34,
                 400,this);
-        platty.setX(400);
-        platty.setY(400);
         entities.add(platty);
         controller.addSpriteToRoot(platty.getSprite());
+
+        //Make a Platform?
+        Platform platty2 = new Platform("sprites/128x32platform.png",128,32,162,
+                400,this);
+        entities.add(platty2);
+        controller.addSpriteToRoot(platty2.getSprite());
     }
 
     public List<Entity> getObjects() {
