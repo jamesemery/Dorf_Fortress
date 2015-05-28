@@ -76,7 +76,7 @@ public class Main extends Application {
         //Make a Platform?
         Platform platty = new Platform("sprites/128x32platform.png",32,128,400,
                 400);
-        platty.setX(400);
+        platty.setX(34);
         platty.setY(400);
         root.getChildren().add(platty.getSprite());
 

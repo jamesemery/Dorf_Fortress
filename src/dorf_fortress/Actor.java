@@ -8,7 +8,8 @@ import javafx.scene.Node;
  */
 public class Actor extends Entity {
     public String name = "";
-    public final double GRAVITY_CONSTANT = 0;
+    public final double GRAVITY_CONSTANT = .1;
+    public final double TERMINAL_VELOCITY = -7.5;
     public boolean isOnPlatform = true;
 
     /**
@@ -47,7 +48,9 @@ public class Actor extends Entity {
      * on the gravity.
      */
     public void fall() {
-        y_velocity -= GRAVITY_CONSTANT;
+        if (y_velocity >= TERMINAL_VELOCITY) {
+            y_velocity -= GRAVITY_CONSTANT;
+        }
     }
 
     /**
