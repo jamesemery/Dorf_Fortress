@@ -19,7 +19,7 @@
             <Font name="Alegreya SC" size="13.0" />
          </font>
       </Button>
-      <Slider accessibleText="Difficulty" layoutX="275.0" layoutY="252.0" max="10.0" prefHeight="16.0" prefWidth="130.0" />
+      <Slider layoutX="275.0" layoutY="252.0" max="10.0" prefHeight="16.0" prefWidth="130.0" />
       <Label layoutX="200.0" layoutY="250.0" text="Difficulty:" textAlignment="RIGHT">
          <font>
             <Font name="Alegreya SC" size="14.0" />
