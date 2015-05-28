@@ -38,7 +38,6 @@ public class GameController implements EventHandler<KeyEvent> {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         updateAnimation();
-                        inputStore.reset();
                     }
                 });
             }

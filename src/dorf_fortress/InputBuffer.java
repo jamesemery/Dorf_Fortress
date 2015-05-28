@@ -28,15 +28,17 @@ public class InputBuffer {
         return uniqueInstance;
     }
 
-    public void addInput(String input){
-        storedInput.add(input);
+    //Write this up more formally, but pressed=true means the key was pressed,
+    //pressed=false means it was released.
+    public void addInput(String input, boolean pressed){
+        if (pressed == true) {
+            storedInput.add(input);
+        } else {
+            storedInput.remove(input);
+        }
     }
 
     public boolean getInput(String input){
         return storedInput.contains(input);
-    }
-
-    public void reset(){
-        storedInput.clear();
     }
 }
