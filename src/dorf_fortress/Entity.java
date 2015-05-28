@@ -40,9 +40,7 @@ public abstract class Entity {
         x_velocity = dx;
     }
 
-    public double getY_velocity(){
-        return y_velocity;
-    }
+    public double getY_velocity(){ return y_velocity; }
 
     public void setY_velocity(double dy){
         y_velocity = dy;
