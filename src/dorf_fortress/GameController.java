@@ -19,6 +19,7 @@ public class GameController implements EventHandler<KeyEvent> {
     public InputBuffer inputStore;
     List<Sprite> spriteList;
     Group root;
+    private double screenOffset;
 
 
     public GameController(Group root, double sceneHeight) {
@@ -61,6 +62,7 @@ public class GameController implements EventHandler<KeyEvent> {
      */
     private void updateAnimation() {
         simulation.simulateFrame();
+        updateScreen();
     }
 
     /**
@@ -71,6 +73,18 @@ public class GameController implements EventHandler<KeyEvent> {
     public void addSpriteToRoot(Sprite sprite){
         root.getChildren().add(sprite);
         spriteList.add(sprite);
+    }
+
+    /**
+     * Handles logic for determining screen scroll left and right based on
+     * the Dorf's x coordinate then it loops through the sprites in the list
+     * and asks them to update given the new offset
+     */
+    public void updateScreen() {
+        screenOffset = simulation.player.getX();
+        for (Sprite s : spriteList) {
+            s.update(screenOffset);
+        }
     }
 
     /**
