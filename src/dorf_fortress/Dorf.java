@@ -6,7 +6,7 @@ package dorf_fortress;
  */
 public class Dorf extends Actor {
     double STEP_SIZE = 1;
-    public final double FRICTION_CONSTANT = 0.3;
+    public final double FRICTION_CONSTANT = .69;
     String name;
     InputBuffer inputSource;
 
