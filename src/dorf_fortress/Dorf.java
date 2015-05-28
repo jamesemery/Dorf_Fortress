@@ -5,9 +5,10 @@ package dorf_fortress;
  * Controllable hero of the game; subclass of Actor.
  */
 public class Dorf extends Actor {
-    double STEP_SIZE = 300/ GameController.FRAMES_PER_SECOND;
-    double PLATFORM_JUMP_BOOST = 3000;
+    public final double STEP_SIZE = 300/ GameController.FRAMES_PER_SECOND;
+    public final double PLATFORM_JUMP_BOOST = 3000;
     public final double FRICTION_COEFFICIENT = 15/ GameController.FRAMES_PER_SECOND;
+    public final double MAX_HORIZ_SPEED = 80;
     String name;
     InputBuffer inputSource;
 
@@ -95,6 +96,9 @@ public class Dorf extends Actor {
      */
     public void left() {
         this.x_velocity -= STEP_SIZE;
+        if (this.x_velocity < MAX_HORIZ_SPEED * -1) {
+            this.x_velocity = MAX_HORIZ_SPEED * -1;
+        }
     }
 
     /**
@@ -102,6 +106,9 @@ public class Dorf extends Actor {
      */
     public void right() {
         this.x_velocity += STEP_SIZE;
+        if (this.x_velocity > MAX_HORIZ_SPEED) {
+            this.x_velocity = MAX_HORIZ_SPEED;
+        }
     }
 
     /**
