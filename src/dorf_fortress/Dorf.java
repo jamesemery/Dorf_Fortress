@@ -97,29 +97,20 @@ public class Dorf extends Actor {
      * Adds to the leftwards velocity.
      */
     public void left() {
-<<<<<<< HEAD
-        this.x_velocity -= STEP_SIZE;
+        this.x_velocity -= STEP_SIZE_X;
         if (this.x_velocity < MAX_HORIZ_SPEED * -1) {
             this.x_velocity = MAX_HORIZ_SPEED * -1;
         }
-=======
-        this.x_velocity -= STEP_SIZE_X;
-
->>>>>>> 3f45805ec73d00de74053c5717bdd5fd13df538c
     }
 
     /**
      * Adds to the rightwards velocity.
      */
     public void right() {
-<<<<<<< HEAD
-        this.x_velocity += STEP_SIZE;
+        this.x_velocity += STEP_SIZE_X;
         if (this.x_velocity > MAX_HORIZ_SPEED) {
             this.x_velocity = MAX_HORIZ_SPEED;
         }
-=======
-        this.x_velocity += STEP_SIZE_X;
->>>>>>> 3f45805ec73d00de74053c5717bdd5fd13df538c
     }
 
     /**
