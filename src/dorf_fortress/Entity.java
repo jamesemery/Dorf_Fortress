@@ -98,7 +98,7 @@ public abstract class Entity {
      */
     public void updateSprite() {
         this.step();
-        this.sprite.update(this.x, this.y);
+        this.sprite.update(this.x, this.y, this.simulation.player.getX());
     }
 
     /**
