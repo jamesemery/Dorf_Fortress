@@ -9,19 +9,43 @@ public abstract class Entity {
     private double y;
     protected double x_velocity = 0;
     protected double y_velocity = 0;
+    private double initial_x;
+    private double initial_y;
+    private double initial_x_veloicty;
+    private double initial_y_velocity;
     protected Hitbox hitbox;
     double height;
     double width;
     boolean hitbox_checker; //determines if this object enacts hitbox checking
     Model simulation;
+    //if the object "dies" when if falls off the edge of the screen
+    protected boolean screen_death;
 
 
     public Entity (String sprite_location, int hitbox_width, int
-            hitbox_height, Model simulation) {
+            hitbox_height, Model simulation, double x, double y) {
         this.sprite = new Sprite (sprite_location, hitbox_width,
                 hitbox_height);
         this.simulation = simulation;
         hitbox_checker = false;
+        makeHitbox(hitbox_width,hitbox_height);
+        this.setX(x);
+        this.setY(y);
+        initial_x = x;
+        initial_y = y;
+        initial_x_veloicty = x_velocity;
+        initial_y_velocity = y_velocity;
+        this.screen_death = false;
+
+    }
+
+    protected abstract void makeHitbox(int widtht, int height);
+
+    public void reset() {
+        setX(initial_x);
+        setY(initial_y);
+        setX_velocity(initial_x_veloicty);
+        setY_velocity(initial_y_velocity);
 
     }
 
@@ -85,8 +109,25 @@ public abstract class Entity {
                 }
             }
         }
-
+        if (screen_death) {
+            if (isOffScreen()) {
+                this.die();
+            }
+        }
     }
+
+    /**
+     * Determines if the Entity has fallen off either the top or the bottom
+     * of the screen
+     */
+    private boolean isOffScreen() {
+        //under the bottom first then over the top second
+        if (this.y > simulation.SCENE_HEIGHT | this.y < (-this.height)) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Updates the sprite's position on the screen, based on the Dorf's x
@@ -111,6 +152,11 @@ public abstract class Entity {
     public boolean intersects(Entity e){
         return this.hitbox.intersects(e.hitbox);
     }
+
+    /**
+     * Runs when the character meets its demise. TODO IMPLEMENT/DEAL WITH THIS
+     */
+    public void die() {};
 
     //entity objects need to do stuff with collisions
     public abstract void collidesX(Entity projectile);

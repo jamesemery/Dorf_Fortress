@@ -20,33 +20,24 @@ public class Dorf extends Actor {
      * @param hitbox_height
      */
     public Dorf(String image_location, int hitbox_width, int hitbox_height,
-                Model model) {
-        super(image_location, hitbox_width, hitbox_height, model);
+                Model model, double x, double y) {
+
+        super(image_location, hitbox_width, hitbox_height, model, x, y);
         inputSource = InputBuffer.getInstance();
-        hitbox = new DorfHitbox(this.getX(), this.getY() , 32, 32);
+        hitbox = new DorfHitbox( 32, 32);
         height = 32;
         width = 32;
         hitbox_checker = true;
+        this.screen_death = true;
     }
 
     /**
-     * Calls Actor's constructor with a name.
-     * @param image_location
-     * @param hitbox_width
-     * @param hitbox_height
-     * @param name
-     * @param model
+     * Makes a specifc dorf hitbox
      */
-    public Dorf(String image_location, int hitbox_width, int hitbox_height,
-                String name, Model model) {
-        super(image_location, hitbox_width, hitbox_height, name, model);
-        this.name = name;
-        inputSource = InputBuffer.getInstance();
-        hitbox = new DorfHitbox(this.getX(), this.getY() , 32, 32);
-        height = 32;
-        width = 32;
-        hitbox_checker = true;
+    protected void makeHitbox(int width, int height) {
+        this.hitbox = new DorfHitbox(width, height);
     }
+
 
     /**
      * Pulls the frame's input from the InputBuffer, then calls the appropriate
@@ -122,5 +113,12 @@ public class Dorf extends Actor {
      */
     public void down() {
         this.y_velocity -= STEP_SIZE_Y;
+    }
+
+    /**
+     * Resets the level if the dorf dies
+     */
+    public void die() {
+        simulation.reset();
     }
 }
