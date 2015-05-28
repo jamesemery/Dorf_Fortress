@@ -16,7 +16,6 @@ public abstract class Entity {
     Model simulation;
 
 
-
     public Entity (String sprite_location, int hitbox_width, int
             hitbox_height, Model simulation) {
         this.sprite = new Sprite (sprite_location, hitbox_width,
@@ -67,11 +66,18 @@ public abstract class Entity {
         if (this.hitbox_checker){
             for (Entity other : simulation.getObjects()) {
                 if (this.intersects(other)) {
-                    other.collides(this);
+                    other.collidesX(this);
                 }
             }
         }
         this.setY(y - this.y_velocity);
+        if (this.hitbox_checker){
+            for (Entity other : simulation.getObjects()) {
+                if (this.intersects(other)) {
+                    other.collidesY(this);
+                }
+            }
+        }
 
     }
 
@@ -84,6 +90,7 @@ public abstract class Entity {
         return this.hitbox.intersects(e.hitbox);
     }
 
-    //
-    public abstract void collides(Entity projectile);
+    //entity objects need to do stuff with collisions
+    public abstract void collidesX(Entity projectile);
+    public abstract void collidesY(Entity projectile);
 }
