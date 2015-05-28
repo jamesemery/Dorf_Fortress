@@ -66,10 +66,8 @@ public class GameController implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         if(keyEvent.getEventType() == keyEvent.KEY_PRESSED) {
-            System.out.println("PRESS");
             handleKeyPress(keyEvent);
         } else if (keyEvent.getEventType() == keyEvent.KEY_RELEASED) {
-            System.out.println("RELEASE");
             handleKeyRelease(keyEvent);
         }
     }
