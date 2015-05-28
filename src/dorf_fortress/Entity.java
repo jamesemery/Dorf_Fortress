@@ -11,11 +11,11 @@ public abstract class Entity {
     protected double y_velocity = 0;
     private double initial_x;
     private double initial_y;
-    private double initial_x_veloicty;
-    private double initial_y_velocity;
+    protected double initial_x_veloicty;
+    protected double initial_y_velocity;
     protected Hitbox hitbox;
-    double height;
-    double width;
+    protected double height;
+    protected double width;
     boolean hitbox_checker; //determines if this object enacts hitbox checking
     Model simulation;
     //if the object "dies" when if falls off the edge of the screen

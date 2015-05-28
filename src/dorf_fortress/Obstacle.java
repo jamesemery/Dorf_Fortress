@@ -14,6 +14,4 @@ public abstract class Obstacle extends Entity {
         super(sprite_location, hitbox_width, hitbox_height, simulation, x, y);
     }
 
-    public abstract void collidesX(Dorf ferdinand);
-    public abstract void collidesY(Dorf ferdinand);
 }

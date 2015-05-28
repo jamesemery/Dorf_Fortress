@@ -68,6 +68,16 @@ public class Model {
         entities.add(level3);
         controller.addSpriteToRoot(level3.getSprite());
 
+        KillBlock krell = new KillBlock("sprites/BasicDorf.png",32,32,this,200,
+                300);
+        entities.add(krell);
+        controller.addSpriteToRoot(krell.getSprite());
+
+        SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
+                ("sprites/BasicDorf.png",32,32,this,100,50);
+        entities.add(jumpy);
+        controller.addSpriteToRoot(jumpy.getSprite());
+
         /*
          * RANDOM JUMP TESTING ENDS
          */
