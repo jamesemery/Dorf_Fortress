@@ -5,9 +5,11 @@ package dorf_fortress;
  * Controllable hero of the game; subclass of Actor.
  */
 public class Dorf extends Actor {
-    public final double STEP_SIZE = 300/ GameController.FRAMES_PER_SECOND;
-    public final double PLATFORM_JUMP_BOOST = 3000;
-    public final double FRICTION_COEFFICIENT = 15/ GameController.FRAMES_PER_SECOND;
+
+    double STEP_SIZE_X = 200/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_Y = 20/ GameController.FRAMES_PER_SECOND;
+    double PLATFORM_JUMP_BOOST = 15000/ GameController.FRAMES_PER_SECOND;
+    public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 80;
     String name;
     InputBuffer inputSource;
@@ -70,8 +72,8 @@ public class Dorf extends Actor {
         if (inputSource.getInput("down")) {
             this.down();
         }
-        super.step();
         applyFriction();
+        super.step();
     }
 
     /**
@@ -81,11 +83,11 @@ public class Dorf extends Actor {
      */
     private void applyFriction() {
         if(this.x_velocity > 0) {
-            this.x_velocity -= FRICTION_COEFFICIENT;
+            this.x_velocity -= FRICTION_CONSTANT;
             //We don't want to overshoot on velocity, just bring it to zero.
             if (this.x_velocity < 0) { this.x_velocity = 0;}
         } else if (this.x_velocity < 0) {
-            this.x_velocity += FRICTION_COEFFICIENT;
+            this.x_velocity += FRICTION_CONSTANT;
             //We don't want to overshoot on velocity, just bring it to zero.
             if (this.x_velocity > 0) { this.x_velocity = 0;}
         }
@@ -95,37 +97,46 @@ public class Dorf extends Actor {
      * Adds to the leftwards velocity.
      */
     public void left() {
+<<<<<<< HEAD
         this.x_velocity -= STEP_SIZE;
         if (this.x_velocity < MAX_HORIZ_SPEED * -1) {
             this.x_velocity = MAX_HORIZ_SPEED * -1;
         }
+=======
+        this.x_velocity -= STEP_SIZE_X;
+
+>>>>>>> 3f45805ec73d00de74053c5717bdd5fd13df538c
     }
 
     /**
      * Adds to the rightwards velocity.
      */
     public void right() {
+<<<<<<< HEAD
         this.x_velocity += STEP_SIZE;
         if (this.x_velocity > MAX_HORIZ_SPEED) {
             this.x_velocity = MAX_HORIZ_SPEED;
         }
+=======
+        this.x_velocity += STEP_SIZE_X;
+>>>>>>> 3f45805ec73d00de74053c5717bdd5fd13df538c
     }
 
     /**
      * Adds to the upwards velocity.
      */
     public void up() {
-        if (this.onPlatform) {
+        if (onPlatform) {
             this.y_velocity += PLATFORM_JUMP_BOOST;
             System.out.println("Jump");
         }
-        this.y_velocity += STEP_SIZE;
+        this.y_velocity += STEP_SIZE_Y;
     }
 
     /**
      * Adds to the downwards velocity.
      */
     public void down() {
-        this.y_velocity -= STEP_SIZE;
+        this.y_velocity -= STEP_SIZE_Y;
     }
 }

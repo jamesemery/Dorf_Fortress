@@ -21,16 +21,15 @@ public class Platform extends Entity {
         // top collision - if the projectile is going faster to the right
         if (projectile.getY_velocity() < this.getY_velocity()) {
             if (projectile instanceof Actor) {
-                System.out.println("TODO");
                 ((Actor) projectile).setOnPlatform(true);
             }
-            projectile.setY(this.getY() - projectile.height - 0.1);
+            projectile.setY(this.getY() - projectile.height - 0.01);
             projectile.setY_velocity(this.y_velocity);
 
         // bottom collision - if the object collided but was going slower than
         // the platform, know this by elimination
         } else {
-            projectile.setY(this.getY() + this.height + 0.1);
+            projectile.setY(this.getY() + this.height + 0.01);
             projectile.setY_velocity(this.getY_velocity());
         }
     }
@@ -39,13 +38,13 @@ public class Platform extends Entity {
     public void collidesX(Entity projectile) {
         // right collision - if the projectile is going faster to the right
         if (projectile.getX_velocity() > this.getX_velocity()) {
-            projectile.setX(this.getX() - projectile.width - 0.1);
+            projectile.setX(this.getX() - projectile.width - 0.01);
             projectile.setX_velocity(this.x_velocity);
 
             // left collision - if the object collided but was going slower than
             // the platform, know this by elimination
         } else {
-            projectile.setX(this.getX() + this.width + 0.1);
+            projectile.setX(this.getX() + this.width + 0.01);
             projectile.setX_velocity(this.getX_velocity());
         }
     }
