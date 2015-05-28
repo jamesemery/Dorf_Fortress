@@ -21,8 +21,9 @@ public class Actor extends Entity {
      * @param hitbox_width
      * @param hitbox_height
      */
-    public Actor(String sprite_location, int hitbox_width, int hitbox_height) {
-        super(sprite_location, hitbox_width, hitbox_height);
+    public Actor(String sprite_location, int hitbox_width, int hitbox_height,
+                 Model simulation) {
+        super(sprite_location, hitbox_width, hitbox_height, simulation);
         this.name = "";
     }
 
@@ -37,8 +38,8 @@ public class Actor extends Entity {
      * @param name
      */
     public Actor(String sprite_location, int hitbox_width, int hitbox_height,
-                 String name) {
-        super(sprite_location, hitbox_width, hitbox_height);
+                 String name, Model simulation) {
+        super(sprite_location, hitbox_width, hitbox_height, simulation);
         this.name = name;
     }
 

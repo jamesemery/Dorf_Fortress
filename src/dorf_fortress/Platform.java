@@ -16,8 +16,10 @@ public class Platform extends Entity {
 
     @Override
     public void collides(Entity projectile) {
-        projectile.setY(368);
-        //System.out.println(projectile.height);
+        //top collision
+        //if ((projectile.))
+
+
         projectile.setY(this.getY() - projectile.height);
         projectile.setY_velocity(this.y_velocity);
         double y = projectile.getY();

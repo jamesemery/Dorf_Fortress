@@ -68,10 +68,10 @@ public class Main extends Application {
         root.getChildren().add(platformerBasicsRegion);
 
         //Make a Dorf!
-        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand");
-        ferdinand.setX(34);
-        ferdinand.setY(100);
-        root.getChildren().add(ferdinand.getSprite());
+//        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand", this);
+//        ferdinand.setX(34);
+//        ferdinand.setY(100);
+//        root.getChildren().add(ferdinand.getSprite());
 
         //Make a Platform?
         Platform platty = new Platform("sprites/128x32platform.png",128,32,400,
@@ -89,7 +89,7 @@ public class Main extends Application {
 
 
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(ferdinand,platty);
+        GameController controller = new GameController(root);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.

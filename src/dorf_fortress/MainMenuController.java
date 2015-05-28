@@ -38,24 +38,24 @@ public class MainMenuController {
         root.getChildren().add(platformerBasicsRegion);
 
         //Make a Dorf!
-        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand");
-        ferdinand.setX(34);
-        ferdinand.setY(100);
-        root.getChildren().add(ferdinand.getSprite());
+//        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand", this);
+//        ferdinand.setX(34);
+//        ferdinand.setY(100);
+//        root.getChildren().add(ferdinand.getSprite());
 
         //Make a Platform?
-        Platform platty = new Platform("sprites/BasicDorf.png",32,32,400,400);
-        platty.setX(400);
-        platty.setY(400);
-        root.getChildren().add(platty.getSprite());
+//        Platform platty = new Platform("sprites/BasicDorf.png",32,32,400,400, this);
+//        platty.setX(400);
+//        platty.setY(400);
+//        root.getChildren().add(platty.getSprite());
 
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(ferdinand,platty);
-        controller.initialize();
-
-        // Set up a KeyEvent handler so we can respond to keyboard activity.
-        root.setOnKeyPressed(controller);
-        root.requestFocus();
+//        GameController controller = new GameController(this);
+//        controller.initialize();
+//
+//        // Set up a KeyEvent handler so we can respond to keyboard activity.
+//        root.setOnKeyPressed(controller);
+//        root.requestFocus();
 
 
         eventSource.setScene(new Scene(root, SCENE_WIDTH, SCENE_HEIGHT));
