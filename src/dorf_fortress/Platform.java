@@ -10,13 +10,17 @@ public class Platform extends Entity {
             hitbox_height, double x, double y) {
         super(sprite_location, hitbox_width, hitbox_height);
         hitbox = new DorfHitbox(x,y,hitbox_width,hitbox_height);
+        this.height = hitbox_height;
+        this.width = hitbox_width;
     }
 
     @Override
     public void collides(Entity projectile) {
-        double x = projectile.getX();
+        projectile.setY(368);
+        //System.out.println(projectile.height);
+        projectile.setY(this.getY() - projectile.height);
+        projectile.setY_velocity(this.y_velocity);
         double y = projectile.getY();
-        System.out.println("Collision!" + x +" "+ y);
     }
 }
 

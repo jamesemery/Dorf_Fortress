@@ -10,6 +10,9 @@ public abstract class Entity {
     protected double x_velocity = 0;
     protected double y_velocity = 0;
     protected Hitbox hitbox;
+    double height;
+    double width;
+
 
     public Entity (String sprite_location, int hitbox_width, int hitbox_height) {
         this.sprite = new Sprite (sprite_location, hitbox_width, hitbox_height);
@@ -27,6 +30,22 @@ public abstract class Entity {
 
     public double getX() {
         return this.x;
+    }
+
+    public double getX_velocity(){
+        return x_velocity;
+    }
+
+    public void setX_velocity(double dx){
+        x_velocity = dx;
+    }
+
+    public double getY_velocity(){
+        return y_velocity;
+    }
+
+    public void setY_velocity(double dy){
+        y_velocity = dy;
     }
 
     public double getY() {

@@ -8,7 +8,7 @@ import javafx.scene.Node;
  */
 public class Actor extends Entity {
     public String name = "";
-    public final double GRAVITY_CONSTANT = .09;
+    public final double GRAVITY_CONSTANT = 0;
     public boolean isOnPlatform = true;
 
     /**
