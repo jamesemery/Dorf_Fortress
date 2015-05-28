@@ -8,9 +8,10 @@ import javafx.scene.Node;
  */
 public abstract class Actor extends Entity {
     public String name = "";
-    public final double GRAVITY_CONSTANT = .98;
-    public final double TERMINAL_VELOCITY = -160;
-    protected boolean onPlatform;
+    public final double GRAVITY_CONSTANT = 5;
+    public final double TERMINAL_VELOCITY = -300;
+    public boolean isOnPlatform = true;
+    boolean onPlatform;
 
     /**
      * Creates an unnamed Actor, by passing everything up to Entity's
