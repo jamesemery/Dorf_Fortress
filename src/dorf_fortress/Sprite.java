@@ -19,8 +19,9 @@ public class Sprite extends ImageView {
         //TODO generate a hitbox object.
     }
 
-    public void update(double x, double y) {
-        this.setX(x);
+    public void update(double x, double y, double dorf_x) {
+        double screenX = dorf_x - Main.SCENE_WIDTH/2;
+        this.setX(x-screenX);
         this.setY(y);
     }
 }

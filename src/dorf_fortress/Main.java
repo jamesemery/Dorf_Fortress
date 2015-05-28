@@ -19,8 +19,8 @@ import java.util.TimerTask;
 public class Main extends Application {
 
 
-    final private double SCENE_WIDTH = 640;
-    final private double SCENE_HEIGHT = 480;
+    final static double SCENE_WIDTH = 640;
+    final static double SCENE_HEIGHT = 480;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
