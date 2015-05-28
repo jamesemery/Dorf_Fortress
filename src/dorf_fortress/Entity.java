@@ -62,7 +62,9 @@ public abstract class Entity {
     }
 
     public void step() {
-        this.setX(x + this.x_velocity);
+        //dealing with framerate issues
+        double dx = this.x_velocity/GameController.FRAMES_PER_SECOND;
+        this.setX(x + dx);
         if (this.hitbox_checker){
             for (Entity other : simulation.getObjects()) {
                 if (this.intersects(other)) {
@@ -70,7 +72,8 @@ public abstract class Entity {
                 }
             }
         }
-        this.setY(y - this.y_velocity);
+        double dy = this.y_velocity/GameController.FRAMES_PER_SECOND;
+        this.setY(y - dy);
         if (this.hitbox_checker){
             for (Entity other : simulation.getObjects()) {
                 if (this.intersects(other)) {
