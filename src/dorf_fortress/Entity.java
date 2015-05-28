@@ -58,6 +58,7 @@ public abstract class Entity {
         this.setX(x + this.x_velocity);
         this.setY(y - this.y_velocity);
     }
+
     public void updateSprite() {
         this.step();
         this.sprite.update(this.x, this.y);
