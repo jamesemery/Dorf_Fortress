@@ -32,9 +32,11 @@ public class DorfHitbox extends Hitbox {
         }
     }
 
-    // this returns true if the given hitbox intersects with this current
-    // hitbox. It works by giving the other hitbox a series of the bounds
-    // that makes it up and if any value returns true then it returns true
+    /**
+     * This returns true if the given hitbox intersects with this current
+     * hitbox. It works by giving the other hitbox a series of the bounds
+     * that makes it up, and if any value returns true then it returns true.
+     */
     public boolean intersects(Hitbox h){
         for (Rectangle r : hitboxRectangles) {
             if (h.intersects(r.getBoundsInLocal())){
@@ -44,10 +46,12 @@ public class DorfHitbox extends Hitbox {
         return false;
     }
 
-    // this method takes a javafx bounds object and returns true if it
-    // intersects with any of the objects that make up this hitbox. For this
-    // hitbox it consists of looping through the rectangles that makes it up
-    // and determines if the bounds intersect
+     /**
+      * this method takes a javafx bounds object and returns true if it
+      * intersects with any of the objects that make up this hitbox. For this
+      * hitbox it consists of looping through the rectangles that makes it up
+      * and determines if the bounds intersect.
+      **/
     public boolean intersects(javafx.geometry.Bounds bounds){
         for (Rectangle r : hitboxRectangles) {
             if (r.intersects(bounds)){

@@ -61,6 +61,10 @@ public abstract class Entity {
         return this.sprite;
     }
 
+    /**
+     * Baseline step() method for all Entities; moves the Entity along its
+     * velocity, one axis at a time, and checks for collisions.
+     */
     public void step() {
         //dealing with framerate issues
         double dx = this.x_velocity/GameController.FRAMES_PER_SECOND;
@@ -84,11 +88,26 @@ public abstract class Entity {
 
     }
 
+    /**
+     * Updates the sprite's position on the screen, based on the Dorf's x
+     * coordinate and therefore the relative position of the view.
+     *
+     * At the moment, our view doesn't move, so it's just making sure the
+     * Sprite's coordinates line up with those of the Entity.
+     * TODO: Figure this stuff out.
+     */
     public void updateSprite() {
         this.step();
         this.sprite.update(this.x, this.y);
     }
 
+    /**
+     * TODO: Jamie, you understand what this is doing. I really don't.
+     * It'd be nice if you could write the comment to explain this one.
+     * -Joe
+     * @param e
+     * @return
+     */
     public boolean intersects(Entity e){
         return this.hitbox.intersects(e.hitbox);
     }
