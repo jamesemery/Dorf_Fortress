@@ -95,6 +95,8 @@ public class Main extends Application {
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.
         root.setOnKeyPressed(controller);
+        root.setOnKeyReleased(controller);
+
         root.requestFocus();
 
         primaryStage.setScene(platformerBasics);

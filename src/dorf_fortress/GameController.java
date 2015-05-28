@@ -38,7 +38,6 @@ public class GameController implements EventHandler<KeyEvent> {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         updateAnimation();
-                        inputStore.reset();
                     }
                 });
             }
@@ -66,18 +65,43 @@ public class GameController implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent keyEvent) {
+        if(keyEvent.getEventType() == keyEvent.KEY_PRESSED) {
+            handleKeyPress(keyEvent);
+        } else if (keyEvent.getEventType() == keyEvent.KEY_RELEASED) {
+            handleKeyRelease(keyEvent);
+        }
+    }
+
+    private void handleKeyPress(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.LEFT || code == KeyCode.A) {
-            inputStore.addInput("left");
+            inputStore.addInput("left", true);
             keyEvent.consume();
         } else if (code == KeyCode.RIGHT || code == KeyCode.D) {
-            inputStore.addInput("right");
+            inputStore.addInput("right", true);
             keyEvent.consume();
         } else if (code == KeyCode.UP || code == KeyCode.W) {
-            inputStore.addInput("up");
+            inputStore.addInput("up", true);
             keyEvent.consume();
         } else if (code == KeyCode.DOWN || code == KeyCode.S) {
-            inputStore.addInput("down");
+            inputStore.addInput("down", true);
+            keyEvent.consume();
+        }
+    }
+
+    private void handleKeyRelease(KeyEvent keyEvent) {
+        KeyCode code = keyEvent.getCode();
+        if (code == KeyCode.LEFT || code == KeyCode.A) {
+            inputStore.addInput("left", false);
+            keyEvent.consume();
+        } else if (code == KeyCode.RIGHT || code == KeyCode.D) {
+            inputStore.addInput("right", false);
+            keyEvent.consume();
+        } else if (code == KeyCode.UP || code == KeyCode.W) {
+            inputStore.addInput("up", false);
+            keyEvent.consume();
+        } else if (code == KeyCode.DOWN || code == KeyCode.S) {
+            inputStore.addInput("down", false);
             keyEvent.consume();
         }
     }
