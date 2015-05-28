@@ -12,10 +12,18 @@ public abstract class Entity {
     protected Hitbox hitbox;
     double height;
     double width;
+    boolean hitbox_checker; //determines if this object enacts hitbox checking
+    Model simulation;
 
 
-    public Entity (String sprite_location, int hitbox_width, int hitbox_height) {
-        this.sprite = new Sprite (sprite_location, hitbox_width, hitbox_height);
+
+    public Entity (String sprite_location, int hitbox_width, int
+            hitbox_height, Model simulation) {
+        this.sprite = new Sprite (sprite_location, hitbox_width,
+                hitbox_height);
+        this.simulation = simulation;
+        hitbox_checker = false;
+
     }
 
     public void setX(double x) {
@@ -58,6 +66,13 @@ public abstract class Entity {
 
     public void step() {
         this.setX(x + this.x_velocity);
+        if (this.hitbox_checker){
+            for (Entity other : simulation.getObjects()) {
+                if (this.intersects(other)) {
+                    other.collides(this);
+                }
+            }
+        }
         this.setY(y - this.y_velocity);
     }
     public void updateSprite() {

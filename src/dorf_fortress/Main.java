@@ -2,19 +2,12 @@ package dorf_fortress;
 
 import javafx.application.*;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main extends Application {
 
@@ -68,21 +61,21 @@ public class Main extends Application {
         root.getChildren().add(platformerBasicsRegion);
 
         //Make a Dorf!
-        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand");
-        ferdinand.setX(34);
-        ferdinand.setY(100);
-        root.getChildren().add(ferdinand.getSprite());
+//        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand", this);
+//        ferdinand.setX(34);
+//        ferdinand.setY(100);
+//        root.getChildren().add(ferdinand.getSprite());
 
         //Make a Platform?
-        Platform platty = new Platform("sprites/128x32platform.png",32,128,400,
-                400);
-        platty.setX(400);
-        platty.setY(400);
-        root.getChildren().add(platty.getSprite());
+//        Platform platty = new Platform("sprites/128x32platform.png",32,128,400,
+//                400, this);
+//        platty.setX(400);
+//        platty.setY(400);
+//        root.getChildren().add(platty.getSprite());
 
 
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(ferdinand,platty);
+        GameController controller = new GameController(root);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.

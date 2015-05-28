@@ -7,8 +7,8 @@ package dorf_fortress;
 public class Platform extends Entity {
 
     public Platform(String sprite_location, int hitbox_width, int
-            hitbox_height, double x, double y) {
-        super(sprite_location, hitbox_width, hitbox_height);
+            hitbox_height, double x, double y, Model model) {
+        super(sprite_location, hitbox_width, hitbox_height, model);
         hitbox = new DorfHitbox(x,y,hitbox_width,hitbox_height);
         this.height = hitbox_height;
         this.width = hitbox_width;
@@ -16,8 +16,10 @@ public class Platform extends Entity {
 
     @Override
     public void collides(Entity projectile) {
-        projectile.setY(368);
-        //System.out.println(projectile.height);
+        //top collision
+        //if ((projectile.))
+
+
         projectile.setY(this.getY() - projectile.height);
         projectile.setY_velocity(this.y_velocity);
         double y = projectile.getY();

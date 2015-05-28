@@ -15,12 +15,14 @@ public class Dorf extends Actor {
      * @param hitbox_width
      * @param hitbox_height
      */
-    public Dorf(String image_location, int hitbox_width, int hitbox_height) {
-        super(image_location, hitbox_width, hitbox_height);
+    public Dorf(String image_location, int hitbox_width, int hitbox_height,
+                Model model) {
+        super(image_location, hitbox_width, hitbox_height, model);
         inputSource = InputBuffer.getInstance();
         hitbox = new DorfHitbox(this.getX(), this.getY() , 32, 32);
         height = 32;
         width = 32;
+        hitbox_checker = true;
     }
 
     /**
@@ -29,15 +31,17 @@ public class Dorf extends Actor {
      * @param hitbox_width
      * @param hitbox_height
      * @param name
+     * @param model
      */
     public Dorf(String image_location, int hitbox_width, int hitbox_height,
-                String name) {
-        super(image_location, hitbox_width, hitbox_height, name);
+                String name, Model model) {
+        super(image_location, hitbox_width, hitbox_height, name, model);
         this.name = name;
         inputSource = InputBuffer.getInstance();
         hitbox = new DorfHitbox(this.getX(), this.getY() , 32, 32);
         height = 32;
         width = 32;
+        hitbox_checker = true;
     }
 
     /**

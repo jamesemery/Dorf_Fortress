@@ -2,8 +2,11 @@ package dorf_fortress;
 
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,13 +14,16 @@ import java.util.TimerTask;
 public class GameController implements EventHandler<KeyEvent> {
     final private double FRAMES_PER_SECOND = 20;
     private Timer timer;
-    public Dorf dorf_obj;
-    public dorf_fortress.Platform plat_obj;
+    public Model simulation;
     public InputBuffer inputStore;
+    List<Sprite> spriteList;
+    Group root;
 
-    public GameController(Dorf dorfObj, dorf_fortress.Platform plat_obj) {
-        this.dorf_obj = dorfObj;
-        this.plat_obj = plat_obj;
+
+    public GameController(Group root) {
+        this.root = root;
+        spriteList = new ArrayList<Sprite>();
+        this.simulation = new Model(this);
         this.setUpAnimationTimer();
     }
 
@@ -47,15 +53,15 @@ public class GameController implements EventHandler<KeyEvent> {
 
     private void updateAnimation() {
         //step.
-
-        dorf_obj.updateSprite();
-        plat_obj.updateSprite();
-        if (dorf_obj.intersects(plat_obj)){
-            plat_obj.collides(dorf_obj);
-        }
+        simulation.simulateFrame();
 
         //We do know that this bit actually works, though; I tried it and
         //just called dorf_obj.right() every step, which worked pretty well.
+    }
+
+    public void addSpriteToRoot(Sprite sprite){
+        root.getChildren().add(sprite);
+        spriteList.add(sprite);
     }
 
     @Override
