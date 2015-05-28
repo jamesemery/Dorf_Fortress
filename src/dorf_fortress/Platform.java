@@ -18,7 +18,6 @@ public class Platform extends Entity {
 
     @Override
     public void collidesY(Entity projectile) {
-        System.out.println("TopCollision");
         // top collision - if the projectile is going faster to the right
         if (projectile.getY_velocity() < this.getY_velocity()) {
             if (projectile instanceof Actor) {
@@ -37,7 +36,6 @@ public class Platform extends Entity {
 
     @Override
     public void collidesX(Entity projectile) {
-        System.out.println("SideCollision");
         // top collision - if the projectile is going faster to the right
         if (projectile.getX_velocity() > this.getX_velocity()) {
             projectile.setX(this.getX() - projectile.width - 0.1);
