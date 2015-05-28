@@ -7,7 +7,7 @@ package dorf_fortress;
 public class Dorf extends Actor {
     double STEP_SIZE = 30/ GameController.FRAMES_PER_SECOND;
     double PLATFORM_JUMP_BOOST = 3000;
-    public final double FRICTION_COEFFICIENT = 0.69;
+    public final double FRICTION_COEFFICIENT = 15/ GameController.FRAMES_PER_SECOND;
     String name;
     InputBuffer inputSource;
 
@@ -80,11 +80,11 @@ public class Dorf extends Actor {
      */
     private void applyFriction() {
         if(this.x_velocity > 0) {
-            this.x_velocity -= FRICTION_CONSTANT;
+            this.x_velocity -= FRICTION_COEFFICIENT;
             //We don't want to overshoot on velocity, just bring it to zero.
             if (this.x_velocity < 0) { this.x_velocity = 0;}
         } else if (this.x_velocity < 0) {
-            this.x_velocity += FRICTION_CONSTANT;
+            this.x_velocity += FRICTION_COEFFICIENT;
             //We don't want to overshoot on velocity, just bring it to zero.
             if (this.x_velocity > 0) { this.x_velocity = 0;}
         }
