@@ -73,6 +73,7 @@ public class Main extends Application {
 //        ferdinand.setY(100);
 //        root.getChildren().add(ferdinand.getSprite());
 
+
 //        //Make a Platform?
 //        Platform platty = new Platform("sprites/128x32platform.png",128,32,400,
 //                400);
