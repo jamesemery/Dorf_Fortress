@@ -25,7 +25,7 @@ public abstract class Entity {
     public Entity (String sprite_location, int hitbox_width, int
             hitbox_height, Model simulation, double x, double y) {
         this.sprite = new Sprite (sprite_location, hitbox_width,
-                hitbox_height);
+                hitbox_height, this);
         this.simulation = simulation;
         hitbox_checker = false;
         this.height = hitbox_height;
@@ -141,7 +141,7 @@ public abstract class Entity {
      */
     public void updateSprite() {
         this.step();
-        this.sprite.update(this.x, this.y);
+        this.sprite.update(this.simulation.player.getX());
     }
 
     /**
