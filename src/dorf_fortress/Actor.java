@@ -59,9 +59,8 @@ public class Actor extends Entity {
      */
     public void step() {
         fall();
-        super.step();
-        System.out.println("false");
         setOnPlatform(false);
+        super.step();
     }
 
     /**
@@ -79,6 +78,6 @@ public class Actor extends Entity {
     public void collidesY(Entity projectile) {};
 
     public void setOnPlatform(boolean val) {
-        isOnPlatform = val;
+        onPlatform = val;
     }
 }

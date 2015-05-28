@@ -96,6 +96,7 @@ public class Dorf extends Actor {
      */
     public void left() {
         this.x_velocity -= STEP_SIZE_X;
+
     }
 
     /**
