@@ -12,11 +12,12 @@ public class GameController implements EventHandler<KeyEvent> {
     final private double FRAMES_PER_SECOND = 20;
     private Timer timer;
     public Dorf dorf_obj;
-
+    public dorf_fortress.Platform plat_obj;
     public InputBuffer inputStore;
 
-    public GameController(Dorf dorfObj) {
+    public GameController(Dorf dorfObj, dorf_fortress.Platform plat_obj) {
         this.dorf_obj = dorfObj;
+        this.plat_obj = plat_obj;
         this.setUpAnimationTimer();
     }
 
@@ -48,6 +49,11 @@ public class GameController implements EventHandler<KeyEvent> {
         //step.
 
         dorf_obj.updateSprite();
+        plat_obj.updateSprite();
+        if (dorf_obj.intersects(plat_obj)){
+            plat_obj.collides(dorf_obj);
+        }
+
         //We do know that this bit actually works, though; I tried it and
         //just called dorf_obj.right() every step, which worked pretty well.
     }

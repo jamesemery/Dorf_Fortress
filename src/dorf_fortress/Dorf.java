@@ -18,6 +18,9 @@ public class Dorf extends Actor {
     public Dorf(String image_location, int hitbox_width, int hitbox_height) {
         super(image_location, hitbox_width, hitbox_height);
         inputSource = InputBuffer.getInstance();
+        hitbox = new DorfHitbox(this.getX(), this.getY() , 32, 32);
+        height = 32;
+        width = 32;
     }
 
     /**
@@ -32,6 +35,9 @@ public class Dorf extends Actor {
         super(image_location, hitbox_width, hitbox_height, name);
         this.name = name;
         inputSource = InputBuffer.getInstance();
+        hitbox = new DorfHitbox(this.getX(), this.getY() , 32, 32);
+        height = 32;
+        width = 32;
     }
 
     /**

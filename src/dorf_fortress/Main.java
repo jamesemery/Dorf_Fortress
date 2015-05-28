@@ -28,9 +28,10 @@ public class Main extends Application {
         primaryStage.setTitle("Dorf Fortress");
         primaryStage.setResizable(false);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
-        Parent menuRoot = (Parent) loader.load();
-        final MainMenuController mainMenuController = loader.getController();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu" +
+//                ".fxml"));
+//        Parent menuRoot = (Parent) loader.load();
+//        final MainMenuController mainMenuController = loader.getController();
 
         // Code snippet from Jeff Ondich's example, to make sure the
         // application closes when the window does.
@@ -53,7 +54,8 @@ public class Main extends Application {
         //actual platformer.
 
 
-        Scene platformerBasics = new Scene(menuRoot, SCENE_WIDTH, SCENE_HEIGHT);
+        Scene platformerBasics = new Scene(root, SCENE_WIDTH,
+                SCENE_HEIGHT);
 
         //Make a tiled background.
         BackgroundImage myBI = new BackgroundImage(
@@ -71,8 +73,16 @@ public class Main extends Application {
         ferdinand.setY(100);
         root.getChildren().add(ferdinand.getSprite());
 
+        //Make a Platform?
+        Platform platty = new Platform("sprites/128x32platform.png",32,128,400,
+                400);
+        platty.setX(400);
+        platty.setY(400);
+        root.getChildren().add(platty.getSprite());
+
+
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(ferdinand);
+        GameController controller = new GameController(ferdinand,platty);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.
