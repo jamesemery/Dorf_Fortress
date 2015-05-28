@@ -26,8 +26,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
-        Parent root = (Parent) loader.load();
-        final MainMenuController controller = loader.getController();
+        Parent menuRoot = (Parent) loader.load();
+        final MainMenuController mainMenuController = loader.getController();
 
         // Code snippet from Jeff Ondich's example, to make sure the
         // application closes when the window does.
@@ -60,7 +60,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dorf Fortress");
         primaryStage.setResizable(false);
-        Scene platformerBasics = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        Scene platformerBasics = new Scene(menuRoot, SCENE_WIDTH, SCENE_HEIGHT);
 
 //        //Make a tiled background.
 //        BackgroundImage myBI = new BackgroundImage(
