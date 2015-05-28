@@ -33,6 +33,10 @@ public class GameController implements EventHandler<KeyEvent> {
         inputStore = InputBuffer.getInstance();
     }
 
+    /**
+     * This is essentially our view; it sets up an animation timer for the
+     * scene.
+     */
     private void setUpAnimationTimer() {
         TimerTask timerTask = new TimerTask() {
             public void run() {
@@ -51,19 +55,29 @@ public class GameController implements EventHandler<KeyEvent> {
         this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
+    /**
+     * Calls the model's simulateFrame() method, which updates the objects in
+     * the scene.
+     */
     private void updateAnimation() {
-        //step.
         simulation.simulateFrame();
-
-        //We do know that this bit actually works, though; I tried it and
-        //just called dorf_obj.right() every step, which worked pretty well.
     }
 
+    /**
+     * Adds a sprite to the scene, both to the root node and the controller's
+     * list of sprites.
+     * @param sprite
+     */
     public void addSpriteToRoot(Sprite sprite){
         root.getChildren().add(sprite);
         spriteList.add(sprite);
     }
 
+    /**
+     * Handles key events; checks for both key presses and releases, and passes
+     * them on to the appropriate method.
+     * @param keyEvent
+     */
     @Override
     public void handle(KeyEvent keyEvent) {
         if(keyEvent.getEventType() == keyEvent.KEY_PRESSED) {
@@ -73,6 +87,12 @@ public class GameController implements EventHandler<KeyEvent> {
         }
     }
 
+    /**
+     * Handles key presses of appropriate keys by passing them on to our input
+     * buffer. The boolean value "true" indicates a key press rather than a
+     * key release.
+     * @param keyEvent
+     */
     private void handleKeyPress(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.LEFT || code == KeyCode.A) {
@@ -90,6 +110,12 @@ public class GameController implements EventHandler<KeyEvent> {
         }
     }
 
+    /**
+     * Handles releases of appropriate keys by passing them on to our input
+     * buffer. The boolean value "true" indicates a key release rather than a
+     * key press.
+     * @param keyEvent
+     */
     private void handleKeyRelease(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.LEFT || code == KeyCode.A) {
