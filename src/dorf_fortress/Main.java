@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -24,8 +25,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Dorf Fortress");
+        primaryStage.setResizable(false);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
+        Parent menuRoot = (Parent) loader.load();
+        final MainMenuController mainMenuController = loader.getController();
+
         // Code snippet from Jeff Ondich's example, to make sure the
-        //application closes when the window does.
+        // application closes when the window does.
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {
@@ -33,6 +41,9 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
+
+
+
         //Example code for loading from an fxml file. We might need this for
         //the main menu?
         //FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -41,11 +52,8 @@ public class Main extends Application {
         //...and fill in the objects by hand. That's much nicer to do for our
         //actual platformer.
 
-        primaryStage.setTitle("Dorf Fortress");
-        //Not sure what would happen if people started messing around with the
-        //window size mid-game, but I don't particularly want to find out.
-        primaryStage.setResizable(false);
-        Scene platformerBasics = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+
+        Scene platformerBasics = new Scene(menuRoot, SCENE_WIDTH, SCENE_HEIGHT);
 
         //Make a tiled background.
         BackgroundImage myBI = new BackgroundImage(
