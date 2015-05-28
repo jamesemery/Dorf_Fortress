@@ -17,10 +17,16 @@ public class InputBuffer {
     private static InputBuffer uniqueInstance;
     Set<String> storedInput;
 
+
     private InputBuffer() {
         storedInput = new HashSet<String>();
     }
 
+    /**
+     * Returns an instance of InputBuffer, creating one if it doesn't already
+     * exist. This is the only constructor that can be publicly accessed.
+     * @return the instance of InputBuffer.
+     */
     public static InputBuffer getInstance() {
         if (uniqueInstance == null) {
             uniqueInstance = new InputBuffer();
@@ -28,8 +34,13 @@ public class InputBuffer {
         return uniqueInstance;
     }
 
-    //Write this up more formally, but pressed=true means the key was pressed,
-    //pressed=false means it was released.
+    /**
+     * Edits the stored input based on the key input given. If the key was
+     * pressed (i.e. pressed = true), adds that input to storage; if it was
+     * released (pressed = false), removes it from storage.
+     * @param input
+     * @param pressed
+     */
     public void addInput(String input, boolean pressed){
         if (pressed == true) {
             storedInput.add(input);
@@ -38,6 +49,12 @@ public class InputBuffer {
         }
     }
 
+    /**
+     * Returns a boolean value signifying whether or not the given input is
+     * contained in storage.
+     * @param input
+     * @return
+     */
     public boolean getInput(String input){
         return storedInput.contains(input);
     }
