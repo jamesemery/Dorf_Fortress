@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Model {
     private List<Entity> entities;
-    private Dorf player;
+    public Dorf player;
     private GameController controller;
     public static double SCENE_HEIGHT;
 
