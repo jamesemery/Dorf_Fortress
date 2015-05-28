@@ -8,16 +8,14 @@ import javafx.scene.Node;
  */
 public class Actor extends Entity {
     public String name = "";
-    public final double GRAVITY_CONSTANT = 0.1;
+    public final double GRAVITY_CONSTANT = .98;
     public final double TERMINAL_VELOCITY = -160;
     public boolean isOnPlatform = true;
     boolean onPlatform;
 
     /**
-     * Calls Sprite's constructor, which makes the image and a hitbox object.
-     * The hitbox object will be centered on the x-axis of the image, and
-     * grounded onto the lower bound of its y-coordinates. Additionally fills
-     * in the Actor's name.
+     * Creates an unnamed Actor, by passing everything up to Entity's
+     * constructor.
      * @param sprite_location
      * @param hitbox_width
      * @param hitbox_height
@@ -29,10 +27,8 @@ public class Actor extends Entity {
     }
 
     /**
-     * Calls Sprite's constructor, which makes the image and a hitbox object.
-     * The hitbox object will be centered on the x-axis of the image, and
-     * grounded onto the lower bound of its y-coordinates. Additionally fills
-     * in the Actor's name.
+     * Creates an Actor with a given name, again by passing its parameters up
+     * to Entity.
      * @param sprite_location
      * @param hitbox_width
      * @param hitbox_height
@@ -45,19 +41,21 @@ public class Actor extends Entity {
     }
 
     /**
-     * A method for actors affected by gravity; called during the step() method.
-     * This will probably be moved or overwritten, but I want somewhere to work
-     * on the gravity.
+     * Applies the effects of gravity; simply adds or subtracts to the velocity
+     * based on the gravitational constant (up to terminal velocity.) It's worth
+     * noting that y coordinates are measured from the top of the screen.
      */
     public void fall() {
         if (y_velocity >= TERMINAL_VELOCITY) {
             y_velocity -= GRAVITY_CONSTANT;
+        } else {
+            y_velocity = TERMINAL_VELOCITY;
         }
     }
 
     /**
-     * Actor's step() method accounts for the effects of gravity and then just
-     * moves according to its velocity.
+     * Actor's step() method accounts for the effects of gravity and then simply
+     * moves according to its velocity, via Entity's step() method.
      */
     public void step() {
         fall();
@@ -66,12 +64,17 @@ public class Actor extends Entity {
         setOnPlatform(false);
     }
 
+    /**
+     * Runs when the character meets its demise. TODO IMPLEMENT/DEAL WITH THIS
+     */
     public void die() {
         //do stuff
     }
 
-    //in current implementation the dorf will never act upon something else
-    // colliding with it but it might in the future so this is left here
+    // In the current implementation an Actor will never act upon something else
+    // colliding with it (it will instead call the collidesX/Y method of the
+    // object it's colliding with) but it might in the future, and it needs
+    // to fill the abstract methods from Entity.
     public void collidesX(Entity projectile) {};
     public void collidesY(Entity projectile) {};
 
