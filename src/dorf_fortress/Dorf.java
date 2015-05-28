@@ -6,7 +6,7 @@ package dorf_fortress;
  */
 public class Dorf extends Actor {
     double STEP_SIZE = 1;
-    public final double FRICTION_COEFFICIENT = 0.3;
+    public final double FRICTION_CONSTANT = 0.3;
     String name;
     InputBuffer inputSource;
 
@@ -47,8 +47,12 @@ public class Dorf extends Actor {
     }
 
     /**
-     * Handles user specific modifications to the to change velocity
-     * accordingly then calls the actor step method
+     * Pulls the frame's input from the InputBuffer, then calls the appropriate
+     * methods to modify its velocity. Then:
+     * - applies friction
+     * - calls Actor's step() method, which applies gravity and
+     * - calls Entity's step() method, which changes position based on velocity
+     *   and handles collision checking.
      */
     @Override
     public void step(){
@@ -68,29 +72,47 @@ public class Dorf extends Actor {
         super.step();
     }
 
+    /**
+     * Applies friction by subtracting a friction constant from the velocity.
+     * To do that, we check the sign of the velocity, then make sure the
+     * friction doesn't overshoot.
+     */
     private void applyFriction() {
         if(this.x_velocity > 0) {
-            this.x_velocity -= FRICTION_COEFFICIENT;
+            this.x_velocity -= FRICTION_CONSTANT;
             //We don't want to overshoot on velocity, just bring it to zero.
             if (this.x_velocity < 0) { this.x_velocity = 0;}
         } else if (this.x_velocity < 0) {
-            this.x_velocity += FRICTION_COEFFICIENT;
+            this.x_velocity += FRICTION_CONSTANT;
             //We don't want to overshoot on velocity, just bring it to zero.
             if (this.x_velocity > 0) { this.x_velocity = 0;}
         }
     }
 
+    /**
+     * Adds to the leftwards velocity.
+     */
     public void left() {
         this.x_velocity -= STEP_SIZE;
-        this.setX(this.getX() - this.STEP_SIZE);
     }
+
+    /**
+     * Adds to the rightwards velocity.
+     */
     public void right() {
         this.x_velocity += STEP_SIZE;
-        this.setX(this.getX() + this.STEP_SIZE);
     }
+
+    /**
+     * Adds to the upwards velocity.
+     */
     public void up() {
         this.y_velocity += STEP_SIZE;
     }
+
+    /**
+     * Adds to the downwards velocity.
+     */
     public void down() {
         this.y_velocity -= STEP_SIZE;
     }
