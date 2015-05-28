@@ -9,7 +9,7 @@ import javafx.scene.Node;
 public class Actor extends Entity {
     public String name = "";
     public final double GRAVITY_CONSTANT = 0.1;
-    public final double TERMINAL_VELOCITY = -7.5;
+    public final double TERMINAL_VELOCITY = -160;
     public boolean isOnPlatform = true;
     boolean onPlatform;
 
@@ -62,6 +62,8 @@ public class Actor extends Entity {
     public void step() {
         fall();
         super.step();
+        System.out.println("false");
+        setOnPlatform(false);
     }
 
     public void die() {
@@ -73,5 +75,7 @@ public class Actor extends Entity {
     public void collidesX(Entity projectile) {};
     public void collidesY(Entity projectile) {};
 
-    public void setOnPlatform(boolean val) {isOnPlatform = val;}
+    public void setOnPlatform(boolean val) {
+        isOnPlatform = val;
+    }
 }
