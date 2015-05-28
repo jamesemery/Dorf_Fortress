@@ -73,19 +73,19 @@ public class Main extends Application {
 //        ferdinand.setY(100);
 //        root.getChildren().add(ferdinand.getSprite());
 
-        //Make a Platform?
-        Platform platty = new Platform("sprites/128x32platform.png",128,32,400,
-                400);
-        platty.setX(34);
-        platty.setY(400);
-        root.getChildren().add(platty.getSprite());
-
-        Platform platty2 = new Platform("sprites/128x32platform.png",128,32,400,
-                400);
-        platty2.setX(162);
-        platty2.setY(400);
-        platty2.updateSprite();
-        root.getChildren().add(platty2.getSprite());
+//        //Make a Platform?
+//        Platform platty = new Platform("sprites/128x32platform.png",128,32,400,
+//                400);
+//        platty.setX(34);
+//        platty.setY(400);
+//        root.getChildren().add(platty.getSprite());
+//
+//        Platform platty2 = new Platform("sprites/128x32platform.png",128,32,400,
+//                400);
+//        platty2.setX(162);
+//        platty2.setY(400);
+//        platty2.updateSprite();
+//        root.getChildren().add(platty2.getSprite());
 
 
         //Set up the controller. (Hopefully)

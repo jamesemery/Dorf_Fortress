@@ -25,7 +25,7 @@ public class Model {
         controller.addSpriteToRoot(ferdinand.getSprite());
 
         //Make a Platform?
-        Platform platty = new Platform("sprites/128x32platform.png",32,128,400,
+        Platform platty = new Platform("sprites/128x32platform.png",128,32,400,
                 400,this);
         platty.setX(400);
         platty.setY(400);
