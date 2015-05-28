@@ -12,6 +12,8 @@ public class Platform extends Entity {
         hitbox = new PlatformHitbox(x,y,hitbox_width,hitbox_height);
         this.height = hitbox_height;
         this.width = hitbox_width;
+        this.setX(x);
+        this.setY(y);
     }
 
     @Override
