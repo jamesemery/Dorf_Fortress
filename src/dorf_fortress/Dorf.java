@@ -5,9 +5,9 @@ package dorf_fortress;
  * Controllable hero of the game; subclass of Actor.
  */
 public class Dorf extends Actor {
-    double STEP_SIZE = 30/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE = 300/ GameController.FRAMES_PER_SECOND;
     double PLATFORM_JUMP_BOOST = 3000;
-    public final double FRICTION_COEFFICIENT = 0.69;
+    public final double FRICTION_CONSTANT = 0.69;
     String name;
     InputBuffer inputSource;
 
@@ -69,8 +69,8 @@ public class Dorf extends Actor {
         if (inputSource.getInput("down")) {
             this.down();
         }
-        applyFriction();
         super.step();
+        applyFriction();
     }
 
     /**
