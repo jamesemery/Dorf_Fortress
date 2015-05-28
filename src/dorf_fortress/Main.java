@@ -2,12 +2,19 @@ package dorf_fortress;
 
 import javafx.application.*;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main extends Application {
 

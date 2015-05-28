@@ -7,9 +7,9 @@ package dorf_fortress;
 public class Platform extends Entity {
 
     public Platform(String sprite_location, int hitbox_width, int
-            hitbox_height, double x, double y, Model model) {
-        super(sprite_location, hitbox_width, hitbox_height, model);
-        hitbox = new DorfHitbox(x,y,hitbox_width,hitbox_height);
+            hitbox_height, double x, double y) {
+        super(sprite_location, hitbox_width, hitbox_height);
+        hitbox = new PlatformHitbox(x,y,hitbox_width,hitbox_height);
         this.height = hitbox_height;
         this.width = hitbox_width;
     }

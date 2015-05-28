@@ -6,8 +6,10 @@ package dorf_fortress;
  */
 public class Dorf extends Actor {
     double STEP_SIZE = 1;
+    public final double FRICTION_COEFFICIENT = 0.3;
     String name;
     InputBuffer inputSource;
+
 
     /**
      * Calls Actor's constructor with no name.
@@ -62,9 +64,21 @@ public class Dorf extends Actor {
         if (inputSource.getInput("down")) {
             this.down();
         }
+        applyFriction();
         super.step();
     }
 
+    private void applyFriction() {
+        if(this.x_velocity > 0) {
+            this.x_velocity -= FRICTION_COEFFICIENT;
+            //We don't want to overshoot on velocity, just bring it to zero.
+            if (this.x_velocity < 0) { this.x_velocity = 0;}
+        } else if (this.x_velocity < 0) {
+            this.x_velocity += FRICTION_COEFFICIENT;
+            //We don't want to overshoot on velocity, just bring it to zero.
+            if (this.x_velocity > 0) { this.x_velocity = 0;}
+        }
+    }
 
     public void left() {
         this.x_velocity -= STEP_SIZE;

@@ -48,9 +48,7 @@ public abstract class Entity {
         x_velocity = dx;
     }
 
-    public double getY_velocity(){
-        return y_velocity;
-    }
+    public double getY_velocity(){ return y_velocity; }
 
     public void setY_velocity(double dy){
         y_velocity = dy;
@@ -75,6 +73,7 @@ public abstract class Entity {
         }
         this.setY(y - this.y_velocity);
     }
+
     public void updateSprite() {
         this.step();
         this.sprite.update(this.x, this.y);
