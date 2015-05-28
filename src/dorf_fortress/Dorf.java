@@ -5,8 +5,9 @@ package dorf_fortress;
  * Controllable hero of the game; subclass of Actor.
  */
 public class Dorf extends Actor {
-    double STEP_SIZE = 1;
-    public final double FRICTION_CONSTANT = 0.3;
+    double STEP_SIZE = 30/ GameController.FRAMES_PER_SECOND;
+    double PLATFORM_JUMP_BOOST = 3000;
+    public final double FRICTION_COEFFICIENT = 0.69;
     String name;
     InputBuffer inputSource;
 
@@ -107,6 +108,10 @@ public class Dorf extends Actor {
      * Adds to the upwards velocity.
      */
     public void up() {
+        if (onPlatform) {
+            this.y_velocity += PLATFORM_JUMP_BOOST;
+            System.out.println("Jump");
+        }
         this.y_velocity += STEP_SIZE;
     }
 
