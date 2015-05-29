@@ -30,7 +30,7 @@ public class Model {
          */
 
         //Make a Platform?
-       BouncyPlatform ground1 = new BouncyPlatform("sprites/128x32platform.png",128,32,34,
+       SolidPlatform ground1 = new SolidPlatform("sprites/128x32platform.png",128,32,34,
                 400,this);
         entities.add(ground1);
         controller.addSpriteToRoot(ground1.getSprite());
@@ -53,7 +53,7 @@ public class Model {
         entities.add(ground4);
         controller.addSpriteToRoot(ground4.getSprite());
 
-        SolidPlatform level1 = new SolidPlatform("sprites/128x32platform.png",128,32,325,
+        BouncyPlatform level1 = new BouncyPlatform("sprites/basicPlatform.png",138,32,325,
                 300,this);
         entities.add(level1);
         controller.addSpriteToRoot(level1.getSprite());
