@@ -6,9 +6,9 @@ package dorf_fortress;
  */
 public class Dorf extends Actor {
 
-    double STEP_SIZE_X = 200/ GameController.FRAMES_PER_SECOND;
-    double STEP_SIZE_Y = 20/ GameController.FRAMES_PER_SECOND;
-    double PLATFORM_JUMP_BOOST = 15000/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_X = 240/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
+    double PLATFORM_JUMP_BOOST = 10000/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 5000 / GameController.FRAMES_PER_SECOND;
     String name;
@@ -112,7 +112,9 @@ public class Dorf extends Actor {
             this.y_velocity += PLATFORM_JUMP_BOOST;
             System.out.println("Jump");
         }
-        this.y_velocity += STEP_SIZE_Y;
+        if (this.y_velocity >= 50) {
+            this.y_velocity += STEP_SIZE_Y;
+        }
     }
 
     /**
@@ -127,5 +129,17 @@ public class Dorf extends Actor {
      */
     public void die() {
         simulation.reset();
+    }
+
+    /**
+     * Change in behavior for dorf so it doesn't worry about going off the top
+     */
+    @Override
+    protected boolean isOffScreen() {
+        //under the bottom first then over the top second
+        if (this.getY() > simulation.SCENE_HEIGHT) {
+            return true;
+        }
+        return false;
     }
 }
