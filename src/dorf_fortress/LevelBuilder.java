@@ -64,18 +64,6 @@ public class LevelBuilder {
 
         /* Obstacles */
 
-        Obstacle left_border_1 = new KillBlock(
-                "sprites/staticObstacleTransparent.png",
-                32,32,-32,150,this.model);
-        this.entities.add(left_border_1);
-        this.controller.addSpriteToRoot(left_border_1.getSprite());
-
-        Obstacle left_border_2 = new KillBlock(
-                "sprites/staticObstacleTransparent.png",
-                32,32,-32,100,this.model);
-        this.entities.add(left_border_2);
-        this.controller.addSpriteToRoot(left_border_2.getSprite());
-
         Obstacle on_platform1 = new KillBlock(
                 "sprites/staticObstacleTransparent.png",
                 32,32,150+48,300-32,this.model);
@@ -89,7 +77,7 @@ public class LevelBuilder {
         this.controller.addSpriteToRoot(under_platform3.getSprite());
 
         Obstacle fireball_0 = new SimpleUpwardsKillBall("sprites/fireball.png",
-                33,33,425,100,this.model);
+                33,33,425,80,this.model);
         entities.add(fireball_0);
         controller.addSpriteToRoot(fireball_0.getSprite());
 
