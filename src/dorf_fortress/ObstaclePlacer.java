@@ -65,6 +65,7 @@ public class ObstaclePlacer {
     public Obstacle getSimpleObsticle(double finalX) {
         int x = randomGenerator.nextInt((int)finalX);
         int speed = randomGenerator.nextInt(80) + 20;
+        if (randomGenerator.nextBoolean()) {speed = speed*-1;}
         SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
                 ("sprites/BasicDorf.png",32,32,x,speed,simulation);
         return jumpy;

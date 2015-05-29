@@ -22,26 +22,28 @@ public class Ghost extends Dorf {
     public Ghost(String image_location, int hitbox_width, int hitbox_height, double x, double y,
                  Model model) {
         super(image_location, hitbox_width, hitbox_height, x, y, model);
+        inputSource = GhostInputSource.getInstance();
     }
 
     @Override
-    public void step(){
-        inputSource.addInput("right", true);
+    public void step() {
         currentFrameCount++;
+        ((GhostInputSource)inputSource).nextFrame();
         super.step();
     }
 
     @Override
-    public void die(){
+    public void die() {
         finishedLevel = true;
         finalX = this.getX();
         frameFinished = currentFrameCount;
     }
 
     @Override
-    public void reset(){
+    public void reset() {
         finishedLevel = false;
         currentFrameCount = 0;
         super.reset();
+        inputSource.clear();
     }
 }

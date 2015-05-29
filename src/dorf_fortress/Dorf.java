@@ -24,7 +24,7 @@ public class Dorf extends Actor {
                 Model model) {
 
         super(image_location, hitbox_width, hitbox_height, x, y, model);
-        inputSource = InputBuffer.getInstance();
+        inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( 32, 32);
         height = 32;
         width = 32;

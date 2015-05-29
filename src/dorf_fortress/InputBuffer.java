@@ -5,49 +5,14 @@ import java.util.Set;
 import java.util.HashSet;
 
 /**
- * Class that stores input that is entered during the Main simulation loop.
- * It is able to be reset so the input is clean for each new frame. This
- * allows classes elsewhere in main to mimic user input by entering it into
- * this buffer itself so it will excecute as though the user inputted it.
- * Uses singleton pattern for ease of refrence
+ * ADT we built to handle the two sorts of input sources that are used to
+ * control actors in the level, computer generated and user generated. What
+ * is inportant is that it can give a query which corresponds to an input and
+ * returns a boolean that says that that input is there.
  *
  * Created by jamie on 5/27/15.
  */
-public class InputBuffer {
-    private static InputBuffer uniqueInstance;
-    Set<String> storedInput;
-
-
-    private InputBuffer() {
-        storedInput = new HashSet<String>();
-    }
-
-    /**
-     * Returns an instance of InputBuffer, creating one if it doesn't already
-     * exist. This is the only constructor that can be publicly accessed.
-     * @return the instance of InputBuffer.
-     */
-    public static InputBuffer getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new InputBuffer();
-        }
-        return uniqueInstance;
-    }
-
-    /**
-     * Edits the stored input based on the key input given. If the key was
-     * pressed (i.e. pressed = true), adds that input to storage; if it was
-     * released (pressed = false), removes it from storage.
-     * @param input
-     * @param pressed
-     */
-    public void addInput(String input, boolean pressed){
-        if (pressed == true) {
-            storedInput.add(input);
-        } else {
-            storedInput.remove(input);
-        }
-    }
+public abstract class InputBuffer {
 
     /**
      * Returns a boolean value signifying whether or not the given input is
@@ -55,7 +20,8 @@ public class InputBuffer {
      * @param input
      * @return
      */
-    public boolean getInput(String input){
-        return storedInput.contains(input);
-    }
+    public abstract boolean getInput(String input);
+
+    public abstract void clear();
+
 }

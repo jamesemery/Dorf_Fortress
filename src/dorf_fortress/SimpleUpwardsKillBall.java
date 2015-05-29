@@ -12,6 +12,10 @@ public class SimpleUpwardsKillBall extends Obstacle{
         super(sprite_location, hitbox_width, hitbox_height, x,
                 simulation.SCENE_HEIGHT, simulation);
         upwards_speed = speed;
+        if (speed < 0) {
+            this.setY(0);
+            this.initial_y = this.getY();
+        }
         this.initial_y_velocity = speed;
         setY_velocity(upwards_speed);
         screen_death = true;
