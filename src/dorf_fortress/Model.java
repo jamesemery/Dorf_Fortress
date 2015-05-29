@@ -74,7 +74,7 @@ public class Model {
         controller.addSpriteToRoot(krell.getSprite());
 
         SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-                ("sprites/BasicDorf.png",32,32,this,100,50);
+                ("sprites/fireball.png",32,32,this,100,50);
         entities.add(jumpy);
         controller.addSpriteToRoot(jumpy.getSprite());
 
