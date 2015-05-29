@@ -23,7 +23,7 @@ public abstract class Entity {
 
 
     public Entity (String sprite_location, int hitbox_width, int
-            hitbox_height, Model simulation, double x, double y) {
+            hitbox_height, double x, double y, Model simulation) {
         this.sprite = new Sprite (sprite_location, hitbox_width,
                 hitbox_height, this);
         this.simulation = simulation;

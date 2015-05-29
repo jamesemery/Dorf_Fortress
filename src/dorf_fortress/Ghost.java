@@ -16,9 +16,9 @@ public class Ghost extends Dorf {
      * @param x
      * @param y
      */
-    public Ghost(String image_location, int hitbox_width, int hitbox_height,
-                 Model model, double x, double y) {
-        super(image_location, hitbox_width, hitbox_height, model, x, y);
+    public Ghost(String image_location, int hitbox_width, int hitbox_height, double x, double y,
+                 Model model) {
+        super(image_location, hitbox_width, hitbox_height, x, y, model);
     }
 
     @Override
