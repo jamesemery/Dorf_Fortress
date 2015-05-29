@@ -11,6 +11,7 @@ public class BouncyPlatform extends Platform {
         super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
+        this.JUMP_BOOST = 7500/ GameController.FRAMES_PER_SECOND;
     }
 
     @Override
@@ -18,10 +19,10 @@ public class BouncyPlatform extends Platform {
         // top collision - if the projectile is going faster to the right
         if (projectile.getY_velocity() < this.getY_velocity()) {
             if (projectile instanceof Actor) {
-                ((Actor) projectile).setOnPlatform(true);
+                ((Actor) projectile).setCurPlatform(this);
             }
             projectile.setY(this.getY() - projectile.height - 0.01);
-            projectile.setY_velocity((this.y_velocity + 300)); //Messing with velocity!!!
+            projectile.setY_velocity(this.y_velocity + 7500/GameController.FRAMES_PER_SECOND); //Messing with velocity!!!
 
         // bottom collision - if the object collided but was going slower than
         // the platform, know this by elimination
