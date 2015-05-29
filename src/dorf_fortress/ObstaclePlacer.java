@@ -55,7 +55,7 @@ public class ObstaclePlacer {
         int x = randomGenerator.nextInt((int)finalX);
         int speed = randomGenerator.nextInt(80) + 20;
         SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-                ("sprites/BasicDorf.png",32,32,simulation,x,speed);
+                ("sprites/BasicDorf.png",32,32,x,speed,simulation);
         return jumpy;
     }
 }
