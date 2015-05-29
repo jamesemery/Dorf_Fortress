@@ -95,22 +95,10 @@ public abstract class Entity {
         //dealing with framerate issues
         double dx = this.x_velocity/GameController.FRAMES_PER_SECOND;
         this.setX(x + dx);
-        if (this.hitbox_checker){
-            for (Entity other : simulation.getObjects()) {
-                if (this.intersects(other)) {
-                    other.collidesX(this);
-                }
-            }
-        }
+        handleCollisionX();
         double dy = this.y_velocity/GameController.FRAMES_PER_SECOND;
         this.setY(y - dy);
-        if (this.hitbox_checker){
-            for (Entity other : simulation.getObjects()) {
-                if (this.intersects(other)) {
-                    other.collidesY(this);
-                }
-            }
-        }
+        handleCollisionY();
         if (screen_death) {
             if (isOffScreen()) {
                 this.die();
@@ -118,11 +106,33 @@ public abstract class Entity {
         }
     }
 
+    // collision code is such that it can be overridden by subclasses if
+    // necessary
+    protected void handleCollisionX() {
+        if (this.hitbox_checker){
+            for (Entity other : simulation.getObjects()) {
+                if (this.intersects(other)) {
+                    other.collidesX(this);
+                }
+            }
+        }
+    }
+    protected void handleCollisionY() {
+        if (this.hitbox_checker){
+            for (Entity other : simulation.getObjects()) {
+                if (this.intersects(other)) {
+                    other.collidesY(this);
+                }
+            }
+        }
+    }
+
+
     /**
      * Determines if the Entity has fallen off either the top or the bottom
      * of the screen
      */
-    private boolean isOffScreen() {
+    protected boolean isOffScreen() {
         //under the bottom first then over the top second
         if (this.y > simulation.SCENE_HEIGHT | this.y < (-this.height)) {
             return true;
@@ -159,6 +169,8 @@ public abstract class Entity {
      * Runs when the character meets its demise. TODO IMPLEMENT/DEAL WITH THIS
      */
     public void die() {};
+
+
 
     //entity objects need to do stuff with collisions
     public abstract void collidesX(Entity projectile);

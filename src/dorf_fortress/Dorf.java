@@ -128,4 +128,16 @@ public class Dorf extends Actor {
     public void die() {
         simulation.reset();
     }
+
+    /**
+     * Change in behavior for dorf so it doesn't worry about going off the top
+     */
+    @Override
+    protected boolean isOffScreen() {
+        //under the bottom first then over the top second
+        if (this.getY() > simulation.SCENE_HEIGHT) {
+            return true;
+        }
+        return false;
+    }
 }

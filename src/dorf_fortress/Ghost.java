@@ -21,5 +21,10 @@ public class Ghost extends Dorf {
         super(image_location, hitbox_width, hitbox_height, model, x, y);
     }
 
+    @Override
+    public void step(){
+        inputSource.addInput("right",true);
+        super.step();
+    }
 
 }
