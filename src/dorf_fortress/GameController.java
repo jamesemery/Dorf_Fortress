@@ -142,6 +142,11 @@ public class GameController implements EventHandler<KeyEvent> {
         spriteList.add(sprite);
     }
 
+    public void removeSpriteFromRoot(Sprite sprite) {
+        root.getChildren().remove(sprite);
+        spriteList.remove(sprite);
+    }
+
     /**
      * Handles logic for determining screen scroll left and right based on
      * the Dorf's x coordinate then it loops through the sprites in the list
@@ -214,4 +219,5 @@ public class GameController implements EventHandler<KeyEvent> {
             keyEvent.consume();
         }
     }
+
 }

@@ -109,7 +109,6 @@ public class Dorf extends Actor {
     public void up() {
         if (curPlatform != null) {
             this.y_velocity += curPlatform.getJump();
-            System.out.println("Jump");
         }
         if (this.y_velocity >= 50) {
             this.y_velocity += STEP_SIZE_Y;
@@ -124,10 +123,17 @@ public class Dorf extends Actor {
     }
 
     /**
-     * Resets the level if the dorf dies
+     * Resets the level if the dorf dies.
      */
     public void die() {
         simulation.reset();
+    }
+
+    /**
+     * Completes the level and initiates the win screen.
+     */
+    public void win() {
+        System.out.println("You win!");
     }
 
     /**

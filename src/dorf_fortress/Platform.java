@@ -5,7 +5,7 @@ package dorf_fortress;
  * A rectangular platform upon which a Dorf is able to stand.
  */
 public abstract class Platform extends Entity {
-    double JUMP_BOOST = 0;
+    double JUMP_BOOST;
 
     public Platform(String sprite_location, int hitbox_width, int
             hitbox_height, double x, double y, Model simulation) {

@@ -1,8 +1,8 @@
 package dorf_fortress;
 
 /**
- * Created by Joe Adkisson on 5/24/2015.
- * A rectangular platform upon which a Dorf is able to stand.
+ * Created by Michael Stoneman on 5/28/2015.
+ * A platform that boosts jumps and makes standing still impossible.
  */
 public class BouncyPlatform extends Platform {
 
@@ -11,6 +11,7 @@ public class BouncyPlatform extends Platform {
         super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
+        // Lowered jump boost to account for the increased jump height later.
         this.JUMP_BOOST = 7500/ GameController.FRAMES_PER_SECOND;
     }
 
@@ -22,7 +23,10 @@ public class BouncyPlatform extends Platform {
                 ((Actor) projectile).setCurPlatform(this);
             }
             projectile.setY(this.getY() - projectile.height - 0.01);
-            projectile.setY_velocity(this.y_velocity + 7500/GameController.FRAMES_PER_SECOND); //Messing with velocity!!!
+
+            // Adds upward velocity upon a collision from above.
+            projectile.setY_velocity(this.y_velocity +
+                    7500/GameController.FRAMES_PER_SECOND);
 
         // bottom collision - if the object collided but was going slower than
         // the platform, know this by elimination
