@@ -7,10 +7,9 @@ package dorf_fortress;
 public class Dorf extends Actor {
 
     double STEP_SIZE_X = 240/ GameController.FRAMES_PER_SECOND;
-    double STEP_SIZE_Y = 60/ GameController.FRAMES_PER_SECOND;
-    double PLATFORM_JUMP_BOOST = 15000/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
-    public final double MAX_HORIZ_SPEED = 5000 / GameController.FRAMES_PER_SECOND;
+    public final double MAX_HORIZ_SPEED = 6000 / GameController.FRAMES_PER_SECOND;
     String name;
     InputBuffer inputSource;
 
@@ -21,10 +20,10 @@ public class Dorf extends Actor {
      * @param hitbox_width
      * @param hitbox_height
      */
-    public Dorf(String image_location, int hitbox_width, int hitbox_height,
-                Model model, double x, double y) {
+    public Dorf(String image_location, int hitbox_width, int hitbox_height, double x, double y,
+                Model model) {
 
-        super(image_location, hitbox_width, hitbox_height, model, x, y);
+        super(image_location, hitbox_width, hitbox_height, x, y, model);
         inputSource = InputBuffer.getInstance();
         hitbox = new DorfHitbox( 32, 32);
         height = 32;
@@ -108,10 +107,12 @@ public class Dorf extends Actor {
      * Adds to the upwards velocity.
      */
     public void up() {
-        if (onPlatform) {
-            this.y_velocity += PLATFORM_JUMP_BOOST;
+        if (curPlatform != null) {
+            this.y_velocity += curPlatform.getJump();
         }
-        this.y_velocity += STEP_SIZE_Y;
+        if (this.y_velocity >= 50) {
+            this.y_velocity += STEP_SIZE_Y;
+        }
     }
 
     /**
@@ -122,10 +123,17 @@ public class Dorf extends Actor {
     }
 
     /**
-     * Resets the level if the dorf dies
+     * Resets the level if the dorf dies.
      */
     public void die() {
         simulation.reset();
+    }
+
+    /**
+     * Completes the level and initiates the win screen.
+     */
+    public void win() {
+        System.out.println("You win!");
     }
 
     /**

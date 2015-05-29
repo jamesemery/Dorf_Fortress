@@ -36,22 +36,25 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
-
+        startGame(primaryStage);
         //We're making an empty scene with just the root, then populating it
         //with objects.
+
+    }
+
+    /**
+     * Launches the menu scene.
+     */
+    public static void startMenu() {
+    }
+
+    /**
+     * Launches the game scene.
+     */
+    public static void startGame(Stage mainStage) {
         Group root = new Group();
         Scene platformerBasics = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
-
-        //Make a tiled background.
-        BackgroundImage myBI = new BackgroundImage(
-                new Image("sprites/BasicTile.png"),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        Region platformerBasicsRegion = new Region();
-        platformerBasicsRegion.setPrefSize(SCENE_WIDTH+20, SCENE_HEIGHT+20);
-        platformerBasicsRegion.setBackground(new Background(myBI));
-        root.getChildren().add(platformerBasicsRegion);
 
         //Set up the controller. (Hopefully)
         GameController controller = new GameController(root, SCENE_HEIGHT);
@@ -62,10 +65,10 @@ public class Main extends Application {
         root.setOnKeyReleased(controller);
         root.requestFocus();
 
-        primaryStage.setScene(platformerBasics);
-        primaryStage.show();
+        mainStage.setScene(platformerBasics);
+        mainStage.show();
+        System.out.println("setup Game");
     }
-
 
     public static void main(String[] args) {
         launch(args);

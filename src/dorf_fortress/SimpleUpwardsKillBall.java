@@ -7,10 +7,10 @@ public class SimpleUpwardsKillBall extends Obstacle{
     double upwards_speed;
 
     public SimpleUpwardsKillBall(String sprite_location, int hitbox_width,
-                                 int hitbox_height, Model simulation, double
-                                         x, double speed) {
-        super(sprite_location, hitbox_width, hitbox_height, simulation, x,
-                simulation.SCENE_HEIGHT);
+                                 int hitbox_height, double
+                                         x, double speed, Model simulation) {
+        super(sprite_location, hitbox_width, hitbox_height, x,
+                simulation.SCENE_HEIGHT, simulation);
         upwards_speed = speed;
         this.initial_y_velocity = speed;
         setY_velocity(upwards_speed);
