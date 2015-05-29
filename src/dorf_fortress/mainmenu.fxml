@@ -14,12 +14,12 @@
          </font>
       </Text>
       <Separator layoutX="200.0" layoutY="303.0" prefHeight="30.0" prefWidth="200.0" />
-      <Button layoutX="230.0" layoutY="333.0" mnemonicParsing="false" onAction="#whenBeginClicked" prefHeight="29.0" prefWidth="141.0" text="Begin" textAlignment="CENTER">
+      <Button fx:id = "beginButton" layoutX="230.0" layoutY="333.0" mnemonicParsing="false" onAction="#whenBeginClicked" prefHeight="29.0" prefWidth="141.0" text="Begin" textAlignment="CENTER">
          <font>
             <Font name="Alegreya SC" size="13.0" />
          </font>
       </Button>
-      <Slider layoutX="275.0" layoutY="252.0" max="10.0" prefHeight="16.0" prefWidth="130.0" />
+      <Slider fx:id= "difficultySlider" layoutX="275.0" layoutY="252.0" max="10.0" prefHeight="16.0" prefWidth="130.0" />
       <Label layoutX="200.0" layoutY="250.0" text="Difficulty:" textAlignment="RIGHT">
          <font>
             <Font name="Alegreya SC" size="14.0" />
@@ -34,7 +34,7 @@
             </ImageView>
          </children>
       </StackPane>
-      <TextField layoutX="250.0" layoutY="217.0" prefHeight="26.0" prefWidth="150.0" />
+      <TextField fx:id ="nameTextField" layoutX="250.0" layoutY="217.0" prefHeight="26.0" prefWidth="150.0" promptText="Ferdinand" />
       <Label layoutX="200.0" layoutY="220.0" prefHeight="19.0" prefWidth="40.0" text="Name:">
          <font>
             <Font name="Alegreya SC" size="14.0" />
@@ -45,6 +45,6 @@
             <Font name="Alegreya SC" size="14.0" />
          </font>
       </Label>
-      <ColorPicker layoutX="290.0" layoutY="277.0" prefHeight="26.0" prefWidth="110.0" />
+      <ColorPicker fx:id="beardColorPicker" layoutX="290.0" layoutY="277.0" prefHeight="26.0" prefWidth="110.0" />
    </children>
 </AnchorPane>
