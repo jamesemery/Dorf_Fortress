@@ -7,8 +7,8 @@ package dorf_fortress;
 public class Dorf extends Actor {
 
     double STEP_SIZE_X = 240/ GameController.FRAMES_PER_SECOND;
-    double STEP_SIZE_Y = 60/ GameController.FRAMES_PER_SECOND;
-    double PLATFORM_JUMP_BOOST = 15000/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
+    double PLATFORM_JUMP_BOOST = 10000/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 5000 / GameController.FRAMES_PER_SECOND;
     String name;
@@ -112,7 +112,9 @@ public class Dorf extends Actor {
             this.y_velocity += PLATFORM_JUMP_BOOST;
             System.out.println("Jump");
         }
-        this.y_velocity += STEP_SIZE_Y;
+        if (this.y_velocity >= 50) {
+            this.y_velocity += STEP_SIZE_Y;
+        }
     }
 
     /**
