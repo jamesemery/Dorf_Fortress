@@ -6,8 +6,8 @@ package dorf_fortress;
  */
 public class Dorf extends Actor {
 
-    double STEP_SIZE_X = 200/ GameController.FRAMES_PER_SECOND;
-    double STEP_SIZE_Y = 20/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_X = 240/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_Y = 60/ GameController.FRAMES_PER_SECOND;
     double PLATFORM_JUMP_BOOST = 15000/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 5000 / GameController.FRAMES_PER_SECOND;
