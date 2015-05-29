@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //Set up the stage
         primaryStage.setTitle("Dorf Fortress");
         primaryStage.setResizable(false);
 
@@ -36,16 +38,36 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
-        startGame(primaryStage);
-        //We're making an empty scene with just the root, then populating it
-        //with objects.
 
+        //Set up the scene
+        //startGame(primaryStage);
+        startMenu(primaryStage);
     }
 
     /**
      * Launches the menu scene.
      */
-    public static void startMenu() {
+    public static void startMenu(Stage mainStage) {
+        URL fxmlUrl = Main.class.getResource("mainmenu.fxml");
+        System.out.println(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        try {
+            Parent root = (Parent) loader.load();
+
+            Scene platformerBasics = new Scene(root, SCENE_WIDTH,
+                    SCENE_HEIGHT);
+            MainMenuController controller = loader.getController();
+            root.requestFocus();
+
+            mainStage.setScene(platformerBasics);
+            mainStage.show();
+        } catch (Exception e) {
+            System.out.println("Fxml file not found");
+            javafx.application.Platform.exit();
+            System.exit(0);
+        }
+        System.out.println("setup Menu");
+
     }
 
     /**
