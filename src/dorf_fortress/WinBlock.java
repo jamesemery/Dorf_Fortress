@@ -11,6 +11,9 @@ public class WinBlock extends Obstacle{
         super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
     }
 
+    /**
+     * TODO: Make hitbox ONLY the center of the gateway!
+     */
     @Override
     protected void makeHitbox() {
         this.hitbox = new PlatformHitbox(this.width,this.height);

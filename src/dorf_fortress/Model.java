@@ -22,13 +22,13 @@ public class Model {
         this.controller = controller;
         entities = new ArrayList<Entity>();
         //Make a Dorf!
-        Dorf ferdinand = new Dorf("sprites/BrownDorf.png", 32, 32, 34,
+        Dorf ferdinand = new Dorf("sprites/GreyDorf.png", 32, 32, 34,
                 100, this);
         this.player = ferdinand;
         controller.addSpriteToRoot(ferdinand.getSprite());
 
         //Make a Ghost!
-        Ghost casper = new Ghost("sprites/BrownDorf.png", 32, 32, 34,
+        Ghost casper = new Ghost("sprites/GreyDorf.png", 32, 32, 34,
                 100, this);
         this.levelSolver = casper;
 //        this.controller.addSpriteToRoot(casper.getSprite());

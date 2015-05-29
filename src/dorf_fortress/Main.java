@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +26,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //Set up the stage
         primaryStage.setTitle("Dorf Fortress");
         primaryStage.setResizable(false);
 
@@ -36,22 +39,47 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
-        startGame(primaryStage);
-        //We're making an empty scene with just the root, then populating it
-        //with objects.
 
+        //Set up the scene
+        //startGame(primaryStage);
+        startMenu(primaryStage);
     }
 
     /**
      * Launches the menu scene.
      */
-    public static void startMenu() {
+    public static void startMenu(Stage mainStage) {
+        URL fxmlUrl = Main.class.getResource("mainmenu.fxml");
+        System.out.println(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        try {
+            Parent root = (Parent) loader.load();
+
+            Scene platformerBasics = new Scene(root, SCENE_WIDTH,
+                    SCENE_HEIGHT);
+            MainMenuController controller = loader.getController();
+            root.requestFocus();
+
+            mainStage.setScene(platformerBasics);
+            mainStage.show();
+        } catch (Exception e) {
+            System.out.println("Fxml file not found");
+            javafx.application.Platform.exit();
+            System.exit(0);
+        }
+        System.out.println("setup Menu");
+
     }
 
     /**
      * Launches the game scene.
      */
-    public static void startGame(Stage mainStage) {
+    public static void startGame(Stage mainStage,
+                String name, double difficulty, Color beardColor) {
+        System.out.println("Debug message from Main.startGame(). Params:");
+        System.out.println("Name: " + name);
+        System.out.println("Difficulty: " + difficulty);
+        System.out.println("Color: " + beardColor);
         Group root = new Group();
         Scene platformerBasics = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
