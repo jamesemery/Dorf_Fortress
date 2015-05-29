@@ -44,12 +44,12 @@ public class Ghost extends Dorf {
     @Override
     public void win() {
         if (liveSimulation) {
+            liveSimulation = false;
+            super.win();
+        } else {
             finishedLevel = true;
             finalX = this.getX();
             frameFinished = currentFrameCount;
-        } else {
-            liveSimulation = false;
-//            super.win();
         }
     }
 
