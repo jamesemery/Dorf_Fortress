@@ -68,8 +68,8 @@ public class Model {
         entities.add(level3);
         controller.addSpriteToRoot(level3.getSprite());
 
-        KillBlock krell = new KillBlock("sprites/BasicDorf.png",32,32,this,200,
-                300);
+        KillBlock krell = new KillBlock("sprites/staticObstacleTransparent.png",32,32,this,200,
+                288);
         entities.add(krell);
         controller.addSpriteToRoot(krell.getSprite());
 
