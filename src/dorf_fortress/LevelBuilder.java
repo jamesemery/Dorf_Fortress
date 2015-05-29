@@ -18,48 +18,98 @@ public class LevelBuilder {
     }
 
     public void makeTestLevel() {
-        //Make a Platform?
-        SolidPlatform ground1 = new SolidPlatform("sprites/128x32platform.png",128,32,34,
-                400,this.model);
-        this.entities.add(ground1);
-        this.controller.addSpriteToRoot(ground1.getSprite());
 
-        //Make a Platform?
-        SolidPlatform ground2 = new SolidPlatform("sprites/128x32platform.png",128,32,162,
-                400,this.model);
-        this.entities.add(ground2);
-        controller.addSpriteToRoot(ground2.getSprite());
+        /* Platforms */
 
-        //Make a Platform?
-        SolidPlatform ground3 = new SolidPlatform("sprites/128x32platform.png",128,32,290,
-                400,this.model);
-        this.entities.add(ground3);
-        this.controller.addSpriteToRoot(ground3.getSprite());
-
-        //Make a Platform?
-        SolidPlatform ground4 = new SolidPlatform("sprites/128x32platform.png",128,32,418,
-                400,this.model);
-        this.entities.add(ground4);
-        this.controller.addSpriteToRoot(ground4.getSprite());
-
-        BouncyPlatform level1 = new BouncyPlatform("sprites/basicPlatform.png",138,32,325,
-                300,this.model);
-        this.entities.add(level1);
-        this.controller.addSpriteToRoot(level1.getSprite());
-
-        SolidPlatform level2 = new SolidPlatform("sprites/128x32platform.png",128,32,197,
+        Platform spawn = new SolidPlatform("sprites/128x32platform.png",128,32,0,
                 200,this.model);
-        this.entities.add(level2);
-        this.controller.addSpriteToRoot(level2.getSprite());
+        this.entities.add(spawn);
+        this.controller.addSpriteToRoot(spawn.getSprite());
 
-        SolidPlatform level3 = new SolidPlatform("sprites/128x32platform.png",128,32,69,
-                100,this.model);
-        this.entities.add(level3);
-        this.controller.addSpriteToRoot(level3.getSprite());
+        Platform platform1 = new SolidPlatform("sprites/128x32platform.png",128,32,150,
+                300,this.model);
+        this.entities.add(platform1);
+        controller.addSpriteToRoot(platform1.getSprite());
 
-        KillBlock krell = new KillBlock("sprites/staticObstacleTransparent.png",32,32,200,
-                288, this.model);
-        this.entities.add(krell);
-        this.controller.addSpriteToRoot(krell.getSprite());
+        Platform platform2 = new BouncyPlatform("sprites/basicPlatform.png",128,32,300,
+                400,this.model);
+        this.entities.add(platform2);
+        this.controller.addSpriteToRoot(platform2.getSprite());
+
+        Platform platform3 = new SolidPlatform("sprites/128x32platform.png",128,32,450,
+                150,this.model);
+        this.entities.add(platform3);
+        this.controller.addSpriteToRoot(platform3.getSprite());
+
+        Platform platform4 = new SolidPlatform("sprites/128x32platform.png",128,32,650,
+                300,this.model);
+        this.entities.add(platform4);
+        this.controller.addSpriteToRoot(platform4.getSprite());
+
+        Platform platform5 = new SolidPlatform("sprites/128x32platform.png",128,32,800,
+                200,this.model);
+        this.entities.add(platform5);
+        this.controller.addSpriteToRoot(platform5.getSprite());
+
+        Platform platform6 = new BouncyPlatform("sprites/basicPlatform.png",128,32,850,
+                400,this.model);
+        this.entities.add(platform6);
+        this.controller.addSpriteToRoot(platform6.getSprite());
+
+        Platform platform7 = new SolidPlatform("sprites/128x32platform.png",128,32,1000,
+                150,this.model);
+        this.entities.add(platform7);
+        this.controller.addSpriteToRoot(platform7.getSprite());
+
+
+        /* Obstacles */
+
+        Obstacle left_border_1 = new KillBlock(
+                "sprites/staticObstacleTransparent.png",
+                32,32,-32,150,this.model);
+        this.entities.add(left_border_1);
+        this.controller.addSpriteToRoot(left_border_1.getSprite());
+
+        Obstacle left_border_2 = new KillBlock(
+                "sprites/staticObstacleTransparent.png",
+                32,32,-32,100,this.model);
+        this.entities.add(left_border_2);
+        this.controller.addSpriteToRoot(left_border_2.getSprite());
+
+        Obstacle on_platform1 = new KillBlock(
+                "sprites/staticObstacleTransparent.png",
+                32,32,150+48,300-32,this.model);
+        this.entities.add(on_platform1);
+        this.controller.addSpriteToRoot(on_platform1.getSprite());
+
+        Obstacle under_platform3 = new KillBlock(
+                "sprites/staticObstacleTransparent.png",
+                32,32,450+48,150+100,this.model);
+        this.entities.add(under_platform3);
+        this.controller.addSpriteToRoot(under_platform3.getSprite());
+
+        Obstacle fireball_0 = new SimpleUpwardsKillBall("sprites/fireball.png",
+                33,33,425,100,this.model);
+        entities.add(fireball_0);
+        controller.addSpriteToRoot(fireball_0.getSprite());
+
+        Obstacle fireball_1 = new SimpleUpwardsKillBall("sprites/fireball.png",
+                33,33,775,100,this.model);
+        entities.add(fireball_1);
+        controller.addSpriteToRoot(fireball_1.getSprite());
+
+        Obstacle fireball_2 = new SimpleUpwardsKillBall("sprites/fireball.png",
+                33,33,950,150,this.model);
+        entities.add(fireball_2);
+        controller.addSpriteToRoot(fireball_2.getSprite());
+
+
+        /* Goal */
+
+        WinBlock victory_arch = new WinBlock(
+                "sprites/basicArchway.png",
+                113,109,1000+7,150-109,this.model);
+        this.entities.add(victory_arch);
+        this.controller.addSpriteToRoot(victory_arch.getSprite());
     }
 }
