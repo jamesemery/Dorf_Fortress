@@ -50,6 +50,14 @@ public class Dorf extends Actor {
      */
     @Override
     public void step(){
+        String solving = "{";
+        solving += inputSource.getInput("left");
+        solving += "," + inputSource.getInput("right") + ",";
+        solving += inputSource.getInput("up") ;
+        solving += "," + inputSource.getInput("down") + "}";
+        if (this instanceof Ghost) {
+            System.out.println(solving);
+        }
         if (inputSource.getInput("left")) {
             this.left();
         }
@@ -62,6 +70,7 @@ public class Dorf extends Actor {
         if (inputSource.getInput("down")) {
             this.down();
         }
+
         applyFriction();
         super.step();
     }

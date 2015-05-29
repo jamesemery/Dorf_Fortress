@@ -41,6 +41,13 @@ public class Ghost extends Dorf {
     }
 
     @Override
+    public void win() {
+        finishedLevel = true;
+        finalX = this.getX();
+        frameFinished = currentFrameCount;
+    }
+
+    @Override
     public void reset() {
         finishedLevel = false;
         currentFrameCount = 0;

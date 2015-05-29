@@ -21,7 +21,9 @@ public class ObstaclePlacer {
     }
 
     public void generateObstacles(int n) {
-        //simulates the ghosts path once to get necessary variables
+
+        // simulates the ghosts path once to get necessary variables from the
+        // ghost about how the simulation went
         while (simulation.getNextGhostHitbox() != null) {
         }
         simulation.reset();
@@ -44,7 +46,6 @@ public class ObstaclePlacer {
                 int i = 0;
                 while (i < testCases.size()) {
                     Hitbox obstacleHitbox = testCases.get(i).getHitbox();
-                    System.out.println(levelSolver.currentFrameCount);
                     if (ghost.intersects(obstacleHitbox)) {
                         testCases.remove(i);
                     } else {
@@ -61,7 +62,6 @@ public class ObstaclePlacer {
         }
         simulation.addEntities(safeObstacles);
         simulation.setGhostMode(false);
-        System.out.println(safeObstacles.size());
     }
 
 
