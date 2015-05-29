@@ -7,7 +7,8 @@ public class Ghost extends Dorf {
     public boolean finishedLevel;
     public double finalX;
     public int frameFinished;
-    private int currentFrameCount;
+    public int currentFrameCount;
+    //TODO change the security of these
 
     /**
      * Calls Actor's constructor with no name.

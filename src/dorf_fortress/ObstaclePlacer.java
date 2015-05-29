@@ -30,23 +30,28 @@ public class ObstaclePlacer {
 
 
         while (safeObstacles.size() < n) {
+            //creates obstacles to test
             List<Entity> testCases = new ArrayList<Entity>();
             for (int i = safeObstacles.size(); i < n; i++) {
                 Entity obstacle = getSimpleObsticle(endX);
                 testCases.add(obstacle);
             }
+
+
             simulation.testingEntities = testCases;
-            while (simulation.getNextGhostHitbox() != null) {
-                Hitbox ghost = simulation.getNextGhostHitbox();
+            Hitbox ghost = simulation.getNextGhostHitbox();
+            while (ghost != null) {
                 int i = 0;
                 while (i < testCases.size()) {
                     Hitbox obstacleHitbox = testCases.get(i).getHitbox();
+                    System.out.println(levelSolver.currentFrameCount);
                     if (ghost.intersects(obstacleHitbox)) {
                         testCases.remove(i);
                     } else {
                         i++;
                     }
                 }
+                ghost = simulation.getNextGhostHitbox();
             }
             for (Entity e : testCases) {
                 safeObstacles.add(e);
@@ -67,7 +72,7 @@ public class ObstaclePlacer {
         int speed = randomGenerator.nextInt(80) + 20;
         if (randomGenerator.nextBoolean()) {speed = speed*-1;}
         SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-                ("sprites/BasicDorf.png",32,32,x,speed,simulation);
+                ("sprites/fireball.png",32,32,x,speed,simulation);
         return jumpy;
     }
 }
