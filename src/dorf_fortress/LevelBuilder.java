@@ -66,13 +66,13 @@ public class LevelBuilder {
 
         Obstacle on_platform1 = new KillBlock(
                 "sprites/staticObstacleTransparent.png",
-                32,32,150+48,300-32,this.model);
+                32,32,192,256,this.model);
         this.entities.add(on_platform1);
         this.controller.addSpriteToRoot(on_platform1.getSprite());
 
         Obstacle under_platform3 = new KillBlock(
                 "sprites/staticObstacleTransparent.png",
-                32,32,450+48,150+100,this.model);
+                32,32,512,256,this.model);
         this.entities.add(under_platform3);
         this.controller.addSpriteToRoot(under_platform3.getSprite());
 
