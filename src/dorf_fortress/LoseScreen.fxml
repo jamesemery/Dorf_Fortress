@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('@../sprites/BasicTile.png'); -fx-background-repeat: stretch;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.LoseScreenController">
+   <children>
+      <Text layoutX="87.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You seem to have suffered a " textAlignment="CENTER">
+         <font>
+            <Font name="Alegreya" size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="372.0" layoutY="215.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
+         <font>
+            <Font name="Alegreya SC" size="13.0" />
+         </font>
+      </Button>
+      <Text layoutX="364.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="miner" textAlignment="CENTER">
+         <font>
+            <Font name="Alegreya Italic" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="423.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="setback..." textAlignment="CENTER">
+         <font>
+            <Font name="Alegreya" size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="230.0" layoutY="215.0" mnemonicParsing="false" onAction="#whenTryAgainClicked" prefHeight="29.0" prefWidth="141.0" text="Try Again" textAlignment="CENTER">
+         <font>
+            <Font name="Alegreya SC" size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="87.0" layoutY="215.0" mnemonicParsing="false" onAction="#whenSolutionClicked" prefHeight="29.0" prefWidth="141.0" text="See Solution" textAlignment="CENTER">
+         <font>
+            <Font name="Alegreya SC" size="13.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="222.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sprites/basicArchway.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="365.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sprites/basicArchway.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="80.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sprites/basicArchway.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
