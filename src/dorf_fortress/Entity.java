@@ -11,7 +11,7 @@ public abstract class Entity {
     protected double y_velocity = 0;
     private double initial_x;
     private double initial_y;
-    protected double initial_x_veloicty;
+    protected double initial_x_velocity;
     protected double initial_y_velocity;
     protected Hitbox hitbox;
     protected double height;
@@ -35,7 +35,7 @@ public abstract class Entity {
         this.setY(y);
         initial_x = x;
         initial_y = y;
-        initial_x_veloicty = x_velocity;
+        initial_x_velocity = x_velocity;
         initial_y_velocity = y_velocity;
         this.screen_death = false;
 
@@ -46,7 +46,7 @@ public abstract class Entity {
     public void reset() {
         setX(initial_x);
         setY(initial_y);
-        setX_velocity(initial_x_veloicty);
+        setX_velocity(initial_x_velocity);
         setY_velocity(initial_y_velocity);
 
     }
