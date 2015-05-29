@@ -36,14 +36,25 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
-
+        startGame(primaryStage);
         //We're making an empty scene with just the root, then populating it
         //with objects.
+
+    }
+
+    /**
+     * Launches the menu scene.
+     */
+    public static void startMenu() {
+    }
+
+    /**
+     * Launches the game scene.
+     */
+    public static void startGame(Stage mainStage) {
         Group root = new Group();
         Scene platformerBasics = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
-
-
 
         //Set up the controller. (Hopefully)
         GameController controller = new GameController(root, SCENE_HEIGHT);
@@ -54,10 +65,10 @@ public class Main extends Application {
         root.setOnKeyReleased(controller);
         root.requestFocus();
 
-        primaryStage.setScene(platformerBasics);
-        primaryStage.show();
+        mainStage.setScene(platformerBasics);
+        mainStage.show();
+        System.out.println("setup Game");
     }
-
 
     public static void main(String[] args) {
         launch(args);
