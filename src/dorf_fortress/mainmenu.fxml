@@ -29,7 +29,7 @@
          <children>
             <ImageView fx:id="menu_dorf_sprite" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../sprites/BasicDorf.png" />
+                  <Image url="@../sprites/GreyDorf.png" />
                </image>
             </ImageView>
          </children>
