@@ -23,19 +23,21 @@ public class MainMenuController {
 
     @FXML
     void whenBeginClicked(ActionEvent actionEvent) {
-        System.out.println("Run the damn thing.");
-        Stage eventSource = (Stage) menu_dorf_sprite.getScene().getWindow();
 
-        Group root = new Group();
-        //Make a tiled background.
-        BackgroundImage myBI = new BackgroundImage(
-                new Image("sprites/BasicTile.png"),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        Region platformerBasicsRegion = new Region();
-        platformerBasicsRegion.setPrefSize(SCENE_WIDTH+20, SCENE_HEIGHT+20);
-        platformerBasicsRegion.setBackground(new Background(myBI));
-        root.getChildren().add(platformerBasicsRegion);
+        Main.startGame((Stage) menu_dorf_sprite.getScene().getWindow());
+//        System.out.println("Run the damn thing.");
+//        Stage eventSource = (Stage) menu_dorf_sprite.getScene().getWindow();
+//
+//        Group root = new Group();
+//        //Make a tiled background.
+//        BackgroundImage myBI = new BackgroundImage(
+//                new Image("sprites/BasicTile.png"),
+//                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+//                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+//        Region platformerBasicsRegion = new Region();
+//        platformerBasicsRegion.setPrefSize(SCENE_WIDTH+20, SCENE_HEIGHT+20);
+//        platformerBasicsRegion.setBackground(new Background(myBI));
+//        root.getChildren().add(platformerBasicsRegion);
 
         //Make a Dorf!
 //        Dorf ferdinand = new Dorf("sprites/BasicDorf.png", 32, 32, "Ferdinand", this);
@@ -58,7 +60,7 @@ public class MainMenuController {
 //        root.requestFocus();
 
 
-        eventSource.setScene(new Scene(root, SCENE_WIDTH, SCENE_HEIGHT));
+//        eventSource.setScene(new Scene(root, SCENE_WIDTH, SCENE_HEIGHT));
     }
 
 }

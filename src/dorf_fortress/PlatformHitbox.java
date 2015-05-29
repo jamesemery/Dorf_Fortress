@@ -55,11 +55,4 @@ public class PlatformHitbox extends Hitbox {
         return false;
     }
 
-    //TODO delete this method
-    public String toString() {
-        return ("Max Y: " + hitboxRectangles[0].getBoundsInLocal().getMaxY()
-                + " Max X: " + hitboxRectangles[0].getBoundsInLocal().getMaxX
-                ());
-    }
-
 }
