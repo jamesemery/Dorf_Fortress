@@ -160,7 +160,11 @@ public class GameController implements EventHandler<KeyEvent> {
      * and asks them to update given the new offset
      */
     public void updateScreen() {
-        screenOffset = simulation.player.getX();
+        if (simulation.getGhostMode()) {
+            screenOffset = simulation.levelSolver.getX();
+        } else {
+            screenOffset = simulation.player.getX();
+        }
         for (Sprite s : spriteList) {
             s.update(screenOffset);
         }

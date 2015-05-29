@@ -33,9 +33,7 @@ public class GhostInputSource extends InputBuffer {
                 storedInput.add(frameInput);
             }
             currentInput = storedInput.get(0);
-            System.out.println("Frames of Input: " + storedInput.size());
         } catch (FileNotFoundException e){
-            System.out.println("DemoInputs.txt was not found");
         }
     }
 
@@ -94,6 +92,8 @@ public class GhostInputSource extends InputBuffer {
      */
     public void nextFrame() {
         cursor++;
-        currentInput = storedInput.get(cursor);
+        if (cursor<storedInput.size()) {
+            currentInput = storedInput.get(cursor);
+        }
     }
 }

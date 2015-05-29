@@ -8,6 +8,7 @@ public class Ghost extends Dorf {
     public double finalX;
     public int frameFinished;
     public int currentFrameCount;
+    public boolean liveSimulation;
     //TODO change the security of these
 
     /**
@@ -42,9 +43,14 @@ public class Ghost extends Dorf {
 
     @Override
     public void win() {
-        finishedLevel = true;
-        finalX = this.getX();
-        frameFinished = currentFrameCount;
+        if (liveSimulation) {
+            finishedLevel = true;
+            finalX = this.getX();
+            frameFinished = currentFrameCount;
+        } else {
+            liveSimulation = false;
+//            super.win();
+        }
     }
 
     @Override

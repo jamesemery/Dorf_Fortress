@@ -92,8 +92,9 @@ public class Model {
          * RANDOM JUMP TESTING ENDS
          */
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this,this.levelSolver);
-        dangerMaker.generateObstacles(300);
+        dangerMaker.generateObstacles(10);
         setGhostMode(true);
+        levelSolver.liveSimulation = true;
     }
 
     /**
@@ -193,5 +194,8 @@ public class Model {
     }
 
 
+    public boolean getGhostMode() {
+        return ghostMode;
+    }
 }
 
