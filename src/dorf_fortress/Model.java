@@ -93,7 +93,7 @@ public class Model {
          */
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this,this.levelSolver);
         dangerMaker.generateObstacles(10);
-        setGhostMode(true);
+        setGhostMode(false);
         levelSolver.liveSimulation = true;
     }
 
@@ -115,10 +115,13 @@ public class Model {
             this.reset();
             ghostMode = true;
             controller.removeSpriteFromRoot(levelSolver.getSprite());
+            controller.removeSpriteFromRoot(player.getSprite());
             controller.addSpriteToRoot(levelSolver.getSprite());
         } else {
             this.reset();
             ghostMode = false;
+            controller.removeSpriteFromRoot(player.getSprite());
+            controller.addSpriteToRoot(player.getSprite());
             controller.removeSpriteFromRoot(levelSolver.getSprite());
         }
     }

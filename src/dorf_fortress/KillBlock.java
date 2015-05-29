@@ -1,11 +1,13 @@
 package dorf_fortress;
 
+import java.util.Random;
+
 /**
  * The simplest form of an obstacle, a static block that kills the player
  * when touched
  * Created by jamie on 5/28/15.
  */
-public class KillBlock extends Obstacle{
+public class KillBlock extends Obstacle implements FramePlacer {
 
   public KillBlock(String sprite_location, int hitbox_width, int hitbox_height,
                    double x, double y, Model simulation) {
@@ -26,4 +28,11 @@ public class KillBlock extends Obstacle{
     public void collidesY(Entity projectile) {
         projectile.die();
     }
+
+    public Entity getCloseInstance(Hitbox target, int frameCount) {
+        double xTarget = target.getX();
+        double yTarget = target.getY();
+        Random rand = new Random();
+        return null;
+    } //TODO finish filling this in
 }

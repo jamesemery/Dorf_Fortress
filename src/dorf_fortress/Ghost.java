@@ -1,6 +1,10 @@
 package dorf_fortress;
 
 /**
+ * Ghost object is used by the ObstacleBuilder and LevelBuilder in procedural
+ * generation of the level by being able to execute inputs directly from the
+ * GhostInputSource where inputs can be easily mimic those of the user.
+ *
  * Created by jamie on 5/28/15.
  */
 public class Ghost extends Dorf {

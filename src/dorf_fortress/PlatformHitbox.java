@@ -55,4 +55,7 @@ public class PlatformHitbox extends Hitbox {
         return false;
     }
 
+    public double getX() {return x;};
+    public double getY() {return y;};
+
 }
