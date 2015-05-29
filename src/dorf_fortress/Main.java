@@ -43,15 +43,7 @@ public class Main extends Application {
         Scene platformerBasics = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
 
-        //Make a tiled background.
-        BackgroundImage myBI = new BackgroundImage(
-                new Image("sprites/BasicTile.png"),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        Region platformerBasicsRegion = new Region();
-        platformerBasicsRegion.setPrefSize(SCENE_WIDTH+20, SCENE_HEIGHT+20);
-        platformerBasicsRegion.setBackground(new Background(myBI));
-        root.getChildren().add(platformerBasicsRegion);
+
 
         //Set up the controller. (Hopefully)
         GameController controller = new GameController(root, SCENE_HEIGHT);

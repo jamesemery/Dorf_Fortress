@@ -3,8 +3,13 @@ package dorf_fortress;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,11 +25,18 @@ public class GameController implements EventHandler<KeyEvent> {
     List<Sprite> spriteList;
     Group root;
     private double screenOffset;
+    private Rectangle background;
+    final String backgroundImageLoc = "sprites/BasicTile.png";
+    Image tile;
+    double tileWidth;
+    double tileHeight;
 
 
     public GameController(Group root, double sceneHeight) {
         this.root = root;
         spriteList = new ArrayList<Sprite>();
+        this.background = setUpBackground();
+        updateBackground(0);
         this.simulation = new Model(this, sceneHeight);
         this.setUpAnimationTimer();
     }
@@ -32,6 +44,61 @@ public class GameController implements EventHandler<KeyEvent> {
     public void initialize() {
         this.setUpAnimationTimer();
         inputStore = InputBuffer.getInstance();
+    }
+
+    /**
+     * Sets up the tiled background image in its initial position. Returns the
+     * Region object as well as adding it to the tree.
+     * @return a Region containing the tiled image.
+     */
+    private Rectangle setUpBackground() {
+        //Make a tiled background.
+        /**BackgroundImage myBI = new BackgroundImage(
+                new Image("sprites/BasicTile.png"),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Region platformerBasicsRegion = new Region();
+        platformerBasicsRegion.setPrefSize(Main.SCENE_WIDTH + 20, Main.SCENE_HEIGHT + 20);
+        platformerBasicsRegion.setBackground(new Background(myBI));
+        root.getChildren().add(platformerBasicsRegion);
+        return platformerBasicsRegion;
+         */
+        Image backgroundImage = new Image(backgroundImageLoc);
+        //We have to make the rectangle a little bigger because when it pans
+        //some of it goes off the screen.
+        Rectangle backgroundRect = new Rectangle(0, 0,
+                Main.SCENE_WIDTH + 3*backgroundImage.getWidth(),
+                Main.SCENE_HEIGHT + 3*backgroundImage.getHeight());
+        this.tileWidth = backgroundImage.getWidth();
+        this.tileHeight = backgroundImage.getHeight();
+        this.tile = backgroundImage;
+        ImagePattern tile = new ImagePattern(
+                (backgroundImage),0,0,backgroundImage.getWidth(),
+                 backgroundImage.getHeight(), false );
+        backgroundRect.setFill(tile);
+        root.getChildren().add(backgroundRect);
+
+        return backgroundRect;
+    }
+
+    /**
+     * Updates the background's tiling to match the platforms.
+     * @param screenOffset is the player's x-coordinate.
+     */
+    public void updateBackground(double screenOffset) {
+
+        //Get the width of the tiled image
+        double imageWidth = this.tileWidth;
+        //get the dorf's offset over one tile
+        double tileOffset = screenOffset % imageWidth;
+        //change background position accordingly.
+        this.background.setX(-1*this.tileWidth - tileOffset);
+        //test
+        ImagePattern tilePattern = new ImagePattern(
+                (this.tile),-1*tileOffset,0,this.tile.getWidth(),
+                tile.getHeight(), false );
+        this.background.setFill(tilePattern);
+
     }
 
     /**
@@ -85,6 +152,7 @@ public class GameController implements EventHandler<KeyEvent> {
         for (Sprite s : spriteList) {
             s.update(screenOffset);
         }
+        updateBackground(screenOffset);
     }
 
     /**

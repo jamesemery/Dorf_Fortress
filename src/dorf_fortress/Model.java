@@ -30,7 +30,7 @@ public class Model {
          */
 
         //Make a Platform?
-       BouncyPlatform ground1 = new BouncyPlatform("sprites/128x32platform.png",128,32,34,
+       SolidPlatform ground1 = new SolidPlatform("sprites/128x32platform.png",128,32,34,
                 400,this);
         entities.add(ground1);
         controller.addSpriteToRoot(ground1.getSprite());
@@ -53,7 +53,7 @@ public class Model {
         entities.add(ground4);
         controller.addSpriteToRoot(ground4.getSprite());
 
-        SolidPlatform level1 = new SolidPlatform("sprites/128x32platform.png",128,32,325,
+        BouncyPlatform level1 = new BouncyPlatform("sprites/basicPlatform.png",138,32,325,
                 300,this);
         entities.add(level1);
         controller.addSpriteToRoot(level1.getSprite());
@@ -68,13 +68,15 @@ public class Model {
         entities.add(level3);
         controller.addSpriteToRoot(level3.getSprite());
 
-        KillBlock krell = new KillBlock("sprites/BasicDorf.png",32,32,200,
-                300,this);
+        KillBlock krell = new KillBlock("sprites/staticObstacleTransparent.png",32,32,200,
+                288, this);
+
         entities.add(krell);
         controller.addSpriteToRoot(krell.getSprite());
 
         SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-                ("sprites/BasicDorf.png",32,32,100,50,this);
+                ("sprites/fireball.png",32,32,100,50, this);
+
         entities.add(jumpy);
         controller.addSpriteToRoot(jumpy.getSprite());
 
