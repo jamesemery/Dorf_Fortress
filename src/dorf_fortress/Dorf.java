@@ -10,7 +10,7 @@ public class Dorf extends Actor {
     double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     double PLATFORM_JUMP_BOOST = 10000/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
-    public final double MAX_HORIZ_SPEED = 5000 / GameController.FRAMES_PER_SECOND;
+    public final double MAX_HORIZ_SPEED = 6000 / GameController.FRAMES_PER_SECOND;
     String name;
     InputBuffer inputSource;
 
