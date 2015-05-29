@@ -7,7 +7,8 @@ package dorf_fortress;
  */
 public class KillBlock extends Obstacle{
 
-  public KillBlock(String sprite_location, int hitbox_width, int hitbox_height, double x, double y, Model simulation) {
+  public KillBlock(String sprite_location, int hitbox_width, int hitbox_height,
+                   double x, double y, Model simulation) {
     super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
   }
 
