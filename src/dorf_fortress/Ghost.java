@@ -1,6 +1,10 @@
 package dorf_fortress;
 
 /**
+ * Ghost object is used by the ObstacleBuilder and LevelBuilder in procedural
+ * generation of the level by being able to execute inputs directly from the
+ * GhostInputSource where inputs can be easily mimic those of the user.
+ *
  * Created by jamie on 5/28/15.
  */
 public class Ghost extends Dorf {
@@ -8,6 +12,7 @@ public class Ghost extends Dorf {
     public double finalX;
     public int frameFinished;
     public int currentFrameCount;
+    public boolean liveSimulation;
     //TODO change the security of these
 
     /**
@@ -23,7 +28,8 @@ public class Ghost extends Dorf {
     public Ghost(String image_location, int hitbox_width, int hitbox_height, double x, double y,
                  Model model) {
         super(image_location, hitbox_width, hitbox_height, x, y, model);
-        inputSource = GhostInputSource.getInstance();
+        inputSource = new GhostInputSource();
+        inputSource.clear();
     }
 
     @Override
@@ -42,9 +48,15 @@ public class Ghost extends Dorf {
 
     @Override
     public void win() {
-        finishedLevel = true;
-        finalX = this.getX();
-        frameFinished = currentFrameCount;
+        if (liveSimulation) {
+            liveSimulation = false;
+            super.win();
+            reset();
+        } else {
+            finishedLevel = true;
+            finalX = this.getX();
+            frameFinished = currentFrameCount;
+        }
     }
 
     @Override
@@ -52,6 +64,5 @@ public class Ghost extends Dorf {
         finishedLevel = false;
         currentFrameCount = 0;
         super.reset();
-        inputSource.clear();
     }
 }

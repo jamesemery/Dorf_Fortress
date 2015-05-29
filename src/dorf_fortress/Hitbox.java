@@ -18,4 +18,7 @@ public abstract class Hitbox {
 
 
     public abstract boolean intersects(javafx.geometry.Bounds boundsInLocal);
+
+    public abstract double getX();
+    public abstract double getY();
 }
