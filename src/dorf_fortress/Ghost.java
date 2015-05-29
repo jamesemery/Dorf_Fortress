@@ -4,7 +4,10 @@ package dorf_fortress;
  * Created by jamie on 5/28/15.
  */
 public class Ghost extends Dorf {
-
+    public boolean finishedLevel;
+    public double finalX;
+    public int frameFinished;
+    private int currentFrameCount;
 
     /**
      * Calls Actor's constructor with no name.
@@ -23,8 +26,22 @@ public class Ghost extends Dorf {
 
     @Override
     public void step(){
-        inputSource.addInput("right",true);
+        inputSource.addInput("right", true);
+        currentFrameCount++;
         super.step();
     }
 
+    @Override
+    public void die(){
+        finishedLevel = true;
+        finalX = this.getX();
+        frameFinished = currentFrameCount;
+    }
+
+    @Override
+    public void reset(){
+        finishedLevel = false;
+        currentFrameCount = 0;
+        super.reset();
+    }
 }

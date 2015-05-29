@@ -175,4 +175,8 @@ public abstract class Entity {
     //entity objects need to do stuff with collisions
     public abstract void collidesX(Entity projectile);
     public abstract void collidesY(Entity projectile);
+
+    public Hitbox getHitbox() {
+        return hitbox;
+    }
 }

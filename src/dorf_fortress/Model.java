@@ -3,12 +3,16 @@ package dorf_fortress;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * Created by jamie on 5/27/15.
  */
 public class Model {
     private List<Entity> entities;
     public Dorf player;
+    public Ghost levelSolver;
+    private boolean ghostMode;
+    public List<Entity> testingEntities; //used for character generation
     private GameController controller;
     public static double SCENE_HEIGHT;
 
@@ -23,6 +27,12 @@ public class Model {
                 100);
         this.player = ferdinand;
         controller.addSpriteToRoot(ferdinand.getSprite());
+
+        //Make a Ghost!
+        Ghost casper = new Ghost("sprites/BrownDorf.png", 32, 32, this, 34,
+                100);
+        this.levelSolver = casper;
+//        this.controller.addSpriteToRoot(casper.getSprite());
 
 
         /*
@@ -73,15 +83,68 @@ public class Model {
         entities.add(krell);
         controller.addSpriteToRoot(krell.getSprite());
 
-        SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-                ("sprites/BasicDorf.png",32,32,this,100,50);
-        entities.add(jumpy);
-        controller.addSpriteToRoot(jumpy.getSprite());
+//        SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
+//                ("sprites/BasicDorf.png",32,32,this,100,50);
+//        entities.add(jumpy);
+//        controller.addSpriteToRoot(jumpy.getSprite());
 
         /*
          * RANDOM JUMP TESTING ENDS
          */
+        ObstaclePlacer dangerMaker = new ObstaclePlacer(this,this.levelSolver);
+        dangerMaker.generateObstacles(40);
     }
+
+    /**
+     * sets or removes the ghost mode from the level, if given argument is
+     * true it sets it, and removes it if its set to false, also handles
+     * turning on and off display of the dorf
+     */
+    public void setGhostMode(boolean val) {
+        if (val) {
+            this.reset();
+            ghostMode = true;
+            controller.removeSpriteFromRoot(levelSolver.getSprite());
+            controller.addSpriteToRoot(levelSolver.getSprite());
+        } else {
+            this.reset();
+            ghostMode = false;
+            controller.removeSpriteFromRoot(levelSolver.getSprite());
+        }
+    }
+
+    /**
+     * Adds the given list of entities to the running simulation as well as
+     * hooking them into the view properly
+     */
+    public void addEntities(List<Entity> newEntities) {
+        for (Entity e : newEntities) {
+            entities.add(e);
+            System.out.println(e);
+            controller.addSpriteToRoot(e.getSprite());
+        }
+    }
+
+
+    /**
+     * if the GhostMode is not on, it turns it on and resets the level then
+     * it simulates one frame of the level and returns the hitbox for the
+     * ghost frame at that perticular point. If the ghost finishes its run
+     * though it returns a null
+     */
+    public Hitbox getNextGhostHitbox() {
+        if (!ghostMode) {
+            this.reset();
+            ghostMode = true;
+        }
+        this.simulateFrame();
+        if (this.levelSolver.finishedLevel) {
+            return null;
+        } else {
+            return this.levelSolver.getHitbox();
+        }
+    }
+
 
 
     public List<Entity> getObjects() {
@@ -92,16 +155,33 @@ public class Model {
         for (Entity i : entities){
             i.updateSprite();
         }
-        player.updateSprite();
+        if(testingEntities!=null) {
+            for (Entity i : testingEntities) {
+                i.updateSprite();
+            }
+        }
+        if (ghostMode) {
+            levelSolver.updateSprite();
+        }
+        else {
+            player.updateSprite();
+        }
+
     }
 
     // restets the level to the initial conditions for every entity contained
     // in the set
     public void reset() {
-        for (Entity i : entities){
+        for (Entity i : entities) {
             i.reset();
         }
+        if (testingEntities!=null){
+            for (Entity i : testingEntities) {
+                i.reset();
+            }
+        }
         player.reset();
+        levelSolver.reset();
     }
 
 
