@@ -11,6 +11,7 @@ public class SolidPlatform extends Platform {
         super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
+        this.JUMP_BOOST = 10000/ GameController.FRAMES_PER_SECOND;
     }
 
     @Override
@@ -18,7 +19,7 @@ public class SolidPlatform extends Platform {
         // top collision - if the projectile is going down relative
         if (projectile.getY_velocity() < this.getY_velocity()) {
             if (projectile instanceof Actor) {
-                ((Actor) projectile).setOnPlatform(true);
+                ((Actor) projectile).setCurPlatform(this);
             }
             projectile.setY(this.getY() - projectile.height - 0.01);
             projectile.setY_velocity(this.y_velocity);

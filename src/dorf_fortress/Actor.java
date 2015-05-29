@@ -10,7 +10,7 @@ public abstract class Actor extends Entity {
     public String name = "";
     public final double GRAVITY_CONSTANT = 5;
     public final double TERMINAL_VELOCITY = -300;
-    boolean onPlatform;
+    Platform curPlatform;
 
     /**
      * Creates an unnamed Actor, by passing everything up to Entity's
@@ -45,7 +45,7 @@ public abstract class Actor extends Entity {
      */
     public void step() {
         fall();
-        setOnPlatform(false);
+        curPlatform = null;
         super.step();
     }
 
@@ -56,7 +56,7 @@ public abstract class Actor extends Entity {
     public void collidesX(Entity projectile) {};
     public void collidesY(Entity projectile) {};
 
-    public void setOnPlatform(boolean val) {
-        onPlatform = val;
+    public void setCurPlatform(Platform platform) {
+        curPlatform = platform;
     }
 }
