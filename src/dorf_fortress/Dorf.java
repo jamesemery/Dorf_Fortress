@@ -1,5 +1,8 @@
 package dorf_fortress;
 
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
  * Created by Joe Adkisson on 5/24/2015.
  * Controllable hero of the game; subclass of Actor.
@@ -10,6 +13,7 @@ public class Dorf extends Actor {
     double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 6000 / GameController.FRAMES_PER_SECOND;
+    private boolean victorious = false;
     String name;
     InputBuffer inputSource;
 
@@ -126,6 +130,7 @@ public class Dorf extends Actor {
      * Resets the level if the dorf dies.
      */
     public void die() {
+        System.out.println(this.getSprite().getScene().getWindow());
         simulation.reset();
     }
 
@@ -133,9 +138,24 @@ public class Dorf extends Actor {
      * Completes the level and initiates the win screen.
      */
     public void win() {
-        System.out.println("You win!");
+        System.out.println("Beginning win() method");
+        simulation.reset();
+        if(this.victorious == false) {
+            this.victorious = true;
+            Stage mainStage = (Stage) this.getSprite().getScene().getWindow();
+            System.out.print("Stage:");
+            System.out.println(mainStage);
+
+            Main.startWinMenu(mainStage);
+            System.out.println("Ending win() method");
+        }
     }
 
+    //does stuff
+    public void reset() {
+        super.reset();
+        inputSource.clear();
+    }
     /**
      * Change in behavior for dorf so it doesn't worry about going off the top
      */

@@ -20,7 +20,6 @@ import java.util.TimerTask;
 
 public class Main extends Application {
 
-
     final static double SCENE_WIDTH = 640;
     final static double SCENE_HEIGHT = 480;
 
@@ -47,6 +46,10 @@ public class Main extends Application {
         //startLoseMenu(primaryStage);
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     /**
      * Launches the menu scene.
      */
@@ -69,7 +72,7 @@ public class Main extends Application {
             javafx.application.Platform.exit();
             System.exit(0);
         }
-        System.out.println("setup Menu");
+        System.out.println("setup Start Menu");
 
     }
 
@@ -100,12 +103,9 @@ public class Main extends Application {
         System.out.println("setup Game");
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     /**
-     * Launches the menu scene.
+     * Launches the lose menu scene.
      */
     public static void startLoseMenu(Stage mainStage) {
         URL fxmlUrl = Main.class.getResource("LoseScreen.fxml");
@@ -126,17 +126,17 @@ public class Main extends Application {
             javafx.application.Platform.exit();
             System.exit(0);
         }
-        System.out.println("setup Menu");
+        System.out.println("setup Lose Menu");
 
     }
 
 
     /**
-     * Launches the menu scene.
+     * Launches the win menu scene.
      */
     public static void startWinMenu(Stage mainStage) {
+        System.out.println("Setting up win menu");
         URL fxmlUrl = Main.class.getResource("WinScreen.fxml");
-        System.out.println(fxmlUrl);
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
         try {
             Parent root = loader.load();
@@ -150,11 +150,11 @@ public class Main extends Application {
             mainStage.show();
         } catch (Exception e) {
             System.out.println("Fxml file not found");
+            System.out.println("Exception: " + e);
             javafx.application.Platform.exit();
             System.exit(0);
         }
-        System.out.println("setup Menu");
-
+        System.out.println("setup Win Menu");
     }
 
 

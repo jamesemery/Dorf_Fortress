@@ -133,6 +133,13 @@ public class GameController implements EventHandler<KeyEvent> {
     }
 
     /**
+     * Pauses the animation.
+     */
+    public void pause() {
+        this.timer.cancel();
+    }
+
+    /**
      * Adds a sprite to the scene, both to the root node and the controller's
      * list of sprites.
      * @param sprite

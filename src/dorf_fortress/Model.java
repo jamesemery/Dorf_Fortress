@@ -96,6 +96,14 @@ public class Model {
     }
 
     /**
+     * Pauses the animation; simply calls the controller's method of the same
+     * name.
+     */
+    public void pause() {
+        this.controller.pause();
+    }
+
+    /**
      * sets or removes the ghost mode from the level, if given argument is
      * true it sets it, and removes it if its set to false, also handles
      * turning on and off display of the dorf
