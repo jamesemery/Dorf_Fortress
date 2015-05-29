@@ -46,13 +46,20 @@ public class PlatformHitbox extends Hitbox {
     // intersects with any of the objects that make up this hitbox. For this
     // hitbox it consists of looping through the rectangles that makes it up
     // and determines if the bounds intersect
-    public boolean intersects(javafx.geometry.Bounds bounds){
+    public boolean intersects(javafx.geometry.Bounds bounds) {
         for (Rectangle r : hitboxRectangles) {
-            if (r.intersects(bounds)){
+            if (r.intersects(bounds)) {
                 return true;
             }
         }
         return false;
+    }
+
+    //TODO delete this method
+    public String toString() {
+        return ("Max Y: " + hitboxRectangles[0].getBoundsInLocal().getMaxY()
+                + " Max X: " + hitboxRectangles[0].getBoundsInLocal().getMaxX
+                ());
     }
 
 }

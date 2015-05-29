@@ -109,7 +109,6 @@ public class Dorf extends Actor {
     public void up() {
         if (curPlatform != null) {
             this.y_velocity += curPlatform.getJump();
-            System.out.println("Jump");
         }
         if (this.y_velocity >= 50) {
             this.y_velocity += STEP_SIZE_Y;
