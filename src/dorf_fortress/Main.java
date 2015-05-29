@@ -40,9 +40,11 @@ public class Main extends Application {
             }
         });
 
-        //Set up the scene
+        //Set up the scene. The commented lines are for testing.
         //startGame(primaryStage);
         startMenu(primaryStage);
+        //startWinMenu(primaryStage);
+        //startLoseMenu(primaryStage);
     }
 
     /**
@@ -101,5 +103,59 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    /**
+     * Launches the menu scene.
+     */
+    public static void startLoseMenu(Stage mainStage) {
+        URL fxmlUrl = Main.class.getResource("LoseScreen.fxml");
+        System.out.println(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        try {
+            Parent root = (Parent) loader.load();
+
+            Scene platformerBasics = new Scene(root, SCENE_WIDTH,
+                    SCENE_HEIGHT);
+            LoseScreenController controller = loader.getController();
+            root.requestFocus();
+
+            mainStage.setScene(platformerBasics);
+            mainStage.show();
+        } catch (Exception e) {
+            System.out.println("Fxml file not found");
+            javafx.application.Platform.exit();
+            System.exit(0);
+        }
+        System.out.println("setup Menu");
+
+    }
+
+
+    /**
+     * Launches the menu scene.
+     */
+    public static void startWinMenu(Stage mainStage) {
+        URL fxmlUrl = Main.class.getResource("WinScreen.fxml");
+        System.out.println(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        try {
+            Parent root = loader.load();
+
+            Scene platformerBasics = new Scene(root, SCENE_WIDTH,
+                    SCENE_HEIGHT);
+            WinScreenController controller = loader.getController();
+            root.requestFocus();
+
+            mainStage.setScene(platformerBasics);
+            mainStage.show();
+        } catch (Exception e) {
+            System.out.println("Fxml file not found");
+            javafx.application.Platform.exit();
+            System.exit(0);
+        }
+        System.out.println("setup Menu");
+
+    }
+
 
 }

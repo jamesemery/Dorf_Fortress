@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('@../sprites/BasicTile.png'); -fx-background-repeat: stretch;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.LoseScreenController">
+<AnchorPane fx:id ="primaryPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('@../sprites/BasicTile.png'); -fx-background-repeat: stretch;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.LoseScreenController">
    <children>
       <Text layoutX="87.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You seem to have suffered a " textAlignment="CENTER">
          <font>
