@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -73,7 +74,12 @@ public class Main extends Application {
     /**
      * Launches the game scene.
      */
-    public static void startGame(Stage mainStage) {
+    public static void startGame(Stage mainStage,
+                String name, double difficulty, Color beardColor) {
+        System.out.println("Debug message from Main.startGame(). Params:");
+        System.out.println("Name: " + name);
+        System.out.println("Difficulty: " + difficulty);
+        System.out.println("Color: " + beardColor);
         Group root = new Group();
         Scene platformerBasics = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
