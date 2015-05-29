@@ -53,7 +53,15 @@ public class Dorf extends Actor {
      *   and handles collision checking.
      */
     @Override
-    public void step(){
+    public void step() {
+        String solving = "{";
+        solving += inputSource.getInput("left");
+        solving += "," + inputSource.getInput("right") + ",";
+        solving += inputSource.getInput("up");
+        solving += "," + inputSource.getInput("down") + "}";
+        if (this instanceof Ghost) {
+            System.out.println(solving);
+        }
         if (inputSource.getInput("left")) {
             this.left();
         }

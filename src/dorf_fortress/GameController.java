@@ -37,7 +37,7 @@ public class GameController implements EventHandler<KeyEvent> {
         spriteList = new ArrayList<Sprite>();
         this.background = setUpBackground();
         updateBackground(0);
-        this.simulation = new Model(this, sceneHeight);
+        this.simulation = Model.getInstance(this, sceneHeight);
         this.setUpAnimationTimer();
     }
 

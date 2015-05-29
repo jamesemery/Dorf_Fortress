@@ -28,7 +28,8 @@ public class Ghost extends Dorf {
     public Ghost(String image_location, int hitbox_width, int hitbox_height, double x, double y,
                  Model model) {
         super(image_location, hitbox_width, hitbox_height, x, y, model);
-        inputSource = GhostInputSource.getInstance();
+        inputSource = new GhostInputSource();
+        inputSource.clear();
     }
 
     @Override
@@ -50,6 +51,7 @@ public class Ghost extends Dorf {
         if (liveSimulation) {
             liveSimulation = false;
             super.win();
+            reset();
         } else {
             finishedLevel = true;
             finalX = this.getX();
@@ -62,6 +64,5 @@ public class Ghost extends Dorf {
         finishedLevel = false;
         currentFrameCount = 0;
         super.reset();
-        inputSource.clear();
     }
 }

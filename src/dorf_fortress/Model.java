@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Created by jamie on 5/27/15.
  */
 public class Model {
+    static Model singleInstance;
     private List<Entity> entities;
     public Dorf player;
     public Ghost levelSolver;
@@ -16,8 +17,13 @@ public class Model {
     public static double SCENE_HEIGHT;
 
 
+    static Model getInstance(GameController controller, double sceneHeight) {
+        singleInstance = new Model(controller, sceneHeight);
+        return singleInstance;
+    }
 
-    public Model(GameController controller, double sceneHeight) {
+
+    private Model(GameController controller, double sceneHeight) {
         this.SCENE_HEIGHT = sceneHeight;
         this.controller = controller;
         entities = new ArrayList<Entity>();
@@ -93,7 +99,7 @@ public class Model {
          */
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this,this.levelSolver);
         dangerMaker.generateObstacles(10);
-        setGhostMode(false);
+        setGhostMode(true);
         levelSolver.liveSimulation = true;
     }
 
@@ -184,6 +190,7 @@ public class Model {
     // restets the level to the initial conditions for every entity contained
     // in the set
     public void reset() {
+        System.out.println("____________");
         for (Entity i : entities) {
             i.reset();
         }

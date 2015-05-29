@@ -13,7 +13,7 @@ import java.util.HashSet;
  *
  * Created by jamie on 5/27/15.
  */
-public class BasicInputBuffer extends InputBuffer {
+public class  BasicInputBuffer extends InputBuffer {
     private static InputBuffer uniqueInstance;
     Set<String> storedInput;
 
