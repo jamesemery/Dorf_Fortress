@@ -21,7 +21,7 @@ public class GameController implements EventHandler<KeyEvent> {
     final public static double FRAMES_PER_SECOND = 60;
     private Timer timer;
     public Model simulation;
-    public InputBuffer inputStore;
+    public BasicInputBuffer inputStore;
     List<Sprite> spriteList;
     Group root;
     private double screenOffset;
@@ -43,7 +43,7 @@ public class GameController implements EventHandler<KeyEvent> {
 
     public void initialize() {
         this.setUpAnimationTimer();
-        inputStore = InputBuffer.getInstance();
+        inputStore = (BasicInputBuffer)BasicInputBuffer.getInstance();
     }
 
     /**

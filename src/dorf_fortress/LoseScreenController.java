@@ -19,6 +19,7 @@ public class LoseScreenController {
     @FXML
     void whenSolutionClicked(ActionEvent event) {
         //This will do something eventually...
+
     }
 
     @FXML

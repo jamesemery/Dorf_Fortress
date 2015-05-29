@@ -84,15 +84,16 @@ public class Model {
 //       controller.addSpriteToRoot(krell.getSprite());
 
 //        SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-//                ("sprites/BasicDorf.png",32,32,this,100,50);
+//                ("sprites/BasicDorf.png",32,32,100,-50,this);
 //        entities.add(jumpy);
 //        controller.addSpriteToRoot(jumpy.getSprite());
 
         /*
          * RANDOM JUMP TESTING ENDS
          */
-//        ObstaclePlacer dangerMaker = new ObstaclePlacer(this,this.levelSolver);
-//        dangerMaker.generateObstacles(40);
+        ObstaclePlacer dangerMaker = new ObstaclePlacer(this,this.levelSolver);
+        dangerMaker.generateObstacles(300);
+        setGhostMode(true);
     }
 
     /**
@@ -128,7 +129,6 @@ public class Model {
     public void addEntities(List<Entity> newEntities) {
         for (Entity e : newEntities) {
             entities.add(e);
-            System.out.println(e);
             controller.addSpriteToRoot(e.getSprite());
         }
     }

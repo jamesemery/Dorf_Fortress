@@ -9,8 +9,8 @@ public abstract class Entity {
     private double y;
     protected double x_velocity = 0;
     protected double y_velocity = 0;
-    private double initial_x;
-    private double initial_y;
+    protected double initial_x;
+    protected double initial_y;
     protected double initial_x_velocity;
     protected double initial_y_velocity;
     protected Hitbox hitbox;

@@ -21,7 +21,9 @@ public class ObstaclePlacer {
     }
 
     public void generateObstacles(int n) {
-        //simulates the ghosts path once to get necessary variables
+
+        // simulates the ghosts path once to get necessary variables from the
+        // ghost about how the simulation went
         while (simulation.getNextGhostHitbox() != null) {
         }
         simulation.reset();
@@ -30,14 +32,17 @@ public class ObstaclePlacer {
 
 
         while (safeObstacles.size() < n) {
+            //creates obstacles to test
             List<Entity> testCases = new ArrayList<Entity>();
             for (int i = safeObstacles.size(); i < n; i++) {
                 Entity obstacle = getSimpleObsticle(endX);
                 testCases.add(obstacle);
             }
+
+
             simulation.testingEntities = testCases;
-            while (simulation.getNextGhostHitbox() != null) {
-                Hitbox ghost = simulation.getNextGhostHitbox();
+            Hitbox ghost = simulation.getNextGhostHitbox();
+            while (ghost != null) {
                 int i = 0;
                 while (i < testCases.size()) {
                     Hitbox obstacleHitbox = testCases.get(i).getHitbox();
@@ -47,6 +52,7 @@ public class ObstaclePlacer {
                         i++;
                     }
                 }
+                ghost = simulation.getNextGhostHitbox();
             }
             for (Entity e : testCases) {
                 safeObstacles.add(e);
@@ -56,7 +62,6 @@ public class ObstaclePlacer {
         }
         simulation.addEntities(safeObstacles);
         simulation.setGhostMode(false);
-        System.out.println(safeObstacles.size());
     }
 
 
@@ -65,8 +70,9 @@ public class ObstaclePlacer {
     public Obstacle getSimpleObsticle(double finalX) {
         int x = randomGenerator.nextInt((int)finalX);
         int speed = randomGenerator.nextInt(80) + 20;
+        if (randomGenerator.nextBoolean()) {speed = speed*-1;}
         SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-                ("sprites/BasicDorf.png",32,32,x,speed,simulation);
+                ("sprites/fireball.png",32,32,x,speed,simulation);
         return jumpy;
     }
 }

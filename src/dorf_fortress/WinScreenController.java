@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
-
 /**
  * Created by azureillusions on 5/29/15.
  */
@@ -21,4 +20,3 @@ public class WinScreenController {
     }
 
 }
-

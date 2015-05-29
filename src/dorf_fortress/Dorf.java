@@ -28,7 +28,7 @@ public class Dorf extends Actor {
                 Model model) {
 
         super(image_location, hitbox_width, hitbox_height, x, y, model);
-        inputSource = InputBuffer.getInstance();
+        inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( 32, 32);
         height = 32;
         width = 32;
@@ -54,6 +54,14 @@ public class Dorf extends Actor {
      */
     @Override
     public void step(){
+        String solving = "{";
+        solving += inputSource.getInput("left");
+        solving += "," + inputSource.getInput("right") + ",";
+        solving += inputSource.getInput("up") ;
+        solving += "," + inputSource.getInput("down") + "}";
+        if (this instanceof Ghost) {
+            System.out.println(solving);
+        }
         if (inputSource.getInput("left")) {
             this.left();
         }
@@ -66,6 +74,7 @@ public class Dorf extends Actor {
         if (inputSource.getInput("down")) {
             this.down();
         }
+
         applyFriction();
         super.step();
     }
