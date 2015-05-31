@@ -108,7 +108,7 @@ public class Main extends Application {
     /**
      * Launches the lose menu scene.
      */
-    public static void startLoseMenu(Scene mainScene) {
+    public static void startLoseMenu(Scene mainScene, Model simulation) {
         URL fxmlUrl = Main.class.getResource("LoseScreen.fxml");
         System.out.println(fxmlUrl);
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
@@ -116,6 +116,10 @@ public class Main extends Application {
             AnchorPane loseRoot = loader.load();
 
             LoseScreenController controller = loader.getController();
+            controller.setModel(simulation);
+
+            /* TODO: MICHAEL IS WORKING ON THIS */
+
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(loseRoot);
             loseRoot.requestFocus();

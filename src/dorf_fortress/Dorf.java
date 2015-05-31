@@ -141,6 +141,9 @@ public class Dorf extends Actor {
     public void die() {
         System.out.println(this.getSprite().getScene().getWindow());
         simulation.reset();
+
+        Scene mainScene = this.getSprite().getScene();
+        Main.startLoseMenu(mainScene, simulation);
     }
 
     /**
