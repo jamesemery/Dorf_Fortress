@@ -90,7 +90,7 @@ public class Main extends Application {
                 SCENE_HEIGHT);
 
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(root, SCENE_HEIGHT);
+        GameController controller = new GameController(root, SCENE_HEIGHT, difficulty);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Model {
     static Model singleInstance;
     private List<Entity> entities;
+    private int obstacle_count;
     public Dorf player;
     public Ghost levelSolver;
     private boolean ghostMode;
@@ -17,15 +18,23 @@ public class Model {
     public static double SCENE_HEIGHT;
 
 
-    static Model getInstance(GameController controller, double sceneHeight) {
-        singleInstance = new Model(controller, sceneHeight);
+    static Model getInstance(GameController controller, double sceneHeight, double difficulty) {
+        singleInstance = new Model(controller, sceneHeight, difficulty);
         return singleInstance;
     }
 
 
-    private Model(GameController controller, double sceneHeight) {
+    private Model(GameController controller, double sceneHeight, double difficulty) {
         this.SCENE_HEIGHT = sceneHeight;
         this.controller = controller;
+
+        /*
+         * TODO: Here's where the number of obstacles is set by the difficulty.
+         * TODO: Fiddle with? We can make obstacle_count = n(difficulty) + c,
+         * TODO: where c is the count at difficulty 0 and n scales it.
+         */
+        this.obstacle_count = (int) Math.round(.75*difficulty);
+
         entities = new ArrayList<Entity>();
         //Make a Dorf!
         Dorf ferdinand = new Dorf("sprites/GreyDorf.png", 32, 32, 34,
@@ -98,7 +107,7 @@ public class Model {
          * RANDOM JUMP TESTING ENDS
          */
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this,this.levelSolver);
-        dangerMaker.generateObstacles(0);
+        dangerMaker.generateObstacles(this.obstacle_count);
         setGhostMode(false);
     }
 
