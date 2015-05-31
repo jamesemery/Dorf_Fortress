@@ -45,55 +45,6 @@ public class Model {
          */
         LevelBuilder levelBuilder = new LevelBuilder(this,entities,controller);
         levelBuilder.makeTestLevel();
-//       //Make a Platform?
-//       SolidPlatform ground1 = new SolidPlatform("sprites/128x32platform.png",128,32,34,
-//                400,this);
-//       entities.add(ground1);
-//       controller.addSpriteToRoot(ground1.getSprite());
-//
-//       //Make a Platform?
-//       SolidPlatform ground2 = new SolidPlatform("sprites/128x32platform.png",128,32,162,
-//                400,this);
-//       entities.add(ground2);
-//       controller.addSpriteToRoot(ground2.getSprite());
-//
-//       //Make a Platform?
-//       SolidPlatform ground3 = new SolidPlatform("sprites/128x32platform.png",128,32,290,
-//                400,this);
-//       entities.add(ground3);
-//       controller.addSpriteToRoot(ground3.getSprite());
-//
-//       //Make a Platform?
-//       SolidPlatform ground4 = new SolidPlatform("sprites/128x32platform.png",128,32,418,
-//                400,this);
-//       entities.add(ground4);
-//       controller.addSpriteToRoot(ground4.getSprite());
-//
-//       BouncyPlatform level1 = new BouncyPlatform("sprites/basicPlatform.png",138,32,325,
-//                300,this);
-//       entities.add(level1);
-//       controller.addSpriteToRoot(level1.getSprite());
-//
-//       SolidPlatform level2 = new SolidPlatform("sprites/128x32platform.png",128,32,197,
-//                200,this);
-//       entities.add(level2);
-//       controller.addSpriteToRoot(level2.getSprite());
-//
-//       SolidPlatform level3 = new SolidPlatform("sprites/128x32platform.png",128,32,69,
-//                100,this);
-//       entities.add(level3);
-//       controller.addSpriteToRoot(level3.getSprite());
-//
-//       KillBlock krell = new KillBlock("sprites/staticObstacleTransparent.png",32,32,200,
-//                288, this);
-//       entities.add(krell);
-//       controller.addSpriteToRoot(krell.getSprite());
-
-//        SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-//                ("sprites/BasicDorf.png",32,32,100,-50,this);
-//        entities.add(jumpy);
-//        controller.addSpriteToRoot(jumpy.getSprite());
-
         /*
          * RANDOM JUMP TESTING ENDS
          */

@@ -60,15 +60,16 @@ public class Main extends Application {
         try {
             Parent root = (Parent) loader.load();
 
-            Scene platformerBasics = new Scene(root, SCENE_WIDTH,
+            Scene mainMenu = new Scene(root, SCENE_WIDTH,
                     SCENE_HEIGHT);
             MainMenuController controller = loader.getController();
             root.requestFocus();
 
-            mainStage.setScene(platformerBasics);
+            mainStage.setScene(mainMenu);
             mainStage.show();
         } catch (Exception e) {
-            System.out.println("Fxml file not found");
+            System.out.println("Fxml file not found.");
+            System.out.println(e);
             javafx.application.Platform.exit();
             System.exit(0);
         }
@@ -86,7 +87,7 @@ public class Main extends Application {
         System.out.println("Difficulty: " + difficulty);
         System.out.println("Color: " + beardColor);
         Group root = new Group();
-        Scene platformerBasics = new Scene(root, SCENE_WIDTH,
+        Scene gameScene = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
 
         //Set up the controller. (Hopefully)
@@ -98,7 +99,7 @@ public class Main extends Application {
         root.setOnKeyReleased(controller);
         root.requestFocus();
 
-        mainStage.setScene(platformerBasics);
+        mainStage.setScene(gameScene);
         mainStage.show();
         System.out.println("setup Game");
     }
@@ -107,22 +108,20 @@ public class Main extends Application {
     /**
      * Launches the lose menu scene.
      */
-    public static void startLoseMenu(Stage mainStage) {
+    public static void startLoseMenu(Scene mainScene) {
         URL fxmlUrl = Main.class.getResource("LoseScreen.fxml");
         System.out.println(fxmlUrl);
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
         try {
-            Parent root = (Parent) loader.load();
+            AnchorPane loseRoot = loader.load();
 
-            Scene platformerBasics = new Scene(root, SCENE_WIDTH,
-                    SCENE_HEIGHT);
             LoseScreenController controller = loader.getController();
-            root.requestFocus();
+            Group root = (Group) mainScene.getRoot();
+            root.getChildren().add(loseRoot);
+            loseRoot.requestFocus();
 
-            mainStage.setScene(platformerBasics);
-            mainStage.show();
         } catch (Exception e) {
-            System.out.println("Fxml file not found");
+            System.out.println("Fxml file not found!");
             javafx.application.Platform.exit();
             System.exit(0);
         }
@@ -134,22 +133,18 @@ public class Main extends Application {
     /**
      * Launches the win menu scene.
      */
-    public static void startWinMenu(Stage mainStage) {
+    public static void startWinMenu(Scene mainScene) {
         System.out.println("Setting up win menu");
         URL fxmlUrl = Main.class.getResource("WinScreen.fxml");
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
         try {
-            Parent root = loader.load();
+            AnchorPane winRoot = loader.load();
+            Group root = (Group) mainScene.getRoot();
+            root.getChildren().add(winRoot);
+            winRoot.requestFocus();
 
-            Scene platformerBasics = new Scene(root, SCENE_WIDTH,
-                    SCENE_HEIGHT);
-            WinScreenController controller = loader.getController();
-            root.requestFocus();
-
-            mainStage.setScene(platformerBasics);
-            mainStage.show();
         } catch (Exception e) {
-            System.out.println("Fxml file not found");
+            System.out.println("Fxml file not found!");
             System.out.println("Exception: " + e);
             javafx.application.Platform.exit();
             System.exit(0);

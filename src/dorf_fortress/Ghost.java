@@ -50,8 +50,9 @@ public class Ghost extends Dorf {
     public void win() {
         if (liveSimulation) {
             liveSimulation = false;
-            super.win();
             reset();
+            super.win();
+
         } else {
             finishedLevel = true;
             finalX = this.getX();

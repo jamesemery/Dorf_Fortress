@@ -60,7 +60,7 @@ public class Dorf extends Actor {
         solving += inputSource.getInput("up");
         solving += "," + inputSource.getInput("down") + "}";
         if (this instanceof Ghost) {
-            System.out.println(solving);
+            //System.out.println(solving);
         }
         if (inputSource.getInput("left")) {
             this.left();
@@ -149,13 +149,17 @@ public class Dorf extends Actor {
     public void win() {
         System.out.println("Beginning win() method");
         simulation.reset();
+        if (!(this instanceof Ghost)) {
+            simulation.pause();
+            System.out.println("pausing");
+        }
         if(this.victorious == false) {
             this.victorious = true;
-            Stage mainStage = (Stage) this.getSprite().getScene().getWindow();
+            Scene mainScene = this.getSprite().getScene();
             System.out.print("Stage:");
-            System.out.println(mainStage);
+            System.out.println(mainScene);
 
-            Main.startWinMenu(mainStage);
+            Main.startWinMenu(mainScene);
             System.out.println("Ending win() method");
         }
     }
