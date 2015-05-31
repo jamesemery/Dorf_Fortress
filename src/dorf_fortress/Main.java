@@ -55,7 +55,7 @@ public class Main extends Application {
      */
     public static void startMenu(Stage mainStage) {
         URL fxmlUrl = Main.class.getResource("mainmenu.fxml");
-        System.out.println(fxmlUrl);
+        System.out.println("fxml url: " + fxmlUrl);
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
         try {
             Parent root = (Parent) loader.load();

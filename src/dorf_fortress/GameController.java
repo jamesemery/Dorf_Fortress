@@ -31,7 +31,7 @@ public class GameController implements EventHandler<KeyEvent> {
     double tileWidth;
     double tileHeight;
 
-    
+
     public GameController(Group root, double sceneHeight, double difficulty) {
         System.out.println("Making a controller object...");
         this.root = root;
@@ -39,7 +39,7 @@ public class GameController implements EventHandler<KeyEvent> {
         this.background = setUpBackground();
         updateBackground(0);
         this.simulation = Model.getInstance(this, sceneHeight, difficulty);
-        this.setUpAnimationTimer();
+        //this.setUpAnimationTimer();
     }
 
     public void initialize() {
