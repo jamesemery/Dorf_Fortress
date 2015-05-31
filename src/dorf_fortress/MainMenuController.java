@@ -29,11 +29,11 @@ public class MainMenuController {
     @FXML private ColorPicker beardColorPicker;
     @FXML private javafx.scene.control.TextField nameTextField;
 
+
     @FXML
     void whenBeginClicked(ActionEvent actionEvent) {
         Stage thisStage = (Stage) menu_dorf_sprite.getScene().getWindow();
         Main.startGame(thisStage, nameTextField.getText(),
                 difficultySlider.getValue(), beardColorPicker.getValue() );
     }
-
 }
