@@ -44,6 +44,7 @@ public class Ghost extends Dorf {
         finishedLevel = true;
         finalX = this.getX();
         frameFinished = currentFrameCount;
+        currentFrameCount = 0;
     }
 
     @Override

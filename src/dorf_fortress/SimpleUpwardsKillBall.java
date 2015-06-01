@@ -1,5 +1,6 @@
 package dorf_fortress;
 
+import java.util.Random;
 /**
  * Created by jamie on 5/28/15.
  */
@@ -39,5 +40,19 @@ public class SimpleUpwardsKillBall extends Obstacle{
     @Override
     public void die() {
         this.reset();
+    }
+
+    // This class is agnostic to the specific hitbox it is passed.
+    public static Obstacle getInstance(ObstaclePlacer source, Hitbox h,
+                                       Random rand) {
+        double finalX = source.getFinalX();
+        int x = rand.nextInt((int) finalX);
+        int speed = rand.nextInt(80) + 20;
+        if (rand.nextBoolean()) {
+            speed = speed * -1;
+        }
+        SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
+                ("sprites/fireball.png", 32, 32, x, speed, source.getSimulation());
+        return jumpy;
     }
 }
