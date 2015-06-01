@@ -1,5 +1,7 @@
 package dorf_fortress;
 
+import javafx.scene.shape.Line;
+
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class SpinningHead extends Obstacle{
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
 //        this.sprite = new spinningHeadSprite(x,y,this);
-        this.sprite = new Sprite("sprites/GreyDorf.png",
+        this.sprite = new Sprite("sprites/Skull.png",
                 (int)this.width, (int)this.height, this);
     }
 
