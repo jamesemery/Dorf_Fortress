@@ -16,7 +16,7 @@ public class SolidPlatform extends Platform {
     }
 
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new Sprite("sprites/128x32platform.png", (int)this
+        this.sprite = new SimpleSprite("sprites/128x32platform.png", (int)this
                 .width, (int)this.height,this);
     }
 

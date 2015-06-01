@@ -40,7 +40,7 @@ public class Dorf extends Actor {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new Sprite("sprites/GreyDorf.png",
+        this.sprite = new SimpleSprite("sprites/GreyDorf.png",
                 (int)this.width, (int)this.height, this);
     }
 

@@ -12,7 +12,7 @@ public class WinBlock extends Obstacle{
     }
 
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new Sprite("sprites/basicarchway.png", (int)this
+        this.sprite = new SimpleSprite("sprites/basicarchway.png", (int)this
                 .width, (int)this.height,this);
     }
 

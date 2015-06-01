@@ -23,7 +23,7 @@ public class SimpleUpwardsKillBall extends Obstacle{
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new Sprite("sprites/fireball.png", 32, 32, this);
+        this.sprite = new SimpleSprite("sprites/fireball.png", 32, 32, this);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class SimpleUpwardsKillBall extends Obstacle{
                                        Random rand) {
         double finalX = source.getFinalX();
         int x = rand.nextInt((int) finalX);
-        int speed = rand.nextInt(80) + 20;
+        int speed = rand.nextInt(100) + 40;
         if (rand.nextBoolean()) {
             speed = speed * -1;
         }
