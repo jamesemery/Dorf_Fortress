@@ -6,22 +6,32 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane style="-fx-background-color: white"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0"  xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.WinScreenController">
+<AnchorPane fx:id="primaryPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.WinScreenController">
    <children>
-      <Text layoutX="91.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations on clearing Dorf Fortress!" textAlignment="CENTER">
+      <Text layoutX="6.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations on clearing Dorf Fortress!" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya" size="24.0" />
+            <Font name="Alegreya" size="36.0" />
          </font>
       </Text>
-      <Button layoutX="230.0" layoutY="214.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
+      <Button layoutX="327.0" layoutY="349.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
          <font>
             <Font name="Alegreya SC" size="13.0" />
          </font>
       </Button>
-      <ImageView fx:id="archwayImage" fitHeight="150.0" fitWidth="200.0" layoutX="222.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="archwayImage" fitHeight="150.0" fitWidth="200.0" layoutX="164.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image  url="@../sprites/basicArchway.png" />
+            <Image url="@../sprites/basicArchway.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="archwayImage1" fitHeight="150.0" fitWidth="200.0" layoutX="320.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sprites/basicArchway.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="171.0" layoutY="349.0" mnemonicParsing="false" onAction="#whenReplayClicked" prefHeight="29.0" prefWidth="141.0" text="Replay Level" textAlignment="CENTER">
+         <font>
+            <Font name="Alegreya SC" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
