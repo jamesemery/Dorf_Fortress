@@ -19,12 +19,14 @@ public class LoseScreenController {
     }
     @FXML
     void whenMenuClicked(ActionEvent event) {
+        System.out.println("Running whenMenuClicked() in LoseScreenController.java");
         Stage thisStage = (Stage) primaryPane.getScene().getWindow();
         Main.startMenu(thisStage);
     }
 
     @FXML
     void whenSolutionClicked(ActionEvent event) {
+        System.out.println("Running whenSolutionClicked() in LoseScreenController.java");
         model.setGhostMode(true);
 
         Stage thisStage = (Stage) primaryPane.getScene().getWindow();
@@ -34,6 +36,7 @@ public class LoseScreenController {
 
     @FXML
     void whenTryAgainClicked(ActionEvent event) {
+        System.out.println("Running whenTryAgainClicked() in LoseScreenController.java");
         Stage thisStage = (Stage) primaryPane.getScene().getWindow();
         Main.startGame(thisStage, "TODO: PASS NAME",
                 this.model.getDifficulty(), Color.MAGENTA); //TODO: CHANGE COLOR

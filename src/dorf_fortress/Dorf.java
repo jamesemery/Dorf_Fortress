@@ -143,6 +143,7 @@ public class Dorf extends Actor {
      * Resets the level if the dorf dies.
      */
     public void die() {
+        System.out.println("Running die() in Dorf.java");
         System.out.println(this.getSprite().getScene().getWindow());
         simulation.reset();
 
