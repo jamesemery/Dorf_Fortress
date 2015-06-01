@@ -15,7 +15,7 @@ public class Model {
     public List<Entity> testingEntities; //used for character generation
     private GameController controller;
     public static double SCENE_HEIGHT;
-
+    private int currentFrame;
     private double difficulty;
 
 
@@ -32,8 +32,7 @@ public class Model {
 
         entities = new ArrayList<Entity>();
         //Make a Dorf!
-        Dorf ferdinand = new Dorf("sprites/GreyDorf.png", 32, 32, 34,
-                100, this);
+        Dorf ferdinand = new Dorf( 32, 32, 34, 100, this);
         this.player = ferdinand;
         controller.addSpriteToRoot(ferdinand.getSprite());
 
@@ -60,8 +59,10 @@ public class Model {
          * TODO: where c is the count at difficulty 0 and n scales it.
          */
         List tempList = new ArrayList<Integer>();
-        dangerMaker.generateObstacles((int) Math.round(.75 * this.difficulty), tempList);
+        dangerMaker.generateObstacles((int) Math.round(2.5 * this
+                .difficulty), tempList);
         setGhostMode(false);
+        levelSolver.liveSimulation = true;
     }
 
     /**
@@ -135,6 +136,7 @@ public class Model {
     }
 
     public void simulateFrame() {
+        currentFrame++;
         for (Entity i : entities) {
             i.updateSprite();
         }
@@ -151,10 +153,10 @@ public class Model {
 
     }
 
-    // resets the level to the initial conditions for every entity contained
+    // Resets the level to the initial conditions for every entity contained
     // in the set
     public void reset() {
-        System.out.println("____________");
+        currentFrame = 0;
         for (Entity i : entities) {
             i.reset();
         }
@@ -173,4 +175,8 @@ public class Model {
     }
 
     public double getDifficulty() { return this.difficulty; }
+
+    public int getCurrentFrame() {
+        return currentFrame;
+    }
 }

@@ -6,14 +6,20 @@ package dorf_fortress;
  */
 public class BouncyPlatform extends Platform {
 
-    public BouncyPlatform(String sprite_location, int hitbox_width, int
-            hitbox_height, double x, double y, Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
+    public BouncyPlatform(int hitbox_width, int hitbox_height, double x,
+                          double y, Model simulation) {
+        super(hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
         // Lowered jump boost to account for the increased jump height later.
         //7500
         this.JUMP_BOOST = 22500/ GameController.FRAMES_PER_SECOND;
+    }
+
+    @Override
+    protected void makeSprite(double x, double y, Model simulation) {
+        this.sprite = new Sprite("sprites/basicPlatform.png", (int)this
+                .width, (int)this.height,this);
     }
 
     @Override

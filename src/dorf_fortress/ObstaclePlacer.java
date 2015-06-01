@@ -48,15 +48,15 @@ public class ObstaclePlacer {
      * @param params
      */
     private void obstacleFactoryMehtod(int n, List<Integer> params) {
-        Dictionary<String,Integer> obsticleOccurance = parseParams(n, params);
-        Enumeration<String> keys = obsticleOccurance.keys();
+        Dictionary<String,Integer> obstacleOccurance = parseParams(n, params);
+        Enumeration<String> keys = obstacleOccurance.keys();
 
         // For each key in the dictonary it creates vlaue elements and adds
         // them to the safeObstacles list.
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
             List<Entity> testCases = new ArrayList<Entity>();
-            int numToMake = obsticleOccurance.get(key);
+            int numToMake = obstacleOccurance.get(key);
             int numMade = 0;
 
             while (numMade < numToMake) {
@@ -75,8 +75,9 @@ public class ObstaclePlacer {
                     lastframe = getCorrespondingFrame();
                     System.out.println(getCorrespondingFrame() + " " +
                             selectFrames.peek());
-                    while ((!selectFrames.isEmpty())&&(levelSolver
-                            .currentFrameCount == selectFrames.peek ())) {
+                    while ((!selectFrames.isEmpty())&&(this
+                            .getCorrespondingFrame() == selectFrames
+                            .peek ())) {
                         System.out.println(selectFrames.peek());
                         int current = selectFrames.poll();
                         Entity obstacle = Obstacle.getInstanceFactory(this,
@@ -106,13 +107,13 @@ public class ObstaclePlacer {
      * @param params
      */
     private Dictionary<String, Integer> parseParams(int n, List<Integer> params) {
-        Dictionary<String,Integer> obsticleOccurance = new Hashtable<String,
+        Dictionary<String,Integer> obstacleOccurance = new Hashtable<String,
                 Integer>();
-        int boxes = (int)(0.8*n);
+        int boxes = (int)(0.4*n);
         System.out.println("Boxes to make: " + boxes);
-        obsticleOccurance.put("box", boxes);
-        obsticleOccurance.put("simpleBall", n - boxes);
-        return obsticleOccurance;
+        obstacleOccurance.put("box", boxes);
+        obstacleOccurance.put("simpleBall", n - boxes);
+        return obstacleOccurance;
     }
 
     /**
@@ -165,6 +166,6 @@ public class ObstaclePlacer {
     }
 
     public int getCorrespondingFrame() {
-        return levelSolver.currentFrameCount;
+        return simulation.getCurrentFrame();
     }
 }

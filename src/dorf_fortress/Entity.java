@@ -22,14 +22,13 @@ public abstract class Entity {
     protected boolean screen_death;
 
 
-    public Entity (String sprite_location, int hitbox_width, int
-            hitbox_height, double x, double y, Model simulation) {
-        this.sprite = new Sprite (sprite_location, hitbox_width,
-                hitbox_height, this);
+    public Entity (int hitbox_width, int hitbox_height, double x, double y,
+                   Model simulation) {
         this.simulation = simulation;
         hitbox_checker = false;
         this.height = hitbox_height;
         this.width = hitbox_width;
+        makeSprite(x,y,simulation);
         makeHitbox();
         this.setX(x);
         this.setY(y);
@@ -40,6 +39,8 @@ public abstract class Entity {
         this.screen_death = false;
 
     }
+
+    protected abstract void makeSprite(double x, double y, Model simulation);
 
     protected abstract void makeHitbox();
 

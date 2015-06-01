@@ -7,11 +7,10 @@ import java.util.Random;
 public class SimpleUpwardsKillBall extends Obstacle{
     double upwards_speed;
 
-    public SimpleUpwardsKillBall(String sprite_location, int hitbox_width,
-                                 int hitbox_height, double
-                                         x, double speed, Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, x,
-                simulation.SCENE_HEIGHT, simulation);
+    public SimpleUpwardsKillBall(int hitbox_width, int hitbox_height, double
+            x, double speed, Model simulation) {
+        super(hitbox_width, hitbox_height, x, simulation.SCENE_HEIGHT,
+                simulation);
         upwards_speed = speed;
         if (speed < 0) {
             this.setY(0);
@@ -20,6 +19,11 @@ public class SimpleUpwardsKillBall extends Obstacle{
         this.initial_y_velocity = speed;
         setY_velocity(upwards_speed);
         screen_death = true;
+    }
+
+    @Override
+    protected void makeSprite(double x, double y, Model simulation) {
+        this.sprite = new Sprite("sprites/fireball.png", 32, 32, this);
     }
 
     @Override
@@ -52,7 +56,7 @@ public class SimpleUpwardsKillBall extends Obstacle{
             speed = speed * -1;
         }
         SimpleUpwardsKillBall jumpy = new SimpleUpwardsKillBall
-                ("sprites/fireball.png", 32, 32, x, speed, source.getSimulation());
+                (32, 32, x, speed, source.getSimulation());
         return jumpy;
     }
 }
