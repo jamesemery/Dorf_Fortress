@@ -61,7 +61,7 @@ public class Model {
          */
         List tempList = new ArrayList<Integer>();
         dangerMaker.generateObstacles((int) Math.round(.75 * this.difficulty), tempList);
-        setGhostMode(true);
+        setGhostMode(false);
     }
 
     /**
