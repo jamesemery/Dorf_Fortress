@@ -8,8 +8,10 @@ import javafx.scene.Node;
  */
 public abstract class Actor extends Entity {
     public String name = "";
-    public final double GRAVITY_CONSTANT = 5;
-    public final double TERMINAL_VELOCITY = -300;
+    public final double GRAVITY_CONSTANT = 10;
+    public final double TERMINAL_VELOCITY = -600;
+    //public final double GRAVITY_CONSTANT = 5;
+    //public final double TERMINAL_VELOCITY = -300;
     Platform curPlatform;
 
     /**

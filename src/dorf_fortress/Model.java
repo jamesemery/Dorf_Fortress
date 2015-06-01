@@ -146,7 +146,7 @@ public class Model {
 
     }
 
-    // restets the level to the initial conditions for every entity contained
+    // resets the level to the initial conditions for every entity contained
     // in the set
     public void reset() {
         System.out.println("____________");

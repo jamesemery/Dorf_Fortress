@@ -12,7 +12,8 @@ public class BouncyPlatform extends Platform {
         this.height = hitbox_height;
         this.width = hitbox_width;
         // Lowered jump boost to account for the increased jump height later.
-        this.JUMP_BOOST = 7500/ GameController.FRAMES_PER_SECOND;
+        //7500
+        this.JUMP_BOOST = 22500/ GameController.FRAMES_PER_SECOND;
     }
 
     @Override
