@@ -75,14 +75,10 @@ public class ObstaclePlacer {
                     lastframe = getCorrespondingFrame();
                     System.out.println(getCorrespondingFrame() + " " +
                             selectFrames.peek());
-                    if (levelSolver.currentFrameCount == selectFrames.peek()) {
+                    while ((!selectFrames.isEmpty())&&(levelSolver
+                            .currentFrameCount == selectFrames.peek ())) {
                         System.out.println(selectFrames.peek());
                         int current = selectFrames.poll();
-                        // deletes repeat frames so they don't cause problems
-                        while ((!selectFrames.isEmpty())&&current==selectFrames
-                                .peek()) {
-                            selectFrames.poll();
-                        }
                         Entity obstacle = Obstacle.getInstanceFactory(this,
                                 levelSolver.getHitbox(), key, randomGenerator);
                         testCases.add(obstacle);
