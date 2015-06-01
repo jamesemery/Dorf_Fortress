@@ -65,7 +65,7 @@ public class ObstaclePlacer {
                 // priority queue to ensure they come out in chronological order
                 PriorityQueue<Integer> selectFrames = new PriorityQueue<Integer>();
                 for (int k = 0; k < (numToMake - numMade); k++) {
-                    selectFrames.add(randomGenerator.nextInt(endFrame));
+                    selectFrames.add(randomGenerator.nextInt(endFrame)+1);
                 }
                 // Runs through the simulation of the ghost and grabbs the ghosts
                 // hitbox at the selected frames
