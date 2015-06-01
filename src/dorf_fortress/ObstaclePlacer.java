@@ -147,11 +147,13 @@ public class ObstaclePlacer {
     * necessary for placement
     */
     private void initializeGhost() {
+        simulation.reset();
         while (simulation.getNextGhostHitbox() != null) {
         }
         simulation.reset();
         this.endFrame = levelSolver.frameFinished;
         this.finalX = levelSolver.finalX;
+        System.out.print("Endframe " + endFrame);
     }
 
     public Model getSimulation() {
