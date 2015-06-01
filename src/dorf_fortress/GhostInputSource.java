@@ -21,7 +21,7 @@ public class GhostInputSource extends InputBuffer {
     public GhostInputSource() {
         storedInput = new ArrayList<Boolean[]>();
         cursor = 0;
-        File f = new File("src/dorf_fortress/DemoInputs.txt");
+        File f = new File("src/dorf_fortress/NewDemoInputs.txt");
         try {
             Scanner scanner = new Scanner(f);
             while (scanner.hasNextBoolean()){
