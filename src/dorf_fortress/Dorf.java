@@ -13,9 +13,9 @@ public class Dorf extends Actor {
     //double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     //public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
     //public final double MAX_HORIZ_SPEED = 6000 / GameController.FRAMES_PER_SECOND;
-    double STEP_SIZE_X = 400/ GameController.FRAMES_PER_SECOND;
+    double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
     double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
-    public final double FRICTION_CONSTANT = 260/ GameController.FRAMES_PER_SECOND;
+    public final double FRICTION_CONSTANT = 240/ GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 12000 / GameController.FRAMES_PER_SECOND;
     private boolean victorious = false;
     String name;
@@ -145,7 +145,10 @@ public class Dorf extends Actor {
     public void die() {
         System.out.println(this.getSprite().getScene().getWindow());
         simulation.reset();
-
+        if (!(this instanceof Ghost)) {
+            simulation.pause();
+            System.out.println("pausing");
+        }
         Scene mainScene = this.getSprite().getScene();
         Main.startLoseMenu(mainScene, simulation);
     }
