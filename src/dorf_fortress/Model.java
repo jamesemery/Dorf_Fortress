@@ -37,7 +37,7 @@ public class Model {
         controller.addSpriteToRoot(ferdinand.getSprite());
 
         //Make a Ghost!
-        Ghost casper = new Ghost("sprites/GreyDorf.png", 32, 32, 34,
+        Ghost casper = new Ghost(32, 32, 34,
                 100, this);
         this.levelSolver = casper;
 //        this.controller.addSpriteToRoot(casper.getSprite());

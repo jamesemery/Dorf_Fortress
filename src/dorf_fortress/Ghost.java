@@ -17,14 +17,13 @@ public class Ghost extends Dorf {
     /**
      * Calls Actor's constructor with no name.
      *
-     * @param image_location
      * @param hitbox_width
      * @param hitbox_height
      * @param model
      * @param x
      * @param y
      */
-    public Ghost(String image_location, int hitbox_width, int hitbox_height, double x, double y,
+    public Ghost(int hitbox_width, int hitbox_height, double x, double y,
                  Model model) {
         super(hitbox_width, hitbox_height, x, y, model);
         inputSource = new GhostInputSource();
@@ -60,7 +59,7 @@ public class Ghost extends Dorf {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new Sprite("sprites/GreyDorf.png",
+        this.sprite = new Sprite("sprites/Mummy.png",
                 (int)this.width, (int)this.height, this);
     }
 
