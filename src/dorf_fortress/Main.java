@@ -118,8 +118,6 @@ public class Main extends Application {
             LoseScreenController controller = loader.getController();
             controller.setModel(simulation);
 
-            /* TODO: MICHAEL IS WORKING ON THIS */
-
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(loseRoot);
             loseRoot.requestFocus();
@@ -137,12 +135,16 @@ public class Main extends Application {
     /**
      * Launches the win menu scene.
      */
-    public static void startWinMenu(Scene mainScene) {
+    public static void startWinMenu(Scene mainScene, Model simulation) {
         System.out.println("Setting up win menu");
         URL fxmlUrl = Main.class.getResource("WinScreen.fxml");
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
         try {
             AnchorPane winRoot = loader.load();
+
+            WinScreenController controller = loader.getController();
+            controller.setModel(simulation);
+
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(winRoot);
             winRoot.requestFocus();
