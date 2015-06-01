@@ -5,3 +5,5 @@ Dorf and enemy sprites by Kazzador and Enterbrain, posted on spritespace.blogspo
 Both are declared free to use for non-commercial purposes.
 
 Fireball from pixshark.com
+Dungeon ambient noise by proglifter at freesound.org
+Sound effects by yyd at opengameart.org

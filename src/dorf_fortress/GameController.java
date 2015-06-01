@@ -27,6 +27,7 @@ public class GameController implements EventHandler<KeyEvent> {
     private double screenOffset;
     private Rectangle background;
     final String backgroundImageLoc = "sprites/BasicTile.png";
+    final String ambientNoiseLoc = "sprites/dungeonSound.wav";
     Image tile;
     double tileWidth;
     double tileHeight;
@@ -40,10 +41,10 @@ public class GameController implements EventHandler<KeyEvent> {
         this.background = setUpBackground();
         updateBackground(0);
         this.simulation = Model.getInstance(this, sceneHeight, difficulty);
-        //this.setUpAnimationTimer();
     }
 
     public void initialize() {
+        
         this.setUpAnimationTimer();
         inputStore = (BasicInputBuffer)BasicInputBuffer.getInstance();
     }
