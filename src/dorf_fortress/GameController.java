@@ -32,13 +32,14 @@ public class GameController implements EventHandler<KeyEvent> {
     double tileHeight;
 
 
-    public GameController(Group root, double sceneHeight) {
+    public GameController(Group root, double sceneHeight, double difficulty) {
+        System.out.println("Making a controller object...");
         this.root = root;
         spriteList = new ArrayList<Sprite>();
         this.background = setUpBackground();
         updateBackground(0);
-        this.simulation = Model.getInstance(this, sceneHeight);
-        this.setUpAnimationTimer();
+        this.simulation = Model.getInstance(this, sceneHeight, difficulty);
+        //this.setUpAnimationTimer();
     }
 
     public void initialize() {
@@ -52,17 +53,6 @@ public class GameController implements EventHandler<KeyEvent> {
      * @return a Region containing the tiled image.
      */
     private Rectangle setUpBackground() {
-        //Make a tiled background.
-        /**BackgroundImage myBI = new BackgroundImage(
-                new Image("sprites/BasicTile.png"),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        Region platformerBasicsRegion = new Region();
-        platformerBasicsRegion.setPrefSize(Main.SCENE_WIDTH + 20, Main.SCENE_HEIGHT + 20);
-        platformerBasicsRegion.setBackground(new Background(myBI));
-        root.getChildren().add(platformerBasicsRegion);
-        return platformerBasicsRegion;
-         */
         Image backgroundImage = new Image(backgroundImageLoc);
         //We have to make the rectangle a little bigger because when it pans
         //some of it goes off the screen.

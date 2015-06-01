@@ -9,7 +9,13 @@ import javafx.stage.Stage;
  * Created by azureillusions on 5/29/15.
  */
 public class LoseScreenController {
+    private Model model;
+
     @FXML private AnchorPane primaryPane;
+
+    void setModel(Model simulation) {
+        this.model = simulation;
+    }
     @FXML
     void whenMenuClicked(ActionEvent event) {
         Stage thisStage = (Stage) primaryPane.getScene().getWindow();
@@ -18,7 +24,7 @@ public class LoseScreenController {
 
     @FXML
     void whenSolutionClicked(ActionEvent event) {
-        //This will do something eventually...
+
 
     }
 

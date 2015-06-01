@@ -141,6 +141,9 @@ public class Dorf extends Actor {
     public void die() {
         System.out.println(this.getSprite().getScene().getWindow());
         simulation.reset();
+
+        Scene mainScene = this.getSprite().getScene();
+        Main.startLoseMenu(mainScene, simulation);
     }
 
     /**
@@ -149,13 +152,17 @@ public class Dorf extends Actor {
     public void win() {
         System.out.println("Beginning win() method");
         simulation.reset();
+        if (!(this instanceof Ghost)) {
+            simulation.pause();
+            System.out.println("pausing");
+        }
         if(this.victorious == false) {
             this.victorious = true;
-            Stage mainStage = (Stage) this.getSprite().getScene().getWindow();
+            Scene mainScene = this.getSprite().getScene();
             System.out.print("Stage:");
-            System.out.println(mainStage);
+            System.out.println(mainScene);
 
-            Main.startWinMenu(mainStage);
+            Main.startWinMenu(mainScene);
             System.out.println("Ending win() method");
         }
     }

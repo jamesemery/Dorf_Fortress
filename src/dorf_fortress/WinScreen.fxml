@@ -5,8 +5,8 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<!-- style thing for AnchorPane that we were having trouble implementing style="-fx-background-image: url('@../sprites/BasicTile.png'); -fx-background-repeat: stretch;"-->
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.WinScreenController">
+
+<AnchorPane style="-fx-background-color: white"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0"  xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.WinScreenController">
    <children>
       <Text layoutX="91.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations on clearing Dorf Fortress!" textAlignment="CENTER">
          <font>

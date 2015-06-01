@@ -5,8 +5,9 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.MainMenuController">
+<?import javafx.scene.Group?>
+<Group xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.MainMenuController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
    <children>
       <Text layoutX="167.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dorf Fortress" textAlignment="CENTER">
          <font>
@@ -48,3 +49,4 @@
       <ColorPicker fx:id="beardColorPicker" layoutX="290.0" layoutY="277.0" prefHeight="26.0" prefWidth="110.0" />
    </children>
 </AnchorPane>
+</Group>
