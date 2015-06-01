@@ -16,7 +16,7 @@ public class KillBlock extends Obstacle {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new Sprite("sprites/staticObstacleTransparent.png",
+        this.sprite = new SimpleSprite("sprites/staticObstacleTransparent.png",
                 (int)this.width, (int)this.height, this);
     }
 

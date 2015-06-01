@@ -6,10 +6,10 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -40,10 +40,10 @@ public class GameController implements EventHandler<KeyEvent> {
         this.background = setUpBackground();
         updateBackground(0);
         this.simulation = Model.getInstance(this, sceneHeight, difficulty);
-        //this.setUpAnimationTimer();
     }
 
     public void initialize() {
+
         this.setUpAnimationTimer();
         inputStore = (BasicInputBuffer)BasicInputBuffer.getInstance();
     }
