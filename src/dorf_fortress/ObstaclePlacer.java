@@ -77,7 +77,7 @@ public class ObstaclePlacer {
                             selectFrames.peek());
                     while ((!selectFrames.isEmpty())&&(this
                             .getCorrespondingFrame() == selectFrames
-                            .peek ())) {
+                            .peek())) {
                         System.out.println(selectFrames.peek());
                         int current = selectFrames.poll();
                         Entity obstacle = Obstacle.getInstanceFactory(this,
@@ -110,9 +110,11 @@ public class ObstaclePlacer {
         Dictionary<String,Integer> obstacleOccurance = new Hashtable<String,
                 Integer>();
         int boxes = (int)(0.4*n);
+        int spinning = (int)(0.1*n);
         System.out.println("Boxes to make: " + boxes);
         obstacleOccurance.put("box", boxes);
-        obstacleOccurance.put("simpleBall", n - boxes);
+        obstacleOccurance.put("simpleBall", n - boxes - spinning);
+        obstacleOccurance.put("spinningHead", spinning);
         return obstacleOccurance;
     }
 
