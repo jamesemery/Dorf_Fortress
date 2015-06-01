@@ -11,7 +11,8 @@ public class SolidPlatform extends Platform {
         super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
-        this.JUMP_BOOST = 10000/ GameController.FRAMES_PER_SECOND;
+        //10,000
+        this.JUMP_BOOST = 18000/ GameController.FRAMES_PER_SECOND;
     }
 
     @Override
