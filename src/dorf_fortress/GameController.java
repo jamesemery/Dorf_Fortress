@@ -7,9 +7,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -27,7 +30,7 @@ public class GameController implements EventHandler<KeyEvent> {
     private double screenOffset;
     private Rectangle background;
     final String backgroundImageLoc = "sprites/BasicTile.png";
-    final String ambientNoiseLoc = "sprites/dungeonSound.wav";
+    final String ambientNoiseLoc = "src/sprites/dungeonSound.wav";
     Image tile;
     double tileWidth;
     double tileHeight;
@@ -41,10 +44,13 @@ public class GameController implements EventHandler<KeyEvent> {
         this.background = setUpBackground();
         updateBackground(0);
         this.simulation = Model.getInstance(this, sceneHeight, difficulty);
+        Media ambientNoise = new Media(new File(ambientNoiseLoc).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(ambientNoise);
+        mediaPlayer.play();
     }
 
     public void initialize() {
-        
+
         this.setUpAnimationTimer();
         inputStore = (BasicInputBuffer)BasicInputBuffer.getInstance();
     }
