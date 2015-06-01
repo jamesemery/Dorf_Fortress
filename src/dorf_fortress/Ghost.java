@@ -59,7 +59,7 @@ public class Ghost extends Dorf {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new Sprite("sprites/Mummy.png",
+        this.sprite = new SimpleSprite("sprites/Mummy.png",
                 (int)this.width, (int)this.height, this);
     }
 

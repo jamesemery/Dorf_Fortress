@@ -25,6 +25,8 @@ public class SpinningHead extends Obstacle{
         this.length = length;
         centerX = x;
         centerY = y;
+        ((SpinningHeadSprite)sprite).setCenterX(centerX);
+        ((SpinningHeadSprite)sprite).setCenterY(centerY);
     }
 
     public void setFrameOffset(int frame) {
@@ -34,8 +36,8 @@ public class SpinningHead extends Obstacle{
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
 //        this.sprite = new spinningHeadSprite(x,y,this);
-        this.sprite = new Sprite("sprites/Skull.png",
-                (int)this.width, (int)this.height, this);
+        this.sprite = new SpinningHeadSprite("sprites/Skull.png",
+                centerY, centerX, this);
     }
 
     @Override
