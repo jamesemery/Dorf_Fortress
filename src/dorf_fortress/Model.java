@@ -73,6 +73,11 @@ public class Model {
     }
 
     /**
+     * Unpauses the animation; ditto.
+     */
+    public void unpause() {this.controller.unpause(); }
+
+    /**
      * sets or removes the ghost mode from the level, if given argument is
      * true it sets it, and removes it if its set to false, also handles
      * turning on and off display of the dorf

@@ -30,6 +30,7 @@ public class GameController implements EventHandler<KeyEvent> {
     Image tile;
     double tileWidth;
     double tileHeight;
+    boolean paused = false;
 
 
     public GameController(Group root, double sceneHeight, double difficulty) {
@@ -126,6 +127,7 @@ public class GameController implements EventHandler<KeyEvent> {
      * Pauses the animation.
      */
     public void pause() {
+        this.paused = true;
         this.timer.cancel();
     }
 
@@ -133,7 +135,10 @@ public class GameController implements EventHandler<KeyEvent> {
     /**
      * Unpauses the animation.
      */
-    public void unpause() { this.setUpAnimationTimer(); }
+    public void unpause() {
+        this.setUpAnimationTimer();
+        this.paused = false;
+    }
 
     /**
      * Adds a sprite to the scene, both to the root node and the controller's
@@ -195,12 +200,18 @@ public class GameController implements EventHandler<KeyEvent> {
         } else if (code == KeyCode.RIGHT || code == KeyCode.D) {
             inputStore.addInput("right", true);
             keyEvent.consume();
-        } else if (code == KeyCode.UP || code == KeyCode.W) {
+        } else if (code == KeyCode.UP || code == KeyCode.W || code == KeyCode.SPACE) {
             inputStore.addInput("up", true);
             keyEvent.consume();
         } else if (code == KeyCode.DOWN || code == KeyCode.S) {
             inputStore.addInput("down", true);
             keyEvent.consume();
+        } else if (code == KeyCode.ESCAPE || code == KeyCode.P) {
+            if(this.paused) {
+                unpause();
+            } else {
+                pause();
+            }
         }
     }
 
