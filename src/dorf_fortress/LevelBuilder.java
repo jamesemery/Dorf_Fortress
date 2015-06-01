@@ -21,42 +21,42 @@ public class LevelBuilder {
 
         /* Platforms */
 
-        Platform spawn = new SolidPlatform("sprites/128x32platform.png",128,32,0,
+        Platform spawn = new SolidPlatform(128,32,0,
                 200,this.model);
         this.entities.add(spawn);
         this.controller.addSpriteToRoot(spawn.getSprite());
 
-        Platform platform1 = new SolidPlatform("sprites/128x32platform.png",128,32,150,
+        Platform platform1 = new SolidPlatform(128,32,150,
                 300,this.model);
         this.entities.add(platform1);
         controller.addSpriteToRoot(platform1.getSprite());
 
-        Platform platform2 = new BouncyPlatform("sprites/basicPlatform.png",128,32,300,
+        Platform platform2 = new BouncyPlatform(128,32,300,
                 400,this.model);
         this.entities.add(platform2);
         this.controller.addSpriteToRoot(platform2.getSprite());
 
-        Platform platform3 = new SolidPlatform("sprites/128x32platform.png",128,32,450,
+        Platform platform3 = new SolidPlatform(128,32,450,
                 150,this.model);
         this.entities.add(platform3);
         this.controller.addSpriteToRoot(platform3.getSprite());
 
-        Platform platform4 = new SolidPlatform("sprites/128x32platform.png",128,32,650,
+        Platform platform4 = new SolidPlatform(128,32,650,
                 300,this.model);
         this.entities.add(platform4);
         this.controller.addSpriteToRoot(platform4.getSprite());
 
-        Platform platform5 = new SolidPlatform("sprites/128x32platform.png",128,32,800,
+        Platform platform5 = new SolidPlatform(128,32,800,
                 200,this.model);
         this.entities.add(platform5);
         this.controller.addSpriteToRoot(platform5.getSprite());
 
-        Platform platform6 = new BouncyPlatform("sprites/basicPlatform.png",128,32,850,
+        Platform platform6 = new BouncyPlatform(128,32,850,
                 400,this.model);
         this.entities.add(platform6);
         this.controller.addSpriteToRoot(platform6.getSprite());
 
-        Platform platform7 = new SolidPlatform("sprites/128x32platform.png",128,32,1000,
+        Platform platform7 = new SolidPlatform(128,32,1000,
                 150,this.model);
         this.entities.add(platform7);
         this.controller.addSpriteToRoot(platform7.getSprite());
@@ -65,28 +65,26 @@ public class LevelBuilder {
         /* Obstacles */
 
         Obstacle on_platform1 = new KillBlock(
-                "sprites/staticObstacleTransparent.png",
                 32,32,192,256,this.model);
         this.entities.add(on_platform1);
         this.controller.addSpriteToRoot(on_platform1.getSprite());
 
         Obstacle under_platform3 = new KillBlock(
-                "sprites/staticObstacleTransparent.png",
                 32,32,512,256,this.model);
         this.entities.add(under_platform3);
         this.controller.addSpriteToRoot(under_platform3.getSprite());
 
-        Obstacle fireball_0 = new SimpleUpwardsKillBall("sprites/fireball.png",
+        Obstacle fireball_0 = new SimpleUpwardsKillBall(
                 33,33,425,80,this.model);
         entities.add(fireball_0);
         controller.addSpriteToRoot(fireball_0.getSprite());
 
-        Obstacle fireball_1 = new SimpleUpwardsKillBall("sprites/fireball.png",
+        Obstacle fireball_1 = new SimpleUpwardsKillBall(
                 33,33,775,100,this.model);
         entities.add(fireball_1);
         controller.addSpriteToRoot(fireball_1.getSprite());
 
-        Obstacle fireball_2 = new SimpleUpwardsKillBall("sprites/fireball.png",
+        Obstacle fireball_2 = new SimpleUpwardsKillBall(
                 33,33,950,150,this.model);
         entities.add(fireball_2);
         controller.addSpriteToRoot(fireball_2.getSprite());
@@ -95,7 +93,6 @@ public class LevelBuilder {
         /* Goal */
 
         WinBlock victory_arch = new WinBlock(
-                "sprites/basicArchway.png",
                 113,109,1000+7,150-109,this.model);
         this.entities.add(victory_arch);
         this.controller.addSpriteToRoot(victory_arch.getSprite());
