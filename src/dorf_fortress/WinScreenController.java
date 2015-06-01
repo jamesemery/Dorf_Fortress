@@ -31,6 +31,7 @@ public class WinScreenController {
     void whenReplayClicked(ActionEvent event) {
         System.out.println("Running whenTryAgainClicked() in LoseScreenController.java");
         Group mainRoot = (Group) primaryPane.getScene().getRoot();
+        model.setGhostMode(false);
         this.model.unpause();
         System.out.println("unpaused");
         mainRoot.requestFocus();

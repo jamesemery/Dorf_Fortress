@@ -46,9 +46,9 @@ public class Ghost extends Dorf {
     @Override
     public void win() {
         if (liveSimulation) {
-            liveSimulation = false;
-            reset();
+            //reset()
             super.win();
+            reset();
 
         } else {
             finishedLevel = true;

@@ -184,6 +184,7 @@ public class Dorf extends Actor {
     //does stuff
     public void reset() {
         super.reset();
+        this.victorious = false;
         inputSource.clear();
     }
     /**
