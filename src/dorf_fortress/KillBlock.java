@@ -52,8 +52,8 @@ public class KillBlock extends Obstacle {
         while ((instance==null)||(instance.hitbox.intersects(target))) {
             double x;
             double y;
-            x = rand.nextInt(100);
-            y = rand.nextInt(70);
+            x = rand.nextInt(200);
+            y = rand.nextInt(150);
             if (rand.nextBoolean()) {
                 x = -1*x;
             }
