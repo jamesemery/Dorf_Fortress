@@ -7,9 +7,9 @@ package dorf_fortress;
 public abstract class Platform extends Entity {
     double JUMP_BOOST;
 
-    public Platform(String sprite_location, int hitbox_width, int
+    public Platform(int hitbox_width, int
             hitbox_height, double x, double y, Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
+        super(hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
     }

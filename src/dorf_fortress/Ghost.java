@@ -11,7 +11,6 @@ public class Ghost extends Dorf {
     public boolean finishedLevel;
     public double finalX;
     public int frameFinished;
-    public int currentFrameCount;
     public boolean liveSimulation;
     //TODO change the security of these
 
@@ -27,14 +26,13 @@ public class Ghost extends Dorf {
      */
     public Ghost(String image_location, int hitbox_width, int hitbox_height, double x, double y,
                  Model model) {
-        super(image_location, hitbox_width, hitbox_height, x, y, model);
+        super(hitbox_width, hitbox_height, x, y, model);
         inputSource = new GhostInputSource();
         inputSource.clear();
     }
 
     @Override
     public void step() {
-        currentFrameCount++;
         ((GhostInputSource)inputSource).nextFrame();
         super.step();
     }
@@ -43,7 +41,7 @@ public class Ghost extends Dorf {
     public void die() {
         finishedLevel = true;
         finalX = this.getX();
-        frameFinished = currentFrameCount;
+        frameFinished = simulation.getCurrentFrame();
     }
 
     @Override
@@ -56,14 +54,19 @@ public class Ghost extends Dorf {
         } else {
             finishedLevel = true;
             finalX = this.getX();
-            frameFinished = currentFrameCount;
+            frameFinished = simulation.getCurrentFrame();
         }
+    }
+
+    @Override
+    protected void makeSprite(double x, double y, Model simulation) {
+        this.sprite = new Sprite("sprites/GreyDorf.png",
+                (int)this.width, (int)this.height, this);
     }
 
     @Override
     public void reset() {
         finishedLevel = false;
-        currentFrameCount = 0;
         super.reset();
     }
 }

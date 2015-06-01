@@ -75,8 +75,9 @@ public class ObstaclePlacer {
                     lastframe = getCorrespondingFrame();
                     System.out.println(getCorrespondingFrame() + " " +
                             selectFrames.peek());
-                    while ((!selectFrames.isEmpty())&&(levelSolver
-                            .currentFrameCount == selectFrames.peek ())) {
+                    while ((!selectFrames.isEmpty())&&(this
+                            .getCorrespondingFrame() == selectFrames
+                            .peek ())) {
                         System.out.println(selectFrames.peek());
                         int current = selectFrames.poll();
                         Entity obstacle = Obstacle.getInstanceFactory(this,
@@ -108,7 +109,7 @@ public class ObstaclePlacer {
     private Dictionary<String, Integer> parseParams(int n, List<Integer> params) {
         Dictionary<String,Integer> obstacleOccurance = new Hashtable<String,
                 Integer>();
-        int boxes = (int)(0.8*n);
+        int boxes = (int)(0.4*n);
         System.out.println("Boxes to make: " + boxes);
         obstacleOccurance.put("box", boxes);
         obstacleOccurance.put("simpleBall", n - boxes);
@@ -165,6 +166,6 @@ public class ObstaclePlacer {
     }
 
     public int getCorrespondingFrame() {
-        return levelSolver.currentFrameCount;
+        return simulation.getCurrentFrame();
     }
 }
