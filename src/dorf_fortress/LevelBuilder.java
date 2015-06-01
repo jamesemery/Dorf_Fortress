@@ -89,6 +89,11 @@ public class LevelBuilder {
         entities.add(fireball_2);
         controller.addSpriteToRoot(fireball_2.getSprite());
 
+        Obstacle spinny = new SpinningHead(32, 32, 300, 300, 6000, 80,
+                this.model);
+        entities.add(spinny);
+        controller.addSpriteToRoot(spinny.getSprite());
+
 
         /* Goal */
 
