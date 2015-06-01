@@ -9,12 +9,18 @@ import java.util.Random;
  */
 public class KillBlock extends Obstacle {
 
-  public KillBlock(String sprite_location, int hitbox_width, int hitbox_height,
-                   double x, double y, Model simulation) {
-    super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
+  public KillBlock(int hitbox_width, int hitbox_height, double x, double y,
+                   Model simulation) {
+    super(hitbox_width, hitbox_height, x, y, simulation);
   }
 
-  @Override
+    @Override
+    protected void makeSprite(double x, double y, Model simulation) {
+        this.sprite = new Sprite("sprites/staticObstacleTransparent.png",
+                (int)this.width, (int)this.height, this);
+    }
+
+    @Override
     protected void makeHitbox() {
         this.hitbox = new PlatformHitbox(this.width,this.height);
     }
@@ -57,9 +63,7 @@ public class KillBlock extends Obstacle {
             x += xTarget;
             y += yTarget;
             System.out.println(x + " " + y);
-            instance = new KillBlock(
-                    "sprites/staticObstacleTransparent.png",
-                    32,32,x,y,source.getSimulation());
+            instance = new KillBlock(32,32,x,y,source.getSimulation());
             System.out.println("foo");
         }
         return instance;

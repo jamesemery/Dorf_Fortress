@@ -17,13 +17,12 @@ public abstract class Actor extends Entity {
     /**
      * Creates an unnamed Actor, by passing everything up to Entity's
      * constructor.
-     * @param sprite_location
      * @param hitbox_width
      * @param hitbox_height
      */
-    public Actor(String sprite_location, int hitbox_width, int hitbox_height, double x, double y,
+    public Actor(int hitbox_width, int hitbox_height, double x, double y,
                  Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
+        super( hitbox_width, hitbox_height, x, y, simulation);
         this.name = "";
     }
 

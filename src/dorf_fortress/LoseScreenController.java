@@ -30,10 +30,15 @@ public class LoseScreenController {
     void whenSolutionClicked(ActionEvent event) {
         System.out.println("Running whenSolutionClicked() in LoseScreenController.java");
         model.setGhostMode(true);
-
-        Stage thisStage = (Stage) primaryPane.getScene().getWindow();
-        Main.startGame(thisStage, "TODO: PASS NAME",
-                this.model.getDifficulty(), Color.MAGENTA); //TODO: CHANGE COLOR
+        Group mainRoot = (Group) primaryPane.getScene().getRoot();
+        this.model.unpause();
+        System.out.println("unpaused");
+        mainRoot.requestFocus();
+        mainRoot.getChildren().remove(primaryPane);
+        // Stage thisStage = (Stage) primaryPane.getScene().getWindow();
+        // Main.startGame(thisStage, "TODO: PASS NAME",
+        // this.model.getDifficulty(), Color.MAGENTA); //TODO: CHANGE
+        // COLOR
     }
 
     @FXML

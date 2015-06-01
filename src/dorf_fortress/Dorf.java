@@ -24,20 +24,24 @@ public class Dorf extends Actor {
 
     /**
      * Calls Actor's constructor with no name.
-     * @param image_location
      * @param hitbox_width
      * @param hitbox_height
      */
-    public Dorf(String image_location, int hitbox_width, int hitbox_height, double x, double y,
+    public Dorf(int hitbox_width, int hitbox_height, double x, double y,
                 Model model) {
-
-        super(image_location, hitbox_width, hitbox_height, x, y, model);
+        super(hitbox_width, hitbox_height, x, y, model);
         inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( 32, 32);
         height = 32;
         width = 32;
         hitbox_checker = true;
         this.screen_death = true;
+    }
+
+    @Override
+    protected void makeSprite(double x, double y, Model simulation) {
+        this.sprite = new Sprite("sprites/GreyDorf.png",
+                (int)this.width, (int)this.height, this);
     }
 
     /**

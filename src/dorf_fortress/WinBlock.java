@@ -6,9 +6,14 @@ package dorf_fortress;
  */
 public class WinBlock extends Obstacle{
 
-    public WinBlock(String sprite_location, int hitbox_width, int hitbox_height,
+    public WinBlock(int hitbox_width, int hitbox_height,
                     double x, double y, Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
+        super(hitbox_width, hitbox_height, x, y, simulation);
+    }
+
+    protected void makeSprite(double x, double y, Model simulation) {
+        this.sprite = new Sprite("sprites/basicarchway.png", (int)this
+                .width, (int)this.height,this);
     }
 
     /**

@@ -10,10 +10,12 @@ import java.util.Random;
 
 public abstract class Obstacle extends Entity {
 
-    public Obstacle(String sprite_location, int hitbox_width, int hitbox_height, double x, double y,
+    public Obstacle(int hitbox_width, int hitbox_height, double x, double y,
                     Model simulation) {
-        super(sprite_location, hitbox_width, hitbox_height, x, y, simulation);
+        super(hitbox_width, hitbox_height, x, y, simulation);
     }
+
+
 
     public static Obstacle getInstanceFactory(ObstaclePlacer source, Hitbox
             h, String type, Random rand) {
@@ -21,6 +23,8 @@ public abstract class Obstacle extends Entity {
             return KillBlock.getInstance(source, h, rand);
         } else if (type == "simpleBall") {
             return SimpleUpwardsKillBall.getInstance(source, h, rand);
+        } else if (type == "spinningHead") {
+            return SpinningHead.getInstance(source, h, rand);
         }
         return null;
     }
