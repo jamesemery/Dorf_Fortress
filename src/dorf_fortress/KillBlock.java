@@ -7,7 +7,7 @@ import java.util.Random;
  * when touched
  * Created by jamie on 5/28/15.
  */
-public class KillBlock extends Obstacle implements FramePlacer {
+public class KillBlock extends Obstacle {
 
   public KillBlock(String sprite_location, int hitbox_width, int hitbox_height,
                    double x, double y, Model simulation) {
@@ -35,4 +35,33 @@ public class KillBlock extends Obstacle implements FramePlacer {
         Random rand = new Random();
         return null;
     } //TODO finish filling this in
+
+    public static Obstacle getInstance(ObstaclePlacer source, Hitbox target,
+                                       Random rand) {
+        double xTarget = target.getX();
+        double yTarget = target.getY();
+        KillBlock instance = null;
+
+        //making sure the generated block doesnt already intersect the target
+        while ((instance==null)||(instance.hitbox.intersects(target))) {
+            double x;
+            double y;
+            x = rand.nextInt(100);
+            y = rand.nextInt(70);
+            if (rand.nextBoolean()) {
+                x = -1*x;
+            }
+            if (rand.nextBoolean()) {
+                y = -1*y;
+            }
+            x += xTarget;
+            y += yTarget;
+            System.out.println(x + " " + y);
+            instance = new KillBlock(
+                    "sprites/staticObstacleTransparent.png",
+                    32,32,x,y,source.getSimulation());
+            System.out.println("foo");
+        }
+        return instance;
+    }
 }

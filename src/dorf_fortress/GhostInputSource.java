@@ -12,13 +12,13 @@ import java.io.File;
  * Created by jamie on 5/28/15.
  */
 public class GhostInputSource extends InputBuffer {
-    private static GhostInputSource uniqueInstance;
+//    private static GhostInputSource uniqueInstance;
     List<Boolean[]> storedInput;
     Boolean[] currentInput;
     int cursor;
 
 
-    private GhostInputSource() {
+    public GhostInputSource() {
         storedInput = new ArrayList<Boolean[]>();
         cursor = 0;
         File f = new File("src/dorf_fortress/DemoInputs.txt");
@@ -37,18 +37,19 @@ public class GhostInputSource extends InputBuffer {
         }
     }
 
-    /**
-     * Returns an instance of InputBuffer, creating one if it doesn't already
-     * exist. This is the only constructor that can be publicly accessed.
-     *
-     * @return the instance of InputBuffer.
-     */
-    public static InputBuffer getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new GhostInputSource();
-        }
-        return uniqueInstance;
-    }
+//    /**
+//     * Returns an instance of InputBuffer, creating one if it doesn't already
+//     * exist. This is the only constructor that can be publicly accessed.
+//     *
+//     * @return the instance of InputBuffer.
+//     */
+//    public static InputBuffer getInstance() {
+//        if (uniqueInstance == null) {
+//            uniqueInstance = new GhostInputSource();
+//        }
+//        uniqueInstance.clear();
+//        return uniqueInstance;
+//    }
 
     /**
      * Returns a boolean value signifying whether or not the given input is
