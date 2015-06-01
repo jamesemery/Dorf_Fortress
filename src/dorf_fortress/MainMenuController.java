@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -24,6 +25,9 @@ public class MainMenuController {
 
     public MainMenuController() {}
 
+    @FXML private AnchorPane anchorPane;
+    @FXML private Text titleText;
+    @FXML private Button beginButton;
     @FXML private ImageView menu_dorf_sprite;
     @FXML private Slider difficultySlider;
     @FXML private ColorPicker beardColorPicker;
