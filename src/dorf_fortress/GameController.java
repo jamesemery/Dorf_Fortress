@@ -129,6 +129,12 @@ public class GameController implements EventHandler<KeyEvent> {
         this.timer.cancel();
     }
 
+
+    /**
+     * Unpauses the animation.
+     */
+    public void unpause() { this.setUpAnimationTimer(); }
+
     /**
      * Adds a sprite to the scene, both to the root node and the controller's
      * list of sprites.
