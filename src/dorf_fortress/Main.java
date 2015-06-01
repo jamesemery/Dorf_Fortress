@@ -10,10 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,6 +25,8 @@ public class Main extends Application {
 
     final static double SCENE_WIDTH = 640;
     final static double SCENE_HEIGHT = 480;
+    final static String ambientNoiseLoc = "src/sprites/dungeonSound.wav";
+    static MediaPlayer noisePlayer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -73,6 +78,22 @@ public class Main extends Application {
             javafx.application.Platform.exit();
             System.exit(0);
         }
+        //Play ambient dungeon sounds
+        Media ambientNoise = new Media(new File(ambientNoiseLoc).toURI().toString());
+        noisePlayer = new MediaPlayer(ambientNoise);
+        System.out.println(noisePlayer.statusProperty());
+        if(!noisePlayer.statusProperty().equals(MediaPlayer.Status.PLAYING)) {
+            noisePlayer.play();
+            System.out.println("playing media");
+        }
+
+        noisePlayer.setOnPaused(new Runnable() {
+            @Override
+            public void run() {
+                noisePlayer.play();
+                System.out.println("replaying media");
+            }
+        });
         System.out.println("setup Start Menu");
 
     }
