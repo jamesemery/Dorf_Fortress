@@ -127,8 +127,11 @@ public class GameController implements EventHandler<KeyEvent> {
      * Pauses the animation.
      */
     public void pause() {
-        this.paused = true;
-        this.timer.cancel();
+        if(this.paused == false) {
+            this.paused = true;
+            this.timer.cancel();
+        }
+
     }
 
 
@@ -136,8 +139,10 @@ public class GameController implements EventHandler<KeyEvent> {
      * Unpauses the animation.
      */
     public void unpause() {
-        this.setUpAnimationTimer();
-        this.paused = false;
+        if(this.paused == true) {
+            this.setUpAnimationTimer();
+            this.paused = false;
+        }
     }
 
     /**

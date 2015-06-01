@@ -176,7 +176,7 @@ public class Dorf extends Actor {
             System.out.print("Stage:");
             System.out.println(mainScene);
 
-            Main.startWinMenu(mainScene);
+            Main.startWinMenu(mainScene, simulation);
             System.out.println("Ending win() method");
         }
     }
@@ -184,6 +184,7 @@ public class Dorf extends Actor {
     //does stuff
     public void reset() {
         super.reset();
+        this.victorious = false;
         inputSource.clear();
     }
     /**

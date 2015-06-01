@@ -37,7 +37,7 @@ public class Model {
         controller.addSpriteToRoot(ferdinand.getSprite());
 
         //Make a Ghost!
-        Ghost casper = new Ghost("sprites/GreyDorf.png", 32, 32, 34,
+        Ghost casper = new Ghost(32, 32, 34,
                 100, this);
         this.levelSolver = casper;
 //        this.controller.addSpriteToRoot(casper.getSprite());
@@ -59,7 +59,7 @@ public class Model {
          * TODO: where c is the count at difficulty 0 and n scales it.
          */
         List tempList = new ArrayList<Integer>();
-        dangerMaker.generateObstacles((int) Math.round(2.5 * this
+        dangerMaker.generateObstacles((int) Math.round(12.5 * this
                 .difficulty), tempList);
         setGhostMode(false);
         levelSolver.liveSimulation = true;
