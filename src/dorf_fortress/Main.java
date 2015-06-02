@@ -82,6 +82,7 @@ public class Main extends Application {
         //Play ambient dungeon sounds
         Media ambientNoise = new Media(new File(ambientNoiseLoc).toURI().toString());
         noisePlayer = new MediaPlayer(ambientNoise);
+        noisePlayer.setCycleCount(MediaPlayer.INDEFINITE);
         System.out.println(noisePlayer.statusProperty());
         if(!noisePlayer.statusProperty().equals(MediaPlayer.Status.PLAYING)) {
             noisePlayer.play();
