@@ -58,8 +58,8 @@ public class GameController implements EventHandler<KeyEvent> {
         //We have to make the rectangle a little bigger because when it pans
         //some of it goes off the screen.
         Rectangle backgroundRect = new Rectangle(0, 0,
-                Main.SCENE_WIDTH + 3*backgroundImage.getWidth(),
-                Main.SCENE_HEIGHT + 3*backgroundImage.getHeight());
+                Main.SCENE_WIDTH,
+                Main.SCENE_HEIGHT);
         this.tileWidth = backgroundImage.getWidth();
         this.tileHeight = backgroundImage.getHeight();
         this.tile = backgroundImage;
@@ -77,14 +77,9 @@ public class GameController implements EventHandler<KeyEvent> {
      * @param screenOffset is the player's x-coordinate.
      */
     public void updateBackground(double screenOffset) {
-
-        //Get the width of the tiled image
-        double imageWidth = this.tileWidth;
         //get the dorf's offset over one tile
-        double tileOffset = screenOffset % imageWidth;
+        double tileOffset = screenOffset % this.tileWidth;
         //change background position accordingly.
-        this.background.setX(-1*this.tileWidth - tileOffset);
-        //test
         ImagePattern tilePattern = new ImagePattern(
                 (this.tile),-1*tileOffset,0,this.tile.getWidth(),
                 tile.getHeight(), false );
