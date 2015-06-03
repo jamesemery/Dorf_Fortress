@@ -26,8 +26,8 @@ public class BouncyPlatform extends Platform {
     public void collidesY(Entity projectile) {
         // top collision - if the projectile is going faster to the right
         if (projectile.getY_velocity() < this.getY_velocity()) {
-            if (projectile instanceof Actor) {
-                ((Actor) projectile).setCurPlatform(this);
+            if (projectile instanceof Dorf) {
+                ((Dorf) projectile).setCurPlatform(this);
             }
             projectile.setY(this.getY() - projectile.height - 0.01);
 

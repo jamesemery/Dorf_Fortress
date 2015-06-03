@@ -24,8 +24,8 @@ public class SolidPlatform extends Platform {
     public void collidesY(Entity projectile) {
         // top collision - if the projectile is going down relative
         if (projectile.getY_velocity() < this.getY_velocity()) {
-            if (projectile instanceof Actor) {
-                ((Actor) projectile).setCurPlatform(this);
+            if (projectile instanceof Dorf) {
+                ((Dorf)projectile).setCurPlatform(this);
             }
             projectile.setY(this.getY() - projectile.height - 0.01);
             projectile.setY_velocity(this.y_velocity);

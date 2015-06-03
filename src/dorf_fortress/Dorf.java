@@ -7,16 +7,15 @@ import javafx.stage.Stage;
  * Created by Joe Adkisson on 5/24/2015.
  * Controllable hero of the game; subclass of Actor.
  */
-public class Dorf extends Actor {
+public class Dorf extends Entity {
 
-    //double STEP_SIZE_X = 240/ GameController.FRAMES_PER_SECOND;
-    //double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
-    //public final double FRICTION_CONSTANT = 120/ GameController.FRAMES_PER_SECOND;
-    //public final double MAX_HORIZ_SPEED = 6000 / GameController.FRAMES_PER_SECOND;
     double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
     double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 240/ GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 12000 / GameController.FRAMES_PER_SECOND;
+    public final double GRAVITY_CONSTANT = 10;
+    public final double TERMINAL_VELOCITY = -600;
+    Platform curPlatform;
     private boolean victorious = false;
     String name;
     InputBuffer inputSource;
@@ -30,6 +29,7 @@ public class Dorf extends Actor {
     public Dorf(int hitbox_width, int hitbox_height, double x, double y,
                 Model model) {
         super(hitbox_width, hitbox_height, x, y, model);
+        this.name = "";
         inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( 32, 32);
         height = 32;
@@ -86,6 +86,8 @@ public class Dorf extends Actor {
         }
 
         applyFriction();
+        fall();
+        curPlatform = null;
         super.step();
     }
 
@@ -103,6 +105,19 @@ public class Dorf extends Actor {
             this.x_velocity += FRICTION_CONSTANT;
             //We don't want to overshoot on velocity, just bring it to zero.
             if (this.x_velocity > 0) { this.x_velocity = 0;}
+        }
+    }
+
+    /**
+     * Applies the effects of gravity; simply adds or subtracts to the velocity
+     * based on the gravitational constant (up to terminal velocity.) It's worth
+     * noting that y coordinates are measured from the top of the screen.
+     */
+    public void fall() {
+        if (y_velocity >= TERMINAL_VELOCITY) {
+            y_velocity -= GRAVITY_CONSTANT;
+        } else {
+            y_velocity = TERMINAL_VELOCITY;
         }
     }
 
@@ -197,5 +212,16 @@ public class Dorf extends Actor {
             return true;
         }
         return false;
+    }
+
+    // In the current implementation an Actor will never act upon something else
+    // colliding with it (it will instead call the collidesX/Y method of the
+    // object it's colliding with) but it might in the future, and it needs
+    // to fill the abstract methods from Entity.
+    public void collidesX(Entity projectile) {};
+    public void collidesY(Entity projectile) {};
+
+    public void setCurPlatform(Platform platform) {
+        curPlatform = platform;
     }
 }
