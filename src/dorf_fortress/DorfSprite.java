@@ -7,6 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * A Sprite that has animations for movement in the left and right directions.
+ * Created specifically for Dorf objects, but it's theoretically capable of
+ * handling any object with left and right movement. The only caveat is that
+ * the leftwards and rightwards animations must have the same number of frames.
+ * There is no forward-facing animation; when the character stops moving, it
+ * will just stay on the same frame it was on.
  * Created by Joe on 6/4/2015.
  */
 
@@ -14,9 +20,13 @@ import java.util.List;
 public class DorfSprite extends Sprite {
 
     ImageView[] rightImages;
+    ImageView[] leftImages;
     int numImages;
-    boolean movingRight = true;
     int currentImage = 0;
+    boolean movingRight = true;
+    double pastFrameX = 0; //the last x coordinate at which we updated a sprite
+    double frameTolerance =10.0; //how far the entity must travel before updating
+
 
     /**
      * Calls ImageView's constructor, which takes in a string URL pointing to
@@ -32,41 +42,67 @@ public class DorfSprite extends Sprite {
     public DorfSprite(String[] leftArray, String[] rightArray, int hitbox_width,
                       int hitbox_height, Entity dorf) {
         super(dorf);
-        System.out.println("imageArray: " + rightArray);
         this.rightImages = new ImageView[rightArray.length];
+        this.leftImages = new ImageView[leftArray.length];
         for (int i = 0; i < rightArray.length; i++ ) {
-            System.out.println(rightArray[i]);
+            this.leftImages[i] = new ImageView((leftArray[i]));
             this.rightImages[i] = new ImageView((rightArray[i]));
         }
         this.numImages = this.rightImages.length;
         this.getChildren().add(this.rightImages[0]);
+        this.pastFrameX = dorf.getX();
     }
 
     @Override
     public void setX(double x) {
-            rightImages[this.currentImage].setX(x);
+        for (int i = 0; i < numImages; i++) {
+            rightImages[i].setX(x);
+            leftImages[i].setX(x);
         }
+    }
 
     @Override
     public void setY(double y) {
-            rightImages[this.currentImage].setY(y);
+        for (int i = 0; i < numImages; i++) {
+            rightImages[i].setY(y);
+            leftImages[i].setY(y);
         }
+    }
 
     @Override
     public void update(double dorf_x) {
-        //have an instance variable saving the last x we updated at
-        //if we're more than [number] pixels right of that,
-            //go to next rightward sprite if going right
-            //go to rightward[0]
-        //if we're more than [number] pixels left of that,
-            //go to next leftward sprite if going left
-            //go to leftward[0]
+        //we have an instance variable saving the last x we updated at;
+        //if we're more than [frameTolerance] pixels right of that...
+        if (dorf_x - pastFrameX > frameTolerance) {
+            System.out.println("moving right!");
+            if (movingRight) { getNextFrame(); } //just go to next frame
+            else {
+                currentImage = 0;
+                movingRight = true;
+            }
+            pastFrameX = dorf_x;
+        //if we're more than [frameTolerance] pixels left of that...
+        } else if (dorf_x - pastFrameX < frameTolerance*-1) {
+            System.out.println("moving left!");
+            //if we're moving right, reset animation moving left
+            if (movingRight) {
+                currentImage = 0;
+                movingRight = false;
+            } else { getNextFrame(); }
+            pastFrameX = dorf_x;
+        }
+        System.out.println("movingRight: " + movingRight);
+        // Remove the current image; we can just wipe both left and right
+        // sprites if they exist in the tree.
+        this.getChildren().clear();
+//        this.getChildren().remove(rightImages[this.currentImage]);
+//        this.getChildren().remove(leftImages[this.currentImage]);
+        if(movingRight) {
+            this.getChildren().add(rightImages[this.currentImage]);
+        } else {
+            this.getChildren().add(leftImages[this.currentImage]);
+        }
 
-
-        //Move to the next image
-        this.getChildren().remove(rightImages[this.currentImage]);
-        getNextFrame();
-        this.getChildren().add(rightImages[this.currentImage]);
         super.update(dorf_x);
     }
 
