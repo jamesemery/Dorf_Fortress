@@ -13,14 +13,10 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.io.File;
 import java.net.URL;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main extends Application {
 
@@ -28,6 +24,7 @@ public class Main extends Application {
     final static double SCENE_HEIGHT = 480;
     final static String ambientNoiseLoc = "src/sprites/dungeonSound.wav";
     static MediaPlayer noisePlayer;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -46,10 +43,7 @@ public class Main extends Application {
         });
 
         //Set up the scene. The commented lines are for testing.
-        //startGame(primaryStage);
-        startMenu(primaryStage);
-        //startWinMenu(primaryStage);
-        //startLoseMenu(primaryStage);
+        loadMainMenu(primaryStage);
     }
 
     public static void main(String[] args) {
@@ -57,9 +51,9 @@ public class Main extends Application {
     }
 
     /**
-     * Launches the menu scene.
+     * Launches the menu scene, with its own controller.
      */
-    public static void startMenu(Stage mainStage) {
+    public static void loadMainMenu(Stage mainStage) {
         URL fxmlUrl = Main.class.getResource("mainmenu.fxml");
         System.out.println("fxml url: " + fxmlUrl);
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
@@ -79,7 +73,7 @@ public class Main extends Application {
             javafx.application.Platform.exit();
             System.exit(0);
         }
-        //Play ambient dungeon sounds
+        //Play ambient dungeon sounds on loop
         Media ambientNoise = new Media(new File(ambientNoiseLoc).toURI().toString());
         noisePlayer = new MediaPlayer(ambientNoise);
         noisePlayer.setCycleCount(MediaPlayer.INDEFINITE);
@@ -88,27 +82,13 @@ public class Main extends Application {
             noisePlayer.play();
             System.out.println("playing media");
         }
-
-        noisePlayer.setOnPaused(new Runnable() {
-            @Override
-            public void run() {
-                noisePlayer.play();
-                System.out.println("replaying media");
-            }
-        });
-        System.out.println("setup Start Menu");
-
     }
 
     /**
      * Launches the game scene.
      */
-    public static void startGame(Stage mainStage,
-                String name, double difficulty, Color beardColor) {
-        System.out.println("Debug message from Main.startGame(). Params:");
-        System.out.println("Name: " + name);
-        System.out.println("Difficulty: " + difficulty);
-        System.out.println("Color: " + beardColor);
+    public static void startGame(Stage mainStage, String name, double difficulty, Color beardColor) {
+
         Group root = new Group();
         Scene gameScene = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);

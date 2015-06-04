@@ -25,7 +25,7 @@ public class WinScreenController {
     @FXML
     void whenMenuClicked(ActionEvent event) {
         Stage thisStage = (Stage) archwayImage.getScene().getWindow();
-        Main.startMenu(thisStage);
+        Main.loadMainMenu(thisStage);
     }
     @FXML
     void whenReplayClicked(ActionEvent event) {
