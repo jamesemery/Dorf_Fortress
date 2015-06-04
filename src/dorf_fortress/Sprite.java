@@ -19,7 +19,7 @@ public class Sprite extends Parent {
     /**
      * Calls ImageView's constructor, which takes in a string URL pointing to
      * the location of the image; then creates its own Hitbox object.
-     * @param sprite_Location
+     * @param entity
      */
     public Sprite (Entity entity) {
         super();

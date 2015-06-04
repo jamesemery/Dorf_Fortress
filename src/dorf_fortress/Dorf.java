@@ -1,14 +1,12 @@
 package dorf_fortress;
 
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 /**
  * Created by Joe Adkisson on 5/24/2015.
  * Controllable hero of the game; subclass of Actor.
  */
 public class Dorf extends Entity {
-
     double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
     double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     public final double FRICTION_CONSTANT = 240/ GameController.FRAMES_PER_SECOND;
@@ -40,8 +38,13 @@ public class Dorf extends Entity {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite("sprites/GreyDorf.png",
-                (int)this.width, (int)this.height, this);
+//        this.sprite = new SimpleSprite("sprites/GreyDorf.png",
+//                (int)this.width, (int)this.height, this);
+        String[] rightImages = {"sprites/BasicDorfRight1.png",
+                "sprites/BasicDorfRight2.png","sprites/BasicDorfRight3.png"};
+        String[] leftImages = {"sprites/BasicDorfLeft1.png",
+                "sprites/BasicDorfLeft2.png","sprites/BasicDorfLeft3.png"};
+        this.sprite = new DorfSprite(leftImages,rightImages,22,32, this);
     }
 
     /**
