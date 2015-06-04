@@ -20,7 +20,7 @@ public class Dorf extends Entity {
 
 
     /**
-     * Calls Actor's constructor with no name.
+     * Calls Entity's constructor with no name.
      * @param hitbox_width
      * @param hitbox_height
      */
@@ -29,7 +29,7 @@ public class Dorf extends Entity {
         super(hitbox_width, hitbox_height, x, y, model);
         this.name = "";
         inputSource = BasicInputBuffer.getInstance();
-        hitbox = new DorfHitbox( 32, 32);
+        hitbox = new DorfHitbox( hitbox_width, hitbox_height);
         height = 32;
         width = 32;
         hitbox_checker = true;
@@ -38,13 +38,12 @@ public class Dorf extends Entity {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-//        this.sprite = new SimpleSprite("sprites/GreyDorf.png",
-//                (int)this.width, (int)this.height, this);
         String[] rightImages = {"sprites/BasicDorfRight1.png",
                 "sprites/BasicDorfRight2.png","sprites/BasicDorfRight3.png"};
         String[] leftImages = {"sprites/BasicDorfLeft1.png",
                 "sprites/BasicDorfLeft2.png","sprites/BasicDorfLeft3.png"};
-        this.sprite = new DorfSprite(leftImages,rightImages,22,32, this);
+        this.sprite = new DorfSprite(leftImages,rightImages,(int)this.width,
+                (int)this.height, this);
     }
 
     /**

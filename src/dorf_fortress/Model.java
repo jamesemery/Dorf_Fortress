@@ -32,7 +32,7 @@ public class Model {
 
         entities = new ArrayList<Entity>();
         //Make a Dorf!
-        Dorf ferdinand = new Dorf( 32, 32, 34, 100, this);
+        Dorf ferdinand = new Dorf( 22, 32, 34, 100, this);
         this.player = ferdinand;
         controller.addSpriteToRoot(ferdinand.getSprite());
 

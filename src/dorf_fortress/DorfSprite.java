@@ -71,6 +71,9 @@ public class DorfSprite extends Sprite {
 
     @Override
     public void update(double dorf_x) {
+    //TODO: refactor this code for a nicer loop, so we can have quicker
+        //changes in direction. Works for now, though.
+
         //we have an instance variable saving the last x we updated at;
         //if we're more than [frameTolerance] pixels right of that...
         if (dorf_x - pastFrameX > frameTolerance) {
@@ -92,11 +95,9 @@ public class DorfSprite extends Sprite {
             pastFrameX = dorf_x;
         }
         System.out.println("movingRight: " + movingRight);
-        // Remove the current image; we can just wipe both left and right
-        // sprites if they exist in the tree.
+
+        // Clears the sprite and draws in the correct image.
         this.getChildren().clear();
-//        this.getChildren().remove(rightImages[this.currentImage]);
-//        this.getChildren().remove(leftImages[this.currentImage]);
         if(movingRight) {
             this.getChildren().add(rightImages[this.currentImage]);
         } else {
