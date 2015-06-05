@@ -77,7 +77,7 @@ public class DorfSprite extends Sprite {
         //we have an instance variable saving the last x we updated at;
         //if we're more than [frameTolerance] pixels right of that...
         if (dorf_x - pastFrameX > frameTolerance) {
-            System.out.println("moving right!");
+//            System.out.println("moving right!");
             if (movingRight) { getNextFrame(); } //just go to next frame
             else {
                 currentImage = 0;
@@ -86,7 +86,7 @@ public class DorfSprite extends Sprite {
             pastFrameX = dorf_x;
         //if we're more than [frameTolerance] pixels left of that...
         } else if (dorf_x - pastFrameX < frameTolerance*-1) {
-            System.out.println("moving left!");
+//            System.out.println("moving left!");
             //if we're moving right, reset animation moving left
             if (movingRight) {
                 currentImage = 0;
@@ -94,7 +94,7 @@ public class DorfSprite extends Sprite {
             } else { getNextFrame(); }
             pastFrameX = dorf_x;
         }
-        System.out.println("movingRight: " + movingRight);
+//        System.out.println("movingRight: " + movingRight);
 
         // Clears the sprite and draws in the correct image.
         this.getChildren().clear();

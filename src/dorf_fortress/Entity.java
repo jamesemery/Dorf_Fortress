@@ -1,6 +1,12 @@
 package dorf_fortress;
 
 /**
+ * Interface class for all of the simulation components in the code, this
+ * interface contains a constructor and simulation code for basic simulation
+ * components with the expectation that these methods are overrided by
+ * subclasses when behavior is particularly complicated. Also entials a
+ * series of getters and setters for the general variables that every Entity
+ * will have.
  * Created by Joe on 5/27/2015.
  */
 public abstract class Entity {
@@ -90,7 +96,9 @@ public abstract class Entity {
 
     /**
      * Baseline step() method for all Entities; moves the Entity along its
-     * velocity, one axis at a time, and checks for collisions.
+     * velocity, one axis at a time, and checks for collisions. Segmets
+     * movement into x collisions first then y collision so that the
+     * collision handler knows where the object came from
      */
     public void step() {
         //dealing with framerate issues
