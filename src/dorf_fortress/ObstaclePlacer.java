@@ -63,7 +63,6 @@ public class ObstaclePlacer {
             int numMade = 0;
 
             while (numMade < numToMake) {
-                System.out.println(key + " numMade: " + numMade);
                 // Randomly selects numToMake frames in the simulation and uses a
                 // priority queue to ensure they come out in chronological order
                 PriorityQueue<Integer> selectFrames = new PriorityQueue<Integer>();
@@ -76,12 +75,9 @@ public class ObstaclePlacer {
                 while (!selectFrames.isEmpty()) {
                     Hitbox ghost = simulation.getNextGhostHitbox();
                     lastframe = getCorrespondingFrame();
-                    System.out.println(getCorrespondingFrame() + " " +
-                            selectFrames.peek());
                     while ((!selectFrames.isEmpty())&&(this
                             .getCorrespondingFrame() == selectFrames
                             .peek())) {
-                        System.out.println(selectFrames.peek());
                         int current = selectFrames.poll();
                         Entity obstacle = Obstacle.getInstanceFactory(this,
                                 levelSolver.getHitbox(), key, randomGenerator);
@@ -117,7 +113,6 @@ public class ObstaclePlacer {
                 Integer>();
         int boxes = (int)(0.4*n);
         int spinning = (int)(0.1*n);
-        System.out.println("Boxes to make: " + boxes);
         obstacleOccurance.put("spinningHead", spinning);
         obstacleOccurance.put("box", boxes);
         obstacleOccurance.put("simpleBall", n - boxes - spinning);
@@ -162,7 +157,6 @@ public class ObstaclePlacer {
         simulation.reset();
         this.endFrame = levelSolver.frameFinished;
         this.finalX = levelSolver.finalX;
-        System.out.print("Endframe " + endFrame);
     }
 
     public Model getSimulation() {
