@@ -22,7 +22,7 @@ public class KillBlock extends Obstacle {
 
     @Override
     protected void makeHitbox() {
-        this.hitbox = new PlatformHitbox(this.width,this.height);
+        this.hitbox = new RectangleHitbox(this.width,this.height);
     }
 
     @Override

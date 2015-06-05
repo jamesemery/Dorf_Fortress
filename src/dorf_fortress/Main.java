@@ -21,6 +21,7 @@ import java.net.URL;
  * - Delete unused imports, methods, classes, etc.
  * - Delete all print statements.
  * - Double-check that every part of the code is commented.
+ * - Check all inheritance trees for redundancies that can be deleted!
  */
 
 public class Main extends Application {
