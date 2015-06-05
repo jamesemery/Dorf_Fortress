@@ -31,7 +31,7 @@ public class Dorf extends Entity {
         inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( hitbox_width, hitbox_height);
         height = 32;
-        width = 32;
+        width = 22;
         hitbox_checker = true;
         this.screen_death = true;
     }
