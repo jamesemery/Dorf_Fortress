@@ -10,7 +10,6 @@ public class TrampolinePlatform extends Platform {
         super(hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
-        this.JUMP_BOOST = 22500/ GameController.FRAMES_PER_SECOND;
     }
 
     @Override
@@ -23,10 +22,14 @@ public class TrampolinePlatform extends Platform {
         );
     }
 
+    /**
+     * Overrides the default collision method, giving the colliding entity the
+     * inverse of its original Y velocity.
+     * @param projectile   The entity having its velocity inverted.
+     */
     @Override
     public void collidesY(Entity projectile) {
         super.collidesY(projectile);
-        //Gives the dorf a slight bounce when he's on the platform.
         projectile.setY_velocity(-projectile.getY_velocity());
     }
 }

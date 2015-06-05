@@ -44,7 +44,7 @@ public class LevelBuilder {
 //                300,this.model);
 //        this.entities.add(platform1);
 //
-//        Platform platform2 = new BouncyPlatform(128,32,300,
+//        Platform platform2 = new TrampolinePlatform(128,32,300,
 //                400,this.model);
 //        this.entities.add(platform2);
 //
