@@ -89,7 +89,6 @@ public class Dorf extends Entity {
 
         applyFriction();
         fall();
-        curPlatform = null;
         super.step();
     }
 
@@ -116,6 +115,7 @@ public class Dorf extends Entity {
      * noting that y coordinates are measured from the top of the screen.
      */
     public void fall() {
+        this.curPlatform = null;
         if (y_velocity >= TERMINAL_VELOCITY) {
             y_velocity -= GRAVITY_CONSTANT;
         } else {

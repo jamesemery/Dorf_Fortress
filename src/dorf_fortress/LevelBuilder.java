@@ -20,7 +20,9 @@ public class LevelBuilder {
     private boolean holdingRight;
     private boolean holdingLeft;
     private boolean holdingUp;
-    boolean jumpHandled;
+    private boolean holdingDown;
+    private boolean jumpHandled;
+    private boolean justPlacedPlatform;
 
     public LevelBuilder(Model model, List<Entity> entities,
                         GameController controller) {
@@ -171,6 +173,10 @@ public class LevelBuilder {
 
             // if its currently on a platform
             if (levelSolver.curPlatform!=null) {
+                if (justPlacedPlatform) {
+                    justPlacedPlatform = false;
+                    ghostInput.removeInputs(model.getCurrentFrame());
+                }
                 lastPlatformFrame = model.getCurrentFrame();
                 downStart = true;
                 jumpHandled = false;
@@ -213,13 +219,14 @@ public class LevelBuilder {
                 System.out.println
                         ("------------------------------------------------");
                 placePlatform(downFrame, levelSolver.frameFinished);
+                justPlacedPlatform = true;
                 downFrame = 0;
 
             } else {
                 handleDownInput();
             }
 
-            ghostInput.addInput(holdingLeft,holdingRight,holdingUp,false);
+            ghostInput.addInput(holdingLeft,holdingRight,holdingUp,holdingDown);
             model.simulateFrame();
         }
     }
@@ -283,6 +290,7 @@ public class LevelBuilder {
      * is currently on a platform
      */
     private void handlePlatformInput() {
+        holdingDown = false;
         holdingLeft = false;
         holdingRight = true;
         holdingUp = false;
@@ -345,6 +353,7 @@ public class LevelBuilder {
         }
 
         model.reset(startFrame);
+        justPlacedPlatform = true;
         return true;
     }
 
