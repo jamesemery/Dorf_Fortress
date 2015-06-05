@@ -116,8 +116,15 @@ public class Main extends Application {
         try {
             AnchorPane loseRoot = loader.load();
 
-            LoseScreenController controller = loader.getController();
+            OverlayController controller = loader.getController();
             controller.setModel(simulation);
+
+            loseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    controller.handleKeyPress(keyEvent);
+                }
+            });
 
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(loseRoot);
@@ -143,8 +150,15 @@ public class Main extends Application {
         try {
             AnchorPane winRoot = loader.load();
 
-            WinScreenController controller = loader.getController();
+            OverlayController controller = loader.getController();
             controller.setModel(simulation);
+
+            winRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    controller.handleKeyPress(keyEvent);
+                }
+            });
 
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(winRoot);

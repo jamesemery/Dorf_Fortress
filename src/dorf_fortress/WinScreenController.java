@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 /**
  * Created by azureillusions on 5/29/15.
+ * TODO: Delete. It's no longer necessary to the project.
  */
 public class WinScreenController {
     private Model model;
@@ -27,6 +28,7 @@ public class WinScreenController {
         Stage thisStage = (Stage) archwayImage.getScene().getWindow();
         Main.loadMainMenu(thisStage);
     }
+
     @FXML
     void whenReplayClicked(ActionEvent event) {
         System.out.println("Running whenTryAgainClicked() in LoseScreenController.java");
