@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 /**
  * Created by azureillusions on 5/29/15.
+ * TODO: Delete. It's no longer necessary to the project.
  */
 public class LoseScreenController {
     private Model model;
@@ -34,8 +35,6 @@ public class LoseScreenController {
         this.model.unpause();
         mainRoot.requestFocus();
         mainRoot.getChildren().remove(primaryPane);
-
-
     }
 
     @FXML
@@ -46,6 +45,8 @@ public class LoseScreenController {
         System.out.println("unpaused");
         mainRoot.requestFocus();
         mainRoot.getChildren().remove(primaryPane);
+
+
 
 
         // The issue with this bit is that we don't have access to the

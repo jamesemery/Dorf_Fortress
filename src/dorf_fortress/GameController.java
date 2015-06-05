@@ -6,10 +6,12 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-
-import java.io.File;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class GameController implements EventHandler<KeyEvent> {
     List<Sprite> spriteList;
     Group root;
     private double screenOffset;
+    private Text helpText;
     private Rectangle background;
     final String backgroundImageLoc = "sprites/BasicTile.png";
     Image tile;
@@ -40,6 +43,7 @@ public class GameController implements EventHandler<KeyEvent> {
         this.background = setUpBackground();
         updateBackground(0);
         this.simulation = Model.getInstance(this, sceneHeight, difficulty);
+        this.helpText = drawHelpText();
     }
 
     public void initialize() {
@@ -87,6 +91,17 @@ public class GameController implements EventHandler<KeyEvent> {
 
     }
 
+    private Text drawHelpText() {
+        Text text = new Text(10,25,"Use WASD or arrow keys to move, " +
+                "press P or Esc to pause\n" + "Hold W/Up for a higher jump");
+        text.setFont(new Font("Alegreya SC", 20));
+        text.setFill(new Color(1, 1, 1,1));
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        root.getChildren().add(text);
+        return text;
+
+    }
+
     /**
      * This is essentially our view; it sets up an animation timer for the
      * scene.
@@ -126,9 +141,7 @@ public class GameController implements EventHandler<KeyEvent> {
             this.paused = true;
             this.timer.cancel();
         }
-
     }
-
 
     /**
      * Unpauses the animation.
@@ -169,6 +182,14 @@ public class GameController implements EventHandler<KeyEvent> {
         for (Sprite s : spriteList) {
             s.update(screenOffset);
         }
+        //fade out the help text as the player moves farther along the level
+        double textOpacity = 0;
+        if (this.simulation.getGhostMode() == false) { //ghosts don't need help
+            textOpacity = 1 - ( (this.simulation.player.getX() - 50) * .005);
+            if (textOpacity < 0) { textOpacity = 0; }
+            if (textOpacity > 1) { textOpacity = 1; }
+        }
+        this.helpText.setFill(new Color(1,1,1,textOpacity));
         updateBackground(screenOffset);
     }
 
@@ -229,7 +250,7 @@ public class GameController implements EventHandler<KeyEvent> {
         } else if (code == KeyCode.RIGHT || code == KeyCode.D) {
             inputStore.addInput("right", false);
             keyEvent.consume();
-        } else if (code == KeyCode.UP || code == KeyCode.W) {
+        } else if (code == KeyCode.UP || code == KeyCode.W || code == KeyCode.SPACE) {
             inputStore.addInput("up", false);
             keyEvent.consume();
         } else if (code == KeyCode.DOWN || code == KeyCode.S) {

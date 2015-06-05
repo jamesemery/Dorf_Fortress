@@ -49,8 +49,8 @@ public class Model {
          * TODO: where c is the count at difficulty 0 and n scales it.
          */
         List tempList = new ArrayList<Integer>();
-        dangerMaker.generateObstacles((int) Math.round(7.5 * this
-                .difficulty), tempList);
+        dangerMaker.generateObstacles((int) Math.round(7 + (.7)*
+                this.difficulty*this.difficulty), tempList);
         setGhostMode(false);
         levelSolver.liveSimulation = true;
     }

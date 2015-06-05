@@ -7,7 +7,7 @@ import java.net.URL;
  * A rectangular platform upon which a Dorf is able to stand.
  */
 public abstract class Platform extends Entity {
-    protected double JUMP_BOOST;
+    protected double JUMP_BOOST = 18000/ GameController.FRAMES_PER_SECOND;
 
     public Platform(int hitbox_width, int
             hitbox_height, double x, double y, Model simulation) {
@@ -17,7 +17,7 @@ public abstract class Platform extends Entity {
     }
 
     public void makeHitbox() {
-        this.hitbox = new PlatformHitbox(this.width,this.height);
+        this.hitbox = new RectangleHitbox(this.width,this.height);
     }
 
     public double getJump() {

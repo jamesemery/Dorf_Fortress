@@ -3,11 +3,9 @@ package dorf_fortress;
 import javafx.application.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -17,6 +15,14 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import java.io.File;
 import java.net.URL;
+
+/*
+ * TODO LIST - do NOT submit until these are finished!
+ * - Delete unused imports, methods, classes, etc.
+ * - Delete all print statements.
+ * - Double-check that every part of the code is commented.
+ * - Check all inheritance trees for redundancies that can be deleted!
+ */
 
 public class Main extends Application {
 
@@ -87,7 +93,8 @@ public class Main extends Application {
     /**
      * Launches the game scene.
      */
-    public static void startGame(Stage mainStage, String name, double difficulty, Color beardColor) {
+    public static void startGame(Stage mainStage, String name,
+                                 double difficulty, Color beardColor) {
 
         Group root = new Group();
         Scene gameScene = new Scene(root, SCENE_WIDTH,
@@ -118,8 +125,15 @@ public class Main extends Application {
         try {
             AnchorPane loseRoot = loader.load();
 
-            LoseScreenController controller = loader.getController();
+            OverlayController controller = loader.getController();
             controller.setModel(simulation);
+
+            loseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    controller.handleKeyPress(keyEvent);
+                }
+            });
 
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(loseRoot);
@@ -145,8 +159,15 @@ public class Main extends Application {
         try {
             AnchorPane winRoot = loader.load();
 
-            WinScreenController controller = loader.getController();
+            OverlayController controller = loader.getController();
             controller.setModel(simulation);
+
+            winRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    controller.handleKeyPress(keyEvent);
+                }
+            });
 
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(winRoot);
