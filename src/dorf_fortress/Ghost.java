@@ -24,9 +24,9 @@ public class Ghost extends Dorf {
      * @param y
      */
     public Ghost(int hitbox_width, int hitbox_height, double x, double y,
-                 Model model) {
+                 Model model, InputBuffer inputSource) {
         super(hitbox_width, hitbox_height, x, y, model);
-        inputSource = new GhostInputSource();
+        this.inputSource = inputSource;
         inputSource.clear();
     }
 
@@ -68,4 +68,5 @@ public class Ghost extends Dorf {
         finishedLevel = false;
         super.reset();
     }
+
 }

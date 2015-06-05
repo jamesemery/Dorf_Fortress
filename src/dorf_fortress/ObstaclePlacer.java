@@ -9,6 +9,9 @@ import java.util.Enumeration;
 import java.util.PriorityQueue;
 
 /**
+ * ObstaclePlacer handles the random generation of obstacles on the map in
+ * such a way that they will never impact the Ghosts path to completing the
+ * level. The class takes an Integer list of parameters
  * Created by jamie on 5/28/15.
  */
 public class ObstaclePlacer {
@@ -67,7 +70,7 @@ public class ObstaclePlacer {
                 for (int k = 0; k < (numToMake - numMade); k++) {
                     selectFrames.add(randomGenerator.nextInt(endFrame)+1);
                 }
-                // Runs through the simulation of the ghost and grabbs the ghosts
+                // Runs through the simulation of the ghost and grbs the ghosts
                 // hitbox at the selected frames
                 int lastframe = -1;
                 while (!selectFrames.isEmpty()) {
@@ -86,6 +89,9 @@ public class ObstaclePlacer {
 
                     }
                 }
+
+                // resets the simulation and adds the valid obstacles to the
+                // safe list
                 simulation.reset();
                 List<Entity> culledList = cullList(testCases);
                 numMade += culledList.size();
@@ -112,9 +118,9 @@ public class ObstaclePlacer {
         int boxes = (int)(0.4*n);
         int spinning = (int)(0.1*n);
         System.out.println("Boxes to make: " + boxes);
+        obstacleOccurance.put("spinningHead", spinning);
         obstacleOccurance.put("box", boxes);
         obstacleOccurance.put("simpleBall", n - boxes - spinning);
-        obstacleOccurance.put("spinningHead", spinning);
         return obstacleOccurance;
     }
 

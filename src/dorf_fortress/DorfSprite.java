@@ -92,6 +92,7 @@ public class DorfSprite extends Sprite {
             } else { getNextFrame(); }
             pastFrameX = dorf_x;
         }
+//        System.out.println("movingRight: " + movingRight);
 
         // Clears the sprite and draws in the correct image.
         this.getChildren().clear();

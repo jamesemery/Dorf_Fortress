@@ -31,16 +31,6 @@ public class Model {
         this.difficulty = difficulty;
 
         entities = new ArrayList<Entity>();
-        //Make a Dorf!
-        Dorf ferdinand = new Dorf( 22, 32, 34, 100, this);
-        this.player = ferdinand;
-        controller.addSpriteToRoot(ferdinand.getSprite());
-
-        //Make a Ghost!
-        Ghost casper = new Ghost(32, 32, 34,
-                100, this);
-        this.levelSolver = casper;
-//        this.controller.addSpriteToRoot(casper.getSprite());
 
 
         /*
@@ -153,8 +143,10 @@ public class Model {
 
     }
 
-    // Resets the level to the initial conditions for every entity contained
-    // in the set
+    /**
+     * Resets the conditions of every object in the level back to starting
+     * conditions
+     */
     public void reset() {
         currentFrame = 0;
         for (Entity i : entities) {
@@ -167,6 +159,22 @@ public class Model {
         }
         player.reset();
         levelSolver.reset();
+    }
+
+    /**
+     * Resets the conditions of every object in the level back to starting
+     * conditions and then simulates the level using the ghost up to the
+     * specified frame(which must be positive).
+     *
+     * This class is intended for use during level generation, no assumptions
+     * are made about what happens when the ghost wins or looses as a result
+     */
+    public void reset(int frame) {
+        this.reset();
+        while (currentFrame < frame) {
+            this.simulateFrame();
+        }
+        System.out.println("Reset to " + frame);
     }
 
 
