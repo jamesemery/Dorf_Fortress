@@ -12,17 +12,15 @@ public class SolidPlatform extends Platform {
         super(hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
-        //10,000
-        this.JUMP_BOOST = 18000/ GameController.FRAMES_PER_SECOND;
     }
 
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite("sprites/128x32platform.png", (int)this
-                .width, (int)this.height,this);
-    }
-
-    public void makeHitbox() {
-        this.hitbox = new RectangleHitbox(this.width,this.height);
+        this.sprite = new SimpleSprite(
+                "sprites/128x32platform.png",
+                (int)this.width,
+                (int)this.height,
+                this
+        );
     }
 }
 
