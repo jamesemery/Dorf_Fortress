@@ -12,8 +12,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-
-import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -94,10 +92,10 @@ public class GameController implements EventHandler<KeyEvent> {
     }
 
     private Text drawHelpText() {
-        Text text = new Text(150,50,"WASD or Arrow Keys to Move,\n" +
-                "Press P or Esc to pause");
+        Text text = new Text(10,25,"Use WASD or arrow keys to move, " +
+                "press P or Esc to pause\n" + "Hold W/Up for a higher jump");
         text.setFont(new Font("Alegreya SC", 20));
-        text.setFill(new Color(1, 1, 1, 0.5));
+        text.setFill(new Color(1, 1, 1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
         root.getChildren().add(text);
         return text;
@@ -185,9 +183,12 @@ public class GameController implements EventHandler<KeyEvent> {
             s.update(screenOffset);
         }
         //fade out the help text as the player moves farther along the level
-        double textOpacity = 1 - ( (this.simulation.player.getX()-50)*.005);
-        if (textOpacity < 0) { textOpacity = 0;}
-        if (textOpacity > 1) { textOpacity = 1;}
+        double textOpacity = 0;
+        if (this.simulation.getGhostMode() == false) { //ghosts don't need help
+            textOpacity = 1 - ( (this.simulation.player.getX() - 50) * .005);
+            if (textOpacity < 0) { textOpacity = 0; }
+            if (textOpacity > 1) { textOpacity = 1; }
+        }
         this.helpText.setFill(new Color(1,1,1,textOpacity));
         updateBackground(screenOffset);
     }
