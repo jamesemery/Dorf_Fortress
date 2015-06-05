@@ -151,6 +151,8 @@ public class LevelBuilder {
 
         // Adds blank inputs to the front of the ghost input to make level
         // solving nicer for humans to play later
+        ghostInput.addInput(false, false, false, false);
+        ghostInput.removeInputs(1);
         for (int i = 0; i < 30; i++) {
             ghostInput.addInput(false, false, false, false);
         }

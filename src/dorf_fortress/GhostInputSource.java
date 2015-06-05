@@ -141,7 +141,7 @@ public class GhostInputSource extends InputBuffer {
      * exception. frame argument must be positive value
      */
     public void removeInputs(int frame) throws IndexOutOfBoundsException {
-        if (frame >= storedInput.size()) {
+        if (frame > storedInput.size()) {
             throw new IndexOutOfBoundsException(frame + " is not a valid " +
                     "frame in the GhostInputSource, the last valid frame is "
                     + (storedInput.size() - 1));
