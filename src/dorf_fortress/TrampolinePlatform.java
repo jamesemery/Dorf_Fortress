@@ -1,36 +1,35 @@
 package dorf_fortress;
 
-import java.net.URL;
-
 /**
- * Created by Michael Stoneman on 5/28/2015.
- * A platform that boosts jumps and makes standing still impossible.
+ * Created by azureillusions on 6/4/15.
  */
-public class BouncyPlatform extends Platform {
+public class TrampolinePlatform extends Platform {
 
-    public BouncyPlatform(int hitbox_width, int hitbox_height, double x,
+    public TrampolinePlatform(int hitbox_width, int hitbox_height, double x,
                           double y, Model simulation) {
         super(hitbox_width, hitbox_height, x, y, simulation);
         this.height = hitbox_height;
         this.width = hitbox_width;
-        this.JUMP_BOOST = 22500/ GameController.FRAMES_PER_SECOND;
     }
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
         this.sprite = new SimpleSprite(
-                "sprites/basicPlatform.png",
+                "sprites/basicPlatform.png", //TODO: get a TrampolinePlatform.png, use it here.
                 (int)this.width,
                 (int)this.height,
                 this
         );
     }
 
+    /**
+     * Overrides the default collision method, giving the colliding entity the
+     * inverse of its original Y velocity.
+     * @param projectile   The entity having its velocity inverted.
+     */
     @Override
     public void collidesY(Entity projectile) {
         super.collidesY(projectile);
-        //Gives the dorf a slight bounce when he's on the platform.
-        projectile.setY_velocity(projectile.getY_velocity() +7500/GameController.FRAMES_PER_SECOND);
+        projectile.setY_velocity(-projectile.getY_velocity());
     }
 }
-

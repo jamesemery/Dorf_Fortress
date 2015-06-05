@@ -9,6 +9,17 @@ import java.util.Scanner;
 import java.io.File;
 
 /**
+ * Class that mimics the behavior of the input source so that the Ghost
+ * object will maintain consistent behavior to the Dorf object. In its
+ * current state this class works by reading from a pre-generated file that
+ * lists booleans corresponding to the key inputs for the Dorf that solve the
+ * hard-coded level. The class is able to run through these inputs frame by
+ * frame just like the input buffer that is tied to user inputs.
+ *
+ * The class stores a list of length 4 boolean arrays corresponding to frame
+ * by frame input in chronological order and when asked for input it merely
+ * returns the corresponding value for the current frame.
+ *
  * Created by jamie on 5/28/15.
  */
 public class GhostInputSource extends InputBuffer {
@@ -18,10 +29,26 @@ public class GhostInputSource extends InputBuffer {
     int cursor;
 
 
+    /**
+     * Currently, all this constructor does is read from a file that consists
+     * of a series of 4 ordered booleans on a line and converts that into the
+     * stored array of inputs.
+     */
     public GhostInputSource() {
         storedInput = new ArrayList<Boolean[]>();
         cursor = 0;
-        File f = new File("src/dorf_fortress/NewDemoInputs.txt");
+    }
+
+
+    /**
+     * Currently, all this constructor does is read from a file that consists
+     * of a series of 4 ordered booleans on a line and converts that into the
+     * this constructor takes a filepath for where the file is located
+     */
+    public GhostInputSource(String filepath) {
+        storedInput = new ArrayList<Boolean[]>();
+        cursor = 0;
+        File f = new File(filepath);
         try {
             Scanner scanner = new Scanner(f);
             while (scanner.hasNextBoolean()){
@@ -37,19 +64,6 @@ public class GhostInputSource extends InputBuffer {
         }
     }
 
-//    /**
-//     * Returns an instance of InputBuffer, creating one if it doesn't already
-//     * exist. This is the only constructor that can be publicly accessed.
-//     *
-//     * @return the instance of InputBuffer.
-//     */
-//    public static InputBuffer getInstance() {
-//        if (uniqueInstance == null) {
-//            uniqueInstance = new GhostInputSource();
-//        }
-//        uniqueInstance.clear();
-//        return uniqueInstance;
-//    }
 
     /**
      * Returns a boolean value signifying whether or not the given input is
@@ -81,11 +95,13 @@ public class GhostInputSource extends InputBuffer {
     }
 
     /**
-     * Resets the cursor so the first input will be the valid first input
+     * Resets the cursor so the first input will be the valid first input.
      */
     public void clear() {
         cursor = 0;
-        currentInput = storedInput.get(0);
+        if (!storedInput.isEmpty()){
+            currentInput = storedInput.get(0);
+        }
     }
 
     /**
@@ -95,6 +111,46 @@ public class GhostInputSource extends InputBuffer {
         cursor++;
         if (cursor<storedInput.size()) {
             currentInput = storedInput.get(cursor);
+        } else {
+            System.out.println("bunk");
         }
+    }
+
+    /**
+     * Adds set of input to the end of the list
+     */
+    public void addInput(boolean left, boolean right, boolean up, boolean
+            down) {
+        Boolean[] newFrame = new Boolean[4];
+        newFrame[0] = left;
+        newFrame[1] = right;
+        newFrame[2] = up;
+        newFrame[3] = down;
+        storedInput.add(newFrame);
+
+        // If this is the first input being entered, then it sets the current
+        // frame to the proper place
+        if (storedInput.size()==1){
+            currentInput = storedInput.get(0);
+        }
+    }
+
+    /**
+     * Removes all inputs from the list after the given frame, if the number
+     * specified is a frame after the last frame of the list it will throw an
+     * exception. frame argument must be positive value
+     */
+    public void removeInputs(int frame) throws IndexOutOfBoundsException {
+        if (frame >= storedInput.size()) {
+            throw new IndexOutOfBoundsException(frame + " is not a valid " +
+                    "frame in the GhostInputSource, the last valid frame is "
+                    + (storedInput.size() - 1));
+        }
+        // Repeatedly removes the last item of the array until the array has
+        // a number of elements equal to the specified frame
+        while (storedInput.size() > (frame+1)) {
+            storedInput.remove(storedInput.size() - 1);
+        }
+        System.out.println("InputSource removed to " + frame);
     }
 }

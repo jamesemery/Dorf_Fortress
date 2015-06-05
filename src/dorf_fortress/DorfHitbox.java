@@ -4,6 +4,10 @@ import javafx.geometry.Bounds;
 import javafx.scene.shape.Rectangle;
 
 /**
+ * Hitbox class for the dorf hitbox. Consists of a series of JFX
+ * rectangles who's bounds are used for hitdetection. In its current state,
+ * the hitbox is just one rectangle and is a placeholder until the dorf
+ * sprite and sprite animations have been finalized.
  * Created by jamie on 5/27/15.
  */
 public class DorfHitbox extends Hitbox {
