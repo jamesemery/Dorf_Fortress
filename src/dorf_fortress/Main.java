@@ -18,6 +18,13 @@ import javafx.stage.WindowEvent;
 import java.io.File;
 import java.net.URL;
 
+/*
+ * TODO LIST - do NOT submit until these are finished!
+ * - Delete unused imports, methods, classes, etc.
+ * - Delete all print statements.
+ * - Double-check that every part of the code is commented.
+ */
+
 public class Main extends Application {
 
     final static double SCENE_WIDTH = 640;
