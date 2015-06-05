@@ -3,12 +3,9 @@ package dorf_fortress;
 import javafx.application.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -87,7 +84,8 @@ public class Main extends Application {
     /**
      * Launches the game scene.
      */
-    public static void startGame(Stage mainStage, String name, double difficulty, Color beardColor) {
+    public static void startGame(Stage mainStage, String name,
+                                 double difficulty, Color beardColor) {
 
         Group root = new Group();
         Scene gameScene = new Scene(root, SCENE_WIDTH,
