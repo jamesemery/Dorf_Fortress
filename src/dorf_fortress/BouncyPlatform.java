@@ -30,7 +30,7 @@ public class BouncyPlatform extends Platform {
     }
 
     public void makeHitbox() {
-        this.hitbox = new PlatformHitbox(this.width,this.height);
+        this.hitbox = new RectangleHitbox(this.width,this.height);
     }
 }
 
