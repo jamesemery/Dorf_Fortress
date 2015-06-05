@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 /**
  * Created by azureillusions on 5/29/15.
+ * TODO: Delete. It's no longer necessary to the project.
  */
 public class LoseScreenController {
     private Model model;

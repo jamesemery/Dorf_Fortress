@@ -121,6 +121,13 @@ public class Main extends Application {
             OverlayController controller = loader.getController();
             controller.setModel(simulation);
 
+            loseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    controller.handleKeyPress(keyEvent);
+                }
+            });
+
             Group root = (Group) mainScene.getRoot();
             root.getChildren().add(loseRoot);
             loseRoot.requestFocus();

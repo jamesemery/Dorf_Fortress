@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -21,7 +23,7 @@ public class OverlayController {
     void setModel(Model simulation) {
         this.model = simulation;
     }
-    
+
     @FXML
     void whenMenuClicked(ActionEvent event) {
         System.out.println("Running whenMenuClicked() in LoseScreenController.java");
@@ -47,14 +49,6 @@ public class OverlayController {
         System.out.println("unpaused");
         mainRoot.requestFocus();
         mainRoot.getChildren().remove(primaryPane);
-
-
-
-        // The issue with this bit is that we don't have access to the
-        // various parameters startGame wants (i.e. beard color, difficulty,
-        // name). Moreover, if we just call startGame, it will (probably?)
-        // generate a brand new level.
-        // Main.startGame(thisStage);
     }
 
     @FXML
@@ -66,5 +60,15 @@ public class OverlayController {
         System.out.println("unpaused");
         mainRoot.requestFocus();
         mainRoot.getChildren().remove(primaryPane);
+    }
+
+    /*
+     * Allows the user to simply press the space bar to replay the level.
+     */
+    public void handleKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.SPACE) {
+            whenReplayClicked(new ActionEvent()); // Needed to call the method.
+            event.consume();
+        }
     }
 }
