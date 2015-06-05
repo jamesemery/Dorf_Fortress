@@ -31,7 +31,7 @@ public class LevelBuilder {
         this.entities.add(platform1);
         controller.addSpriteToRoot(platform1.getSprite());
 
-        Platform platform2 = new BouncyPlatform(128,32,300,
+        Platform platform2 = new TrampolinePlatform(128,32,300,
                 400,this.model);
         this.entities.add(platform2);
         this.controller.addSpriteToRoot(platform2.getSprite());
