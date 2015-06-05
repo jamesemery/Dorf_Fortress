@@ -17,6 +17,12 @@ public class LevelBuilder {
     private Platform startPlatform;
     private int lastSafeFrame;
     private boolean levelFinished;
+    private boolean holdingRight;
+    private boolean holdingLeft;
+    private boolean holdingUp;
+    private boolean holdingDown;
+    private boolean jumpHandled;
+    private boolean justPlacedPlatform;
 
     public LevelBuilder(Model model, List<Entity> entities,
                         GameController controller) {
@@ -145,6 +151,8 @@ public class LevelBuilder {
 
         // Adds blank inputs to the front of the ghost input to make level
         // solving nicer for humans to play later
+        ghostInput.addInput(false, false, false, false);
+        ghostInput.removeInputs(1);
         for (int i = 0; i < 30; i++) {
             ghostInput.addInput(false, false, false, false);
         }
@@ -155,23 +163,33 @@ public class LevelBuilder {
         int lastPlatformFrame = 30;
         boolean downStart = false;
         int downFrame =0;
-        boolean jumpHandled = false;
+        holdingUp = false;
+        holdingRight = true;
+        holdingLeft = false;
         while (!levelFinished) {
             System.out.println();
             System.out.println("frame: " + model.getCurrentFrame());
             System.out.println("x: " + levelSolver.getX());
             System.out.println("GhostInputSource size: " + ghostInput
                     .storedInput.size());
-            //if its currently on a platform, go right
+
+            // if its currently on a platform
             if (levelSolver.curPlatform!=null) {
-                System.out.println("on platform");
-                ghostInput.addInput(false, true, false, false);
+                if (justPlacedPlatform) {
+                    justPlacedPlatform = false;
+                    ghostInput.removeInputs(model.getCurrentFrame());
+                }
                 lastPlatformFrame = model.getCurrentFrame();
                 downStart = true;
                 jumpHandled = false;
+                handlePlatformInput();
 
-
+            // If the dorf is in the air (because it isnt on a platform) then
+            // it asks if this is the first frame off of a platform
+            // (jumpHandled)
             } else if (!jumpHandled) {
+                // Sometimes allow the dorf to fall
+
                 System.out.println("first jump");
                 // How many frames back to jump at
                 System.out.println
@@ -180,40 +198,106 @@ public class LevelBuilder {
                 model.reset(lastPlatformFrame - fudge);
                 ghostInput.removeInputs(lastPlatformFrame-fudge);
                 lastPlatformFrame = lastPlatformFrame - fudge;
-                ghostInput.addInput(false, true, true, false);
+                holdingUp = true;
                 jumpHandled = true;
 
 
             } else if (levelSolver.y_velocity>0) {
+                handleUpInput();
                 System.out.println("going up");
-                ghostInput.addInput(false, true, true, false);
 
 
             } else if (downStart) {
-//                System.out.println("first down");
+                System.out.println("first down");
 //                System.out.println("FinalX: " + levelSolver.finalX + " " +
 //                        "FinalFrame: " + levelSolver.frameFinished);
 //                System.out.println("selected frame = " + platformPlace);
 
                 downFrame = model.getCurrentFrame();
                 downStart = false;
-                ghostInput.addInput(false, true, true, false);
 
 
             } else if (levelSolver.finishedLevel) {
+                System.out.println
+                        ("------------------------------------------------");
                 placePlatform(downFrame, levelSolver.frameFinished);
+                justPlacedPlatform = true;
                 downFrame = 0;
 
-
             } else {
-                ghostInput.addInput(false, true, true, false);
-                System.out.println("falling");
+                handleDownInput();
             }
 
-
+            ghostInput.addInput(holdingLeft,holdingRight,holdingUp,holdingDown);
             model.simulateFrame();
         }
     }
+
+    /**
+     * Handles the logic for how the computer manages creating new inputs
+     * while the dorf is jumping up
+     */
+    public void handleUpInput() {
+        double upUnholdingChance = 0.05;
+        double rightUnholdingChance = 0.05;
+        double rightHoldingChance = 0.05;
+
+        // Randomly chooses to unpress the up key
+        if (holdingUp) {
+            if (upUnholdingChance>randomGenerator.nextDouble()) {
+                holdingUp = false;
+            }
+        }
+        if (holdingRight) {
+            if (rightUnholdingChance>randomGenerator.nextDouble()) {
+                holdingRight = false;
+            }
+        }
+        if (!holdingRight) {
+            if (rightHoldingChance>randomGenerator.nextDouble()) {
+                holdingRight = true;
+            }
+        }
+    }
+    /**
+     * Handles the logic for how the computer adds new input when the dorf is
+     * falling
+     */
+    private void handleDownInput() {
+        double rightUnholdingChance = 0.20;
+        double leftTapChance = 0.50;
+        double leftUnholdingChance = 0.30;
+        double rightTapChance = 0.20;
+        if (holdingRight) {
+            if (rightUnholdingChance>randomGenerator.nextDouble()) {
+                holdingRight = false;
+                if (leftTapChance>randomGenerator.nextDouble()) {
+                    holdingLeft = true;
+                }
+            }
+        }
+        if (holdingLeft) {
+            if (leftUnholdingChance>randomGenerator.nextDouble()) {
+                holdingLeft = false;
+            }
+        }
+        if (!holdingRight) {
+            if (rightTapChance>randomGenerator.nextDouble()) {
+                holdingRight = true;
+            }
+        }
+    }
+    /**
+     * Handles logic for how the computer adds the dorf's input if the dorf
+     * is currently on a platform
+     */
+    private void handlePlatformInput() {
+        holdingDown = false;
+        holdingLeft = false;
+        holdingRight = true;
+        holdingUp = false;
+    }
+
 
     /**
      * Places a platform to 'catch' the falling ghost between the specified
@@ -232,13 +316,19 @@ public class LevelBuilder {
         double bottom_limit = model.SCENE_HEIGHT - 32 - levelSolver.height;
 
         // Randomly selects a frame then checks that the ghost is within
-        // top_limit and bottom_limit ycoor.
+        // top_limit and bottom_limit ycoor. If it fails 10 times in a row it
+        // returns false
         int selectFrame = 2 + randomGenerator.nextInt(endFrame-startFrame-2);
-        model.reset(startFrame+selectFrame);
+        model.reset(startFrame + selectFrame);
+        int times_tried = 1;
         while ((top_limit>levelSolver.getY())
                 ||(levelSolver.getY()>bottom_limit)) {
             selectFrame = 2 + randomGenerator.nextInt(endFrame-startFrame-2);
             model.reset(startFrame+selectFrame);
+            times_tried++;
+            if (times_tried>10) {
+                return false;
+            }
         }
 
         // places the platform to "catch" the ghost
@@ -265,8 +355,10 @@ public class LevelBuilder {
         }
 
         model.reset(startFrame);
+        justPlacedPlatform = true;
         return true;
     }
+
 
     /**
      * Handles the factors that determine which type of platform to build at

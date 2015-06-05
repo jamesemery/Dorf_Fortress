@@ -28,13 +28,13 @@ public abstract class Platform extends Entity {
     public void collidesX(Entity projectile) {
         // right collision - if the projectile is going faster to the right
         if (projectile.getX_velocity() > this.getX_velocity()) {
-            projectile.setX(this.getX() - projectile.width - 0.01);
+            projectile.setX(this.getX() - projectile.width - 0.001);
             projectile.setX_velocity(this.x_velocity);
 
             // left collision - if the object collided but was going slower than
             // the platform, know this by elimination
         } else {
-            projectile.setX(this.getX() + this.width + 0.01);
+            projectile.setX(this.getX() + this.width + 0.001);
             projectile.setX_velocity(this.getX_velocity());
         }
     }
