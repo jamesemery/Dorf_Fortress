@@ -118,7 +118,7 @@ public class Main extends Application {
         try {
             AnchorPane loseRoot = loader.load();
 
-            LoseScreenController controller = loader.getController();
+            OverlayController controller = loader.getController();
             controller.setModel(simulation);
 
             Group root = (Group) mainScene.getRoot();
@@ -145,7 +145,7 @@ public class Main extends Application {
         try {
             AnchorPane winRoot = loader.load();
 
-            WinScreenController controller = loader.getController();
+            OverlayController controller = loader.getController();
             controller.setModel(simulation);
 
             Group root = (Group) mainScene.getRoot();

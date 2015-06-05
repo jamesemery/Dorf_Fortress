@@ -27,6 +27,7 @@ public class WinScreenController {
         Stage thisStage = (Stage) archwayImage.getScene().getWindow();
         Main.loadMainMenu(thisStage);
     }
+
     @FXML
     void whenReplayClicked(ActionEvent event) {
         System.out.println("Running whenTryAgainClicked() in LoseScreenController.java");
