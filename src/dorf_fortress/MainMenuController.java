@@ -1,20 +1,22 @@
 package dorf_fortress;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.awt.*;
 
 /**
  * Created by azureillusions on 5/27/15.
@@ -33,11 +35,26 @@ public class MainMenuController {
     @FXML private ColorPicker beardColorPicker;
     @FXML private javafx.scene.control.TextField nameTextField;
 
-
     @FXML
     void whenBeginClicked(ActionEvent actionEvent) {
         Stage thisStage = (Stage) menu_dorf_sprite.getScene().getWindow();
-        Main.startGame(thisStage, nameTextField.getText(),
-                difficultySlider.getValue(), beardColorPicker.getValue() );
+        Main.startGame(thisStage, difficultySlider.getValue());
+    }
+
+    EventHandler handler = new EventHandler() {
+        @Override
+        public void handle(Event event) {
+            Color c = beardColorPicker.getValue();
+            System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
+        }
+    };
+
+    public void updateImage() {
+        //menu_dorf_sprite.setImage(new Image("sprites/DorfEditorTestImage.png"));
+        Main.colorSprites(beardColorPicker.getValue());
+    }
+
+    public ColorPicker getBeardColorPicker() {
+        return beardColorPicker;
     }
 }
