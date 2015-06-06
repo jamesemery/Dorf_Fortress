@@ -191,14 +191,15 @@ public class LevelBuilder {
             // (jumpHandled)
             } else if (!jumpHandled) {
                 // if velocity is positive then it was because the platform
-                // gave it velocity (eg. bouncy platform) so don't rewind the
-                // clock
+                // gave it velocity (eg. bouncy platform or the ghost jumped
+                // of its own volition) so don't rewind the clock
                 if (levelSolver.getY_velocity()>0) {
                     jumpHandled = true;
                 } else {
-                    double chanceNoJump = 0.90;
+                    double chanceNoJump = 0.15;
                     if (chanceNoJump>randomGenerator.nextDouble()) {
                         fallTreeFrame = model.getCurrentFrame() - 10;
+                        jumpHandled = true;
                     } else {
                         int fudge = 2 + randomGenerator.nextInt(10);
                         model.reset(lastPlatformFrame - fudge);
@@ -309,11 +310,13 @@ public class LevelBuilder {
         double leftTapChance = 0.10;
         double leftUnholdingChance = 0.30;
         double upTapChance = 0.005;
+        holdingUp = false;
 
         // If the ghost is on a jump boosting platfomr, increase the chances
         // of pressing up for any given platform
         if (levelSolver.curPlatform instanceof BouncyPlatform) {
             upTapChance = 0.40;
+            rightTapChance = 80;
         }
         if (holdingLeft) {
             if (leftUnholdingChance>randomGenerator.nextDouble()) {
@@ -385,14 +388,17 @@ public class LevelBuilder {
         }
 
         // Randomly places the win block if more than 7 platforms exist
-        if (entities.size()>7) {
-            double chance = (entities.size()-7)/14.0;
+        if (entities.size()>9) {
+            double chance = (entities.size()-9)/14.0;
             if (randomGenerator.nextDouble()<chance) {
-                WinBlock victory_arch = new WinBlock(113,109,
-                        placed_platform.getX(), placed_platform.getY() -109,
-                        this.model);
-                this.entities.add(victory_arch);
-                levelFinished = true;
+                // Only spawns the door ona normal platform
+                if (placed_platform instanceof SolidPlatform) {
+                    WinBlock victory_arch = new WinBlock(113, 109,
+                            placed_platform.getX() + 5, placed_platform.getY() - 109,
+                            this.model);
+                    this.entities.add(victory_arch);
+                    levelFinished = true;
+                }
             }
         }
 
@@ -404,14 +410,29 @@ public class LevelBuilder {
 
     /**
      * Handles the factors that determine which type of platform to build at
-     * a particular point and builds it to intersect with the ghost path.
+     * a particular point and builds it to intersect with the ghost path. If
+     * the dorf is below a certian height then it is more likely to select
+     * either a trampolene or jump boost platform
      */
     public Platform platformFactory() {
-        int fudgeFactor = 10 + randomGenerator.nextInt(20);
+        double bouncyPlatformChance = 0.70;
+        double boostPlatformCuttof = 0.70;
+
+        double wayDown = levelSolver.getY()/model.SCENE_HEIGHT;
+        int fudgeFactor = 10 + randomGenerator.nextInt((int)(50*wayDown));
         double xCoor = levelSolver.getX() + levelSolver.width - fudgeFactor;
         double yCoor = levelSolver.getY() + levelSolver.height;
-        Platform platform = new SolidPlatform(128,32,xCoor,
-                yCoor,this.model);
+        Platform platform = null;
+
+        if (wayDown>boostPlatformCuttof) {
+            if (bouncyPlatformChance>randomGenerator.nextDouble()) {
+                platform = new BouncyPlatform(128,32,xCoor, yCoor,this.model);
+            } else {
+                platform = new SolidPlatform(128,32,xCoor, yCoor,this.model);
+            }
+        } else {
+            platform = new SolidPlatform(128,32,xCoor, yCoor,this.model);
+        }
         this.entities.add(platform);
         return platform;
     }

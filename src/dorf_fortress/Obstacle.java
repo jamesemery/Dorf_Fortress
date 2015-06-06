@@ -25,6 +25,8 @@ public abstract class Obstacle extends Entity {
             return SimpleUpwardsKillBall.getInstance(source, h, rand);
         } else if (type == "spinningHead") {
             return SpinningHead.getInstance(source, h, rand);
+        } else if (type == "oscillatingSpider") {
+            return OscillatingSpider.getInstance(source, h, rand);
         }
         return null;
     }
