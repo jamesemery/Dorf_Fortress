@@ -17,6 +17,7 @@ public class Model {
     public static double SCENE_HEIGHT;
     private int currentFrame;
     private double difficulty;
+    private int timeLimit;
 
 
     static Model getInstance(GameController controller, double sceneHeight, double difficulty) {
@@ -31,16 +32,8 @@ public class Model {
         this.difficulty = difficulty;
 
         entities = new ArrayList<Entity>();
-
-
-        /*
-         * RANDOM JUMP TESTING BEGINS
-         */
         LevelBuilder levelBuilder = new LevelBuilder(this, entities, controller);
         levelBuilder.makeTestLevel();
-        /*
-         * RANDOM JUMP TESTING ENDS
-         */
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this.levelSolver);
 
         /*
@@ -52,6 +45,7 @@ public class Model {
         dangerMaker.generateObstacles((int) Math.round(7 + (.7)*
                 this.difficulty*this.difficulty), tempList);
         setGhostMode(false);
+        timeLimit = levelSolver.getEndFrame()*2;
         levelSolver.liveSimulation = true;
     }
 
@@ -125,8 +119,15 @@ public class Model {
         return entities;
     }
 
+
     public void simulateFrame() {
         currentFrame++;
+        // Checks to see if the time limit has run out, if it has, kill the
+        // dorf
+        if ((!ghostMode)&&(currentFrame>timeLimit)) {
+            player.die();
+        }
+
         for (Entity i : entities) {
             i.updateSprite();
         }
@@ -186,5 +187,9 @@ public class Model {
 
     public int getCurrentFrame() {
         return currentFrame;
+    }
+
+    public int getRemainingTime() {
+        return timeLimit - currentFrame;
     }
 }

@@ -58,7 +58,7 @@ public class OscillatingSpider extends Obstacle{
             setX_velocity(0);
             setY_velocity(0);
         } else {
-            setX_velocity(-1*moving_x_velocity);
+            setX_velocity(-1 * moving_x_velocity);
             setY_velocity(-1*moving_y_velocity);
         }
         currentFrame++;
@@ -95,27 +95,35 @@ public class OscillatingSpider extends Obstacle{
                 .SCENE_HEIGHT-100))) {
             yStart = h.getY() + rand.nextInt(200) - 100;
         }
-        int pauseFrames = 10 + rand.nextInt(40);
+        int pauseFrames = 10 + rand.nextInt(60);
         int moveFrames = 80 + rand.nextInt(50);
 
         // Choses a distance for the object to move then an angle and uses
         // trigonometry to choose an angle and final position. Then makes
         // sure that the ending y is on the screen properly and recalculates
         // if necissary;
-        int distance = 200 + rand.nextInt(200);
+        int distance = 150 + rand.nextInt(250);
         int angle = rand.nextInt(361);
-        double endY = yStart + distance*Math.sin(angle);
-        while ((endY<0)||(endY>(source.getSimulation()
-                .SCENE_HEIGHT))) {
+        double endY = yStart - distance*Math.sin(angle);
+        while ((endY<0)||
+                (endY>source.getSimulation().SCENE_HEIGHT -32)) {
             distance = 100 + rand.nextInt(300);
             angle = rand.nextInt(361);
-            endY = yStart + distance*Math.sin(angle);
+            endY = yStart - distance*Math.sin(angle);
         }
 
         double x_velocity = ((double)distance/(double)moveFrames)*Math.cos
                 (angle);
         double y_velocity = ((double)distance/(double)moveFrames)*Math.sin
                 (angle);
+
+        // 50% chance to flip the starting point for the spider
+        if (0.50>rand.nextDouble()) {
+            x_velocity = -1*x_velocity;
+            y_velocity = -1*y_velocity;
+            xStart = xStart + distance*Math.cos(angle);
+            yStart = endY;
+        }
 
         Obstacle instance = new OscillatingSpider(32, 32, xStart, yStart,
                 x_velocity,y_velocity, pauseFrames, moveFrames, source

@@ -69,4 +69,7 @@ public class Ghost extends Dorf {
         super.reset();
     }
 
+    public int getEndFrame() {
+        return frameFinished;
+    }
 }
