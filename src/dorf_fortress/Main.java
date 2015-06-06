@@ -1,11 +1,17 @@
 package dorf_fortress;
 
 import javafx.application.*;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -13,6 +19,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.net.URL;
 
@@ -73,6 +81,13 @@ public class Main extends Application {
 
             mainStage.setScene(mainMenu);
             mainStage.show();
+            controller.getBeardColorPicker().setOnAction(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    System.out.println("updating image");
+                    controller.updateImage();
+                }
+            });
         } catch (Exception e) {
             System.out.println("Fxml file not found.");
             System.out.println(e);
@@ -91,10 +106,66 @@ public class Main extends Application {
     }
 
     /**
+     * Helper method for the main menu; given a color, edits the sprite files
+     * to be that color.
+     */
+    public static void colorSprites(Color selectedColor) {
+        String[] imageSources = {"sprites/GreenDorf.png",
+                "sprites/GreenDorfLeft1.png", "sprites/GreenDorfLeft2.png",
+                "sprites/GreenDorfLeft3.png", "sprites/GreenDorfRight1.png",
+                "sprites/GreenDorfRight2.png", "sprites/GreenDorfRight3.png"};
+        for(int i = 0; i < imageSources.length; i++){
+            //Initialize JavaFX image-related objects
+            Image dorfImage = new Image(imageSources[i]);
+            PixelReader reader = dorfImage.getPixelReader();
+            WritableImage dorfOutput = new WritableImage(
+                    (int)dorfImage.getWidth(), (int)dorfImage.getHeight());
+            PixelWriter dorfOutputWriter = dorfOutput.getPixelWriter();
+            //Go through the pixels, and recolor all the green ones.
+            for (int x = 0; x < dorfImage.getWidth(); x++) {
+                for (int y = 0; y < dorfImage.getHeight(); y++) {
+                    // reading a pixel from src image,
+                    // then writing a pixel to dest image
+                    Color color = reader.getColor(x, y);
+                    if (color.getHue() == 120) { //look only at hair/beard pixels
+                        double hue = selectedColor.getHue();
+                        double saturation = selectedColor.getSaturation();
+                        double brightness = selectedColor.getBrightness();
+                        //TODO: get an algorithm that does a little bit better
+                        //adapting the brightness.
+                        if(color.getBrightness() < 0.5) {
+                            brightness += color.getBrightness();
+                            brightness /= (2.0);
+                        }
+                        Color newColor = color.hsb(hue, saturation, brightness,1);
+                        dorfOutputWriter.setColor(x, y, newColor);
+                    } else {
+                        Color newColor = color;
+                        dorfOutputWriter.setColor(x, y, newColor);
+                    }
+                }
+            }
+            //String fileDest = "src/" + imageSources[i].replace("GreenDorf", "ColoredDorf");
+            //System.out.println(fileDest);
+            //File file = new File(fileDest) ;
+            //try {
+            //    ImageIO.write(SwingFXUtils.fromFXImage(dorfOutput, null), "png", file);
+            //} catch (Exception e) {
+            //    System.out.println("image exception, " + e);
+            //}
+
+        }
+
+
+
+
+    }
+
+
+    /**
      * Launches the game scene.
      */
-    public static void startGame(Stage mainStage, String name,
-                                 double difficulty, Color beardColor) {
+    public static void startGame(Stage mainStage, double difficulty) {
 
         Group root = new Group();
         Scene gameScene = new Scene(root, SCENE_WIDTH,
