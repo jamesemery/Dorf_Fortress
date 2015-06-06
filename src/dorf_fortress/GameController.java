@@ -36,13 +36,15 @@ public class GameController implements EventHandler<KeyEvent> {
     boolean paused = false;
 
 
-    public GameController(Group root, double sceneHeight, double difficulty) {
+    public GameController(Group root, double sceneHeight,
+                          double difficulty, Color hairColor) {
         System.out.println("Making a controller object...");
         this.root = root;
         spriteList = new ArrayList<Sprite>();
         this.background = setUpBackground();
         updateBackground(0);
         this.simulation = Model.getInstance(this, sceneHeight, difficulty);
+        this.simulation.player.colorSprite(hairColor);
         this.helpText = drawHelpText();
     }
 
