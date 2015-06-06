@@ -1,6 +1,7 @@
 package dorf_fortress;
 
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 
 /**
  * Created by Joe Adkisson on 5/24/2015.
@@ -38,12 +39,19 @@ public class Dorf extends Entity {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        String[] rightImages = {"sprites/BasicDorfRight1.png",
-                "sprites/BasicDorfRight2.png","sprites/BasicDorfRight3.png"};
-        String[] leftImages = {"sprites/BasicDorfLeft1.png",
-                "sprites/BasicDorfLeft2.png","sprites/BasicDorfLeft3.png"};
+        String[] rightImages = {"sprites/ColoredDorfRight1.png",
+                "sprites/ColoredDorfRight2.png","sprites/ColoredDorfRight3.png"};
+        String[] leftImages = {"sprites/ColoredDorfLeft1.png",
+                "sprites/ColoredDorfLeft2.png","sprites/ColoredDorfLeft3.png"};
+        System.out.println("Calling makeSprite...");
         this.sprite = new DorfSprite(leftImages,rightImages,(int)this.width,
                 (int)this.height, this);
+
+    }
+
+    public void colorSprite(Color hairColor) {
+        System.out.println("coloring sprite");
+        ((DorfSprite)this.sprite).colorSprites(hairColor);
     }
 
     /**

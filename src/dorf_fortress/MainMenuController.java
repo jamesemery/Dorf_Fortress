@@ -38,7 +38,8 @@ public class MainMenuController {
     @FXML
     void whenBeginClicked(ActionEvent actionEvent) {
         Stage thisStage = (Stage) menu_dorf_sprite.getScene().getWindow();
-        Main.startGame(thisStage, difficultySlider.getValue());
+        Main.startGame(thisStage,
+                difficultySlider.getValue(), beardColorPicker.getValue());
     }
 
     EventHandler handler = new EventHandler() {
@@ -48,11 +49,6 @@ public class MainMenuController {
             System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
         }
     };
-
-    public void updateImage() {
-        //menu_dorf_sprite.setImage(new Image("sprites/DorfEditorTestImage.png"));
-        Main.colorSprites(beardColorPicker.getValue());
-    }
 
     public ColorPicker getBeardColorPicker() {
         return beardColorPicker;

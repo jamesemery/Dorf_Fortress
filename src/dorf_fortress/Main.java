@@ -85,7 +85,8 @@ public class Main extends Application {
                 @Override
                 public void handle(Event event) {
                     System.out.println("updating image");
-                    controller.updateImage();
+                    //code that updates the image on the main menu, NOT the
+                    //dorf sprites. That comes later.
                 }
             });
         } catch (Exception e) {
@@ -108,8 +109,9 @@ public class Main extends Application {
     /**
      * Helper method for the main menu; given a color, edits the sprite files
      * to be that color.
+     * TODO: get this to apply to one image. Or something.
      */
-    public static void colorSprites(Color selectedColor) {
+    /*public static void colorSprite(Image image, Color selectedColor) {
         String[] imageSources = {"sprites/GreenDorf.png",
                 "sprites/GreenDorfLeft1.png", "sprites/GreenDorfLeft2.png",
                 "sprites/GreenDorfLeft3.png", "sprites/GreenDorfRight1.png",
@@ -153,26 +155,22 @@ public class Main extends Application {
             //} catch (Exception e) {
             //    System.out.println("image exception, " + e);
             //}
-
         }
-
-
-
-
-    }
+    }*/
 
 
     /**
      * Launches the game scene.
      */
-    public static void startGame(Stage mainStage, double difficulty) {
+    public static void startGame(Stage mainStage, double difficulty, Color hairColor) {
 
         Group root = new Group();
         Scene gameScene = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
 
         //Set up the controller. (Hopefully)
-        GameController controller = new GameController(root, SCENE_HEIGHT, difficulty);
+        GameController controller = new GameController(root, SCENE_HEIGHT,
+                difficulty, hairColor);
         controller.initialize();
 
         // Set up a KeyEvent handler so we can respond to keyboard activity.

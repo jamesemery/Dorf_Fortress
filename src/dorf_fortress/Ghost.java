@@ -59,8 +59,16 @@ public class Ghost extends Dorf {
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite("sprites/Mummy.png",
-                (int)this.width, (int)this.height, this);
+//        this.sprite = new SimpleSprite("sprites/Mummy.png",
+//                (int)this.width, (int)this.height, this);
+        //TODO the ghost sprite isn't animating right now.
+        String[] rightImages = {"sprites/BasicDorfRight1.png",
+                "sprites/BasicDorfRight2.png","sprites/BasicDorfRight3.png"};
+        String[] leftImages = {"sprites/Mummy.png",
+                "sprites/BasicDorfLeft2.png","sprites/BasicDorfLeft3.png"};
+        System.out.println("Calling makeSprite...");
+        this.sprite = new DorfSprite(leftImages,rightImages,(int)this.width,
+                (int)this.height, this);
     }
 
     @Override
