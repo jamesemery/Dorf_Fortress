@@ -4,7 +4,8 @@ import javafx.geometry.Bounds;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Created by jamie on 5/27/15.
+ * A simple variety of hitbox, typically surrounding platforms and other
+ * uninterestingly shaped obstacles. TODO: Finish commenting.
  */
 public class RectangleHitbox extends Hitbox {
     Rectangle[] hitboxRectangles;
