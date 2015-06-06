@@ -163,6 +163,7 @@ public class LevelBuilder {
         int lastPlatformFrame = 30;
         boolean downStart = false;
         int downFrame =0;
+        int fallTreeFrame =0; // If the dorf tries to fall
         holdingUp = false;
         holdingRight = true;
         holdingLeft = false;
@@ -183,24 +184,30 @@ public class LevelBuilder {
                 downStart = true;
                 jumpHandled = false;
                 handlePlatformInput();
+                fallTreeFrame = 0;
 
             // If the dorf is in the air (because it isnt on a platform) then
             // it asks if this is the first frame off of a platform
             // (jumpHandled)
             } else if (!jumpHandled) {
-                // Sometimes allow the dorf to fall
-
-                System.out.println("first jump");
-                // How many frames back to jump at
-                System.out.println
-                        ("____________________________________________________________");
-                int fudge = 2 + randomGenerator.nextInt(10);
-                model.reset(lastPlatformFrame - fudge);
-                ghostInput.removeInputs(lastPlatformFrame-fudge);
-                lastPlatformFrame = lastPlatformFrame - fudge;
-                holdingUp = true;
-                jumpHandled = true;
-
+                // if velocity is positive then it was because the platform
+                // gave it velocity (eg. bouncy platform) so don't rewind the
+                // clock
+                if (levelSolver.getY_velocity()>0) {
+                    jumpHandled = true;
+                } else {
+                    double chanceNoJump = 0.90;
+                    if (chanceNoJump>randomGenerator.nextDouble()) {
+                        fallTreeFrame = model.getCurrentFrame() - 10;
+                    } else {
+                        int fudge = 2 + randomGenerator.nextInt(10);
+                        model.reset(lastPlatformFrame - fudge);
+                        ghostInput.removeInputs(lastPlatformFrame - fudge);
+                        lastPlatformFrame = lastPlatformFrame - fudge;
+                        holdingUp = true;
+                        jumpHandled = true;
+                    }
+                }
 
             } else if (levelSolver.y_velocity>0) {
                 handleUpInput();
@@ -218,11 +225,16 @@ public class LevelBuilder {
 
 
             } else if (levelSolver.finishedLevel) {
-                System.out.println
-                        ("------------------------------------------------");
-                placePlatform(downFrame, levelSolver.frameFinished);
-                justPlacedPlatform = true;
-                downFrame = 0;
+//                System.out.println
+//                        ("------------------------------------------------");
+                boolean placed = placePlatform(downFrame, levelSolver
+                        .frameFinished);
+                if (placed) {
+                    justPlacedPlatform = true;
+                    downFrame = 0;
+                } else {
+                    model.reset(fallTreeFrame);
+                }
 
             } else {
                 handleDownInput();
@@ -292,10 +304,40 @@ public class LevelBuilder {
      * is currently on a platform
      */
     private void handlePlatformInput() {
-        holdingDown = false;
-        holdingLeft = false;
-        holdingRight = true;
-        holdingUp = false;
+        double rightUnholdingChance = 0.01;
+        double rightTapChance = 0.10;
+        double leftTapChance = 0.10;
+        double leftUnholdingChance = 0.30;
+        double upTapChance = 0.005;
+
+        // If the ghost is on a jump boosting platfomr, increase the chances
+        // of pressing up for any given platform
+        if (levelSolver.curPlatform instanceof BouncyPlatform) {
+            upTapChance = 0.40;
+        }
+        if (holdingLeft) {
+            if (leftUnholdingChance>randomGenerator.nextDouble()) {
+                holdingLeft = false;
+            }
+        }
+        if (holdingRight) {
+            if (rightUnholdingChance>randomGenerator.nextDouble()) {
+                holdingRight = false;
+                if (leftTapChance>randomGenerator.nextDouble()) {
+                    holdingLeft = true;
+                }
+            }
+        }
+        if (!holdingRight) {
+            if (rightTapChance > randomGenerator.nextDouble()) {
+                holdingRight = true;
+            }
+        }
+        if(!holdingUp) {
+            if (upTapChance > randomGenerator.nextDouble()) {
+                holdingUp = true;
+            }
+        }
     }
 
 
