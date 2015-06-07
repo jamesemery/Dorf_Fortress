@@ -10,8 +10,6 @@ import javafx.scene.paint.Color;
 public class Dorf extends Entity {
     double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
     double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
-    public final double FRICTION_CONSTANT = 240/ GameController.FRAMES_PER_SECOND;
-    public final double MAX_HORIZ_SPEED = 12000 / GameController.FRAMES_PER_SECOND;
     public final double GRAVITY_CONSTANT = 10;
     public final double TERMINAL_VELOCITY = -600;
     Platform curPlatform;

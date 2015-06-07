@@ -36,8 +36,13 @@ public class ConveyorPlatform extends Platform {
      */
     @Override
     public void collidesY(Entity projectile) {
-        projectile.setX_velocity(projectile.getX_velocity()
-                                 + 500/GameController.FRAMES_PER_SECOND);
+        Double uppedSpeed = (projectile.getX_velocity()
+                            + 1500/GameController.FRAMES_PER_SECOND);
+        if (uppedSpeed > projectile.MAX_HORIZ_SPEED){
+            projectile.setX_velocity(projectile.MAX_HORIZ_SPEED);
+        } else {
+            projectile.setX_velocity(uppedSpeed);
+        }
         super.collidesY(projectile);
     }
 
