@@ -42,15 +42,46 @@ public class LevelBuilder {
         generateLevel();
 
         /* Platforms */
-
-//        Platform spawn = new TrampolinePlatform(128,32,-100,
-//                400,this.model);
+//
+//        Platform spawn = new ConveyorPlatform(128,32,-100,
+//                200,this.model);
 //        this.entities.add(spawn);
 //
-//        Platform spawn2 = new TrampolinePlatform(128,32,-100,
+//        Platform spawn2 = new ConveyorPlatform(128,32,-200,
 //                200,this.model);
 //        this.entities.add(spawn2);
-//        this.controller.addSpriteToRoot(spawn.getSprite());
+//
+//        Platform spawn3 = new ConveyorPlatform(128,32,-300,
+//                200,this.model);
+//        this.entities.add(spawn3);
+//
+//        Platform spawn4 = new ConveyorPlatform(128,32,-400,
+//                200,this.model);
+//        this.entities.add(spawn4);
+//
+//        Platform spawn5 = new ConveyorPlatform(128,32,-500,
+//                200,this.model);
+//        this.entities.add(spawn5);
+//
+//        Platform spawn6 = new ConveyorPlatform(128,32,-600,
+//                200,this.model);
+//        this.entities.add(spawn6);
+//
+//        Platform spawn7 = new ConveyorPlatform(128,32,-700,
+//                200,this.model);
+//        this.entities.add(spawn7);
+//
+//        Platform spawn8 = new ConveyorPlatform(128,32,-800,
+//                200,this.model);
+//        this.entities.add(spawn8);
+//
+//        Platform spawn9 = new ConveyorPlatform(128,32,-900,
+//                200,this.model);
+//        this.entities.add(spawn9);
+//
+//        Platform spawn10 = new ConveyorPlatform(128,32,-1000,
+//                200,this.model);
+//        this.entities.add(spawn10);
 //
 //        Platform platform1 = new SolidPlatform(128,32,150,
 //                300,this.model);
@@ -449,7 +480,7 @@ public class LevelBuilder {
 
 
     /**
-     * This method loops throguh all of the entities in the entity list and
+     * This method loops through all of the entities in the entity list and
      * adds their sprites to the root
      */
     public void addSpritesToRoot() {
