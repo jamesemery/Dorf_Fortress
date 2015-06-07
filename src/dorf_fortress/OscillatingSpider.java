@@ -3,7 +3,7 @@ package dorf_fortress;
 import java.util.Random;
 
 /**
- * Class for a spider obsticle that moves up for a little while, waits for a
+ * Class for a spider obstacle that moves up for a little while, waits for a
  * moment, then moves down for a little while, then waits for a moment and
  * then repeats the process
  * Created by jamie on 6/5/15.
@@ -29,12 +29,12 @@ public class OscillatingSpider extends Obstacle{
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite("sprites/BasicDorf.png", 32, 32, this);
+        this.sprite = new SimpleSprite("sprites/BasicSpider.png", 35, 35, this);
     }
 
     @Override
     protected void makeHitbox() {
-        this.hitbox = new RectangleHitbox(32, 32);
+        this.hitbox = new RectangleHitbox(35, 35);
     }
 
     /**

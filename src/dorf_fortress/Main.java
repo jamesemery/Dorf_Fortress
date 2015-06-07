@@ -123,8 +123,8 @@ public class Main extends Application {
                     double hue = hairColor.getHue();
                     double saturation = hairColor.getSaturation();
                     double brightness = color.getBrightness();
-                    //get particularly dark colors to be less bright,
-                    //by averaging the two brightnesses.
+                    //dark color inputs shouldn't be lightened too much;
+                    //just average them with the template instead.
                     if(hairColor.getBrightness() < 0.5) {
                         brightness += hairColor.getBrightness();
                         brightness /=2;
