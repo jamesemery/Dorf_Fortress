@@ -61,7 +61,7 @@ public class OverlayController {
     @FXML
     void whenNextLevelClicked(ActionEvent event) {
         System.out.println("Making next level");
-        double difficulty = this.model.getDifficulty() + 0.5;
+        double difficulty = this.model.getDifficulty() + 1;
         Stage mainStage = (Stage) primaryPane.getScene().getWindow();
         Color hairColor = this.model.player.hairColor;
         Main.startGame(mainStage, difficulty, hairColor);

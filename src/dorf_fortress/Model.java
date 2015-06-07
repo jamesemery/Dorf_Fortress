@@ -45,7 +45,7 @@ public class Model {
         dangerMaker.generateObstacles((int) Math.round(7 + (.7)*
                 this.difficulty*this.difficulty), tempList);
         setGhostMode(false);
-        timeLimit = levelSolver.getEndFrame()*2;
+        timeLimit = levelSolver.getEndFrame()*2 + (int) difficulty;
         levelSolver.liveSimulation = true;
     }
 

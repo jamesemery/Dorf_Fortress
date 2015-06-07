@@ -28,6 +28,8 @@ public class GameController implements EventHandler<KeyEvent> {
     Group root;
     private double screenOffset;
     private Text helpText;
+    private Text view_timer;
+    private Text difficulty;
     private Rectangle background;
     final String backgroundImageLoc = "sprites/BasicTile.png";
     Image tile;
@@ -46,6 +48,8 @@ public class GameController implements EventHandler<KeyEvent> {
         this.simulation = Model.getInstance(this, sceneHeight, difficulty);
         this.simulation.player.colorSprite(hairColor);
         this.helpText = drawHelpText();
+        this.view_timer = drawViewTimer();
+        this.difficulty = drawDifficulty();
     }
 
     public void initialize() {
@@ -93,15 +97,37 @@ public class GameController implements EventHandler<KeyEvent> {
 
     }
 
+    //TODO: move out of a controller to a view?
     private Text drawHelpText() {
-        Text text = new Text(10,25,"Use WASD or arrow keys to move, " +
-                "press P or Esc to pause\n" + "Hold W/Up for a higher jump");
+        Text text = new Text(20,400,"Use WASD or arrow keys to move.\n" +
+                "Press P or Esc to pause.\n" + "Hold W/Up for a higher jump.");
         text.setFont(new Font("Alegreya SC", 20));
         text.setFill(new Color(1, 1, 1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
         root.getChildren().add(text);
         return text;
+    }
 
+    //todo: move out of a controller to a view?
+    private Text drawDifficulty() {
+        Text text = new Text(290,25,"Level " +
+                Integer.toString((int) simulation.getDifficulty() + 1));
+        text.setFont(new Font("Alegreya SC", 20));
+        text.setFill(new Color(1,1,1,1));
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        root.getChildren().add(text);
+        return text;
+    }
+
+    //todo: move out of a controller to a view?
+    private Text drawViewTimer() {
+        Text text = new Text(610,25,
+                Integer.toString(simulation.getRemainingTime()));
+        text.setFont(new Font("Alegreya SC", 20));
+        text.setFill(new Color(1, 1, 1,1));
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        root.getChildren().add(text);
+        return text;
     }
 
     /**
@@ -191,7 +217,11 @@ public class GameController implements EventHandler<KeyEvent> {
             if (textOpacity < 0) { textOpacity = 0; }
             if (textOpacity > 1) { textOpacity = 1; }
         }
-        this.helpText.setFill(new Color(1,1,1,textOpacity));
+        this.helpText.setFill(new Color(1, 1, 1, textOpacity));
+
+        String time_left = Integer.toString(simulation.getRemainingTime());
+        view_timer.setText(time_left.substring(0,time_left.length()-2));
+
         updateBackground(screenOffset);
     }
 
