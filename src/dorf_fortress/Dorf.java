@@ -170,7 +170,8 @@ public class Dorf extends Entity {
             simulation.pause();
         }
         Scene mainScene = this.getSprite().getScene();
-        Main.startLoseMenu(mainScene, simulation);
+        //set up the lose menu
+        Main.startOverlayMenu(mainScene, simulation, false);
     }
 
     /**
@@ -186,10 +187,8 @@ public class Dorf extends Entity {
         if(this.victorious == false) {
             this.victorious = true;
             Scene mainScene = this.getSprite().getScene();
-            System.out.print("Stage:");
-            System.out.println(mainScene);
-
-            Main.startWinMenu(mainScene, simulation);
+            //set up the win menu
+            Main.startOverlayMenu(mainScene, simulation, true);
             System.out.println("Ending win() method");
         }
     }

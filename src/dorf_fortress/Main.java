@@ -164,55 +164,29 @@ public class Main extends Application {
         System.out.println("setup Game");
     }
 
-
     /**
-     * Launches the lose menu scene.
+     * Loads the win or the lose menu, depending on the value of the boolean
+     * given.
+     * @param mainScene
+     * @param simulation
+     * @param winning
      */
-    public static void startLoseMenu(Scene mainScene, Model simulation) {
-        URL fxmlUrl = Main.class.getResource("LoseScreen.fxml");
-        System.out.println(fxmlUrl);
-        FXMLLoader loader = new FXMLLoader(fxmlUrl);
-        try {
-            AnchorPane loseRoot = loader.load();
-
-            OverlayController controller = loader.getController();
-            controller.setModel(simulation);
-
-            loseRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent keyEvent) {
-                    controller.handleKeyPress(keyEvent);
-                }
-            });
-
-            Group root = (Group) mainScene.getRoot();
-            root.getChildren().add(loseRoot);
-            loseRoot.requestFocus();
-
-        } catch (Exception e) {
-            System.out.println("Fxml file not found!");
-            javafx.application.Platform.exit();
-            System.exit(0);
+    public static void startOverlayMenu(Scene mainScene, Model simulation, boolean winning) {
+        System.out.println("Setting up a menu");
+        URL fxmlUrl;
+        if(winning) {
+            fxmlUrl = Main.class.getResource("WinScreen.fxml");
+        } else {
+            fxmlUrl = Main.class.getResource("LoseScreen.fxml");
         }
-        System.out.println("setup Lose Menu");
-
-    }
-
-
-    /**
-     * Launches the win menu scene.
-     */
-    public static void startWinMenu(Scene mainScene, Model simulation) {
-        System.out.println("Setting up win menu");
-        URL fxmlUrl = Main.class.getResource("WinScreen.fxml");
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
         try {
-            AnchorPane winRoot = loader.load();
+            AnchorPane menuRoot = loader.load();
 
             OverlayController controller = loader.getController();
             controller.setModel(simulation);
 
-            winRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            menuRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent keyEvent) {
                     controller.handleKeyPress(keyEvent);
@@ -220,17 +194,16 @@ public class Main extends Application {
             });
 
             Group root = (Group) mainScene.getRoot();
-            root.getChildren().add(winRoot);
-            winRoot.requestFocus();
+            root.getChildren().add(menuRoot);
+            menuRoot.requestFocus();
 
         } catch (Exception e) {
-            System.out.println("Fxml file not found!");
+            System.out.println("Menu Could Not Load");
             System.out.println("Exception: " + e);
             javafx.application.Platform.exit();
             System.exit(0);
         }
         System.out.println("setup Win Menu");
     }
-
 
 }
