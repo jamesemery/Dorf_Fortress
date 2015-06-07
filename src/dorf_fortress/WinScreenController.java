@@ -17,7 +17,6 @@ public class WinScreenController {
     private Model model;
 
     @FXML private AnchorPane primaryPane;
-    @FXML private ImageView archwayImage;
 
     void setModel(Model simulation) {
         this.model = simulation;
@@ -25,13 +24,12 @@ public class WinScreenController {
 
     @FXML
     void whenMenuClicked(ActionEvent event) {
-        Stage thisStage = (Stage) archwayImage.getScene().getWindow();
+        Stage thisStage = (Stage) primaryPane.getScene().getWindow();
         Main.loadMainMenu(thisStage);
     }
 
     @FXML
     void whenReplayClicked(ActionEvent event) {
-        System.out.println("Running whenTryAgainClicked() in LoseScreenController.java");
         Group mainRoot = (Group) primaryPane.getScene().getRoot();
         model.setGhostMode(false);
         this.model.unpause();

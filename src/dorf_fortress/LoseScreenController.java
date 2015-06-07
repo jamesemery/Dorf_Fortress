@@ -22,7 +22,6 @@ public class LoseScreenController {
     }
     @FXML
     void whenMenuClicked(ActionEvent event) {
-        System.out.println("Running whenMenuClicked() in LoseScreenController.java");
         Stage thisStage = (Stage) primaryPane.getScene().getWindow();
         Main.loadMainMenu(thisStage);
     }
