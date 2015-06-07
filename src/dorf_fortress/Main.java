@@ -174,7 +174,7 @@ public class Main extends Application {
     public static void startOverlayMenu(Scene mainScene, Model simulation, boolean winning) {
         System.out.println("Setting up a menu, winning="+winning);
         URL fxmlUrl;
-        if(winning) {
+        if (winning) {
             fxmlUrl = Main.class.getResource("WinScreen.fxml");
         } else {
             fxmlUrl = Main.class.getResource("LoseScreen.fxml");
@@ -189,7 +189,7 @@ public class Main extends Application {
             menuRoot.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent keyEvent) {
-                    controller.handleKeyPress(keyEvent);
+                    controller.handleKeyPress(keyEvent, winning);
                 }
             });
 
