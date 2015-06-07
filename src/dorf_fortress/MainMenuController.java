@@ -12,11 +12,14 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import javax.swing.event.ChangeListener;
 
 /**
  * Created by azureillusions on 5/27/15.
@@ -36,21 +39,22 @@ public class MainMenuController {
     @FXML private javafx.scene.control.TextField nameTextField;
 
     @FXML
+    void initialize() {
+        changeMenuSprite();
+    }
+
+    @FXML
     void whenBeginClicked(ActionEvent actionEvent) {
         Stage thisStage = (Stage) menu_dorf_sprite.getScene().getWindow();
         Main.startGame(thisStage,
                 difficultySlider.getValue(), beardColorPicker.getValue());
     }
 
-    EventHandler handler = new EventHandler() {
-        @Override
-        public void handle(Event event) {
-            Color c = beardColorPicker.getValue();
-            System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
-        }
-    };
-
-    public ColorPicker getBeardColorPicker() {
-        return beardColorPicker;
+    public void changeMenuSprite() {
+        Image newImage = new Image("sprites/ColoredDorf.png");
+        System.out.println(newImage);
+        newImage = Main.colorImage(newImage, beardColorPicker.getValue());
+        System.out.println(newImage);
+        menu_dorf_sprite.setImage(newImage);
     }
 }

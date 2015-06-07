@@ -81,14 +81,6 @@ public class Main extends Application {
 
             mainStage.setScene(mainMenu);
             mainStage.show();
-            controller.getBeardColorPicker().setOnAction(new EventHandler() {
-                @Override
-                public void handle(Event event) {
-                    System.out.println("updating image");
-                    //code that updates the image on the main menu, NOT the
-                    //dorf sprites. That comes later.
-                }
-            });
         } catch (Exception e) {
             System.out.println("Fxml file not found.");
             System.out.println(e);
@@ -102,62 +94,51 @@ public class Main extends Application {
         System.out.println(noisePlayer.statusProperty());
         if(!noisePlayer.statusProperty().equals(MediaPlayer.Status.PLAYING)) {
             noisePlayer.play();
-            System.out.println("playing media");
         }
     }
 
     /**
-     * Helper method for the main menu; given a color, edits the sprite files
-     * to be that color.
-     * TODO: get this to apply to one image. Or something.
+     * Colors an image to match a given color. It does so using color-keying;
+     * the pixels we want to change are given a green hue (120), which we can
+     * then alter. This lets us change a Dorf's hair and beard while leaving
+     * the armor untouched. The method is called by both the DorfSprite and
+     * MainMenuController, which are in completely different places; hence
+     * its location here, in the static context of Main.
      */
-    /*public static void colorSprite(Image image, Color selectedColor) {
-        String[] imageSources = {"sprites/GreenDorf.png",
-                "sprites/GreenDorfLeft1.png", "sprites/GreenDorfLeft2.png",
-                "sprites/GreenDorfLeft3.png", "sprites/GreenDorfRight1.png",
-                "sprites/GreenDorfRight2.png", "sprites/GreenDorfRight3.png"};
-        for(int i = 0; i < imageSources.length; i++){
-            //Initialize JavaFX image-related objects
-            Image dorfImage = new Image(imageSources[i]);
-            PixelReader reader = dorfImage.getPixelReader();
-            WritableImage dorfOutput = new WritableImage(
-                    (int)dorfImage.getWidth(), (int)dorfImage.getHeight());
-            PixelWriter dorfOutputWriter = dorfOutput.getPixelWriter();
-            //Go through the pixels, and recolor all the green ones.
-            for (int x = 0; x < dorfImage.getWidth(); x++) {
-                for (int y = 0; y < dorfImage.getHeight(); y++) {
-                    // reading a pixel from src image,
-                    // then writing a pixel to dest image
-                    Color color = reader.getColor(x, y);
-                    if (color.getHue() == 120) { //look only at hair/beard pixels
-                        double hue = selectedColor.getHue();
-                        double saturation = selectedColor.getSaturation();
-                        double brightness = selectedColor.getBrightness();
-                        //TODO: get an algorithm that does a little bit better
-                        //adapting the brightness.
-                        if(color.getBrightness() < 0.5) {
-                            brightness += color.getBrightness();
-                            brightness /= (2.0);
-                        }
-                        Color newColor = color.hsb(hue, saturation, brightness,1);
-                        dorfOutputWriter.setColor(x, y, newColor);
-                    } else {
-                        Color newColor = color;
-                        dorfOutputWriter.setColor(x, y, newColor);
+    public static Image colorImage(Image image, Color hairColor) {
+        //Initialize JavaFX image-related objects
+        PixelReader reader = image.getPixelReader();
+        WritableImage output = new WritableImage(
+                (int) image.getWidth(), (int) image.getHeight());
+        PixelWriter dorfOutputWriter = output.getPixelWriter();
+        //Go through the pixels, and recolor all the green ones.
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                // reading a pixel from src image,
+                // then writing a pixel to dest image
+                javafx.scene.paint.Color color = reader.getColor(x, y);
+                if (color.getHue() == 120) { //look only at green pixels
+                    //keep the hue and saturation from the color,
+                    //but use the template's brightness.
+                    double hue = hairColor.getHue();
+                    double saturation = hairColor.getSaturation();
+                    double brightness = color.getBrightness();
+                    //get particularly dark colors to be less bright,
+                    //by averaging the two brightnesses.
+                    if(hairColor.getBrightness() < 0.5) {
+                        brightness += hairColor.getBrightness();
+                        brightness /=2;
                     }
+                    javafx.scene.paint.Color newColor = color.hsb(hue, saturation, brightness, 1);
+                    dorfOutputWriter.setColor(x, y, newColor);
+                } else {
+                    javafx.scene.paint.Color newColor = color;
+                    dorfOutputWriter.setColor(x, y, newColor);
                 }
             }
-            //String fileDest = "src/" + imageSources[i].replace("GreenDorf", "ColoredDorf");
-            //System.out.println(fileDest);
-            //File file = new File(fileDest) ;
-            //try {
-            //    ImageIO.write(SwingFXUtils.fromFXImage(dorfOutput, null), "png", file);
-            //} catch (Exception e) {
-            //    System.out.println("image exception, " + e);
-            //}
         }
-    }*/
-
+        return output;
+    }
 
     /**
      * Launches the game scene.

@@ -34,7 +34,7 @@
          <children>
             <ImageView fx:id="menu_dorf_sprite" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../sprites/BasicDorf.png" />
+                  <Image url="@../sprites/ColoredDorf.png" />
                </image>
             </ImageView>
          </children>
@@ -45,7 +45,7 @@
             <Font name="AlegreyaSC-Regular" size="14.0" />
          </font>
       </Label>
-      <ColorPicker fx:id="beardColorPicker" layoutX="310.0" layoutY="319.0" prefHeight="26.0" prefWidth="110.0" />
+      <ColorPicker fx:id="beardColorPicker" layoutX="310.0" layoutY="319.0" prefHeight="26.0" prefWidth="110.0" onAction="#changeMenuSprite" />
    </children>
 
    <stylesheets><URL value="@Resources/customFont.css" /></stylesheets>
