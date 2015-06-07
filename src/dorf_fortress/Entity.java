@@ -160,7 +160,6 @@ public abstract class Entity {
      */
     public void updateSprite() {
         this.step();
-        this.sprite.update(this.simulation.player.getX());
     }
 
     /**

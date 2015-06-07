@@ -50,9 +50,7 @@ public class DorfSprite extends Sprite {
         }
         this.numImages = this.rightImages.length;
         this.getChildren().add(this.rightImages[0]);
-        System.out.println("added child " + this.rightImages[0]);
         this.pastFrameX = dorf.getX();
-        System.out.println("DorfSprite constructor finished.");
     }
 
     @Override
@@ -81,7 +79,8 @@ public class DorfSprite extends Sprite {
         if (dorf_x - pastFrameX > frameTolerance) {
             if (movingRight) { getNextFrame(); } //just go to next frame
             else {
-                currentImage = 0;
+                //currentImage = 0;
+                getNextFrame();
                 movingRight = true;
             }
             pastFrameX = dorf_x;
@@ -89,12 +88,12 @@ public class DorfSprite extends Sprite {
         } else if (dorf_x - pastFrameX < frameTolerance*-1) {
             //if we're moving right, reset animation moving left
             if (movingRight) {
-                currentImage = 0;
+                //currentImage = 0;
+                getNextFrame();
                 movingRight = false;
             } else { getNextFrame(); }
             pastFrameX = dorf_x;
         }
-//        System.out.println("movingRight: " + movingRight);
 
         // Clears the sprite and draws in the correct image.
         this.getChildren().clear();
@@ -103,7 +102,6 @@ public class DorfSprite extends Sprite {
         } else {
             this.getChildren().add(leftImages[this.currentImage]);
         }
-
         super.update(dorf_x);
     }
 
