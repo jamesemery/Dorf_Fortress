@@ -172,7 +172,7 @@ public class Main extends Application {
      * @param winning
      */
     public static void startOverlayMenu(Scene mainScene, Model simulation, boolean winning) {
-        System.out.println("Setting up a menu");
+        System.out.println("Setting up a menu, winning="+winning);
         URL fxmlUrl;
         if(winning) {
             fxmlUrl = Main.class.getResource("WinScreen.fxml");
@@ -203,7 +203,6 @@ public class Main extends Application {
             javafx.application.Platform.exit();
             System.exit(0);
         }
-        System.out.println("setup Win Menu");
     }
 
 }
