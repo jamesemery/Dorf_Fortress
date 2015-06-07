@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TODO make a discritpion here
+ * TODO make a description here
  * Created by jamie on 5/27/15.
  */
 public class LevelBuilder {
@@ -43,11 +43,15 @@ public class LevelBuilder {
 
         /* Platforms */
 
-//        Platform spawn = new SolidPlatform(128,32,0,
-//                200,this.model);
+//        Platform spawn = new TrampolinePlatform(128,32,-100,
+//                400,this.model);
 //        this.entities.add(spawn);
+//
+//        Platform spawn2 = new TrampolinePlatform(128,32,-100,
+//                200,this.model);
+//        this.entities.add(spawn2);
 //        this.controller.addSpriteToRoot(spawn.getSprite());
-
+//
 //        Platform platform1 = new SolidPlatform(128,32,150,
 //                300,this.model);
 //        this.entities.add(platform1);
