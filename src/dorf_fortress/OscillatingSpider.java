@@ -29,7 +29,14 @@ public class OscillatingSpider extends Obstacle{
 
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite("sprites/BasicSpider.png", 35, 35, this);
+        //this.sprite = new SimpleSprite("sprites/BasicSpider.png", 35, 35, this);
+        String[] imageList = {"sprites/SpiderForward1.png",
+                "sprites/SpiderForward2.png","sprites/SpiderForward3.png",
+                "sprites/SpiderForward4.png", "sprites/SpiderForward4.png",
+                "sprites/SpiderForward5.png", "sprites/SpiderForward6.png",
+                "sprites/SpiderForward7.png", "sprites/SpiderForward8.png",
+                "sprites/SpiderForward9.png", "sprites/SpiderForward10.png"};
+        this.sprite = new AnimatedSprite(imageList, 35, 35, this );
     }
 
     @Override
@@ -48,15 +55,18 @@ public class OscillatingSpider extends Obstacle{
     public void step() {
         int totalCycleLength = 2*waitFrames + 2*moveFrames;
         int frameInCycle = (currentFrame)%totalCycleLength;
+        ((AnimatedSprite)this.sprite).setAnimationState(true);
         if (frameInCycle<waitFrames) {
             setX_velocity(0);
             setY_velocity(0);
+            ((AnimatedSprite)this.sprite).setAnimationState(false);
         } else if (frameInCycle<(waitFrames+moveFrames)) {
             setX_velocity(moving_x_velocity);
             setY_velocity(moving_y_velocity);
         } else if (frameInCycle<((2*waitFrames)+moveFrames)) {
             setX_velocity(0);
             setY_velocity(0);
+            ((AnimatedSprite)this.sprite).setAnimationState(false);
         } else {
             setX_velocity(-1 * moving_x_velocity);
             setY_velocity(-1*moving_y_velocity);
