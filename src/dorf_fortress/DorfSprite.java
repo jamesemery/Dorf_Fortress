@@ -3,9 +3,6 @@ package dorf_fortress;
 import javafx.scene.image.*;
 import javafx.scene.paint.*;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * A Sprite that has animations for movement in the left and right directions.
  * Created specifically for Dorf objects, but it's theoretically capable of
