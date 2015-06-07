@@ -1,20 +1,20 @@
 /* customFont.css */
 
-@font-face {
-	font-family: Alegreya-Regular;
-	src: url("Alegreya-Regular.otf");
-}
+/*@font-face {*/
+	/*font-family: Alegreya-Regular;*/
+	/*src: url("Alegreya-Regular.otf");*/
+/*}*/
 
-@font-face {
-	font-family: Alegreya-Bold;
-	src: url("Alegreya-Bold.otf");
-}
+/*@font-face {*/
+	/*font-family: Alegreya-Bold;*/
+	/*src: url("Alegreya-Bold.otf");*/
+/*}*/
 
-@font-face {
-	font-family: AlegreyaSC-Regular;
-	src: url("AlegreyaSC-Regular.otf");
-}
+/*@font-face {*/
+	/*font-family: AlegreyaSC-Regular;*/
+	/*src: url("AlegreyaSC-Regular.otf");*/
+/*}*/
 
-.text{
-	-fx-font-family: "AlegreyaSC-Regular";
-}
+/*.text{*/
+	/*-fx-font-family: "AlegreyaSC-Regular";*/
+/*}*/
