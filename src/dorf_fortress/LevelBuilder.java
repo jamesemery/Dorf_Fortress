@@ -75,6 +75,10 @@ public class LevelBuilder {
 //        Platform platform7 = new SolidPlatform(128,32,1000,
 //                150,this.model);
 //        this.entities.add(platform7);
+
+//        DisappearingGhost creepy = new DisappearingGhost(32,32,-10,70,60,60,
+//                180,10,model);
+//        this.entities.add(creepy);
 //
 //
 //        /* Obstacles */
@@ -311,7 +315,7 @@ public class LevelBuilder {
     private void handlePlatformInput() {
         double rightUnholdingChance = 0.01;
         double rightTapChance = 0.10;
-        double leftTapChance = 0.10;
+        double leftTapChance = 0.05;
         double leftUnholdingChance = 0.30;
         double upTapChance = 0.005;
         holdingUp = false;

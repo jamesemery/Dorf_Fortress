@@ -114,6 +114,8 @@ public class ObstaclePlacer {
         int boxes = (int)(0.3*n);
         int spinning = (int)(0.1*n);
         int spiders = (int)(0.8*n);
+        int ghosts = (int)(0.6*n);
+        obstacleOccurance.put("disappearingGhost", ghosts);
         obstacleOccurance.put("oscillatingSpider", spiders);
         obstacleOccurance.put("spinningHead", spinning);
         obstacleOccurance.put("box", boxes);
