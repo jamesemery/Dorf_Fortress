@@ -12,6 +12,8 @@ public class Dorf extends Entity {
     double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     public final double GRAVITY_CONSTANT = 10;
     public final double TERMINAL_VELOCITY = -600;
+    public final double FRICTION_CONSTANT = 240 / GameController.FRAMES_PER_SECOND;
+    public final double MAX_HORIZ_SPEED = 12000 / GameController.FRAMES_PER_SECOND;
     Platform curPlatform;
     private boolean victorious = false;
     String name;
@@ -124,18 +126,24 @@ public class Dorf extends Entity {
      * Adds to the leftwards velocity.
      */
     public void left() {
-        this.x_velocity -= STEP_SIZE_X;
-        if (this.x_velocity < MAX_HORIZ_SPEED * -1) {
-            this.x_velocity = MAX_HORIZ_SPEED * -1;
+        if (-MAX_HORIZ_SPEED < this.x_velocity) {
+            this.x_velocity -= STEP_SIZE_X;
+        } else {
+            this.x_velocity = -MAX_HORIZ_SPEED;
         }
     }
 
     /**
-     * Adds to the rightwards velocity.
+     * Adds to the rightwards velocity. Has an exception, such that the Dorf or
+     * Ghost is not automatically reset to MAX_HORIZ_SPEED if it's in the air
+     * or on a ConveyorPlatform.
      */
     public void right() {
-        this.x_velocity += STEP_SIZE_X;
-        if (this.x_velocity > MAX_HORIZ_SPEED) {
+        boolean conveyor_check = (curPlatform instanceof ConveyorPlatform ||
+                                  curPlatform == null);
+        if (this.x_velocity < MAX_HORIZ_SPEED) {
+            this.x_velocity += STEP_SIZE_X;
+        } else if (!conveyor_check && this.x_velocity > MAX_HORIZ_SPEED) {
             this.x_velocity = MAX_HORIZ_SPEED;
         }
     }
