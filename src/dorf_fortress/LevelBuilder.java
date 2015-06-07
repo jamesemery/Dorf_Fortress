@@ -464,7 +464,7 @@ public class LevelBuilder {
         double conveyorPlatformChance = 0.10;
 
         double wayDown = levelSolver.getY()/model.SCENE_HEIGHT;
-        int fudgeFactor = 10 + randomGenerator.nextInt((int)(50*wayDown));
+        int fudgeFactor = 10 + randomGenerator.nextInt((int)(40*wayDown));
         double xCoor = levelSolver.getX() + levelSolver.width - fudgeFactor;
         double yCoor = levelSolver.getY() + levelSolver.height;
         Platform platform = null;

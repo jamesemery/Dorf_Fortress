@@ -148,19 +148,6 @@ public abstract class Entity {
         return (this.y > simulation.SCENE_HEIGHT | this.y < (-this.height));
     }
 
-
-    /**
-     * Updates the sprite's position on the screen, based on the Dorf's x
-     * coordinate and therefore the relative position of the view.
-     *
-     * At the moment, our view doesn't move, so it's just making sure the
-     * Sprite's coordinates line up with those of the Entity.
-     * TODO: Figure this stuff out.
-     */
-    public void updateSprite() {
-        this.step();
-    }
-
     /**
      * TODO: Jamie, you understand what this is doing. I really don't.
      * It'd be nice if you could write the comment to explain this one.

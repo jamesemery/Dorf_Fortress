@@ -178,10 +178,7 @@ public class Dorf extends Entity {
     public void win() {
         System.out.println("Beginning win() method");
         simulation.reset();
-        if (!(this instanceof Ghost)) {
-            simulation.pause();
-            System.out.println("pausing");
-        }
+        simulation.pause();
         if(this.victorious == false) {
             this.victorious = true;
             Scene mainScene = this.getSprite().getScene();

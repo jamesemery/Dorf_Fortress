@@ -129,17 +129,21 @@ public class Model {
         }
 
         for (Entity i : entities) {
-            i.updateSprite();
+            if (i instanceof Ghost) {
+                System.out.println("Ghost Shouldnt Be here");
+            }
+            i.step();
         }
         if (testingEntities != null) {
             for (Entity i : testingEntities) {
-                i.updateSprite();
+                i.step();
             }
         }
         if (ghostMode) {
-            levelSolver.updateSprite();
+            System.out.println("Ghost moving");
+            levelSolver.step();
         } else {
-            player.updateSprite();
+            player.step();
         }
 
     }
