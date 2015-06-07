@@ -9,6 +9,7 @@ public class SolidPlatform extends Platform {
     /**
      * The constructor for SolidPlatform. Passes the information up the
      * inheritance tree to Platform's constructor.
+     *
      * @param hitbox_width   The width of the hitbox.
      * @param hitbox_height   The height of the hitbox.
      * @param x   The sprite's x-coordinate on the stage.

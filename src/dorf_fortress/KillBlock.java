@@ -62,9 +62,7 @@ public class KillBlock extends Obstacle {
             }
             x += xTarget;
             y += yTarget;
-            System.out.println(x + " " + y);
             instance = new KillBlock(32,32,x,y,source.getSimulation());
-            System.out.println("foo");
         }
         return instance;
     }
