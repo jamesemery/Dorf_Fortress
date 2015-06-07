@@ -47,6 +47,7 @@ public class Ghost extends Dorf {
     public void win() {
         if (liveSimulation) {
             //reset()
+            System.out.println("The Ghost is trying to win");
             super.win();
             reset();
 

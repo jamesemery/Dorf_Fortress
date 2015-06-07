@@ -357,7 +357,8 @@ public class LevelBuilder {
 
         // If the ghost is on a jump boosting platfomr, increase the chances
         // of pressing up for any given platform
-        if (levelSolver.curPlatform instanceof BouncyPlatform) {
+        if ((levelSolver.curPlatform instanceof BouncyPlatform)||
+                (levelSolver.curPlatform instanceof TrampolinePlatform)){
             upTapChance = 0.10;
             rightTapChance = 0.70;
         }
@@ -460,6 +461,7 @@ public class LevelBuilder {
     public Platform platformFactory() {
         double bouncyPlatformChance = 0.70;
         double boostPlatformCuttof = 0.70;
+        double conveyorPlatformChance = 0.10;
 
         double wayDown = levelSolver.getY()/model.SCENE_HEIGHT;
         int fudgeFactor = 10 + randomGenerator.nextInt((int)(50*wayDown));
@@ -469,10 +471,32 @@ public class LevelBuilder {
 
         if (wayDown>boostPlatformCuttof) {
             if (bouncyPlatformChance>randomGenerator.nextDouble()) {
-                platform = new BouncyPlatform(128,32,xCoor, yCoor,this.model);
-            } else {
-                platform = new SolidPlatform(128,32,xCoor, yCoor,this.model);
+
+                // Bases the chance of spawing a trampoline platform on the
+                // dorf's velocity
+                double trampChance = (levelSolver.getY_velocity()/-600) - .40;
+
+                if (trampChance>randomGenerator.nextDouble()) {
+                    platform = new TrampolinePlatform(128,32,xCoor-20,yCoor,
+                            model);
+                    System.out.println("Making Tramp Platform");
+                } else {
+                    platform = new BouncyPlatform(128,32,xCoor, yCoor,this.model);
+                    System.out.println("Making Bouncy Platform");
+                }
+                this.entities.add(platform);
+                return platform;
             }
+        }
+        // Handles non-height dependant platforms
+        if (conveyorPlatformChance>randomGenerator.nextDouble()) {
+            int numToMake = 1 + randomGenerator.nextInt(4);
+            for (int num = numToMake; num > 0; num--) {
+                platform = new ConveyorPlatform(96,32,xCoor, yCoor,this.model);
+                this.entities.add(platform); // TODO this is real bad
+                xCoor+= 96;
+            }
+            return platform;
         } else {
             platform = new SolidPlatform(128,32,xCoor, yCoor,this.model);
         }

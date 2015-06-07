@@ -54,7 +54,7 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
         }
 
         // If its below a certian visiblity its hitbox is unreachable
-        if (currentOpacity < .30) {
+        if (currentOpacity < .60) {
             hitbox.setY(simulation.SCENE_HEIGHT + 60);
         } else {
             hitbox.setY(getY());
