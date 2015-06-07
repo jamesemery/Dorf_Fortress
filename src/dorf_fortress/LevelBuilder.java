@@ -42,22 +42,22 @@ public class LevelBuilder {
         generateLevel();
 
         /* Platforms */
-//
-//        Platform spawn = new ConveyorPlatform(128,32,-100,
-//                200,this.model);
-//        this.entities.add(spawn);
-//
-//        Platform spawn2 = new ConveyorPlatform(128,32,-200,
-//                200,this.model);
-//        this.entities.add(spawn2);
-//
-//        Platform spawn3 = new ConveyorPlatform(128,32,-300,
-//                200,this.model);
-//        this.entities.add(spawn3);
-//
-//        Platform spawn4 = new ConveyorPlatform(128,32,-400,
-//                200,this.model);
-//        this.entities.add(spawn4);
+
+        Platform spawn = new ConveyorPlatform(128,32,-100,
+                200,this.model);
+        this.entities.add(spawn);
+
+        Platform spawn2 = new ConveyorPlatform(128,32,-200,
+                200,this.model);
+        this.entities.add(spawn2);
+
+        Platform spawn3 = new ConveyorPlatform(128,32,-300,
+                200,this.model);
+        this.entities.add(spawn3);
+
+        Platform spawn4 = new ConveyorPlatform(128,32,-400,
+                200,this.model);
+        this.entities.add(spawn4);
 //
 //        Platform spawn5 = new ConveyorPlatform(128,32,-500,
 //                200,this.model);

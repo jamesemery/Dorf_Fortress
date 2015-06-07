@@ -49,12 +49,12 @@ public class ConveyorPlatform extends Platform {
      */
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite(
-                "sprites/rightConveyor.png",
-                (int) this.width,
-                (int) this.height,
-                this
-            );
+        //these are in reverse order because I screwed up the sprites, and
+        //it was easier to change the order here than to reorder the files.
+        String[] images = {"sprites/conveyer1.png", "sprites/conveyer2.png",
+                "sprites/conveyer3.png", "sprites/conveyer4.png"};
+        this.sprite = new AnimatedSprite(images, (int) this.width,
+                (int) this.height, this, 3);
     }
 }
 

@@ -9,14 +9,15 @@ public class AnimatedSprite extends Sprite {
     private ImageView[] images;
     private int numImages;
     int currentImage = 0;
-    int frameDuration = 5; //how many game frames until the sprite changes state
+    int frameDuration; //how many game frames until the sprite changes state
     int curFrame = 0;
     boolean cycling = true;
 
 
     public AnimatedSprite(String[] imageArray, int hitbox_width,
-                      int hitbox_height, Entity entity) {
+                      int hitbox_height, Entity entity, int cycleSpeed) {
         super(entity);
+        this.frameDuration = cycleSpeed;
         this.images = new ImageView[imageArray.length];
         for (int i = 0; i < imageArray.length; i++ ) {
             this.images[i] = new ImageView((imageArray[i]));
