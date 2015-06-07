@@ -145,11 +145,7 @@ public abstract class Entity {
      * of the screen
      */
     protected boolean isOffScreen() {
-        //under the bottom first then over the top second
-        if (this.y > simulation.SCENE_HEIGHT | this.y < (-this.height)) {
-            return true;
-        }
-        return false;
+        return (this.y > simulation.SCENE_HEIGHT | this.y < (-this.height));
     }
 
 
