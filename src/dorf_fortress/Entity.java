@@ -3,8 +3,8 @@ package dorf_fortress;
 /**
  * Interface class for all of the simulation components in the code, this
  * interface contains a constructor and simulation code for basic simulation
- * components with the expectation that these methods are overrided by
- * subclasses when behavior is particularly complicated. Also entials a
+ * components with the expectation that these methods are overridden by
+ * subclasses when behavior is particularly complicated. Also entails a
  * series of getters and setters for the general variables that every Entity
  * will have.
  * Created by Joe on 5/27/2015.
@@ -160,7 +160,6 @@ public abstract class Entity {
      */
     public void updateSprite() {
         this.step();
-        this.sprite.update(this.simulation.player.getX());
     }
 
     /**

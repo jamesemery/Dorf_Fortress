@@ -1,22 +1,22 @@
 package dorf_fortress;
 
 /**
- * SolidPlatform is the default variety of platform: a rectangular platform on
- * which a Dorf is able to stand.
+ * FadingPlatform is a variety of platform that fades in and out of existence,
+ * as does its hitbox. Dorfs beware!
  */
-public class SolidPlatform extends Platform {
+public class FadingPlatform extends Platform {
+
 
     /**
-     * The constructor for SolidPlatform. Passes the information up the
+     * The constructor for FadingPlatform. Passes the information up the
      * inheritance tree to Platform's constructor.
-     *
      * @param hitbox_width   The width of the hitbox.
      * @param hitbox_height   The height of the hitbox.
      * @param x   The sprite's x-coordinate on the stage.
      * @param y   The sprite's y-coordinate on the stage.
      * @param simulation   The singleton Model running in Main.
      */
-    public SolidPlatform(int hitbox_width,
+    public FadingPlatform(int hitbox_width,
                          int hitbox_height,
                          double x,
                          double y,
@@ -40,4 +40,3 @@ public class SolidPlatform extends Platform {
         );
     }
 }
-

@@ -50,9 +50,7 @@ public class DorfSprite extends Sprite {
         }
         this.numImages = this.rightImages.length;
         this.getChildren().add(this.rightImages[0]);
-        System.out.println("added child " + this.rightImages[0]);
         this.pastFrameX = dorf.getX();
-        System.out.println("DorfSprite constructor finished.");
     }
 
     @Override
@@ -81,7 +79,8 @@ public class DorfSprite extends Sprite {
         if (dorf_x - pastFrameX > frameTolerance) {
             if (movingRight) { getNextFrame(); } //just go to next frame
             else {
-                currentImage = 0;
+                //currentImage = 0;
+                getNextFrame();
                 movingRight = true;
             }
             pastFrameX = dorf_x;
@@ -89,12 +88,12 @@ public class DorfSprite extends Sprite {
         } else if (dorf_x - pastFrameX < frameTolerance*-1) {
             //if we're moving right, reset animation moving left
             if (movingRight) {
-                currentImage = 0;
+                //currentImage = 0;
+                getNextFrame();
                 movingRight = false;
             } else { getNextFrame(); }
             pastFrameX = dorf_x;
         }
-//        System.out.println("movingRight: " + movingRight);
 
         // Clears the sprite and draws in the correct image.
         this.getChildren().clear();
@@ -103,7 +102,6 @@ public class DorfSprite extends Sprite {
         } else {
             this.getChildren().add(leftImages[this.currentImage]);
         }
-
         super.update(dorf_x);
     }
 
@@ -121,50 +119,11 @@ public class DorfSprite extends Sprite {
      */
     public void colorSprites(Color hairColor) {
         for(int i = 0; i < rightImages.length; i++) {
-            rightImages[i].setImage(colorImage(rightImages[i].getImage(), hairColor));
-            leftImages[i].setImage(colorImage(leftImages[i].getImage(), hairColor));
+            rightImages[i].setImage(Main.colorImage(rightImages[i].getImage(), hairColor));
+            leftImages[i].setImage(Main.colorImage(leftImages[i].getImage(), hairColor));
         }
     }
 
-    /**
-     * Colors an image to match a given color. It does so using color-keying;
-     * the pixels we want to change are given a green hue (120), which we can
-     * then alter. This lets us change a Dorf's hair and beard while leaving
-     * the armor untouched.
-     */
-    private Image colorImage(Image image, Color hairColor) {
-            //Initialize JavaFX image-related objects
-            PixelReader reader = image.getPixelReader();
-            WritableImage output = new WritableImage(
-                    (int) image.getWidth(), (int) image.getHeight());
-            PixelWriter dorfOutputWriter = output.getPixelWriter();
-            //Go through the pixels, and recolor all the green ones.
-            for (int x = 0; x < image.getWidth(); x++) {
-                for (int y = 0; y < image.getHeight(); y++) {
-                    // reading a pixel from src image,
-                    // then writing a pixel to dest image
-                    javafx.scene.paint.Color color = reader.getColor(x, y);
-                    if (color.getHue() == 120) { //look only at green pixels
-                        //keep the hue and saturation from the color,
-                        //but use the template's brightness.
-                        double hue = hairColor.getHue();
-                        double saturation = hairColor.getSaturation();
-                        double brightness = color.getBrightness();
-                        //get particularly dark colors to be less bright,
-                        //by averaging the two brightnesses.
-                        if(hairColor.getBrightness() < 0.5) {
-                            brightness += hairColor.getBrightness();
-                            brightness /=2;
-                        }
-                        javafx.scene.paint.Color newColor = color.hsb(hue, saturation, brightness, 1);
-                        dorfOutputWriter.setColor(x, y, newColor);
-                    } else {
-                        javafx.scene.paint.Color newColor = color;
-                        dorfOutputWriter.setColor(x, y, newColor);
-                    }
-                }
-            }
-        return output;
-    }
+
 }
 

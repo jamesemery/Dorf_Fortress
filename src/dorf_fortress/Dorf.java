@@ -50,7 +50,6 @@ public class Dorf extends Entity {
     }
 
     public void colorSprite(Color hairColor) {
-        System.out.println("coloring sprite");
         ((DorfSprite)this.sprite).colorSprites(hairColor);
     }
 
@@ -72,16 +71,6 @@ public class Dorf extends Entity {
      */
     @Override
     public void step() {
-//        if (!(this instanceof Ghost)) {
-//            String solving = "";
-//            solving += inputSource.getInput("left");
-//            solving += " " + inputSource.getInput("right") + " ";
-//            solving += inputSource.getInput("up");
-//            solving += " " + inputSource.getInput("down");
-//            if (this instanceof Ghost) {}
-//            System.out.println(solving);
-//        }
-
         if (inputSource.getInput("left")) {
             this.left();
         }
@@ -179,7 +168,6 @@ public class Dorf extends Entity {
         simulation.reset();
         if (!(this instanceof Ghost)) {
             simulation.pause();
-            System.out.println("pausing");
         }
         Scene mainScene = this.getSprite().getScene();
         Main.startLoseMenu(mainScene, simulation);
@@ -212,6 +200,7 @@ public class Dorf extends Entity {
         this.victorious = false;
         inputSource.clear();
     }
+
     /**
      * Change in behavior for dorf so it doesn't worry about going off the top
      */
