@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
  */
 public class OverlayController {
     private Model model;
+    private Stage stage;
     @FXML private AnchorPane primaryPane;
 
     /**
@@ -50,6 +52,19 @@ public class OverlayController {
         System.out.println("unpaused");
         mainRoot.requestFocus();
         mainRoot.getChildren().remove(primaryPane);
+    }
+
+    /**
+     * The code corresponding to the "Next Level" button. Makes a new level with
+     * the same dorf hair color and a slightly higher difficulty.
+     */
+    @FXML
+    void makeNextLevel(ActionEvent event) {
+        System.out.println("Making next level");
+        double difficulty = this.model.getDifficulty() + 0.5;
+        Stage mainStage = (Stage) primaryPane.getScene().getWindow();
+        Color hairColor = this.model.player.hairColor;
+        Main.startGame(mainStage, difficulty, hairColor);
     }
 
     /**

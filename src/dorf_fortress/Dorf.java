@@ -16,6 +16,7 @@ public class Dorf extends Entity {
     private boolean victorious = false;
     String name;
     InputBuffer inputSource;
+    public Color hairColor;
 
 
     /**
@@ -48,6 +49,7 @@ public class Dorf extends Entity {
     }
 
     public void colorSprite(Color hairColor) {
+        this.hairColor = hairColor;
         ((DorfSprite)this.sprite).colorSprites(hairColor);
     }
 
