@@ -204,10 +204,7 @@ public class Dorf extends Entity {
     @Override
     protected boolean isOffScreen() {
         //under the bottom first then over the top second
-        if (this.getY() > simulation.SCENE_HEIGHT) {
-            return true;
-        }
-        return false;
+        return (this.getY() > simulation.SCENE_HEIGHT);
     }
 
     // In the current implementation an Actor will never act upon something else
