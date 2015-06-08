@@ -30,6 +30,9 @@ public abstract class Sprite extends Parent {
         this.setX(entity.getX() - screenX);
     }
 
+    /*
+     * Setters & Getters
+     */
     public void setX(double x){};
     public void setY(double y){};
 }

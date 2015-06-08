@@ -1,13 +1,13 @@
 package dorf_fortress;
 
-import javafx.scene.shape.Line;
-
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Created by jamie on 5/31/15.
+ * SpinningHead is perhaps the most annoying obstacle. It consists of a head,
+ * which kills the player, and a hitbox-less chain, one end of which is
+ * connected to the head and the other to platform.
  */
 public class SpinningHead extends Obstacle{
     double centerX;
@@ -23,10 +23,10 @@ public class SpinningHead extends Obstacle{
         this.frameOffset = 0;
         this.rotationRate = rate;
         this.length = length;
-        centerX = x;
-        centerY = y;
-        ((SpinningHeadSprite)sprite).setCenterX(centerX);
-        ((SpinningHeadSprite)sprite).setCenterY(centerY);
+        this.centerX = x;
+        this.centerY = y;
+        ((SpinningHeadSprite)sprite).setCenterX(this.centerX);
+        ((SpinningHeadSprite)sprite).setCenterY(this.centerY);
     }
 
     public void setFrameOffset(int frame) {
@@ -35,9 +35,7 @@ public class SpinningHead extends Obstacle{
 
     @Override
     protected void makeSprite() {
-//        this.sprite = new spinningHeadSprite(x,y,this);
-        this.sprite = new SpinningHeadSprite("sprites/Skull.png",
-                centerY, centerX, this);
+        this.sprite = new SpinningHeadSprite(this, this.centerX, this.centerY);
     }
 
     @Override
@@ -60,8 +58,8 @@ public class SpinningHead extends Obstacle{
         int currentFrame = simulation.getCurrentFrame();
         double angle = ((double)(currentFrame%rotationRate)/
                 (double)rotationRate) * 360;
-        double x = length*Math.cos(angle) + centerX;
-        double y = length*Math.sin(angle) + centerY;
+        double x = length*Math.cos(angle) + this.centerX;
+        double y = length*Math.sin(angle) + this.centerY;
         this.setY(y);
         this.setX(x);
     }

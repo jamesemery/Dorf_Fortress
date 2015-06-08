@@ -47,7 +47,7 @@ public class TrampolinePlatform extends Platform {
      */
     @Override
     public void collidesY(Entity projectile) {
-        // top collision - if the projectile is going down relative
+        // If the projectile's coming from above.
         if (projectile.getY_velocity() < this.getY_velocity()) {
             if (projectile instanceof Dorf) {
                 ((Dorf)projectile).setCurPlatform(this);
@@ -59,7 +59,7 @@ public class TrampolinePlatform extends Platform {
                 projectile.setY_velocity(this.maxSpeed);
             }
 
-        // bottom collision (by elimination)
+        // If the projectile's coming from below.
         } else {
             projectile.setY(this.getY() + this.height + 0.01);
             projectile.setY_velocity(-projectile.getY_velocity());
