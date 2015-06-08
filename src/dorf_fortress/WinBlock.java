@@ -40,7 +40,7 @@ public class WinBlock extends Obstacle{
             projectile.win();
         }
     }
-    
+
     /**
      * Overrides the collision method to call the Dorf's win() method if it
      * touches the gateway.

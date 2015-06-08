@@ -8,49 +8,49 @@
 
 <AnchorPane fx:id="primaryPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.OverlayController">
    <children>
-      <Text layoutX="77.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations on clearing" textAlignment="CENTER">
+      <Text layoutX="75.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations on clearing" textAlignment="CENTER">
          <font>
-            <Font name="Georgia" size="36.0" />
+            <Font name="Georgia" size="40.0" />
          </font>
       </Text>
-      <Button layoutX="412.0" layoutY="349.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
-         <font>
-            <Font  size="13.0" />
-         </font>
-      </Button>
-      <ImageView fx:id="archwayImage" fitHeight="150.0" fitWidth="200.0" layoutX="93.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../sprites/basicArchway.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="archwayImage1" fitHeight="150.0" fitWidth="200.0" layoutX="249.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../sprites/basicArchway.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="100.0" layoutY="349.0" mnemonicParsing="false" onAction="#whenReplayClicked" prefHeight="29.0" prefWidth="141.0" text="Replay Level" textAlignment="CENTER">
+      <Button layoutX="402.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <ImageView fx:id="archwayImage2" fitHeight="150.0" fitWidth="200.0" layoutX="405.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="archwayImage" fitHeight="150.0" fitWidth="200.0" layoutX="88.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../sprites/basicArchway.png" />
          </image>
       </ImageView>
-      <Button layoutX="256.0" layoutY="346.0" mnemonicParsing="false" onAction="#whenNextLevelClicked" prefHeight="29.0" prefWidth="141.0" style="-fx-padding: 10 30 10 30; -fx-background-radius: 9,8,5,4; -fx-background-insets: 0,1,4,5;" text="Next Level" textAlignment="CENTER">
+      <ImageView fx:id="archwayImage1" fitHeight="150.0" fitWidth="200.0" layoutX="242.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sprites/basicArchway.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="96.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenReplayClicked" prefHeight="29.0" prefWidth="141.0" text="Replay Level" textAlignment="CENTER">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="archwayImage2" fitHeight="150.0" fitWidth="200.0" layoutX="395.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sprites/basicArchway.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="249.0" layoutY="337.0" mnemonicParsing="false" onAction="#whenNextLevelClicked" prefHeight="29.0" prefWidth="141.0" style="-fx-padding: 10 30 10 30; -fx-background-radius: 9,8,5,4; -fx-background-insets: 0,1,4,5;" text="Next Level" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Text layoutX="199.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dorf Fortress!" textAlignment="CENTER">
+      <Text layoutX="239.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="the level!" textAlignment="CENTER">
          <font>
-            <Font name="Georgia" size="36.0" />
+            <Font name="Georgia" size="40.0" />
          </font>
       </Text>
-      <Text fill="#868686" layoutX="173.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(press space to retry level)" textAlignment="CENTER">
+      <Text fill="#868686" layoutX="155.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(press space for next level)" textAlignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font name="Georgia" size="28.0" />
          </font>
       </Text>
    </children>
