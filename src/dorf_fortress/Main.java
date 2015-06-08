@@ -1,8 +1,6 @@
 package dorf_fortress;
 
 import javafx.application.*;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -17,11 +15,9 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import javax.imageio.ImageIO;
 import java.io.File;
 import java.net.URL;
 
@@ -35,10 +31,11 @@ import java.net.URL;
 
 public class Main extends Application {
 
-    final static double SCENE_WIDTH = 640;
-    final static double SCENE_HEIGHT = 480;
-    final static String ambientNoiseLoc = "src/sprites/dungeonSound.wav";
-    static MediaPlayer noisePlayer;
+    public final static double SCENE_WIDTH = 640;
+    public final static double SCENE_HEIGHT = 480;
+    private final static String ambientNoiseLoc = "src/sprites/dungeonSound.wav";
+    private static MediaPlayer noisePlayer;
+    public static int deadDorfs = 0;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -70,6 +67,7 @@ public class Main extends Application {
      * Launches the menu scene, with its own controller.
      */
     public static void loadMainMenu(Stage mainStage) {
+        deadDorfs = 0; //reset the casualty counter; we're starting a new game.
         URL fxmlUrl = Main.class.getResource("mainmenu.fxml");
         System.out.println("fxml url: " + fxmlUrl);
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
@@ -146,7 +144,6 @@ public class Main extends Application {
      * Launches the game scene.
      */
     public static void startGame(Stage mainStage, double difficulty, Color hairColor) {
-
         Group root = new Group();
         Scene gameScene = new Scene(root, SCENE_WIDTH,
                 SCENE_HEIGHT);
