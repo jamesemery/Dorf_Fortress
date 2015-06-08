@@ -35,7 +35,7 @@ public class Model {
 
         entities = new ArrayList<Entity>();
         LevelBuilder levelBuilder = new LevelBuilder(this, entities, controller);
-        levelBuilder.makeTestLevel();
+        levelBuilder.makeLevel();
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this.levelSolver);
 
         /*
@@ -43,11 +43,10 @@ public class Model {
          * TODO: Fiddle with? We can make obstacle_count = n(difficulty) + c,
          * TODO: where c is the count at difficulty 0 and n scales it.
          */
-        List tempList = new ArrayList<Integer>(); //TODO get rid of temp list
 
         // Chooses how many obstacles to place based on the number of platforms
         int obstacles = (int)(entities.size()*((this.difficulty/2) + 1));
-        dangerMaker.generateObstacles(obstacles, tempList);
+        dangerMaker.generateObstacles(obstacles);
         setGhostMode(false);
         timeLimit = levelSolver.getEndFrame()*2 + ((int) difficulty)*60;
         levelSolver.liveSimulation = true;
