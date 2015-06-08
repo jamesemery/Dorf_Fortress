@@ -7,10 +7,9 @@ package dorf_fortress;
  * subclasses when behavior is particularly complicated. Also entails a
  * series of getters and setters for the general variables that every Entity
  * will have.
- * Created by Joe on 5/27/2015.
  */
 public abstract class Entity {
-    Sprite sprite;
+    public Sprite sprite;
     private double x;
     private double y;
     protected double x_velocity = 0;
@@ -23,10 +22,9 @@ public abstract class Entity {
     protected double height;
     protected double width;
     boolean hitbox_checker; //determines if this object enacts hitbox checking
-    Model simulation;
+    public Model simulation;
     //if the object "dies" when if falls off the edge of the screen
     protected boolean screen_death;
-
 
     public Entity (int hitbox_width, int hitbox_height, double x, double y,
                    Model simulation) {

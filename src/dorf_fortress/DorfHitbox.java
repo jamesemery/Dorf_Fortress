@@ -1,6 +1,5 @@
 package dorf_fortress;
 
-import javafx.geometry.Bounds;
 import javafx.scene.shape.Rectangle;
 
 /**
