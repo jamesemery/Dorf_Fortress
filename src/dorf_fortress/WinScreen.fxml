@@ -10,12 +10,12 @@
    <children>
       <Text layoutX="77.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations on clearing" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya" size="36.0" />
+            <Font name="Poor Richard" size="36.0" />
          </font>
       </Text>
       <Button layoutX="412.0" layoutY="349.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya SC" size="13.0" />
+            <Font  size="13.0" />
          </font>
       </Button>
       <ImageView fx:id="archwayImage" fitHeight="150.0" fitWidth="200.0" layoutX="93.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +45,7 @@
       </Button>
       <Text layoutX="199.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dorf Fortress!" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya" size="36.0" />
+            <Font name="Poor Richard" size="36.0" />
          </font>
       </Text>
       <Text fill="#868686" layoutX="173.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(press space to retry level)" textAlignment="CENTER">

@@ -165,8 +165,10 @@ public class LevelBuilder {
 
         //Make a Ghost!
         ghostInput = new GhostInputSource();
+        
 //        ghostInput = new GhostInputSource("src/dorf_fortress/NewDemoInputs.txt");
-        Ghost casper = new Ghost(32, 32, xStart, yStart, model, ghostInput);
+        Ghost casper = new Ghost(22, 32, xStart, yStart, model, ghostInput);
+
         model.levelSolver = casper;
         this.levelSolver = casper;
     }
@@ -362,6 +364,11 @@ public class LevelBuilder {
             upTapChance = 0.10;
             rightTapChance = 0.70;
         }
+        // Clears jump input for the dorf so it will be on the convayor
+        // platform for at least a moment
+        if (levelSolver.curPlatform instanceof ConveyorPlatform) {
+            holdingUp = false;
+        }
         if (holdingLeft) {
             if (leftUnholdingChance>randomGenerator.nextDouble()) {
                 holdingLeft = false;
@@ -462,6 +469,7 @@ public class LevelBuilder {
         double bouncyPlatformChance = 0.70;
         double boostPlatformCuttof = 0.70;
         double conveyorPlatformChance = 0.10;
+        double disappearingPlatformChance = 0.15;
 
         double wayDown = levelSolver.getY()/model.SCENE_HEIGHT;
         int fudgeFactor = 10 + randomGenerator.nextInt((int)(40*wayDown));
@@ -497,9 +505,14 @@ public class LevelBuilder {
                 xCoor+= 96;
             }
             return platform;
-        } else {
-            platform = new SolidPlatform(128,32,xCoor, yCoor,this.model);
         }
+        if (disappearingPlatformChance>randomGenerator.nextDouble()) {
+            platform = new FadingPlatform(128,32,xCoor, yCoor,120,60, 300,
+                    model.getCurrentFrame(), this.model);
+            this.entities.add(platform);
+            return platform;
+        }
+        platform = new SolidPlatform(128,32,xCoor, yCoor,this.model);
         this.entities.add(platform);
         return platform;
     }
