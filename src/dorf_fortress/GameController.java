@@ -110,7 +110,7 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //todo: move out of a controller to a view?
     private Text drawDifficulty() {
-        Text text = new Text(290,25,"Level " +
+        Text text = new Text(270,25,"Difficulty: " +
                 Integer.toString((int) simulation.getDifficulty() + 1));
         text.setFont(new Font("Alegreya SC", 20));
         text.setFill(new Color(1,1,1,1));
@@ -121,7 +121,7 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //todo: move out of a controller to a view?
     private Text drawViewTimer() {
-        Text text = new Text(610,25,
+        Text text = new Text(550,25, "Time left: " +
                 Integer.toString(simulation.getRemainingTime()));
         text.setFont(new Font("Alegreya SC", 20));
         text.setFill(new Color(1, 1, 1,1));
