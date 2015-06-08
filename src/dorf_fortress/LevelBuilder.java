@@ -6,15 +6,15 @@ import java.util.Random;
 /**
  * A LevelBuilder object manages the procedural generation of platforms on a
  * level as well as the construction of a series of inputs for the level
- * solving Ghost. The goal of this mehtod of generation is to construct
- * levels that are necessaraly solvable by a known set of computer inputs
- * every time.
+ * solving Ghost. The goal of this method of generation is to construct
+ * levels that are necessarily solvable by a known set of computer inputs.
+ *
  * The level building script works by having the model simulate through the
- * level with the current set of ghost inputs as normal
- * and then adding to the input based on the current conditions experienced
- * by the ghost (ex. being on a platform makes it more likely to press the
- * left key to stop motion, or being in the air going up the ghost is more
- * likely to go right then in the second half of its jump).
+ * level with the current set of ghost inputs as normal, and then adding to the
+ * input based on the current conditions experienced by the ghost (ex. being on
+ * a platform makes it more likely to press the left key to stop motion, or
+ * being in the air going up the ghost is more likely to go right then in the
+ * second half of its jump).
  *
  * To place platforms the LevelBuilder keeps track of the first frame where
  * the ghost started falling (downwards velocity) and then simulates until

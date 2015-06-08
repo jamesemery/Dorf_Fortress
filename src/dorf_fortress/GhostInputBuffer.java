@@ -35,32 +35,6 @@ public class GhostInputBuffer extends InputBuffer {
         cursor = 0;
     }
 
-
-    /**
-     * Currently, all this constructor does is read from a file that consists
-     * of a series of 4 ordered booleans on a line and converts that into the
-     * this constructor takes a filepath for where the file is located
-     */
-    public GhostInputBuffer(String filepath) {
-        storedInput = new ArrayList<Boolean[]>();
-        cursor = 0;
-        File f = new File(filepath);
-        try {
-            Scanner scanner = new Scanner(f);
-            while (scanner.hasNextBoolean()){
-                Boolean[] frameInput = new Boolean[4];
-                frameInput[0] = scanner.nextBoolean();
-                frameInput[1] = scanner.nextBoolean();
-                frameInput[2] = scanner.nextBoolean();
-                frameInput[3] = scanner.nextBoolean();
-                storedInput.add(frameInput);
-            }
-            currentInput = storedInput.get(0);
-        } catch (FileNotFoundException e){
-        }
-    }
-
-
     /**
      * Returns a boolean value signifying whether or not the given input is
      * contained in storage. Assumes that the boolean array is at least 4
