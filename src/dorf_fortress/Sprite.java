@@ -9,11 +9,10 @@ import com.sun.javafx.sg.prism.NGNode;
 import javafx.scene.Parent;
 
 /**
- * Created by Joe Adkisson on 5/24/2015.
- * A sprite class; it's the superclass for all visible objects in the gameworld.
- * (With the probable exception of our background image.
+ * An abstract sprite class; it's the superclass for all types of visible
+ * objects in the game, excepting the tiled background.
  */
-public class Sprite extends Parent {
+public abstract class Sprite extends Parent {
     protected Entity entity;
 
     /**

@@ -7,16 +7,15 @@ import javafx.scene.image.ImageView;
  */
 public class SimpleSprite extends Sprite {
     ImageView image;
+
     /**
      * Calls ImageView's constructor, which takes in a string URL pointing to
      * the location of the image; then creates its own Hitbox object.
      *
      * @param sprite_Location
-     * @param hitbox_width
-     * @param hitbox_height
      * @param entity
      */
-    public SimpleSprite(String sprite_Location, int hitbox_width, int hitbox_height, Entity entity) {
+    public SimpleSprite(String sprite_Location, Entity entity) {
         super(entity);
         image = new ImageView(sprite_Location);
         this.getChildren().add(image);

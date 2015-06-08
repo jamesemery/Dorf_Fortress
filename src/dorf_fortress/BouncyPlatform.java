@@ -32,12 +32,7 @@ public class BouncyPlatform extends Platform {
      */
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite(
-                "sprites/basicPlatform.png",
-                (int)this.width,
-                (int)this.height,
-                this
-        );
+        this.sprite = new SimpleSprite("sprites/basicPlatform.png", this);
     }
 }
 
