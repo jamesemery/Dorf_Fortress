@@ -23,17 +23,27 @@ public class ObstaclePlacer {
     Random randomGenerator;
     List<Entity> safeObstacles;
     double difficulty;
+    Hitbox safeZone;
 
     // specific varialbes about the simulation parameters
     double finalX;
     int endFrame;
 
-    public ObstaclePlacer(Model simulation, Ghost ghost) {
+    /**
+     * Creates a level builder object with references to objects it will need
+     * for simulation and generation of obstacles.
+     *
+     * @param simulation
+     * @param ghost
+     * @param SpawnZone
+     */
+    public ObstaclePlacer(Model simulation, Ghost ghost, Hitbox SpawnZone) {
         this.simulation = simulation;
         this.levelSolver = ghost;
         this.randomGenerator = new Random();
         this.safeObstacles = new ArrayList<Entity>();
         this.difficulty = simulation.getDifficulty();
+        this.safeZone = SpawnZone;
     }
 
     public void generateObstacles(int n) {
@@ -172,7 +182,11 @@ public class ObstaclePlacer {
             int i = 0;
             while (i < testCases.size()) {
                 Hitbox obstacleHitbox = testCases.get(i).getHitbox();
-                if (ghost.intersects(obstacleHitbox)) {
+
+                // If the obstacle intesects either the safeZone or the
+                // ghost, it is removed from the list
+                if (ghost.intersects(obstacleHitbox)||
+                        (obstacleHitbox.intersects(safeZone))) {
                     testCases.remove(i);
                 } else {
                     i++;

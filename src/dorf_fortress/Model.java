@@ -18,6 +18,7 @@ public class Model {
     private int currentFrame;
     private double difficulty;
     private int timeLimit;
+    public Hitbox spawnSafeZone;
 
 
 //    static Model getInstance(GameController controller, double sceneHeight, double difficulty) {
@@ -32,11 +33,13 @@ public class Model {
         this.SCENE_HEIGHT = sceneHeight;
         this.controller = controller;
         this.difficulty = difficulty;
+        this.spawnSafeZone = null;
 
         entities = new ArrayList<Entity>();
         LevelBuilder levelBuilder = new LevelBuilder(this, entities, controller);
         levelBuilder.makeLevel();
-        ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this.levelSolver);
+        ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this
+                .levelSolver, spawnSafeZone);
 
         /*
          * TODO: Here's where the number of obstacles is set by the difficulty.
