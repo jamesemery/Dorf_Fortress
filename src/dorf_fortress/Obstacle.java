@@ -15,8 +15,6 @@ public abstract class Obstacle extends Entity {
         super(hitbox_width, hitbox_height, x, y, simulation);
     }
 
-
-
     public static Obstacle getInstanceFactory(ObstaclePlacer source, Hitbox
             h, String type, Random rand) {
         if (type == "box") {
