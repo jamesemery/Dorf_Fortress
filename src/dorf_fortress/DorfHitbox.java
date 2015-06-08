@@ -16,21 +16,19 @@ public class DorfHitbox extends Hitbox {
     double y;
 
     public DorfHitbox( double width, double height){
-        this.x = x;
-        this.y = y;
         hitboxRectangles = new Rectangle[1];
         hitboxRectangles[0] = new Rectangle(x, y, width, height);
     }
 
     void setX(double newx){
-        x = newx;
+        this.x = newx;
         for (Rectangle r : hitboxRectangles) {
             r.setX(newx);
         }
     }
 
     void setY(double newy){
-        y = newy;
+        this.y = newy;
         for (Rectangle r : hitboxRectangles){
             r.setY(newy);
         }
@@ -51,10 +49,10 @@ public class DorfHitbox extends Hitbox {
     }
 
      /**
-      * this method takes a javafx bounds object and returns true if it
-      * intersects with any of the objects that make up this hitbox. For this
-      * hitbox it consists of looping through the rectangles that makes it up
-      * and determines if the bounds intersect.
+      * Takes a javafx bounds object and returns true if it intersects with any
+      * of the objects that make up this hitbox. For this hitbox it consists of
+      * looping through the rectangles that makes it up and determines if the
+      * bounds intersect.
       **/
     public boolean intersects(javafx.geometry.Bounds bounds) {
         for (Rectangle r : hitboxRectangles) {

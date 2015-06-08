@@ -216,7 +216,9 @@ public class Dorf extends Entity {
         }
     }
 
-    //does stuff
+    /**
+     * Resets the Dorf to its starting position, with no input.
+     */
     public void reset() {
         super.reset();
         this.victorious = false;
@@ -224,11 +226,10 @@ public class Dorf extends Entity {
     }
 
     /**
-     * Change in behavior for dorf so it doesn't worry about going off the top
+     * Checks whether the Dorf is off the bottom of the screen.
      */
     @Override
     protected boolean isOffScreen() {
-        //under the bottom first then over the top second
         return (this.getY() > simulation.SCENE_HEIGHT);
     }
 
