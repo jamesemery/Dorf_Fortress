@@ -18,9 +18,10 @@ public class SpinningHead extends Obstacle{
     Sprite line;
 
     public SpinningHead(int hitbox_width, int hitbox_height, double x,
-                         double y, int rate, double length, Model simulation) {
+                         double y, int rate, double length, int offset, Model
+                        simulation) {
         super(hitbox_width, hitbox_height, x, y, simulation);
-        this.frameOffset = 0;
+        this.frameOffset = offset;
         this.rotationRate = rate;
         this.length = length;
         this.centerX = x;
@@ -29,9 +30,6 @@ public class SpinningHead extends Obstacle{
         ((SpinningHeadSprite)sprite).setCenterY(this.centerY);
     }
 
-    public void setFrameOffset(int frame) {
-        frameOffset = frame;
-    }
 
     @Override
     protected void makeSprite() {
@@ -55,7 +53,7 @@ public class SpinningHead extends Obstacle{
 
     @Override
     public void step() {
-        int currentFrame = simulation.getCurrentFrame();
+        int currentFrame = frameOffset + simulation.getCurrentFrame();
         double angle = ((double)(currentFrame%rotationRate)/
                 (double)rotationRate) * 360;
         double x = length*Math.cos(angle) + this.centerX;
@@ -86,9 +84,9 @@ public class SpinningHead extends Obstacle{
         double x = xoffset + base.getX();
         double length = 100 + rand.nextInt(50);
         int rate = 6000 + rand.nextInt(3000);
+        int offset = rand.nextInt(rate);
         SpinningHead instance = new SpinningHead(20, 20, x, y, rate, length,
-                source.getSimulation());
-        instance.setFrameOffset(rand.nextInt(rate));
+                offset, source.getSimulation());
         return instance;
     }
 

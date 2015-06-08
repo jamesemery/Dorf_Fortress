@@ -36,7 +36,7 @@ public class OscillatingSpider extends Obstacle{
                 "sprites/SpiderForward5.png", "sprites/SpiderForward6.png",
                 "sprites/SpiderForward7.png", "sprites/SpiderForward8.png",
                 "sprites/SpiderForward9.png", "sprites/SpiderForward10.png"};
-        this.sprite = new AnimatedSprite(imageList, 35, 35, this, 5 );
+        this.sprite = new AnimatedSprite(imageList, this, 5 );
     }
 
     @Override
