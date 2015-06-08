@@ -68,7 +68,7 @@ public class AnimatedSprite extends Sprite {
     }
 
     //Helper method that moves currentImage to the next index.
-    private void getNextFrame() {
+    public void getNextFrame() {
         if(this.currentImage < this.numImages -1) {
             this.currentImage++;
         } else {

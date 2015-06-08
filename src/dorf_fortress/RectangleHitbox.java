@@ -31,10 +31,7 @@ public class RectangleHitbox extends Hitbox {
     }
 
     /**
-     * Returns true if the given bounds object intersects with the rectangles
-     * making up the current hitbox.
-     * @param bounds   The bounds whose intersection are being tested.
-     * @return   A boolean: whether or not it intersects.
+     * Only ever called by the hitbox intersection checker.
      */
     public boolean intersects(javafx.geometry.Bounds bounds) {
         for (Rectangle r : hitboxRectangles) {
