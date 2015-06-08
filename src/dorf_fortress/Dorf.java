@@ -49,9 +49,6 @@ public class Dorf extends Entity {
     /**
      * Makes the Dorf's sprite, a special Sprite subclass called DorfSprite.
      * The image sources are hard-coded in.
-     * @param x
-     * @param y
-     * @param simulation
      */
     @Override
     protected void makeSprite() {
@@ -59,8 +56,7 @@ public class Dorf extends Entity {
                 "sprites/ColoredDorfRight2.png","sprites/ColoredDorfRight3.png"};
         String[] leftImages = {"sprites/ColoredDorfLeft1.png",
                 "sprites/ColoredDorfLeft2.png","sprites/ColoredDorfLeft3.png"};
-        this.sprite = new DorfSprite(leftImages,rightImages,22,
-                32, this);
+        this.sprite = new DorfSprite(leftImages,rightImages,this);
     }
 
     /**

@@ -4,40 +4,37 @@ import javafx.scene.image.*;
 import javafx.scene.paint.*;
 
 /**
- * A Sprite that has animations for movement in the left and right directions.
- * Created specifically for Dorf objects, but it's theoretically capable of
- * handling any object with left and right movement. The only caveat is that
- * the leftwards and rightwards animations must have the same number of frames.
- * There is no forward-facing animation; when the character stops moving, it
+ * A Sprite that has animations for movement in the left and right directions,
+ * created specifically for Dorf objects.
+ * - It assumes that the leftwards and rightwards animations have the same number
+ * of frames.
+ * - The DorfSprite's animation is based not on time or the game loop, but on the
+ * movement of the Dorf; whenever the Dorf moves [frameTolerance] pixels in a
+ * direction, it updates its sprite.
+ * - There is no forward-facing animation; when the character stops moving, it
  * will just stay on the same frame it was on.
- * Created by Joe on 6/4/2015.
  */
-
-
 public class DorfSprite extends Sprite {
-
+    //Variables representing the animation's frames.
     ImageView[] rightImages;
     ImageView[] leftImages;
     int numImages;
+    //Variables to do with animation
     int currentImage = 0;
     boolean movingRight = true;
-    double pastFrameX = 0; //the last x coordinate at which we updated a sprite
-    double frameTolerance =10.0; //how far the entity must travel before updating
+    double pastFrameX = 0;  //the last x at which we updated a sprite. Begins
+                            //at zero.
+    double frameTolerance = 10.0; //how far the entity must move before updating
 
 
     /**
-     * Calls ImageView's constructor, which takes in a string URL pointing to
-     * the location of the image; then creates its own Hitbox object.
      *
      * @param leftArray; an array of Strings containing the locations of the
      *                   left-facing sprites.
      * @param rightArray; ditto for right-facing sprites
-     * @param hitbox_width
-     * @param hitbox_height
      * @param dorf; a reference to the dorf.
      */
-    public DorfSprite(String[] leftArray, String[] rightArray, int hitbox_width,
-                      int hitbox_height, Entity dorf) {
+    public DorfSprite(String[] leftArray, String[] rightArray, Entity dorf) {
         super(dorf);
         this.rightImages = new ImageView[rightArray.length];
         this.leftImages = new ImageView[leftArray.length];
@@ -68,9 +65,6 @@ public class DorfSprite extends Sprite {
 
     @Override
     public void update(double dorf_x) {
-    //TODO: refactor this code for a nicer loop, so we can have quicker
-        //changes in direction. Works for now, though.
-
         //we have an instance variable saving the last x we updated at;
         //if we're more than [frameTolerance] pixels right of that...
         if (dorf_x - pastFrameX > frameTolerance) {
