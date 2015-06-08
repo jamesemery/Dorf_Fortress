@@ -111,7 +111,7 @@ public class GameController implements EventHandler<KeyEvent> {
     //todo: move out of a controller to a view?
     private Text drawDifficulty() {
         Text text = new Text(270,25,"Difficulty: " +
-                Integer.toString((int) simulation.getDifficulty() + 1));
+                Integer.toString((int) simulation.getDifficulty()));
         text.setFont(new Font("Alegreya SC", 20));
         text.setFill(new Color(1,1,1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
