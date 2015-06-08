@@ -29,8 +29,10 @@ public class Dorf extends Entity {
         super(hitbox_width, hitbox_height, x, y, model);
         inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( hitbox_width, hitbox_height);
-        hitbox_checker = true; //TODO comment saying what this does
-        this.screen_death = true; //TODO comment saying what this does
+        hitbox_checker = true; // Makes it so the dorf does collision
+        // detection on other objects
+        this.screen_death = true; // Makes it so the dorf will die if it
+        // falls off the screen
     }
 
     /**
