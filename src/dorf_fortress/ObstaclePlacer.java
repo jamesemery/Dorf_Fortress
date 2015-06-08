@@ -11,26 +11,39 @@ import java.util.PriorityQueue;
 /**
  * ObstaclePlacer handles the random generation of obstacles on the map in
  * such a way that they will never impact the Ghosts path to completing the
- * level. The class takes an Integer list of parameters
- * Created by jamie on 5/28/15.
+ * level. It does this by repeatedly simulating the level to completion with
+ * the ghost and testing frame-by-frame whether or not the ghost intersects
+ * with each obstacles hitbox. Once enough valid obstacles of one type are
+ * made it moves on to another type before eventually putting all of the
+ * obstacles into the simulation entities.
  */
 public class ObstaclePlacer {
-    private Model simulation;
-    private Ghost levelSolver;
-    private Random randomGenerator;
-    private List<Entity> safeObstacles;
-    private double difficulty;
+    Model simulation;
+    Ghost levelSolver;
+    Random randomGenerator;
+    List<Entity> safeObstacles;
+    double difficulty;
+    Hitbox safeZone;
 
-    // specific variables about the simulation parameters
-    private double finalX;
-    private int endFrame;
+    // specific varialbes about the simulation parameters
+    double finalX;
+    int endFrame;
 
-    public ObstaclePlacer(Model simulation, Ghost ghost) {
+    /**
+     * Creates a level builder object with references to objects it will need
+     * for simulation and generation of obstacles.
+     *
+     * @param simulation
+     * @param ghost
+     * @param SpawnZone
+     */
+    public ObstaclePlacer(Model simulation, Ghost ghost, Hitbox SpawnZone) {
         this.simulation = simulation;
         this.levelSolver = ghost;
         this.randomGenerator = new Random();
         this.safeObstacles = new ArrayList<Entity>();
         this.difficulty = simulation.getDifficulty();
+        this.safeZone = SpawnZone;
     }
 
     public void generateObstacles(int n) {
@@ -46,11 +59,14 @@ public class ObstaclePlacer {
     }
 
     /**
-     * Creates a dictionary corresponding to how many objects of each given
-     * type must exist, and then creates specific instances of each type of
-     * obstacle, culling it with cull list.
+     * Calls determineDifficulty(n) to make a dictionary
+     * corresponding to the obstacles that must be placed and
+     * their frequency. exist of each given type and then it creates specific
+     * instances of each type of obstacle and culls it with cullList() so
+     * that none of the obstacles ever intersect with the ghost path.
      * @param n
      */
+
     private void obstacleFactoryMethod(int n) {
         Dictionary<String,Integer> obstacleOccurrence = determineDifficulty(n);
         Enumeration<String> keys = obstacleOccurrence.keys();
@@ -68,20 +84,20 @@ public class ObstaclePlacer {
                 // priority queue to ensure they come out in chronological order
                 PriorityQueue<Integer> selectFrames = new PriorityQueue<Integer>();
                 for (int k = 0; k < (numToMake - numMade); k++) {
-                    selectFrames.add(this.randomGenerator.nextInt(this.endFrame)+1);
+                    selectFrames.add(randomGenerator.nextInt(endFrame)+1);
                 }
                 // Runs through the simulation of the ghost and grbs the ghosts
                 // hitbox at the selected frames
                 int lastframe = -1;
                 while (!selectFrames.isEmpty()) {
-                    Hitbox ghost = this.simulation.getNextGhostHitbox();
+                    Hitbox ghost = simulation.getNextGhostHitbox();
                     lastframe = getCorrespondingFrame();
                     while ((!selectFrames.isEmpty())&&(this
                             .getCorrespondingFrame() == selectFrames
                             .peek())) {
                         int current = selectFrames.poll();
                         Entity obstacle = Obstacle.getInstanceFactory(this,
-                                this.levelSolver.getHitbox(), key, this.randomGenerator);
+                                levelSolver.getHitbox(), key, randomGenerator);
                         testCases.add(obstacle);
 
                     }
@@ -89,11 +105,11 @@ public class ObstaclePlacer {
 
                 // resets the simulation and adds the valid obstacles to the
                 // safe list
-                this.simulation.reset();
+                simulation.reset();
                 List<Entity> culledList = cullList(testCases);
                 numMade += culledList.size();
                 for (Entity e : culledList) {
-                    this.safeObstacles.add(e);
+                    safeObstacles.add(e);
                 }
                 testCases.clear();
 
@@ -101,18 +117,19 @@ public class ObstaclePlacer {
         }
     }
 
+
     /**
-     * Takes a number of obstacles to generate for the level and the known
-     * difficulty (from 1-10) and determines a relative spawn prevalence for
-     * each obstacle. It uses that to determine how many of each obstacle
-     * must be built, returning a dictionary pair of a string representing
-     * the obstacle, and an int representing a number of obstacles to build.
+     * Takes a number of obstacles ot generate for the level and the known
+     * difficulty (from 1-10) and determines a relative spawn prevelance for
+     * each obstacle and uses that to determine how many of each obstacle
+     * must be built and returns a dictionary pair of a string representing
+     * the obstacle, and an int representing a number of obsacles to build.
      *
-     * We decided to use Strings for the dictionary pair output of this
-     * method for readability's sake – it's slightly less efficient, but it
-     * leads to much more legible code in the end.
+     * We decided to us a String for the dictionary pair output of this
+     * method for readabilities sake. It is easier to tell what is being
+     * constructed when reading the code if we use a String.
      *
-     * @param n   The number of obstacles to generate.
+     * @param n
      */
     private Dictionary<String, Integer> determineDifficulty(int n) {
         double boxChance = 0.15;
@@ -120,9 +137,9 @@ public class ObstaclePlacer {
         double spiderChance = 0.20;
         double ghostChance = 0.20;
 
-        // Adjusts the the occurrence of certain obstacles based on the
+        // Adjusts the the occurance of certian obstacles based on the
         // difficulty
-        if (this.difficulty < 3) {
+        if (difficulty < 3) {
             spinningChance = 0;
             spiderChance = 0.15;
             boxChance = 0.30;
@@ -151,7 +168,10 @@ public class ObstaclePlacer {
     /**
      * Runs through the given list of Obstacles and returns another list that
      * is equal or smaller in size to the first list that corresponds to only
-     * the obstacles that did NOT intersect with the ghost
+     * the obstacles that did NOT intersect with the ghost. It does this by
+     * resetting the simulation and placing the obstacles into the
+     * testEntities and then simulating the level to completion, removing any
+     * obstacles that intersect with the ghost along the path.
      */
     private List<Entity> cullList(List<Entity> testCases) {
         this.simulation.testingEntities = testCases;
@@ -160,7 +180,11 @@ public class ObstaclePlacer {
             int i = 0;
             while (i < testCases.size()) {
                 Hitbox obstacleHitbox = testCases.get(i).getHitbox();
-                if (ghost.intersects(obstacleHitbox)) {
+
+                // If the obstacle intesects either the safeZone or the
+                // ghost, it is removed from the list
+                if (ghost.intersects(obstacleHitbox)||
+                        (obstacleHitbox.intersects(safeZone))) {
                     testCases.remove(i);
                 } else {
                     i++;
@@ -180,11 +204,14 @@ public class ObstaclePlacer {
      * necessary for placement
      */
     private void initializeGhost() {
-        this.simulation.reset();
-        while (this.simulation.getNextGhostHitbox() != null) {}
-        this.simulation.reset();
-        this.endFrame = this.levelSolver.frameFinished;
-        this.finalX = this.levelSolver.finalX;
+        simulation.reset();
+        // Makes sure that the ghost nessicarly has determined the frame and
+        // x coordinate that it solves the level at
+        while (simulation.getNextGhostHitbox() != null) {
+        }
+        simulation.reset();
+        this.endFrame = levelSolver.frameFinished;
+        this.finalX = levelSolver.finalX;
     }
 
     /*

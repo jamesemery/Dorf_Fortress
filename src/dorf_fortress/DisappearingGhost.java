@@ -14,6 +14,18 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
     private int offset;
 
 
+    /**
+     *
+     * @param hitbox_width
+     * @param hitbox_height
+     * @param x
+     * @param y
+     * @param framesDangerous
+     * @param framesGone
+     * @param totalCycle
+     * @param offset
+     * @param simulation
+     */
     public DisappearingGhost(int hitbox_width, int hitbox_height, double x, double y,
                              int framesDangerous, int framesGone, int
                                      totalCycle, int offset, Model simulation) {
