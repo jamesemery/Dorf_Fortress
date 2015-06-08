@@ -35,10 +35,7 @@ public class TrampolinePlatform extends Platform {
      */
     @Override
     protected void makeSprite() {
-        /*String[] imageArray = {"sprites/trampoline1.png", //"sprites/trampoline2.png",
-                    "sprites/trampoline3.png", "sprites/trampoline4.png"};
-        this.sprite = new AnimatedSprite(imageArray, 128, 32,  this, 6);*/
-        this.sprite = new SimpleSprite("sprites/bounce1.png", this); //TODO: get a TrampolinePlatform.png, use it here.
+        this.sprite = new SimpleSprite("sprites/bounce1.png", this);
     }
 
     /**
@@ -50,7 +47,7 @@ public class TrampolinePlatform extends Platform {
      */
     @Override
     public void collidesY(Entity projectile) {
-        // If the projectile's coming from above.
+        // If the projectile's coming from above...
         if (projectile.getY_velocity() < this.getY_velocity()) {
             if (projectile instanceof Dorf) {
                 ((Dorf)projectile).setCurPlatform(this);
@@ -61,8 +58,7 @@ public class TrampolinePlatform extends Platform {
             } else {
                 projectile.setY_velocity(this.maxSpeed);
             }
-
-        // If the projectile's coming from below.
+        // If the projectile's coming from below...
         } else {
             projectile.setY(this.getY() + this.height + 0.01);
             projectile.setY_velocity(-projectile.getY_velocity());

@@ -120,15 +120,15 @@ public class LevelBuilder {
 //                32,32,512,256,this.model);
 //        this.entities.add(under_platform3);
 //
-//        Obstacle fireball_0 = new SimpleUpwardsKillBall(
+//        Obstacle fireball_0 = new Fireball(
 //                33,33,425,80,this.model);
 //        entities.add(fireball_0);
 //
-//        Obstacle fireball_1 = new SimpleUpwardsKillBall(
+//        Obstacle fireball_1 = new Fireball(
 //                33,33,775,100,this.model);
 //        entities.add(fireball_1);
 //
-//        Obstacle fireball_2 = new SimpleUpwardsKillBall(
+//        Obstacle fireball_2 = new Fireball(
 //                33,33,950,150,this.model);
 //        entities.add(fireball_2);
 //
@@ -479,7 +479,7 @@ public class LevelBuilder {
                 double trampChance = (levelSolver.getY_velocity()/-600) - .30;
 
                 if (trampChance>randomGenerator.nextDouble()) {
-                    platform = new TrampolinePlatform(128,32,xCoor-20,yCoor,
+                    platform = new TrampolinePlatform(192,32,xCoor-20,yCoor,
                             model);
                     System.out.println("Making Tramp Platform");
                 } else {

@@ -20,7 +20,7 @@ public abstract class Obstacle extends Entity {
         if (type == "box") {
             return KillBlock.getInstance(source, h, rand);
         } else if (type == "simpleBall") {
-            return SimpleUpwardsKillBall.getInstance(source, h, rand);
+            return Fireball.getInstance(source, h, rand);
         } else if (type == "spinningHead") {
             return SpinningHead.getInstance(source, h, rand);
         } else if (type == "oscillatingSpider") {

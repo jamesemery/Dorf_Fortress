@@ -6,7 +6,7 @@ package dorf_fortress;
 public class WinBlock extends Obstacle{
 
     /**
-     * Passes everything up the constructor.
+     * Nothing special to construct; passes everything to super()
      */
     public WinBlock(int hitbox_width, int hitbox_height,
                     double x, double y, Model simulation) {
