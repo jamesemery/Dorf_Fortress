@@ -11,7 +11,7 @@ public class LevelBuilder {
     private Model model;
     private List<Entity> entities;
     private GameController controller;
-    private GhostInputSource ghostInput;
+    private GhostInputBuffer ghostInput;
     private Ghost levelSolver;
     private Random randomGenerator;
     private Platform startPlatform;
@@ -158,9 +158,9 @@ public class LevelBuilder {
         controller.addSpriteToRoot(ferdinand.getSprite());
 
         //Make a Ghost!
-        ghostInput = new GhostInputSource();
+        ghostInput = new GhostInputBuffer();
 
-//        ghostInput = new GhostInputSource("src/dorf_fortress/NewDemoInputs.txt");
+//        ghostInput = new GhostInputBuffer("src/dorf_fortress/NewDemoInputs.txt");
         Ghost casper = new Ghost(22, 32, xStart, yStart, model, ghostInput);
 
         model.levelSolver = casper;
@@ -210,7 +210,7 @@ public class LevelBuilder {
             System.out.println();
             System.out.println("frame: " + model.getCurrentFrame());
             System.out.println("x: " + levelSolver.getX());
-            System.out.println("GhostInputSource size: " + ghostInput
+            System.out.println("GhostInputBuffer size: " + ghostInput
                     .storedInput.size());
 
             // if its currently on a platform

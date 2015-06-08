@@ -22,8 +22,8 @@ import java.io.File;
  *
  * Created by jamie on 5/28/15.
  */
-public class GhostInputSource extends InputBuffer {
-//    private static GhostInputSource uniqueInstance;
+public class GhostInputBuffer extends InputBuffer {
+//    private static GhostInputBuffer uniqueInstance;
     List<Boolean[]> storedInput;
     Boolean[] currentInput;
     int cursor;
@@ -34,7 +34,7 @@ public class GhostInputSource extends InputBuffer {
      * of a series of 4 ordered booleans on a line and converts that into the
      * stored array of inputs.
      */
-    public GhostInputSource() {
+    public GhostInputBuffer() {
         storedInput = new ArrayList<Boolean[]>();
         cursor = 0;
     }
@@ -45,7 +45,7 @@ public class GhostInputSource extends InputBuffer {
      * of a series of 4 ordered booleans on a line and converts that into the
      * this constructor takes a filepath for where the file is located
      */
-    public GhostInputSource(String filepath) {
+    public GhostInputBuffer(String filepath) {
         storedInput = new ArrayList<Boolean[]>();
         cursor = 0;
         File f = new File(filepath);
@@ -143,7 +143,7 @@ public class GhostInputSource extends InputBuffer {
     public void removeInputs(int frame) throws IndexOutOfBoundsException {
         if (frame > storedInput.size()) {
             throw new IndexOutOfBoundsException(frame + " is not a valid " +
-                    "frame in the GhostInputSource, the last valid frame is "
+                    "frame in the GhostInputBuffer, the last valid frame is "
                     + (storedInput.size() - 1));
         }
         // Repeatedly removes the last item of the array until the array has
