@@ -45,7 +45,8 @@ public class GameController implements EventHandler<KeyEvent> {
         spriteList = new ArrayList<Sprite>();
         this.background = setUpBackground();
         updateBackground(0);
-        this.simulation = Model.getInstance(this, sceneHeight, difficulty);
+        //this.simulation = Model.getInstance(this, sceneHeight, difficulty);
+        this.simulation = new Model(this, sceneHeight, difficulty);
         this.simulation.player.colorSprite(hairColor);
         this.helpText = drawHelpText();
         this.view_timer = drawViewTimer();
