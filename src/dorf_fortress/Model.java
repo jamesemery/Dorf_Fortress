@@ -21,7 +21,9 @@ public class Model {
 
 
     static Model getInstance(GameController controller, double sceneHeight, double difficulty) {
-        singleInstance = new Model(controller, sceneHeight, difficulty);
+        if(singleInstance == null) {
+            singleInstance = new Model(controller, sceneHeight, difficulty);
+        }
         return singleInstance;
     }
 
@@ -42,8 +44,8 @@ public class Model {
          * TODO: where c is the count at difficulty 0 and n scales it.
          */
         List tempList = new ArrayList<Integer>();
-        dangerMaker.generateObstacles((int) Math.round(7 + (.7)*
-                this.difficulty*this.difficulty), tempList);
+        dangerMaker.generateObstacles((int) Math.round(7 + (.7) *
+                this.difficulty * this.difficulty), tempList);
         setGhostMode(false);
         timeLimit = levelSolver.getEndFrame()*2 + (int) difficulty;
         levelSolver.liveSimulation = true;
