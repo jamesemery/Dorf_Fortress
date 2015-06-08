@@ -10,12 +10,12 @@
    <children>
       <Text layoutX="123.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your dorf has suffered" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya" size="36.0" />
+            <Font name="Poor Richard" size="36.0" />
          </font>
       </Text>
       <Button layoutX="402.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya SC" size="13.0" />
+            <Font size="13.0" />
          </font>
       </Button>
       <Button layoutX="250.0" layoutY="337.0" mnemonicParsing="false" onAction="#whenReplayClicked" prefHeight="29.0" prefWidth="141.0" style="-fx-padding: 10 20 10 20; -fx-background-radius: 9,8,5,4; -fx-background-insets: 0,1,4,5;" text="Replay Level" textAlignment="CENTER">
@@ -25,7 +25,7 @@
       </Button>
       <Button layoutX="96.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenSolutionClicked" prefHeight="29.0" prefWidth="141.0" text="See Solution" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya SC" size="13.0" />
+            <Font size="13.0" />
          </font>
       </Button>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="242.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +45,7 @@
       </ImageView>
       <Text layoutX="159.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" a miner setback..." textAlignment="CENTER">
          <font>
-            <Font name="Alegreya" size="36.0" />
+            <Font name="Poor Richard" size="36.0" />
          </font>
       </Text>
       <Text fill="#868686" layoutX="166.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(press space to retry level)" textAlignment="CENTER">
