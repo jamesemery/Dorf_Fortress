@@ -34,6 +34,18 @@ public class Dorf extends Entity {
         this.screen_death = true; //TODO comment saying what this does
     }
 
+    /**
+     * Saves the type of the Dorf's current platform. This is used for two
+     * purposes:
+     * - to get the appropriate size jump boost when the Dorf leaves a platform
+     * - to ignore the maximum velocity constraints when on or leaving a
+     *   conveyor platform.
+     * @param platform   The platform on which the Dorf is standing.
+     */
+    public void setCurPlatform(Platform platform) {
+        curPlatform = platform;
+    }
+
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
         String[] rightImages = {"sprites/ColoredDorfRight1.png",
@@ -210,14 +222,12 @@ public class Dorf extends Entity {
         return (this.getY() > simulation.SCENE_HEIGHT);
     }
 
-    // In the current implementation an Actor will never act upon something else
-    // colliding with it (it will instead call the collidesX/Y method of the
-    // object it's colliding with) but it might in the future, and it needs
-    // to fill the abstract methods from Entity.
-    public void collidesX(Entity projectile) {};
-    public void collidesY(Entity projectile) {};
-
-    public void setCurPlatform(Platform platform) {
-        curPlatform = platform;
-    }
+    /**
+     * Dorf will never actually have its collidesX/Y methods called; it's the
+     * collision methods of the thing it hits that matter. However, as a
+     * subclass of Entity, it can't NOT have them. So they're empty.
+     * @param projectile   A hypothetical, nonexistent entity.
+     */
+    public void collidesX(Entity projectile) {}
+    public void collidesY(Entity projectile) {}
 }
