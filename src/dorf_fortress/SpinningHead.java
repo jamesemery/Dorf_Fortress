@@ -15,17 +15,32 @@ public class SpinningHead extends Obstacle{
     double length;
     int frameOffset;
     int rotationRate; // in frames per rotation
-    Sprite line;
+    boolean goingRight;
 
+    /**
+     * A constructor for a spinning head obstacle, passes parameters up the
+     * inheritance tree and accepts its own movement parameters.
+     *
+     * @param hitbox_width Width of the hitbox for the object
+     * @param hitbox_height Height of the hitbox for the object
+     * @param x Starting x position for the skull head
+     * @param y Starting y position for the skull head
+     * @param rate Number of frames to complete one rotation around its center
+     * @param length Length of the rope tying the skull to the platform
+     * @param offset Frame offset from running frame for rotation
+     * @param direction True for clockwise spinning, false for counterclockwise
+     * @param simulation the model that owns this object
+     */
     public SpinningHead(int hitbox_width, int hitbox_height, double x,
-                         double y, int rate, double length, int offset, Model
-                        simulation) {
+                         double y, int rate, double length, int offset,
+                        boolean direction, Model simulation) {
         super(hitbox_width, hitbox_height, x, y, simulation);
         this.frameOffset = offset;
         this.rotationRate = rate;
         this.length = length;
         this.centerX = x;
         this.centerY = y;
+        this.goingRight = direction;
         ((SpinningHeadSprite)sprite).setCenterX(this.centerX);
         ((SpinningHeadSprite)sprite).setCenterY(this.centerY);
     }
@@ -51,6 +66,12 @@ public class SpinningHead extends Obstacle{
         projectile.die();
     }
 
+    /**
+     * Calculates the position that the head should be at any particular
+     * frame based on the current simulation frame and the offset and uses
+     * sine and cosine calculations to determine the offset from the
+     * rotation center the skull should be and moves it there.
+     */
     @Override
     public void step() {
         int currentFrame = frameOffset + simulation.getCurrentFrame();
@@ -58,10 +79,24 @@ public class SpinningHead extends Obstacle{
                 (double)rotationRate) * 360;
         double x = length*Math.cos(angle) + this.centerX;
         double y = length*Math.sin(angle) + this.centerY;
+        if (goingRight) {
+            x = this.centerX - length*Math.cos(angle);
+        }
         this.setY(y);
         this.setX(x);
     }
 
+    /**
+     * Places a spinning head object with the base centered on a random
+     * platform within a 400 pixles in either direction of the player then
+     * then randomly selects a length and rate of rotation as well as an
+     * offset ensure they dont all start in the same orientation.
+     *
+     * @param source
+     * @param h
+     * @param rand random number generator
+     * @return
+     */
     public static Obstacle getInstance(ObstaclePlacer source, Hitbox h, Random rand) {
         List<Platform> platfomrsInRange = new ArrayList<Platform>();
 
@@ -79,21 +114,19 @@ public class SpinningHead extends Obstacle{
         // Selects a random platform from the shorter list
         int n = rand.nextInt(platfomrsInRange.size());
         Platform base = platfomrsInRange.get(n);
+
+        // Selects parameters for the object
         double y = base.getY();
         int xoffset = rand.nextInt((int) base.width);
         double x = xoffset + base.getX();
         double length = 100 + rand.nextInt(50);
         int rate = 6000 + rand.nextInt(3000);
         int offset = rand.nextInt(rate);
+        boolean direction = rand.nextBoolean();
         SpinningHead instance = new SpinningHead(20, 20, x, y, rate, length,
-                offset, source.getSimulation());
+                offset,direction, source.getSimulation());
         return instance;
     }
 
-//    private class spinningHeadSprite extends Sprite {
-//        public spinningHeadSprite(double x, double y, SpinningHead spinningHead) {
-//            super();
-//        }
-//    }
 }
 
