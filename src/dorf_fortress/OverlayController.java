@@ -59,9 +59,9 @@ public class OverlayController {
      * the same dorf hair color and a slightly higher difficulty.
      */
     @FXML
-    void makeNextLevel(ActionEvent event) {
+    void whenNextLevelClicked(ActionEvent event) {
         System.out.println("Making next level");
-        double difficulty = this.model.getDifficulty() + 0.5;
+        double difficulty = this.model.getDifficulty() + 1;
         Stage mainStage = (Stage) primaryPane.getScene().getWindow();
         Color hairColor = this.model.player.hairColor;
         Main.startGame(mainStage, difficulty, hairColor);
@@ -87,10 +87,15 @@ public class OverlayController {
      * Allows the user to simply press the space bar to replay the level.
      * @param event   The key press. If not space, this does nothing.
      */
-    public void handleKeyPress(KeyEvent event) {
+    public void handleKeyPress(KeyEvent event, boolean winning) {
         if (event.getCode() == KeyCode.SPACE) {
-            whenReplayClicked(new ActionEvent());
-            event.consume();
+            if (winning) {
+                whenNextLevelClicked(new ActionEvent());
+                event.consume();
+            } else {
+                whenReplayClicked(new ActionEvent());
+                event.consume();
+            }
         }
     }
 }

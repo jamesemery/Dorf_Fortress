@@ -27,9 +27,6 @@ public abstract class Entity {
     //if the object "dies" when if falls off the edge of the screen
     protected boolean screen_death;
 
-    public final double FRICTION_CONSTANT = 240 / GameController.FRAMES_PER_SECOND;
-    public final double MAX_HORIZ_SPEED = 12000 / GameController.FRAMES_PER_SECOND;
-
 
     public Entity (int hitbox_width, int hitbox_height, double x, double y,
                    Model simulation) {
