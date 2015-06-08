@@ -3,7 +3,11 @@ package dorf_fortress;
 import java.util.Random;
 
 /**
- * TODO COMMENT THIS
+ * This obstacle is a ghost that appears and disappears from the screen
+ * gradually. When the ghost is not visible it can't hurt the dorf but when
+ * it is visible it can hurt the dorf. It has two hang times, one for being
+ * fully visible and one for being completely invisible as well as a total
+ * cycle length where it loops through being corporial and incorporial.
  */
 public class DisappearingGhost extends Obstacle implements OpacityChanger {
     private int dangerFrameEnd;
@@ -15,16 +19,22 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
 
 
     /**
+     * Builds a new object and uses the total cycle length to determine when
+     * the start and end of each framestate must be.
      *
-     * @param hitbox_width
-     * @param hitbox_height
-     * @param x
-     * @param y
-     * @param framesDangerous
-     * @param framesGone
-     * @param totalCycle
-     * @param offset
-     * @param simulation
+     * @param hitbox_width width of the object
+     * @param hitbox_height height of the object
+     * @param x starting x coordinate of the object
+     * @param y starting y coordinate of the object
+     * @param framesDangerous length of time (in framse) the object is
+     *                        completely visible
+     * @param framesGone length of time (in frames) the obstacle is supposed
+     *                   to be completely invisible
+     * @param totalCycle the total length of the cycle between visibility and
+     *                   invisiblity NOTE: this must be greater than the
+     *                   total of frames dangerous and frames gone
+     * @param offset cycle offset for when the animation starts
+     * @param simulation the model that owns the object
      */
     public DisappearingGhost(int hitbox_width, int hitbox_height, double x, double y,
                              int framesDangerous, int framesGone, int
@@ -40,6 +50,17 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
         this.setY(y);
     }
 
+    /**
+     * Step method that updates the current opacity of the object based on
+     * its position in the cycle and then moves the hitbox to an unreachable
+     * location if it is below a certian visiblity.
+     *
+     * Cycle:
+     * -visible
+     * -becoming invisible
+     * -invisible
+     * -becoming visible
+     */
     @Override
     public void step() {
         int currentFrame = (simulation.getCurrentFrame()+offset) % cycleLength;
@@ -102,6 +123,16 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
     }
 
 
+    /**
+     * Gets an instance of a DisappearingGhost that is within a small area of
+     * the given hitbox and randomly sets the cycle parameters to within a
+     * playable range using the random generator provided.
+     *
+     * @param source the ObstaclePlacer that has needed generation variables
+     * @param target the target hitbox that the ghost is placing itself against
+     * @param rand Random object that is used for generation
+     * @return a ghost that is close to the dorf's hitbox at a particular frame
+     */
     public static DisappearingGhost getInstance(ObstaclePlacer source, Hitbox
             target, Random rand) {
         double xTarget = target.getX();
