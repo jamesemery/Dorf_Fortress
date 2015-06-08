@@ -25,7 +25,7 @@ public class SolidPlatform extends Platform {
     }
 
     /**
-     * Sets the platform's sprite to the default sprite
+     * Sets the platform's sprite to the default platform sprite.
      */
     @Override
     protected void makeSprite() {

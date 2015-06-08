@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * SpinningHead is perhaps the most annoying obstacle. It consists of a head,
  * which kills the player, and a hitbox-less chain, one end of which is
- * connected to the head and the other to platform.
+ * connected to the head and the other to a platform.
  */
 public class SpinningHead extends Obstacle{
     double centerX;
@@ -88,9 +88,9 @@ public class SpinningHead extends Obstacle{
 
     /**
      * Places a spinning head object with the base centered on a random
-     * platform within a 400 pixles in either direction of the player then
+     * platform within a 400 pixels in either direction of the player then
      * then randomly selects a length and rate of rotation as well as an
-     * offset ensure they dont all start in the same orientation.
+     * offset ensure they don't all start in the same orientation.
      *
      * @param source
      * @param h
@@ -100,7 +100,7 @@ public class SpinningHead extends Obstacle{
     public static Obstacle getInstance(ObstaclePlacer source, Hitbox h, Random rand) {
         List<Platform> platfomrsInRange = new ArrayList<Platform>();
 
-        // Loops through the entities and finds
+        // Loops through the entities and finds a platform to latch n to
         for (Entity e : source.getSimulation().getObjects()) {
             if (e instanceof Platform) {
                 double xdiff = Math.abs(e.getX() - h.getX());

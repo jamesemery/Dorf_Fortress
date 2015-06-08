@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
 /**
- * Created by Joe Adkisson on 5/24/2015.
  * Controllable hero of the game; subclass of Entity.
  */
 public class Dorf extends Entity {
@@ -185,12 +184,12 @@ public class Dorf extends Entity {
      * Resets the level if the dorf dies.
      */
     public void die() {
-        System.out.println("Running die() in Dorf.java");
-        System.out.println(this.getSprite().getScene().getWindow());
         simulation.reset();
         if (!(this instanceof Ghost)) {
             simulation.pause();
         }
+        Main.deadDorfs++;
+        System.out.println("Casualties: "+ Main.deadDorfs);
         Scene mainScene = this.getSprite().getScene();
         //set up the lose menu
         Main.startOverlayMenu(mainScene, simulation, false);
@@ -200,7 +199,6 @@ public class Dorf extends Entity {
      * Completes the level and initiates the win screen.
      */
     public void win() {
-        System.out.println("Beginning win() method");
         simulation.reset();
         simulation.pause();
         if(this.victorious == false) {
@@ -208,7 +206,6 @@ public class Dorf extends Entity {
             Scene mainScene = this.getSprite().getScene();
             //set up the win menu
             Main.startOverlayMenu(mainScene, simulation, true);
-            System.out.println("Ending win() method");
         }
     }
 

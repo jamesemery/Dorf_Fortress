@@ -19,7 +19,6 @@ public class OverlayController {
     private Stage stage;
     @FXML private AnchorPane primaryPane;
 
-
     /**
      * A setter method for the model.
      * @param simulation   The singleton Model running in Main.
@@ -58,7 +57,7 @@ public class OverlayController {
 
     /**
      * The code corresponding to the "Next Level" button. Makes a new level with
-     * the same dorf hair color and a slightly higher difficulty.
+     * the same Dorf hair color and a slightly higher difficulty.
      */
     @FXML
     void whenNextLevelClicked(ActionEvent event) {
@@ -74,8 +73,7 @@ public class OverlayController {
 
     /**
      * The code corresponding to the "See Solution" button. Activates ghostmode,
-     * then runs the same code as whenTryAgainClicked().
-     * TODO: have it call whenTryAgainClicked() directly?
+     * then runs essentially the same code as whenReplayClicked().
      * @param event   The button press that triggers the method.
      */
     @FXML
@@ -92,7 +90,8 @@ public class OverlayController {
     }
 
     /**
-     * Allows the user to simply press the space bar to replay the level.
+     * Allows the user to simply press the space bar to replay the level (on
+     * a lose screen) or to progress forward (on a win screen).
      * @param event   The key press. If not space, this does nothing.
      */
     public void handleKeyPress(KeyEvent event, boolean winning) {

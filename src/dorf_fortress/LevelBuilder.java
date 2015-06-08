@@ -28,7 +28,7 @@ public class LevelBuilder {
     private Model model;
     private List<Entity> entities;
     private GameController controller;
-    private GhostInputSource ghostInput;
+    private GhostInputBuffer ghostInput;
     private Ghost levelSolver;
     private Random randomGenerator;
     private Platform startPlatform;
@@ -429,7 +429,7 @@ public class LevelBuilder {
                 double trampChance = (levelSolver.getY_velocity()/-600) - .30;
 
                 if (trampChance>randomGenerator.nextDouble()) {
-                    platform = new TrampolinePlatform(128,32,xCoor-20,yCoor,
+                    platform = new TrampolinePlatform(192,32,xCoor-20,yCoor,
                             model);
                 } else {
                     platform = new BouncyPlatform(128,32,xCoor, yCoor,this.model);
