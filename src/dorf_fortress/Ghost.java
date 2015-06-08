@@ -64,8 +64,7 @@ public class Ghost extends Dorf {
                 "sprites/MummyRight2.png","sprites/MummyRight3.png"};
         String[] leftImages = {"sprites/MummyLeft1.png",
                 "sprites/MummyLeft2.png","sprites/MummyLeft3.png"};
-        this.sprite = new DorfSprite(leftImages,rightImages,(int)this.width,
-                (int)this.height, this);
+        this.sprite = new DorfSprite(leftImages,rightImages, this);
     }
 
     @Override

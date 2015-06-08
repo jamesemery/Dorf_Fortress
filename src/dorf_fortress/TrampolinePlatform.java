@@ -35,7 +35,10 @@ public class TrampolinePlatform extends Platform {
      */
     @Override
     protected void makeSprite() {
-        this.sprite = new SimpleSprite("sprites/basicPlatform.png", this); //TODO: get a TrampolinePlatform.png, use it here.
+        /*String[] imageArray = {"sprites/trampoline1.png", //"sprites/trampoline2.png",
+                    "sprites/trampoline3.png", "sprites/trampoline4.png"};
+        this.sprite = new AnimatedSprite(imageArray, 128, 32,  this, 6);*/
+        this.sprite = new SimpleSprite("sprites/bounce1.png", this); //TODO: get a TrampolinePlatform.png, use it here.
     }
 
     /**
