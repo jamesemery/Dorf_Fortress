@@ -111,15 +111,16 @@ public class ObstaclePlacer {
     private Dictionary<String, Integer> parseParams(int n, List<Integer> params) {
         Dictionary<String,Integer> obstacleOccurance = new Hashtable<String,
                 Integer>();
-        int boxes = (int)(0.3*n);
-        int spinning = (int)(0.1*n);
-        int spiders = (int)(0.8*n);
-        int ghosts = (int)(0.6*n);
+        int boxes = (int)(0.15*n); //0.10
+        int spinning = (int)(0.15*n); //0.20
+        int spiders = (int)(0.20*n); //0.20
+        int ghosts = (int)(0.20*n); //0.20
+        int fireballs = n - boxes - spinning - spiders - ghosts;
         obstacleOccurance.put("disappearingGhost", ghosts);
         obstacleOccurance.put("oscillatingSpider", spiders);
         obstacleOccurance.put("spinningHead", spinning);
         obstacleOccurance.put("box", boxes);
-        obstacleOccurance.put("simpleBall", n - boxes - spinning);
+        obstacleOccurance.put("simpleBall", fireballs);
         return obstacleOccurance;
     }
 

@@ -25,7 +25,7 @@ public class ConveyorPlatform extends Platform {
                             Model simulation) {
         super(numToMake * hitbox_width, hitbox_height, x, y, simulation);
         numMade = numToMake;
-        makeSprite(x,y,simulation);
+        makeSprite();
     }
 
     /**
@@ -46,14 +46,13 @@ public class ConveyorPlatform extends Platform {
     }
 
     /**
-     * Sets the platform's sprite to the default sprite
+     * Sets the conveyors sprite to be a ConveyorPlatformSprite object.
      */
     @Override
     protected void makeSprite() {
         String[] images = {"sprites/conveyer1.png", "sprites/conveyer2.png",
                 "sprites/conveyer3.png", "sprites/conveyer4.png"};
-        this.sprite = new ConveyorPlatformSprite(images, 96,
-                (int) this.height, numMade, this, 3);
+        this.sprite = new ConveyorPlatformSprite(images,96, numMade, this, 3);
         sprite.setX(getX());
     }
 }
