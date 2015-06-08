@@ -16,7 +16,6 @@ import javafx.stage.Stage;
  */
 public class OverlayController {
     private Model model;
-    private Stage stage;
     @FXML private AnchorPane primaryPane;
 
     /**
@@ -34,7 +33,6 @@ public class OverlayController {
      */
     @FXML
     void whenMenuClicked(ActionEvent event) {
-        System.out.println("Running whenMenuClicked() in LoseScreenController.java");
         Stage thisStage = (Stage) primaryPane.getScene().getWindow();
         Main.loadMainMenu(thisStage);
     }
@@ -45,14 +43,11 @@ public class OverlayController {
      */
     @FXML
     void whenReplayClicked(ActionEvent event) {
-        System.out.println("Running whenTryAgainClicked() in LoseScreenController.java");
         Group mainRoot = (Group) primaryPane.getScene().getRoot();
         model.setGhostMode(false); // Never hurts to be safe!
         mainRoot.requestFocus();
-        System.out.println("removing main pane");
         mainRoot.getChildren().remove(primaryPane);
         this.model.unpause();
-        System.out.println("unpaused");
     }
 
     /**
@@ -61,7 +56,6 @@ public class OverlayController {
      */
     @FXML
     void whenNextLevelClicked(ActionEvent event) {
-        System.out.println("Making next level");
         double difficulty = this.model.getDifficulty();
         if (difficulty < 50) {
             difficulty += 1;
@@ -78,12 +72,9 @@ public class OverlayController {
      */
     @FXML
     void whenSolutionClicked(ActionEvent event) {
-        System.out.println("Running whenSolutionClicked() in LoseScreenController.java");
         model.setGhostMode(true);
         Group mainRoot = (Group) primaryPane.getScene().getRoot();
-        System.out.println("Removing overlay Pane");
         mainRoot.getChildren().remove(primaryPane);
-        System.out.println("removed overlay pane");
         mainRoot.requestFocus();
         this.model.unpause();
 
