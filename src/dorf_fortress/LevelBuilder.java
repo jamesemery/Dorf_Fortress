@@ -165,7 +165,7 @@ public class LevelBuilder {
 
         //Make a Ghost!
         ghostInput = new GhostInputSource();
-        
+
 //        ghostInput = new GhostInputSource("src/dorf_fortress/NewDemoInputs.txt");
         Ghost casper = new Ghost(22, 32, xStart, yStart, model, ghostInput);
 

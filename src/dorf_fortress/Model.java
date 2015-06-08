@@ -26,7 +26,7 @@ public class Model {
     }
 
 
-    private Model(GameController controller, double sceneHeight, double difficulty) {
+    public Model(GameController controller, double sceneHeight, double difficulty) {
         this.SCENE_HEIGHT = sceneHeight;
         this.controller = controller;
         this.difficulty = difficulty;
@@ -140,7 +140,7 @@ public class Model {
             }
         }
         if (ghostMode) {
-            System.out.println("Ghost moving");
+            //System.out.println("Ghost moving");
             levelSolver.step();
         } else {
             player.step();

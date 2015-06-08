@@ -48,10 +48,11 @@ public class OverlayController {
         System.out.println("Running whenTryAgainClicked() in LoseScreenController.java");
         Group mainRoot = (Group) primaryPane.getScene().getRoot();
         model.setGhostMode(false); // Never hurts to be safe!
+        mainRoot.requestFocus();
+        System.out.println("removing main pane");
+        mainRoot.getChildren().remove(primaryPane);
         this.model.unpause();
         System.out.println("unpaused");
-        mainRoot.requestFocus();
-        mainRoot.getChildren().remove(primaryPane);
     }
 
     /**
@@ -78,9 +79,12 @@ public class OverlayController {
         System.out.println("Running whenSolutionClicked() in LoseScreenController.java");
         model.setGhostMode(true);
         Group mainRoot = (Group) primaryPane.getScene().getRoot();
-        this.model.unpause();
-        mainRoot.requestFocus();
+        System.out.println("Removing overlay Pane");
         mainRoot.getChildren().remove(primaryPane);
+        System.out.println("removed overlay pane");
+        mainRoot.requestFocus();
+        this.model.unpause();
+
     }
 
     /**
