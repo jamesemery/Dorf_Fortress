@@ -19,6 +19,7 @@ public class ObstaclePlacer {
     Ghost levelSolver;
     Random randomGenerator;
     List<Entity> safeObstacles;
+    double difficulty;
 
     // specific varialbes about the simulation parameters
     double finalX;
@@ -29,15 +30,16 @@ public class ObstaclePlacer {
         this.levelSolver = ghost;
         this.randomGenerator = new Random();
         this.safeObstacles = new ArrayList<Entity>();
+        this.difficulty = simulation.getDifficulty();
     }
 
-    public void generateObstacles(int n, List<Integer> params) {
+    public void generateObstacles(int n) {
         // sets up the necessary ghost properties
         initializeGhost();
 
         // Generates the specific types of obstacles
         if (n > 1) {
-            obstacleFactoryMehtod(n, params);
+            obstacleFactoryMehtod(n);
         }
         simulation.addEntities(safeObstacles);
         simulation.setGhostMode(false);
@@ -48,10 +50,9 @@ public class ObstaclePlacer {
      * exist of each given type and then it creates specific instances of
      * each type of obstacle and culls it with cull list before
      * @param n
-     * @param params
      */
-    private void obstacleFactoryMehtod(int n, List<Integer> params) {
-        Dictionary<String,Integer> obstacleOccurance = parseParams(n, params);
+    private void obstacleFactoryMehtod(int n) {
+        Dictionary<String,Integer> obstacleOccurance = determineDifficulty(n);
         Enumeration<String> keys = obstacleOccurance.keys();
 
         // For each key in the dictonary it creates vlaue elements and adds
@@ -102,19 +103,45 @@ public class ObstaclePlacer {
 
 
     /**
-     * Takes the params passed to the ObstaclePlacer and turns them into a
-     * dictionary corresponding to the obstacle in quesiton and the number of
-     * each obstacle it should make based on those parameters
+     * Takes a number of obstacles ot generate for the level and the known
+     * difficulty (from 1-10) and determines a relative spawn prevelance for
+     * each obstacle and uses that to determine how many of each obstacle
+     * must be built and returns a dictionary pair of a string representing
+     * the obstacle, and an int representing a number of obsacles to build.
+     *
+     * We decided to us a String for the dictionary pair output of this
+     * method for readabilities sake. It is easier to tell what is being
+     * constructed when reading the code if we use a String.
+     *
      * @param n
-     * @param params
      */
-    private Dictionary<String, Integer> parseParams(int n, List<Integer> params) {
+    private Dictionary<String, Integer> determineDifficulty(int n) {
+        double boxChance = 0.15;
+        double spinningChance = 0.15;
+        double spiderChance = 0.20;
+        double ghostChance = 0.20;
+
+        // Adjusts the the occurance of certian obstacles based on the
+        // difficulty
+        if (difficulty < 3) {
+            spinningChance = 0;
+            spiderChance = 0.15;
+            boxChance = 0.30;
+
+        } else if (difficulty < 5) {
+            ghostChance = 0;
+            boxChance = 0.25;
+        }
+        if (difficulty < 9) {
+            boxChance = 0.05;
+        }
+
         Dictionary<String,Integer> obstacleOccurance = new Hashtable<String,
                 Integer>();
-        int boxes = (int)(0.15*n); //0.10
-        int spinning = (int)(0.15*n); //0.20
-        int spiders = (int)(0.20*n); //0.20
-        int ghosts = (int)(0.20*n); //0.20
+        int boxes = (int)(boxChance*n); //0.10
+        int spinning = (int)(spinningChance*n); //0.20
+        int spiders = (int)(spiderChance*n); //0.20
+        int ghosts = (int)(ghostChance*n); //0.20
         int fireballs = n - boxes - spinning - spiders - ghosts;
         obstacleOccurance.put("disappearingGhost", ghosts);
         obstacleOccurance.put("oscillatingSpider", spiders);
