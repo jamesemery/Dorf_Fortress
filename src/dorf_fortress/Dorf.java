@@ -5,37 +5,33 @@ import javafx.scene.paint.Color;
 
 /**
  * Created by Joe Adkisson on 5/24/2015.
- * Controllable hero of the game; subclass of Actor.
+ * Controllable hero of the game; subclass of Entity.
  */
 public class Dorf extends Entity {
-    double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
-    double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
+    public final double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
+    public final double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     public final double GRAVITY_CONSTANT = 10;
     public final double TERMINAL_VELOCITY = -600;
     public final double FRICTION_CONSTANT = 240 / GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 12000 / GameController.FRAMES_PER_SECOND;
-    Platform curPlatform;
+    protected Platform curPlatform;
     private boolean victorious = false;
-    String name;
-    InputBuffer inputSource;
+    protected InputBuffer inputSource;
     public Color hairColor;
 
 
     /**
-     * Calls Entity's constructor with no name.
-     * @param hitbox_width
-     * @param hitbox_height
+     * Constructor.
+     * @param hitbox_width   The width of the Dorf's hitbox.
+     * @param hitbox_height   The height of the Dorf's hitbox.
      */
     public Dorf(int hitbox_width, int hitbox_height, double x, double y,
                 Model model) {
         super(hitbox_width, hitbox_height, x, y, model);
-        this.name = "";
         inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( hitbox_width, hitbox_height);
-        height = 32;
-        width = 22;
-        hitbox_checker = true;
-        this.screen_death = true;
+        hitbox_checker = true; //TODO comment saying what this does
+        this.screen_death = true; //TODO comment saying what this does
     }
 
     @Override
@@ -45,8 +41,8 @@ public class Dorf extends Entity {
         String[] leftImages = {"sprites/ColoredDorfLeft1.png",
                 "sprites/ColoredDorfLeft2.png","sprites/ColoredDorfLeft3.png"};
         System.out.println("Calling makeSprite...");
-        this.sprite = new DorfSprite(leftImages,rightImages,(int)this.width,
-                (int)this.height, this);
+        this.sprite = new DorfSprite(leftImages,rightImages,22,
+                32, this);
 
     }
 
