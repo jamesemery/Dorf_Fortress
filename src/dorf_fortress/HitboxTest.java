@@ -13,7 +13,7 @@ public class HitboxTest {
     private Hitbox sneezy = new DorfHitbox(16,16);
     private Hitbox quad = new RectangleHitbox(32,32);
     private Hitbox rhombus = new RectangleHitbox(16,16);
-    
+
     @Test
     public void testDorfIntersectsRectangle() throws Exception {
         grumpy.setX(100);
