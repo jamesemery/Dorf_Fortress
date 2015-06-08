@@ -16,3 +16,5 @@ Features:
 - A time limit programmatically generated based on the level's difficulty and length
 - A "Next Level" button that creates another level with slightly increased difficulty
 - Ambient background noise
+Build/Run Instructions:
+Simply download the repo and import it into IntelliJ. You can run the program from src/dorf_fortress/Main.java.
