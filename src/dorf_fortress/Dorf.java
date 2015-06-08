@@ -46,18 +46,28 @@ public class Dorf extends Entity {
         curPlatform = platform;
     }
 
+    /**
+     * Makes the Dorf's sprite, a special Sprite subclass called DorfSprite.
+     * The image sources are hard-coded in.
+     * @param x
+     * @param y
+     * @param simulation
+     */
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
         String[] rightImages = {"sprites/ColoredDorfRight1.png",
                 "sprites/ColoredDorfRight2.png","sprites/ColoredDorfRight3.png"};
         String[] leftImages = {"sprites/ColoredDorfLeft1.png",
                 "sprites/ColoredDorfLeft2.png","sprites/ColoredDorfLeft3.png"};
-        System.out.println("Calling makeSprite...");
         this.sprite = new DorfSprite(leftImages,rightImages,22,
                 32, this);
-
     }
 
+    /**
+     * Colors the DorfSprite; this method simply passes the request for
+     * coloration, and the desired Color, to the sprite itself.
+     * @param hairColor   The new color for the Dorf's hair/beard.
+     */
     public void colorSprite(Color hairColor) {
         this.hairColor = hairColor;
         ((DorfSprite)this.sprite).colorSprites(hairColor);
