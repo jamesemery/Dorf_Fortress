@@ -40,8 +40,6 @@ public class Main extends Application {
     final static String ambientNoiseLoc = "src/sprites/dungeonSound.wav";
     static MediaPlayer noisePlayer;
 
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 

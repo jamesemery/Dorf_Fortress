@@ -110,8 +110,13 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //todo: move out of a controller to a view?
     private Text drawDifficulty() {
-        Text text = new Text(265,25,"Difficulty: " +
-                Integer.toString((int) simulation.getDifficulty()));
+        String displayText = "Difficulty: ";
+        if (simulation.getDifficulty() < 50) {
+            displayText += Integer.toString((int) simulation.getDifficulty());
+        } else {
+            displayText += "MAX";
+        }
+        Text text = new Text(265,25, displayText);
         text.setFont(new Font("Georgia", 20));
         text.setFill(new Color(1,1,1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
@@ -121,8 +126,9 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //todo: move out of a controller to a view?
     private Text drawViewTimer() {
-        Text text = new Text(520,25, "Time left: " +
-                Integer.toString(simulation.getRemainingTime()));
+        double timeLeft = simulation.getRemainingTime()/60;
+        Text text = new Text(520, 25, "Time left: " +
+                             Integer.toString((int) timeLeft));
         text.setFont(new Font("Georgia", 20));
         text.setFill(new Color(1, 1, 1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
@@ -219,9 +225,8 @@ public class GameController implements EventHandler<KeyEvent> {
         }
         this.helpText.setFill(new Color(1, 1, 1, textOpacity));
 
-        String time_left = Integer.toString(simulation.getRemainingTime());
-        view_timer.setText("Time left: " +
-                time_left.substring(0,time_left.length()-2));
+        double timeLeft = simulation.getRemainingTime()/60;
+        view_timer.setText("Time left: " + Integer.toString((int) timeLeft));
 
         updateBackground(dorf_x);
     }

@@ -1,7 +1,7 @@
 package dorf_fortress;
 
 /**
- * Sprite for ConvayorPlatform that handles having multiple animated sprites
+ * Sprite for ConveyorPlatform that handles having multiple animated sprites
  * in a row for the display. Functions by being a node that contains several
  * children, all of which are animated sprites.
  */
@@ -10,16 +10,15 @@ public class ConveyorPlatformSprite extends Sprite {
     private double platformWidth;
 
     /**
-     * Constructs a series of identacle animated platforms with the images
+     * Constructs a series of identical animated platforms with the images
      * they are given and adds numPlatforms of them to its root for display.
      *
-     *
-     * @param images List of consecutive image sprites to cycle through for
-     *               object
-     * @param width width of a platform
-     * @param numPlatforms number of platforms to repeat
-     * @param entity the owner object for this sprite
-     * @param animationSpeed the a
+     * @param images   List of consecutive image sprites to cycle through for
+     *                 object.
+     * @param width   Width of a platform.
+     * @param numPlatforms   Number of platforms to repeat.
+     * @param entity   The owner object for this sprite.
+     * @param animationSpeed   The animation speed.
      */
     public ConveyorPlatformSprite(String[] images, int width,int
             numPlatforms, Entity entity, int animationSpeed) {

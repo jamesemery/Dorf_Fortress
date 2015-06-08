@@ -11,9 +11,9 @@ import java.util.HashSet;
  * this buffer itself so it will excecute as though the user inputted it.
  * Uses singleton pattern for ease of reference.
  */
-public class  BasicInputBuffer extends InputBuffer {
+public class BasicInputBuffer extends InputBuffer {
     private static InputBuffer uniqueInstance;
-    Set<String> storedInput;
+    private Set<String> storedInput;
 
     /**
      * Private constructor; The input is stored as a set.
@@ -54,7 +54,7 @@ public class  BasicInputBuffer extends InputBuffer {
      * contained in storage.
      * @param input   A String value representing the input.
      */
-    public boolean getInput(String input){
+    public boolean getInput(String input) {
         return storedInput.contains(input);
     }
 
