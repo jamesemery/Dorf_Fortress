@@ -19,14 +19,11 @@ public class AnimatedSprite extends Sprite {
     /**
      * Constructs
      * @param imageArray   The array of image that compose the animation
-     * @param hitbox_width   The width of the hitbox
-     * @param hitbox_height   The height of the hitbox
      * @param entity   The entity to which the sprite corresponds
      * @param cycleSpeed   The number of game frames per image; corresponds to
      *                  this.frameDuration
      */
-    public AnimatedSprite(String[] imageArray, int hitbox_width,
-                      int hitbox_height, Entity entity, int cycleSpeed) {
+    public AnimatedSprite(String[] imageArray, Entity entity, int cycleSpeed) {
         super(entity);
         this.frameDuration = cycleSpeed;
         this.images = new ImageView[imageArray.length];
@@ -56,6 +53,7 @@ public class AnimatedSprite extends Sprite {
         // Clears the sprite and draws in the correct image.
         this.getChildren().clear();
             this.getChildren().add(images[this.currentImage]);
+        super.update(dorf_x);
         super.update(dorf_x);
     }
 

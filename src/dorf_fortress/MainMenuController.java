@@ -34,6 +34,7 @@ public class MainMenuController {
     @FXML private AnchorPane anchorPane;
     @FXML private Text titleText;
     @FXML private Button beginButton;
+    @FXML private CheckBox up_to_11;
     @FXML private ImageView menu_dorf_sprite;
     @FXML private Slider difficultySlider;
     @FXML private ColorPicker beardColorPicker;
@@ -47,8 +48,13 @@ public class MainMenuController {
     @FXML
     void whenBeginClicked(ActionEvent actionEvent) {
         Stage thisStage = (Stage) menu_dorf_sprite.getScene().getWindow();
-        Main.startGame(thisStage,
-                difficultySlider.getValue(), beardColorPicker.getValue());
+        if (up_to_11.isSelected()) {
+            // In our difficulty settings, 20 is 11.
+            Main.startGame(thisStage,20, beardColorPicker.getValue());
+        } else {
+            Main.startGame(thisStage,
+                    difficultySlider.getValue(), beardColorPicker.getValue());
+        }
     }
 
     public void changeMenuSprite() {

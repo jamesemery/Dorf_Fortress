@@ -6,7 +6,7 @@ package dorf_fortress;
  */
 
 public class ConveyorPlatform extends Platform {
-
+    private int numMade;
     /**
      * The constructor for ConveyorPlatform. Passes the information up the
      * inheritance tree to Platform's constructor.
@@ -19,10 +19,13 @@ public class ConveyorPlatform extends Platform {
      */
     public ConveyorPlatform(int hitbox_width,
                             int hitbox_height,
+                            int numToMake,
                             double x,
                             double y,
                             Model simulation) {
-        super(hitbox_width, hitbox_height, x, y, simulation);
+        super(numToMake * hitbox_width, hitbox_height, x, y, simulation);
+        numMade = numToMake;
+        makeSprite();
     }
 
     /**
@@ -43,14 +46,14 @@ public class ConveyorPlatform extends Platform {
     }
 
     /**
-     * Sets the platform's sprite to the default sprite
+     * Sets the conveyors sprite to be a ConveyorPlatformSprite object.
      */
     @Override
     protected void makeSprite() {
         String[] images = {"sprites/conveyer1.png", "sprites/conveyer2.png",
                 "sprites/conveyer3.png", "sprites/conveyer4.png"};
-        this.sprite = new AnimatedSprite(images, (int) this.width,
-                (int) this.height, this, 3);
+        this.sprite = new ConveyorPlatformSprite(images,96, numMade, this, 3);
+        sprite.setX(getX());
     }
 }
 

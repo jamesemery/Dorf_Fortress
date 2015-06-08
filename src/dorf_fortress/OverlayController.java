@@ -19,6 +19,7 @@ public class OverlayController {
     private Stage stage;
     @FXML private AnchorPane primaryPane;
 
+
     /**
      * A setter method for the model.
      * @param simulation   The singleton Model running in Main.

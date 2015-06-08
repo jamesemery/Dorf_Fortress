@@ -42,9 +42,13 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
         // If the ghost is between being visible and invisible
         } else if (currentFrame <= goneFrameStart) {
             double difference = goneFrameStart - dangerFrameEnd;
-            double opacityGradient = ((double)currentFrame - dangerFrameEnd)
-                    /difference;
+            double opacityGradient = ((double) currentFrame - dangerFrameEnd)
+                    / difference;
             currentOpacity = 1.0 - opacityGradient;
+
+            // If the ghost is supposed to be invisible
+        } else if (currentFrame < goneFrameEnd) {
+            currentOpacity = 0.0;
 
         // If it is appearing during the last phase of the cycle
         } else if (currentFrame > goneFrameEnd) {
@@ -53,6 +57,7 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
                     /difference;
             currentOpacity = opacityGradient;
         }
+
 
         // If its below a certian visiblity its hitbox is unreachable
         if (currentOpacity < .60) {

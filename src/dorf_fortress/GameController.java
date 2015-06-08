@@ -26,7 +26,7 @@ public class GameController implements EventHandler<KeyEvent> {
     public BasicInputBuffer inputStore;
     List<Sprite> spriteList;
     Group root;
-    private double screenOffset;
+    private double dorf_x;
     private Text helpText;
     private Text view_timer;
     private Text difficulty;
@@ -84,11 +84,11 @@ public class GameController implements EventHandler<KeyEvent> {
 
     /**
      * Updates the background's tiling to match the platforms.
-     * @param screenOffset is the player's x-coordinate.
+     * @param dorf_x is the player's x-coordinate.
      */
-    public void updateBackground(double screenOffset) {
+    public void updateBackground(double dorf_x) {
         //get the dorf's offset over one tile
-        double tileOffset = screenOffset % this.tileWidth;
+        double tileOffset = dorf_x % this.tileWidth;
         //change background position accordingly.
         ImagePattern tilePattern = new ImagePattern(
                 (this.tile),-1*tileOffset,0,this.tile.getWidth(),
@@ -203,16 +203,16 @@ public class GameController implements EventHandler<KeyEvent> {
      */
     public void updateScreen() {
         if (simulation.getGhostMode()) {
-            screenOffset = simulation.levelSolver.getX();
+            dorf_x = simulation.levelSolver.getX();
         } else {
-            screenOffset = simulation.player.getX();
+            dorf_x = simulation.player.getX();
         }
         for (Sprite s : spriteList) {
-            s.update(screenOffset);
+            s.update(dorf_x);
         }
         //fade out the help text as the player moves farther along the level
         double textOpacity = 0;
-        if (this.simulation.getGhostMode() == false) { //ghosts don't need help
+        if (!this.simulation.getGhostMode()) { //ghosts don't need help
             textOpacity = 1 - ( (this.simulation.player.getX() - 50) * .005);
             if (textOpacity < 0) { textOpacity = 0; }
             if (textOpacity > 1) { textOpacity = 1; }
@@ -223,7 +223,7 @@ public class GameController implements EventHandler<KeyEvent> {
         view_timer.setText("Time left: " +
                 time_left.substring(0,time_left.length()-2));
 
-        updateBackground(screenOffset);
+        updateBackground(dorf_x);
     }
 
     /**

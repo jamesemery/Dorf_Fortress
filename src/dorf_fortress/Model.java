@@ -43,9 +43,11 @@ public class Model {
          * TODO: Fiddle with? We can make obstacle_count = n(difficulty) + c,
          * TODO: where c is the count at difficulty 0 and n scales it.
          */
-        List tempList = new ArrayList<Integer>();
-        dangerMaker.generateObstacles((int) Math.round(7 + (.7) *
-                this.difficulty * this.difficulty), tempList);
+        List tempList = new ArrayList<Integer>(); //TODO get rid of temp list
+
+        // Chooses how many obstacles to place based on the number of platforms
+        int obstacles = (int)(entities.size()*((this.difficulty/2) + 1));
+        dangerMaker.generateObstacles(obstacles, tempList);
         setGhostMode(false);
         timeLimit = levelSolver.getEndFrame()*2 + (int) difficulty;
         levelSolver.liveSimulation = true;
@@ -142,7 +144,6 @@ public class Model {
             }
         }
         if (ghostMode) {
-            //System.out.println("Ghost moving");
             levelSolver.step();
         } else {
             player.step();
