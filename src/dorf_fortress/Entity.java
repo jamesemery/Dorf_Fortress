@@ -1,9 +1,9 @@
 package dorf_fortress;
 
 /**
- * Interface class for all of the simulation components in the code, this
+ * Interface class for all of the simulation components in the code. This
  * interface contains a constructor and simulation code for basic simulation
- * components with the expectation that these methods are overridden by
+ * components, with the expectation that these methods are overridden by
  * subclasses when behavior is particularly complicated. Also entails a
  * series of getters and setters for the general variables that every Entity
  * will have.
@@ -26,6 +26,15 @@ public abstract class Entity {
     //if the object "dies" when if falls off the edge of the screen
     protected boolean screen_death;
 
+    /**
+     * Constructor. Creates a new Entity with the given properties, and
+     * several defaults.
+     * @param hitbox_width   Width of the Entity's hitbox.
+     * @param hitbox_height   Height of the Entity's hitbox.
+     * @param x   Starting X-coordinate.
+     * @param y   Starting Y-coordinate.
+     * @param simulation   A reference to the model.
+     */
     public Entity (int hitbox_width, int hitbox_height, double x, double y,
                    Model simulation) {
         this.simulation = simulation;
@@ -53,7 +62,6 @@ public abstract class Entity {
         setY(initial_y);
         setX_velocity(initial_x_velocity);
         setY_velocity(initial_y_velocity);
-
     }
 
     public void setX(double x) {
@@ -94,7 +102,7 @@ public abstract class Entity {
 
     /**
      * Baseline step() method for all Entities; moves the Entity along its
-     * velocity, one axis at a time, and checks for collisions. Segmets
+     * velocity, one axis at a time, and checks for collisions. Segments
      * movement into x collisions first then y collision so that the
      * collision handler knows where the object came from
      */
@@ -113,8 +121,11 @@ public abstract class Entity {
         }
     }
 
-    // collision code is such that it can be overridden by subclasses if
-    // necessary
+    /**
+     * Default collision code; this can be overridden by subclasses as
+     * necessary. Simply checks for collision with all other entities in the
+     * scene.
+     */
     protected void handleCollisionX() {
         if (this.hitbox_checker){
             for (Entity other : simulation.getObjects()) {
@@ -124,6 +135,12 @@ public abstract class Entity {
             }
         }
     }
+
+    /**
+     * Default collision code; this can be overridden by subclasses as
+     * necessary. Simply checks for collision with all other entities in the
+     * scene.
+     */
     protected void handleCollisionY() {
         if (this.hitbox_checker){
             for (Entity other : simulation.getObjects()) {
@@ -144,28 +161,26 @@ public abstract class Entity {
     }
 
     /**
-     * TODO: Jamie, you understand what this is doing. I really don't.
-     * It'd be nice if you could write the comment to explain this one.
-     * -Joe
-     * @param e
-     * @return
+     * Checks if the Entity intersects with another Entity
+     * @param e   The other Entity
+     * @return   Whether or not they intersect.
      */
     public boolean intersects(Entity e){
         return this.hitbox.intersects(e.hitbox);
     }
 
     /**
-     * Runs when the character meets its demise. TODO IMPLEMENT/DEAL WITH THIS
+     * Runs when the character meets its demise.
      */
     public void die() {};
 
     /**
-     * Runs when the character wins the game. TODO IMPLEMENT/DEAL WITH THIS
+     * Runs when the character wins the game.
      */
     public void win() {};
 
 
-    //entity objects need to do stuff with collisions
+    //All Entities need to have collision methods.
     public abstract void collidesX(Entity projectile);
     public abstract void collidesY(Entity projectile);
 
