@@ -44,7 +44,7 @@ public class Dorf extends Entity {
      * @param platform   The platform on which the Dorf is standing.
      */
     public void setCurPlatform(Platform platform) {
-        curPlatform = platform;
+        this.curPlatform = platform;
     }
 
     /**
@@ -88,16 +88,16 @@ public class Dorf extends Entity {
      */
     @Override
     public void step() {
-        if (inputSource.getInput("left")) {
+        if (this.inputSource.getInput("left")) {
             this.left();
         }
-        if (inputSource.getInput("right")) {
+        if (this.inputSource.getInput("right")) {
             this.right();
         }
-        if (inputSource.getInput("up")) {
+        if (this.inputSource.getInput("up")) {
             this.up();
         }
-        if (inputSource.getInput("down")) {
+        if (this.inputSource.getInput("down")) {
             this.down();
         }
 
@@ -130,10 +130,10 @@ public class Dorf extends Entity {
      */
     public void fall() {
         this.curPlatform = null;
-        if (y_velocity >= TERMINAL_VELOCITY) {
-            y_velocity -= GRAVITY_CONSTANT;
+        if (this.y_velocity >= TERMINAL_VELOCITY) {
+            this.y_velocity -= GRAVITY_CONSTANT;
         } else {
-            y_velocity = TERMINAL_VELOCITY;
+            this.y_velocity = TERMINAL_VELOCITY;
         }
     }
 
@@ -154,8 +154,8 @@ public class Dorf extends Entity {
      * or on a ConveyorPlatform.
      */
     public void right() {
-        boolean conveyor_check = (curPlatform instanceof ConveyorPlatform ||
-                                  curPlatform == null);
+        boolean conveyor_check = (this.curPlatform instanceof ConveyorPlatform ||
+                                  this.curPlatform == null);
         if (this.x_velocity < MAX_HORIZ_SPEED) {
             this.x_velocity += STEP_SIZE_X;
         } else if (!conveyor_check && this.x_velocity > MAX_HORIZ_SPEED) {
@@ -167,8 +167,8 @@ public class Dorf extends Entity {
      * Adds to the upwards velocity.
      */
     public void up() {
-        if (curPlatform != null) {
-            this.y_velocity += curPlatform.getJump();
+        if (this.curPlatform != null) {
+            this.y_velocity += this.curPlatform.getJump();
         }
         if (this.y_velocity >= 50) {
             this.y_velocity += STEP_SIZE_Y;
@@ -186,27 +186,27 @@ public class Dorf extends Entity {
      * Resets the level if the dorf dies.
      */
     public void die() {
-        simulation.reset();
+        this.simulation.reset();
         if (!(this instanceof Ghost)) {
-            simulation.pause();
+            this.simulation.pause();
         }
         Main.deadDorfs++;
         Scene mainScene = this.getSprite().getScene();
         //set up the lose menu
-        Main.startOverlayMenu(mainScene, simulation, false);
+        Main.startOverlayMenu(mainScene, this.simulation, false);
     }
 
     /**
      * Completes the level and initiates the win screen.
      */
     public void win() {
-        simulation.reset();
-        simulation.pause();
+        this.simulation.reset();
+        this.simulation.pause();
         if(this.victorious == false) {
             this.victorious = true;
             Scene mainScene = this.getSprite().getScene();
             //set up the win menu
-            Main.startOverlayMenu(mainScene, simulation, true);
+            Main.startOverlayMenu(mainScene, this.simulation, true);
         }
     }
 
@@ -216,7 +216,7 @@ public class Dorf extends Entity {
     public void reset() {
         super.reset();
         this.victorious = false;
-        inputSource.clear();
+        this.inputSource.clear();
     }
 
     /**
@@ -224,7 +224,7 @@ public class Dorf extends Entity {
      */
     @Override
     protected boolean isOffScreen() {
-        return (this.getY() > simulation.SCENE_HEIGHT);
+        return (this.getY() > Model.SCENE_HEIGHT);
     }
 
     /**
