@@ -115,10 +115,10 @@ public class Spider extends Obstacle{
         int pauseFrames = 10 + rand.nextInt(60);
         int moveFrames = 80 + rand.nextInt(50);
 
-        // Choses a distance for the object to move then an angle and uses
+        // Chooses a distance for the object to move then an angle and uses
         // trigonometry to choose an angle and final position. Then makes
         // sure that the ending y is on the screen properly and recalculates
-        // if necissary;
+        // if necessary;
         int distance = 150 + rand.nextInt(250);
         int angle = rand.nextInt(361);
         double endY = yStart - distance*Math.sin(angle);
