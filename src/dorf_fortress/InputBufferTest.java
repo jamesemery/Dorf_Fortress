@@ -3,7 +3,7 @@ package dorf_fortress;
 import static org.junit.Assert.*;
 
 /**
- * A battery of tests for the two inputbuffer classes
+ * A battery of tests for the two InputBuffer subclasses and their logic
  */
 public class InputBufferTest {
 
@@ -25,9 +25,14 @@ public class InputBufferTest {
     // We should hope that these are both the same instance
     @org.junit.Test
     public void testSingletonIsSingleton() throws Exception {
-        InputBuffer playerInput = BasicInputBuffer.getInstance();
-        InputBuffer playerInput2 = BasicInputBuffer.getInstance();
+        BasicInputBuffer playerInput = BasicInputBuffer.getInstance();
+        BasicInputBuffer playerInput2 = BasicInputBuffer.getInstance();
         assertEquals(playerInput,playerInput2);
+
+        playerInput.addInput("right", true);
+        boolean instance1 = playerInput.getInput("right");
+        boolean instance2 = playerInput2.getInput("right");
+        assertEquals(instance1,instance2);
     }
 
     public void testGhostInputAddInputGetInputNextInputAndResetInput() throws
@@ -98,11 +103,39 @@ public class InputBufferTest {
         assertEquals(ghostInput.getInput("down"), false);
     }
 
+    @org.junit.Test
     public void testBasicInputBufferKeyPressLogic() throws Exception {
         BasicInputBuffer playerInput = BasicInputBuffer.getInstance();
         playerInput.clear();
 
         boolean actual = playerInput.getInput("right");
+        // Should be false because the inputbuffer is empty
+        assertEquals(actual, false);
+
+        // Testing that adding input can be pulled
+        playerInput.addInput("right",true);
+        actual = playerInput.getInput("right");
+        assertEquals(actual, true);
+
+        // testing that nothing changed for other inputs
+        actual = playerInput.getInput("left");
+        assertEquals(actual,false);
+
+        // testing that totally wrong inputs return false
+        actual = playerInput.getInput("apple");
+        assertEquals(actual, false);
+
+        // Testing that setting something to false works properly
+        playerInput.addInput("right",false);
+        actual = playerInput.getInput("right");
+        assertEquals(actual, false);
+
+        // Testing that clear removes input from the buffer properly
+        playerInput.addInput("right",false);
+        playerInput.clear();
+        actual = playerInput.getInput("right");
+        assertEquals(actual, false);
+
 
     }
 }
