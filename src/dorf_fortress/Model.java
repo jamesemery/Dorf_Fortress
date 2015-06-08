@@ -20,12 +20,12 @@ public class Model {
     private int timeLimit;
 
 
-    static Model getInstance(GameController controller, double sceneHeight, double difficulty) {
-        if(singleInstance == null) {
-            singleInstance = new Model(controller, sceneHeight, difficulty);
-        }
-        return singleInstance;
-    }
+//    static Model getInstance(GameController controller, double sceneHeight, double difficulty) {
+//        //if(singleInstance == null) {
+//            singleInstance = new Model(controller, sceneHeight, difficulty);
+//        //}
+//        return singleInstance;
+//    }
 
 
     public Model(GameController controller, double sceneHeight, double difficulty) {

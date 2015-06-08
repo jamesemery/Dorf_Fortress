@@ -46,18 +46,28 @@ public class Dorf extends Entity {
         curPlatform = platform;
     }
 
+    /**
+     * Makes the Dorf's sprite, a special Sprite subclass called DorfSprite.
+     * The image sources are hard-coded in.
+     * @param x
+     * @param y
+     * @param simulation
+     */
     @Override
     protected void makeSprite() {
         String[] rightImages = {"sprites/ColoredDorfRight1.png",
                 "sprites/ColoredDorfRight2.png","sprites/ColoredDorfRight3.png"};
         String[] leftImages = {"sprites/ColoredDorfLeft1.png",
                 "sprites/ColoredDorfLeft2.png","sprites/ColoredDorfLeft3.png"};
-        System.out.println("Calling makeSprite...");
         this.sprite = new DorfSprite(leftImages,rightImages,22,
                 32, this);
-
     }
 
+    /**
+     * Colors the DorfSprite; this method simply passes the request for
+     * coloration, and the desired Color, to the sprite itself.
+     * @param hairColor   The new color for the Dorf's hair/beard.
+     */
     public void colorSprite(Color hairColor) {
         this.hairColor = hairColor;
         ((DorfSprite)this.sprite).colorSprites(hairColor);
@@ -206,7 +216,9 @@ public class Dorf extends Entity {
         }
     }
 
-    //does stuff
+    /**
+     * Resets the Dorf to its starting position, with no input.
+     */
     public void reset() {
         super.reset();
         this.victorious = false;
@@ -214,11 +226,10 @@ public class Dorf extends Entity {
     }
 
     /**
-     * Change in behavior for dorf so it doesn't worry about going off the top
+     * Checks whether the Dorf is off the bottom of the screen.
      */
     @Override
     protected boolean isOffScreen() {
-        //under the bottom first then over the top second
         return (this.getY() > simulation.SCENE_HEIGHT);
     }
 
