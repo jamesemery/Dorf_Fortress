@@ -19,6 +19,7 @@ public class Model {
     private int currentFrame;
     private double difficulty;
     private int timeLimit;
+    public Hitbox spawnSafeZone;
 
     /**
      * Constructor. Builds a model based on the height of the scene and
@@ -32,13 +33,15 @@ public class Model {
         this.SCENE_HEIGHT = sceneHeight;
         this.controller = controller;
         this.difficulty = difficulty;
+        this.spawnSafeZone = null;
 
         entities = new ArrayList<Entity>();
         //Build the Ghost's path and the platforms along it.
         LevelBuilder levelBuilder = new LevelBuilder(this,entities,controller);
         levelBuilder.makeLevel();
-        //Build obstacles.
-        ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this.levelSolver);
+        
+        ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this
+                .levelSolver, spawnSafeZone);
         // Chooses how many obstacles to place based on the number of platforms
         // (i.e. entities.size(), since entities only contains platforms as yet)
         int obstacles = (int)(entities.size()*((this.difficulty/2) + 1));

@@ -99,10 +99,17 @@ public class LevelBuilder {
                 startPlatformY,this.model);
         this.entities.add(spawn);
         this.startPlatform = spawn;
-        this.placeDorf();
+
+        // Makes a safezone hitbox above the start platform for obstacle
+        // generation
+        Hitbox spawnZone = new RectangleHitbox(spawn.width,200);
+        spawnZone.setY(spawn.getY()-200);
+        spawnZone.setX(spawn.getX());
+        model.spawnSafeZone = spawnZone;
 
         // Initializes model so it will be properly simulating the ghost
         // every frame
+        this.placeDorf();
         model.setGhostMode(true);
 
 
