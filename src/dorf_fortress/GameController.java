@@ -99,9 +99,9 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //TODO: move out of a controller to a view?
     private Text drawHelpText() {
-        Text text = new Text(20,400,"Use WASD or arrow keys to move.\n" +
+        Text text = new Text(20,410,"Use WASD or arrow keys to move.\n" +
                 "Press P or Esc to pause.\n" + "Hold W/Up for a higher jump.");
-        text.setFont(new Font("Alegreya SC", 20));
+        text.setFont(new Font("Georgia", 20));
         text.setFill(new Color(1, 1, 1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
         root.getChildren().add(text);
@@ -110,9 +110,9 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //todo: move out of a controller to a view?
     private Text drawDifficulty() {
-        Text text = new Text(270,25,"Difficulty: " +
-                Integer.toString((int) simulation.getDifficulty() + 1));
-        text.setFont(new Font("Alegreya SC", 20));
+        Text text = new Text(265,25,"Difficulty: " +
+                Integer.toString((int) simulation.getDifficulty()));
+        text.setFont(new Font("Georgia", 20));
         text.setFill(new Color(1,1,1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
         root.getChildren().add(text);
@@ -121,9 +121,9 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //todo: move out of a controller to a view?
     private Text drawViewTimer() {
-        Text text = new Text(550,25, "Time left: " +
+        Text text = new Text(520,25, "Time left: " +
                 Integer.toString(simulation.getRemainingTime()));
-        text.setFont(new Font("Alegreya SC", 20));
+        text.setFont(new Font("Georgia", 20));
         text.setFill(new Color(1, 1, 1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
         root.getChildren().add(text);
@@ -220,7 +220,8 @@ public class GameController implements EventHandler<KeyEvent> {
         this.helpText.setFill(new Color(1, 1, 1, textOpacity));
 
         String time_left = Integer.toString(simulation.getRemainingTime());
-        view_timer.setText(time_left.substring(0,time_left.length()-2));
+        view_timer.setText("Time left: " +
+                time_left.substring(0,time_left.length()-2));
 
         updateBackground(screenOffset);
     }
