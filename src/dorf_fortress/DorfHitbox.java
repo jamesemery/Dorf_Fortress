@@ -10,25 +10,15 @@ import javafx.scene.shape.Rectangle;
  * Created by jamie on 5/27/15.
  */
 public class DorfHitbox extends Hitbox {
-    Rectangle hitboxRectangle;
-    double x;
-    double y;
+    private Rectangle hitboxRectangle;
+    private double x;
+    private double y;
 
-    public DorfHitbox( double width, double height){
+    public DorfHitbox(double width, double height){
         //The x and y coordinates for the hitbox rectangle will be
         //set later; we're just making sure that rectangle exists
         //and is the right size.
         hitboxRectangle = new Rectangle(0, 0, width, height);
-    }
-
-    void setX(double newx){
-        this.x = newx;
-        hitboxRectangle.setX(newx);
-    }
-
-    void setY(double newy){
-        this.y = newy;
-        hitboxRectangle.setY(newy);
     }
 
     /**
@@ -44,17 +34,27 @@ public class DorfHitbox extends Hitbox {
     }
 
      /**
-      * Takes a javafx bounds object and returns true if it intersects with any
-      * of the objects that make up this hitbox. For this hitbox it consists of
-      * looping through the rectangles that makes it up and determines if the
-      * bounds intersect.
-      **/
+      * Only ever called by the hitbox intersection checker.
+      */
      public boolean intersects(javafx.geometry.Bounds bounds) {
          if (hitboxRectangle.intersects(bounds)) {
              return true;
          }
          return false;
      }
+
+    /*
+     * Setters and getters.
+     */
+    void setX(double newx){
+        this.x = newx;
+        hitboxRectangle.setX(newx);
+    }
+
+    void setY(double newy){
+        this.y = newy;
+        hitboxRectangle.setY(newy);
+    }
 
     public double getX() {return x;};
     public double getY() {return y;};

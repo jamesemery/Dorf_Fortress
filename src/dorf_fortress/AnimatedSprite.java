@@ -55,8 +55,7 @@ public class AnimatedSprite extends Sprite {
             this.getChildren().add(images[this.currentImage]);
         super.update(dorf_x);
     }
-
-
+    
     /**
      * Sets whether the animation is cycling, forcing the state rather than
      * toggling it.
@@ -67,7 +66,7 @@ public class AnimatedSprite extends Sprite {
     }
 
     //Helper method that moves currentImage to the next index.
-    private void getNextFrame() {
+    public void getNextFrame() {
         if(this.currentImage < this.numImages -1) {
             this.currentImage++;
         } else {
