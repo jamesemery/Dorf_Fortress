@@ -4,8 +4,25 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TODO make a description here
- * Created by jamie on 5/27/15.
+ * A LevelBuilder object manages the procedural generation of platforms on a
+ * level as well as the construction of a series of inputs for the level
+ * solving Ghost. The goal of this mehtod of generation is to construct
+ * levels that are necessaraly solvable by a known set of computer inputs
+ * every time.
+ * The level building script works by having the model simulate through the
+ * level with the current set of ghost inputs as normal
+ * and then adding to the input based on the current conditions experienced
+ * by the ghost (ex. being on a platform makes it more likely to press the
+ * left key to stop motion, or being in the air going up the ghost is more
+ * likely to go right then in the second half of its jump).
+ *
+ * To place platforms the LevelBuilder keeps track of the first frame where
+ * the ghost started falling (downwards velocity) and then simulates until
+ * the dorf dies (or lands on a platform resetting everything) then simulates
+ * to a randomly selected frame between starting to fall and dying and places
+ * a platform exactly there to catch it. Also, if the dorf runs off the edge
+ * of a platform it will sometimes revert several frames back to before the
+ * dorf fell and add a jump to the input instead.
  */
 public class LevelBuilder {
     private Model model;
@@ -15,7 +32,7 @@ public class LevelBuilder {
     private Ghost levelSolver;
     private Random randomGenerator;
     private Platform startPlatform;
-    private int lastSafeFrame;
+    private double difficulty;
     private boolean levelFinished;
     private boolean holdingRight;
     private boolean holdingLeft;
@@ -24,123 +41,26 @@ public class LevelBuilder {
     private boolean jumpHandled;
     private boolean justPlacedPlatform;
 
+    /**
+     * Creates and stores variables needed for level generation
+     *
+     * @param model The simulation the level gets built to
+     * @param entities The list of entities that model simulats
+     * @param controller The view/controller JFX object that the generated
+     *                   sprites get added to for display
+     */
     public LevelBuilder(Model model, List<Entity> entities,
                         GameController controller) {
         this.model = model;
         this.entities = entities;
         this.controller = controller;
         this.randomGenerator = new Random();
+        this.difficulty = model.getDifficulty();
     }
 
-    public void makeTestLevel() {
+
+    public void makeLevel() {
         generateLevel();
-
-        /* Platforms */
-
-//        Platform spawn = new ConveyorPlatform(128,32,1,-100,
-//                150,this.model);
-//        this.entities.add(spawn);
-//
-//        Platform spawn2 = new ConveyorPlatform(128,32,-200,
-//                150,this.model);
-//        this.entities.add(spawn2);
-//
-//        Platform spawn3 = new ConveyorPlatform(128,32,-300,
-//                150,this.model);
-//        this.entities.add(spawn3);
-//
-//        Platform spawn4 = new ConveyorPlatform(128,32,-400,
-//                150,this.model);
-//        this.entities.add(spawn4);
-//
-//        Platform spawn5 = new ConveyorPlatform(128,32,-500,
-//                150,this.model);
-//        this.entities.add(spawn5);
-//
-//        Platform spawn6 = new ConveyorPlatform(128,32,-600,
-//                150,this.model);
-//        this.entities.add(spawn6);
-//
-//        Platform spawn7 = new ConveyorPlatform(128,32,-700,
-//                150,this.model);
-//        this.entities.add(spawn7);
-//
-//        Platform spawn8 = new ConveyorPlatform(128,32,-800,
-//                150,this.model);
-//        this.entities.add(spawn8);
-//
-//        Platform spawn9 = new ConveyorPlatform(128,32,-900,
-//                150,this.model);
-//        this.entities.add(spawn9);
-//
-//        Platform spawn10 = new ConveyorPlatform(128,32,-1000,
-//                150,this.model);
-//        this.entities.add(spawn10);
-//
-//        Platform platform1 = new SolidPlatform(128,32,150,
-//                300,this.model);
-//        this.entities.add(platform1);
-//
-//        Platform platform2 = new TrampolinePlatform(128,32,300,
-//                400,this.model);
-//        this.entities.add(platform2);
-//
-//        Platform platform3 = new SolidPlatform(128,32,450,
-//                150,this.model);
-//        this.entities.add(platform3);
-//
-//        Platform platform4 = new SolidPlatform(128,32,650,
-//                300,this.model);
-//        this.entities.add(platform4);
-//
-//        Platform platform5 = new SolidPlatform(128,32,800,
-//                200,this.model);
-//        this.entities.add(platform5);
-//
-//        Platform platform6 = new BouncyPlatform(128,32,850,
-//                400,this.model);
-//        this.entities.add(platform6);
-//
-//        Platform platform7 = new SolidPlatform(128,32,1000,
-//                150,this.model);
-//        this.entities.add(platform7);
-
-//        DisappearingGhost creepy = new DisappearingGhost(32,32,-10,70,60,60,
-//                180,10,model);
-//        this.entities.add(creepy);
-//
-//
-//        /* Obstacles */
-//
-//        Obstacle on_platform1 = new KillBlock(
-//                32,32,192,256,this.model);
-//        this.entities.add(on_platform1);
-//
-//        Obstacle under_platform3 = new KillBlock(
-//                32,32,512,256,this.model);
-//        this.entities.add(under_platform3);
-//
-//        Obstacle fireball_0 = new Fireball(
-//                33,33,425,80,this.model);
-//        entities.add(fireball_0);
-//
-//        Obstacle fireball_1 = new Fireball(
-//                33,33,775,100,this.model);
-//        entities.add(fireball_1);
-//
-//        Obstacle fireball_2 = new Fireball(
-//                33,33,950,150,this.model);
-//        entities.add(fireball_2);
-//
-//
-//        /* Goal */
-//
-//        WinBlock victory_arch = new WinBlock(
-//                113,109,1000+7,150-109,this.model);
-//        this.entities.add(victory_arch);
-
-
-        /* Dorf Placement */
         this.addSpritesToRoot();
     }
 
@@ -159,21 +79,17 @@ public class LevelBuilder {
 
         //Make a Ghost!
         ghostInput = new GhostInputBuffer();
-
-//        ghostInput = new GhostInputBuffer("src/dorf_fortress/NewDemoInputs.txt");
         Ghost casper = new Ghost(22, 32, xStart, yStart, model, ghostInput);
-
         model.levelSolver = casper;
         this.levelSolver = casper;
     }
 
 
-
-
-
     /**
-     * This is where the procedural level generation comes in. It works by
-     * first placing the starting platform and the dorf
+     * This method is what does the majority of the procedural level
+     * generation by having the model simulate the level and then determining
+     * conditions that the ghost is currently in and adding input to the
+     * ghosts input buffer just before executing the input on simulation.
      */
     public void generateLevel() {
         // Makes the starting platform
@@ -195,25 +111,26 @@ public class LevelBuilder {
         for (int i = 0; i < 30; i++) {
             ghostInput.addInput(false, false, false, false);
         }
-        this.lastSafeFrame = 30;
         model.reset(29);
 
 
-        int lastPlatformFrame = 30;
+        int lastPlatformFrame = 30; // The last frame the dorf was
+        // successfully on a platform
         boolean downStart = false;
         int downFrame =0;
-        int fallTreeFrame =0; // If the dorf tries to fall
         holdingUp = false;
         holdingRight = true;
         holdingLeft = false;
-        while (!levelFinished) {
-            System.out.println();
-            System.out.println("frame: " + model.getCurrentFrame());
-            System.out.println("x: " + levelSolver.getX());
-            System.out.println("GhostInputBuffer size: " + ghostInput
-                    .storedInput.size());
 
-            // if its currently on a platform
+        // The primary generation loop. This while loop runs through the code
+        // until the level has been completed. The variable levelFinished is
+        // set by the platform placer if it has chosen to place a win block.
+        // The winblock will necessarily be placed as the odds of it being
+        // selected become 100% with enough platforms
+        while (!levelFinished) {
+
+            // if its currently on a platform, reset variables associated
+            // with platform placement and adjust the input accordingly
             if (levelSolver.curPlatform!=null) {
                 if (justPlacedPlatform) {
                     justPlacedPlatform = false;
@@ -223,7 +140,6 @@ public class LevelBuilder {
                 downStart = true;
                 jumpHandled = false;
                 handlePlatformInput();
-                fallTreeFrame = 0;
 
             // If the dorf is in the air (because it isnt on a platform) then
             // it asks if this is the first frame off of a platform
@@ -235,12 +151,18 @@ public class LevelBuilder {
                 if (levelSolver.getY_velocity()>0) {
                     jumpHandled = true;
                 } else {
+
+                    // Sometimes it decides to turn back the clock by a few
+                    // frames and make a jump, sometimes it will allow itself
+                    // to just fall of the platform
                     double chanceNoJump = 0.15;
                     if (chanceNoJump>randomGenerator.nextDouble()) {
-                        fallTreeFrame = model.getCurrentFrame() - 10;
+                        // Stores back a few frames so it can get back in the
+                        // event that it was too low to fall
+                        lastPlatformFrame = model.getCurrentFrame() - 10;
                         jumpHandled = true;
                     } else {
-                        int fudge = 2 + randomGenerator.nextInt(10);
+                        int fudge = 4 + randomGenerator.nextInt(10);
                         model.reset(lastPlatformFrame - fudge);
                         ghostInput.removeInputs(lastPlatformFrame - fudge);
                         lastPlatformFrame = lastPlatformFrame - fudge;
@@ -249,33 +171,38 @@ public class LevelBuilder {
                     }
                 }
 
+            // If the velocity is positive, then the dorf is going up and
+            // since jumpHandled is already true, the dorf probably jumped
             } else if (levelSolver.y_velocity>0) {
                 handleUpInput();
-                System.out.println("going up");
 
-
+            // If it gets here, then the dorf is not on a platform, and it
+            // does not have an upwards velocity meaning that the dorf must
+            // be falling right now, so flag this frame as the first frame
+            // for generation and continue running. (NOTE: this will
+            // sometimes result in the dorf falling back onto an extant
+            // platform, if this happens then downStart will be reset while
+            // its on the platform.
             } else if (downStart) {
-                System.out.println("first down");
-//                System.out.println("FinalX: " + levelSolver.finalX + " " +
-//                        "FinalFrame: " + levelSolver.frameFinished);
-//                System.out.println("selected frame = " + platformPlace);
-
                 downFrame = model.getCurrentFrame();
                 downStart = false;
 
-
+            // If the levelSolver has finished the level, then at this point
+            // it cant have completed the level because the no exit has been
+            // built so it means the dorf must have died, in that case we
+            // need to build a platform to catch him now dont we?
             } else if (levelSolver.finishedLevel) {
-//                System.out.println
-//                        ("------------------------------------------------");
                 boolean placed = placePlatform(downFrame, levelSolver
                         .frameFinished);
                 if (placed) {
                     justPlacedPlatform = true;
                     downFrame = 0;
                 } else {
-                    model.reset(fallTreeFrame);
+                    model.reset(lastPlatformFrame);
                 }
 
+            // If none of these other things are true, then the dorf must be
+            // plin'ol fallin.
             } else {
                 handleDownInput();
             }
@@ -287,7 +214,9 @@ public class LevelBuilder {
 
     /**
      * Handles the logic for how the computer manages creating new inputs
-     * while the dorf is jumping up
+     * while the dorf is jumping up. This is weighted so it is somewhat
+     * likely that the dorf will release the up key during the first half of
+     * a jump but it might also hold or unhold the right key.
      */
     public void handleUpInput() {
         double upUnholdingChance = 0.05;
@@ -313,11 +242,13 @@ public class LevelBuilder {
     }
     /**
      * Handles the logic for how the computer adds new input when the dorf is
-     * falling
+     * falling. Here the dorf is more likely to press the left key to kill
+     * momentum or to release the key. This was intended to mimic "fine
+     * tuning" that a human might do before the end of a jump to hit a target.
      */
     private void handleDownInput() {
-        double rightUnholdingChance = 0.20;
-        double leftTapChance = 0.50;
+        double rightUnholdingChance = 0.05;
+        double leftTapChance = 0.25;
         double leftUnholdingChance = 0.30;
         double rightTapChance = 0.20;
         if (holdingRight) {
@@ -341,7 +272,10 @@ public class LevelBuilder {
     }
     /**
      * Handles logic for how the computer adds the dorf's input if the dorf
-     * is currently on a platform
+     * is currently on a platform. For the most part, the dorf is very likely
+     * to hod the right key, but it also might sometimes excecute a jump or
+     * tap the left key or release the right key in order to pause and avoid
+     * an obstacle.
      */
     private void handlePlatformInput() {
         double rightUnholdingChance = 0.01;
@@ -408,12 +342,12 @@ public class LevelBuilder {
         // Randomly selects a frame then checks that the ghost is within
         // top_limit and bottom_limit ycoor. If it fails 10 times in a row it
         // returns false
-        int selectFrame = 2 + randomGenerator.nextInt(endFrame-startFrame-2);
+        int selectFrame = 4 + randomGenerator.nextInt(endFrame-startFrame-2);
         model.reset(startFrame + selectFrame);
         int times_tried = 1;
         while ((top_limit>levelSolver.getY())
                 ||(levelSolver.getY()>bottom_limit)) {
-            selectFrame = 2 + randomGenerator.nextInt(endFrame-startFrame-2);
+            selectFrame = 4 + randomGenerator.nextInt(endFrame-startFrame-2);
             model.reset(startFrame+selectFrame);
             times_tried++;
             if (times_tried>10) {
@@ -432,7 +366,7 @@ public class LevelBuilder {
             return false;
         }
 
-        // Randomly places the win block if more than 7 platforms exist
+        // Randomly places the win block if more than 9 platforms exist
         if (entities.size()>9) {
             double chance = (entities.size()-9)/14.0;
             if (randomGenerator.nextDouble()<chance) {
@@ -457,7 +391,11 @@ public class LevelBuilder {
      * Handles the factors that determine which type of platform to build at
      * a particular point and builds it to intersect with the ghost path. If
      * the dorf is below a certian height then it is more likely to select
-     * either a trampolene or jump boost platform
+     * either a trampolene or jump boost platform. It can also choose to
+     * construct a conveyor platform.
+     *
+     * At call it will use the difficulty statistic to adjust the chance of
+     * particular the ghost platforms that dissapear and reappear.
      */
     public Platform platformFactory() {
         double bouncyPlatformChance = 0.75;
@@ -465,12 +403,24 @@ public class LevelBuilder {
         double conveyorPlatformChance = 0.10;
         double disappearingPlatformChance = 0.15;
 
+        // Adjusts platform spawn chances based on difficulty
+        if (difficulty < 3) {
+            disappearingPlatformChance = 0.05;
+        }
+        if (difficulty > 9) {
+            disappearingPlatformChance = 0.30;
+        }
+
+        // Getting variables for where the platform will be constructed
         double wayDown = levelSolver.getY()/model.SCENE_HEIGHT;
-        int fudgeFactor = 10 + randomGenerator.nextInt((int)(40*wayDown));
+        int fudgeFactor = 11 + randomGenerator.nextInt((int)(40*wayDown));
         double xCoor = levelSolver.getX() + levelSolver.width - fudgeFactor;
         double yCoor = levelSolver.getY() + levelSolver.height;
         Platform platform = null;
 
+
+        // First determines if either of the jump boosting platforms should
+        // be placed (i.e. the ghost is below a certian part of the level)
         if (wayDown>boostPlatformCuttof) {
             if (bouncyPlatformChance>randomGenerator.nextDouble()) {
 
@@ -481,15 +431,15 @@ public class LevelBuilder {
                 if (trampChance>randomGenerator.nextDouble()) {
                     platform = new TrampolinePlatform(192,32,xCoor-20,yCoor,
                             model);
-                    System.out.println("Making Tramp Platform");
                 } else {
                     platform = new BouncyPlatform(128,32,xCoor, yCoor,this.model);
-                    System.out.println("Making Bouncy Platform");
                 }
                 this.entities.add(platform);
                 return platform;
             }
         }
+
+
         // Handles non-height dependant platforms
         if (conveyorPlatformChance>randomGenerator.nextDouble()) {
             int numToMake = 1 + randomGenerator.nextInt(4);
@@ -499,8 +449,8 @@ public class LevelBuilder {
             return platform;
         }
         if (disappearingPlatformChance>randomGenerator.nextDouble()) {
-            platform = new FadingPlatform(128,32,xCoor, yCoor,120,60, 300,
-                    model.getCurrentFrame(), this.model);
+            platform = new FadingPlatform(128,32,xCoor, yCoor, this.model,
+                    model.getCurrentFrame());
             this.entities.add(platform);
             return platform;
         }
