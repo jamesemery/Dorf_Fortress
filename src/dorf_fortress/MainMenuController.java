@@ -49,8 +49,8 @@ public class MainMenuController {
     void whenBeginClicked(ActionEvent actionEvent) {
         Stage thisStage = (Stage) menu_dorf_sprite.getScene().getWindow();
         if (up_to_11.isSelected()) {
-            // In our difficulty settings, 20 is 11.
-            Main.startGame(thisStage,20, beardColorPicker.getValue());
+            // In our difficulty settings, 50 == 11.
+            Main.startGame(thisStage, 50, beardColorPicker.getValue());
         } else {
             Main.startGame(thisStage,
                     difficultySlider.getValue(), beardColorPicker.getValue());
