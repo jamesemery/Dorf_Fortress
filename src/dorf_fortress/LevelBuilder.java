@@ -29,13 +29,7 @@ public class LevelBuilder {
         this.model = model;
         this.entities = entities;
         this.controller = controller;
-
-        long rgenseed = System.currentTimeMillis();
-//        rgenseed = (long)1433632172184;
         this.randomGenerator = new Random();
-        this.randomGenerator.setSeed(rgenseed);
-        System.out.println("Seed is: " + rgenseed);
-//        this.randomGenerator = new Random(); TODO return random to default
     }
 
     public void makeTestLevel() {
@@ -43,7 +37,7 @@ public class LevelBuilder {
 
         /* Platforms */
 
-//        Platform spawn = new ConveyorPlatform(128,32,-100,
+//        Platform spawn = new ConveyorPlatform(128,32,1,-100,
 //                150,this.model);
 //        this.entities.add(spawn);
 //
@@ -463,7 +457,7 @@ public class LevelBuilder {
      * either a trampolene or jump boost platform
      */
     public Platform platformFactory() {
-        double bouncyPlatformChance = 0.70;
+        double bouncyPlatformChance = 0.75;
         double boostPlatformCuttof = 0.70;
         double conveyorPlatformChance = 0.10;
         double disappearingPlatformChance = 0.15;
@@ -479,7 +473,7 @@ public class LevelBuilder {
 
                 // Bases the chance of spawing a trampoline platform on the
                 // dorf's velocity
-                double trampChance = (levelSolver.getY_velocity()/-600) - .40;
+                double trampChance = (levelSolver.getY_velocity()/-600) - .30;
 
                 if (trampChance>randomGenerator.nextDouble()) {
                     platform = new TrampolinePlatform(128,32,xCoor-20,yCoor,
@@ -496,11 +490,9 @@ public class LevelBuilder {
         // Handles non-height dependant platforms
         if (conveyorPlatformChance>randomGenerator.nextDouble()) {
             int numToMake = 1 + randomGenerator.nextInt(4);
-            for (int num = numToMake; num > 0; num--) {
-                platform = new ConveyorPlatform(96,32,xCoor, yCoor,this.model);
-                this.entities.add(platform); // TODO this is real bad
-                xCoor+= 96;
-            }
+            platform = new ConveyorPlatform(96, 32, numToMake, xCoor,
+                    yCoor, this.model);
+            this.entities.add(platform);
             return platform;
         }
         if (disappearingPlatformChance>randomGenerator.nextDouble()) {

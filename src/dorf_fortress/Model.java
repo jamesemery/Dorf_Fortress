@@ -140,7 +140,6 @@ public class Model {
             }
         }
         if (ghostMode) {
-            System.out.println("Ghost moving");
             levelSolver.step();
         } else {
             player.step();
