@@ -39,7 +39,7 @@ public class Model {
         //Build the Ghost's path and the platforms along it.
         LevelBuilder levelBuilder = new LevelBuilder(this,entities,controller);
         levelBuilder.makeLevel();
-        
+
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this
                 .levelSolver, spawnSafeZone);
         // Chooses how many obstacles to place based on the number of platforms
