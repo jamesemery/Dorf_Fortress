@@ -55,7 +55,7 @@ public class AnimatedSprite extends Sprite {
             this.getChildren().add(images[this.currentImage]);
         super.update(dorf_x);
     }
-    
+
     /**
      * Sets whether the animation is cycling, forcing the state rather than
      * toggling it.
