@@ -78,7 +78,7 @@ public class LevelBuilder {
         controller.addSpriteToRoot(ferdinand.getSprite());
 
         //Make a Ghost!
-        ghostInput = new GhostInputSource();
+        ghostInput = new GhostInputBuffer();
         Ghost casper = new Ghost(22, 32, xStart, yStart, model, ghostInput);
         model.levelSolver = casper;
         this.levelSolver = casper;
