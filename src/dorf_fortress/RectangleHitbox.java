@@ -1,41 +1,28 @@
 package dorf_fortress;
 
-import javafx.geometry.Bounds;
 import javafx.scene.shape.Rectangle;
 
 /**
  * A simple variety of hitbox, typically surrounding platforms and other
- * uninterestingly shaped obstacles. TODO: Finish commenting.
+ * uninterestingly shaped obstacles.
  */
 public class RectangleHitbox extends Hitbox {
-    Rectangle[] hitboxRectangles;
-    double x;
-    double y;
+    private Rectangle[] hitboxRectangles;
+    private double x;
+    private double y;
 
     public RectangleHitbox(double width, double height){
-        hitboxRectangles = new Rectangle[1];
-        hitboxRectangles[0] = new Rectangle(width, height);
+        this.hitboxRectangles = new Rectangle[1];
+        this.hitboxRectangles[0] = new Rectangle(width, height);
     }
 
-    void setX(double newx){
-        x = newx;
-        for (Rectangle r : hitboxRectangles) {
-            r.setX(newx);
-        }
-    }
-
-    void setY(double newy){
-        y = newy;
-        for (Rectangle r : hitboxRectangles){
-            r.setY(newy);
-        }
-    }
-
-    // this returns true if the given hitbox intersects with this current
-    // hitbox. It works by giving the other hitbox a series of the bounds
-    // that makes it up and if any value returns true then it returns true
+    /**
+     * Returns true if the given hitbox intersects with the current hitbox.
+     * @param h   The hitbox whose intersection is being tested.
+     * @return   A boolean: whether or not it intersects.
+     */
     public boolean intersects(Hitbox h){
-        for (Rectangle r : hitboxRectangles) {
+        for (Rectangle r : this.hitboxRectangles) {
             if (h.intersects(r.getBoundsInLocal())){
                 return true;
             }
@@ -43,10 +30,12 @@ public class RectangleHitbox extends Hitbox {
         return false;
     }
 
-    // this method takes a javafx bounds object and returns true if it
-    // intersects with any of the objects that make up this hitbox. For this
-    // hitbox it consists of looping through the rectangles that makes it up
-    // and determines if the bounds intersect
+    /**
+     * Returns true if the given bounds object intersects with the rectangles
+     * making up the current hitbox.
+     * @param bounds   The bounds whose intersection are being tested.
+     * @return   A boolean: whether or not it intersects.
+     */
     public boolean intersects(javafx.geometry.Bounds bounds) {
         for (Rectangle r : hitboxRectangles) {
             if (r.intersects(bounds)) {
@@ -56,7 +45,25 @@ public class RectangleHitbox extends Hitbox {
         return false;
     }
 
-    public double getX() {return x;};
-    public double getY() {return y;};
+    /*
+     * Setters and getters.
+     */
+    void setX(double newx){
+        this.x = newx;
+        for (Rectangle r : this.hitboxRectangles) {
+            r.setX(newx);
+        }
+    }
+
+    void setY(double newy){
+        this.y = newy;
+        for (Rectangle r : this.hitboxRectangles){
+            r.setY(newy);
+        }
+    }
+
+    public double getX() {return this.x;}
+
+    public double getY() {return this.y;}
 
 }
