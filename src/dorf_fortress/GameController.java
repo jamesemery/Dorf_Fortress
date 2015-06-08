@@ -134,9 +134,13 @@ public class GameController implements EventHandler<KeyEvent> {
     }
 
     //TODO: move out of a controller to a view?
+    /**
+     * Draws the casualty count into a Text object.
+     * @return   A Text object to be added to the Scene's XML tree.
+     */
     private Text drawDeadDorfs() {
         String displayText = "Dead dorfs: " + Main.deadDorfs;
-        Text text = new Text(25,25, displayText);
+        Text text = new Text(15,25, displayText);
         text.setFont(new Font("Georgia", 20));
         text.setFill(new Color(1,1,1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
@@ -145,7 +149,6 @@ public class GameController implements EventHandler<KeyEvent> {
     }
 
     //todo: move out of a controller to a view?
-
     /**
      * Draws the difficulty setting into a Text object.
      * @return   A Text object to be added to the Scene's XML tree.

@@ -189,7 +189,6 @@ public class Dorf extends Entity {
             simulation.pause();
         }
         Main.deadDorfs++;
-        System.out.println("Casualties: "+ Main.deadDorfs);
         Scene mainScene = this.getSprite().getScene();
         //set up the lose menu
         Main.startOverlayMenu(mainScene, simulation, false);

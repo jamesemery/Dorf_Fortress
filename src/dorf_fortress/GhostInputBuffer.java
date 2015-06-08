@@ -109,8 +109,6 @@ public class GhostInputBuffer extends InputBuffer {
         cursor++;
         if (cursor<storedInput.size()) {
             currentInput = storedInput.get(cursor);
-        } else {
-            System.out.println("bunk");
         }
     }
 
@@ -149,6 +147,5 @@ public class GhostInputBuffer extends InputBuffer {
         while (storedInput.size() > (frame+1)) {
             storedInput.remove(storedInput.size() - 1);
         }
-        System.out.println("InputSource removed to " + frame);
     }
 }

@@ -1,10 +1,11 @@
 package dorf_fortress;
 
-
 import java.util.List;
 import java.util.ArrayList;
+
 /**
- * Created by jamie on 5/27/15.
+ * The Model class is responsible both for building the level by simulating
+ * user input as well as running the model of the game itself.
  */
 public class Model {
     static Model singleInstance;
@@ -20,15 +21,14 @@ public class Model {
     private int timeLimit;
     public Hitbox spawnSafeZone;
 
-
-//    static Model getInstance(GameController controller, double sceneHeight, double difficulty) {
-//        //if(singleInstance == null) {
-//            singleInstance = new Model(controller, sceneHeight, difficulty);
-//        //}
-//        return singleInstance;
-//    }
-
-
+    /**
+     * Constructor. Builds a model based on the height of the scene and
+     * the level's difficulty, along with a reference to the constructor; the
+     * rest is randomly generated.
+     * @param controller   A reference to the level's controller.
+     * @param sceneHeight   The height of the Scene.
+     * @param difficulty   The difficulty of the level; a double from 0 to 50.
+     */
     public Model(GameController controller, double sceneHeight, double difficulty) {
         this.SCENE_HEIGHT = sceneHeight;
         this.controller = controller;
@@ -36,20 +36,17 @@ public class Model {
         this.spawnSafeZone = null;
 
         entities = new ArrayList<Entity>();
-        LevelBuilder levelBuilder = new LevelBuilder(this, entities, controller);
+        //Build the Ghost's path and the platforms along it.
+        LevelBuilder levelBuilder = new LevelBuilder(this,entities,controller);
         levelBuilder.makeLevel();
+
         ObstaclePlacer dangerMaker = new ObstaclePlacer(this, this
                 .levelSolver, spawnSafeZone);
-
-        /*
-         * TODO: Here's where the number of obstacles is set by the difficulty.
-         * TODO: Fiddle with? We can make obstacle_count = n(difficulty) + c,
-         * TODO: where c is the count at difficulty 0 and n scales it.
-         */
-
         // Chooses how many obstacles to place based on the number of platforms
+        // (i.e. entities.size(), since entities only contains platforms as yet)
         int obstacles = (int)(entities.size()*((this.difficulty/2) + 1));
         dangerMaker.generateObstacles(obstacles);
+        //Set up the level for the user to play.
         setGhostMode(false);
         timeLimit = levelSolver.getEndFrame()*2 + ((int) difficulty)*60;
         levelSolver.liveSimulation = true;
@@ -69,20 +66,24 @@ public class Model {
     public void unpause() {this.controller.unpause(); }
 
     /**
-     * sets or removes the ghost mode from the level, if given argument is
-     * true it sets it, and removes it if its set to false, also handles
-     * turning on and off display of the dorf
+     * Resets the level, and lays the groundwork to have either the ghost or
+     * the human-controlled Dorf solve the level, depending on the value of
+     * the boolean.
+     * @param val   Whether the human or the computer is solving the level;
+     *              a value of true means the computer's Ghost.
      */
     public void setGhostMode(boolean val) {
-        if (val) {
+        if (val) { //The ghost is solving the level
             this.reset();
             ghostMode = true;
+            //Clears the scene of Dorf sprites, and adds in the levelSolver's.
             controller.removeSpriteFromRoot(levelSolver.getSprite());
             controller.removeSpriteFromRoot(player.getSprite());
             controller.addSpriteToRoot(levelSolver.getSprite());
-        } else {
+        } else { //The human is solving the level
             this.reset();
             ghostMode = false;
+            //Clears the scene, adds in the user's Dorf sprite.
             controller.removeSpriteFromRoot(player.getSprite());
             controller.addSpriteToRoot(player.getSprite());
             controller.removeSpriteFromRoot(levelSolver.getSprite());
@@ -91,7 +92,8 @@ public class Model {
 
     /**
      * Adds the given list of entities to the running simulation as well as
-     * hooking them into the view properly
+     * giving them to the GameController, which will then connect htem into
+     * the Scene.
      */
     public void addEntities(List<Entity> newEntities) {
         for (Entity e : newEntities) {
@@ -100,12 +102,11 @@ public class Model {
         }
     }
 
-
     /**
-     * if the GhostMode is not on, it turns it on and resets the level then
-     * it simulates one frame of the level and returns the hitbox for the
-     * ghost frame at that perticular point. If the ghost finishes its run
-     * though it returns a null
+     * Simulates the next frame of the level's simulation. If we're not already
+     * in a simulation (i.e. ghostMode is false), sets ghostMode to true and
+     * starts one.
+     * @return   The hitbox of the Ghost's location at the next frame.
      */
     public Hitbox getNextGhostHitbox() {
         if (!ghostMode) {
@@ -120,24 +121,23 @@ public class Model {
         }
     }
 
-
     public List<Entity> getObjects() {
         return entities;
     }
 
-
+    /**
+     * Simulates the next frame of the level. Checks for a time limit death,
+     * then calls the step() method for every possible Entity it knows of.
+     */
     public void simulateFrame() {
         currentFrame++;
-        // Checks to see if the time limit has run out, if it has, kill the
+        // Check to see if the time limit has run out; if it has, kill the
         // dorf
         if ((!ghostMode)&&(currentFrame>timeLimit)) {
             player.die();
         }
 
         for (Entity i : entities) {
-            if (i instanceof Ghost) {
-                System.out.println("Ghost Shouldnt Be here");
-            }
             i.step();
         }
         if (testingEntities != null) {
@@ -145,6 +145,7 @@ public class Model {
                 i.step();
             }
         }
+        //Move the Ghost/Dorf.
         if (ghostMode) {
             levelSolver.step();
         } else {
@@ -155,7 +156,8 @@ public class Model {
 
     /**
      * Resets the conditions of every object in the level back to starting
-     * conditions
+     * conditions. This method is used during the actual game; note that it
+     * is different from reset(int frame).
      */
     public void reset() {
         currentFrame = 0;
@@ -176,15 +178,15 @@ public class Model {
      * conditions and then simulates the level using the ghost up to the
      * specified frame(which must be positive).
      *
-     * This class is intended for use during level generation, no assumptions
-     * are made about what happens when the ghost wins or looses as a result
+     * This method is intended for use during level generation, no assumptions
+     * are made about what happens when the ghost wins or loses as a result.
+     * Note the difference between this and reset().
      */
     public void reset(int frame) {
         this.reset();
         while (currentFrame < frame) {
             this.simulateFrame();
         }
-        System.out.println("Reset to " + frame);
     }
 
 
