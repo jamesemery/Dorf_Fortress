@@ -54,7 +54,6 @@ public class AnimatedSprite extends Sprite {
         this.getChildren().clear();
             this.getChildren().add(images[this.currentImage]);
         super.update(dorf_x);
-        super.update(dorf_x);
     }
 
 
