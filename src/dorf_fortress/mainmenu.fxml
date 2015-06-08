@@ -16,7 +16,7 @@
    <children>
       <Text fx:id="titleText" layoutX="116.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dorf Fortress" textAlignment="CENTER">
          <font>
-            <Font name="Poor Richard" size="64.0" />
+            <Font name="Goudy Old Style Bold" size="64.0" />
          </font>
       </Text>
       <Separator layoutX="220.0" layoutY="345.0" prefHeight="30.0" prefWidth="200.0" />
