@@ -144,27 +144,25 @@ public class ObstaclePlacer {
             spiderChance = 0.15;
             boxChance = 0.30;
 
-        } else if (difficulty < 5) {
+        } else if (this.difficulty < 5) {
             ghostChance = 0;
             boxChance = 0.25;
-        }
-        if (difficulty < 9) {
+        } else if (this.difficulty > 9) {
             boxChance = 0.05;
         }
 
-        Dictionary<String,Integer> obstacleOccurance = new Hashtable<String,
-                Integer>();
-        int boxes = (int)(boxChance*n); //0.10
-        int spinning = (int)(spinningChance*n); //0.20
-        int spiders = (int)(spiderChance*n); //0.20
-        int ghosts = (int)(ghostChance*n); //0.20
+        Dictionary<String,Integer> obstacleOccurrence = new Hashtable<>();
+        int boxes = (int)(boxChance*n);
+        int spinning = (int)(spinningChance*n);
+        int spiders = (int)(spiderChance*n);
+        int ghosts = (int)(ghostChance*n);
         int fireballs = n - boxes - spinning - spiders - ghosts;
-        obstacleOccurance.put("disappearingGhost", ghosts);
-        obstacleOccurance.put("oscillatingSpider", spiders);
-        obstacleOccurance.put("spinningHead", spinning);
-        obstacleOccurance.put("box", boxes);
-        obstacleOccurance.put("simpleBall", fireballs);
-        return obstacleOccurance;
+        obstacleOccurrence.put("disappearingGhost", ghosts);
+        obstacleOccurrence.put("oscillatingSpider", spiders);
+        obstacleOccurrence.put("spinningHead", spinning);
+        obstacleOccurrence.put("box", boxes);
+        obstacleOccurrence.put("simpleBall", fireballs);
+        return obstacleOccurrence;
     }
 
     /**
@@ -176,8 +174,8 @@ public class ObstaclePlacer {
      * obstacles that intersect with the ghost along the path.
      */
     private List<Entity> cullList(List<Entity> testCases) {
-        simulation.testingEntities = testCases;
-        Hitbox ghost = simulation.getNextGhostHitbox();
+        this.simulation.testingEntities = testCases;
+        Hitbox ghost = this.simulation.getNextGhostHitbox();
         while (ghost != null) {
             int i = 0;
             while (i < testCases.size()) {
@@ -192,19 +190,19 @@ public class ObstaclePlacer {
                     i++;
                 }
             }
-            ghost = simulation.getNextGhostHitbox();
+            ghost = this.simulation.getNextGhostHitbox();
         }
-        simulation.testingEntities = null;
-        simulation.reset();
+        this.simulation.testingEntities = null;
+        this.simulation.reset();
         return testCases;
     }
 
 
-    /*
-    * Runs through the simulation once without placing obstacles to ensure
-    * that the ghost has generated solving variables then stores the ones
-    * necessary for placement
-    */
+    /**
+     * Runs through the simulation once without placing obstacles to ensure
+     * that the ghost has generated winning variables, then stores the ones
+     * necessary for placement
+     */
     private void initializeGhost() {
         simulation.reset();
         // Makes sure that the ghost nessicarly has determined the frame and
@@ -216,15 +214,18 @@ public class ObstaclePlacer {
         this.finalX = levelSolver.finalX;
     }
 
+    /*
+     * Setters and getters.
+     */
     public Model getSimulation() {
-        return simulation;
+        return this.simulation;
     }
 
     public double getFinalX() {
-        return finalX;
+        return this.finalX;
     }
 
     public int getCorrespondingFrame() {
-        return simulation.getCurrentFrame();
+        return this.simulation.getCurrentFrame();
     }
 }
