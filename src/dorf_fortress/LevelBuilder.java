@@ -449,8 +449,8 @@ public class LevelBuilder {
             return platform;
         }
         if (disappearingPlatformChance>randomGenerator.nextDouble()) {
-            platform = new FadingPlatform(128,32,xCoor, yCoor,120,60, 300,
-                    model.getCurrentFrame(), this.model);
+            platform = new FadingPlatform(128,32,xCoor, yCoor, this.model,
+                    model.getCurrentFrame());
             this.entities.add(platform);
             return platform;
         }

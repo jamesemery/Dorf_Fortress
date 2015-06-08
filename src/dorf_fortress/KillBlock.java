@@ -9,11 +9,14 @@ import java.util.Random;
  * somewhat challenging to the player
  */
 public class KillBlock extends Obstacle {
-
-  public KillBlock(int hitbox_width, int hitbox_height, double x, double y,
-                   Model simulation) {
-    super(hitbox_width, hitbox_height, x, y, simulation);
-  }
+    /**
+     * Constructor. Nothing special here; it passes its values straight to the
+     * superclass.
+     */
+    public KillBlock(int hitbox_width, int hitbox_height, double x, double y,
+                     Model simulation) {
+        super(hitbox_width, hitbox_height, x, y, simulation);
+    }
 
     @Override
     protected void makeSprite() {

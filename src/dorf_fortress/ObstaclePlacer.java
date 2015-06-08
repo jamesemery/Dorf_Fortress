@@ -42,7 +42,7 @@ public class ObstaclePlacer {
 
         // Generates the specific types of obstacles
         if (n > 1) {
-            obstacleFactoryMehtod(n);
+            obstacleFactoryMethod(n);
         }
         simulation.addEntities(safeObstacles);
         simulation.setGhostMode(false);
@@ -56,16 +56,17 @@ public class ObstaclePlacer {
      * that none of the obstacles ever intersect with the ghost path.
      * @param n
      */
-    private void obstacleFactoryMehtod(int n) {
-        Dictionary<String,Integer> obstacleOccurance = determineDifficulty(n);
-        Enumeration<String> keys = obstacleOccurance.keys();
 
-        // For each key in the dictonary it creates vlaue elements and adds
+    private void obstacleFactoryMethod(int n) {
+        Dictionary<String,Integer> obstacleOccurrence = determineDifficulty(n);
+        Enumeration<String> keys = obstacleOccurrence.keys();
+
+        // For each key in the dictionary it creates value elements and adds
         // them to the safeObstacles list.
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
             List<Entity> testCases = new ArrayList<Entity>();
-            int numToMake = obstacleOccurance.get(key);
+            int numToMake = obstacleOccurrence.get(key);
             int numMade = 0;
 
             while (numMade < numToMake) {
