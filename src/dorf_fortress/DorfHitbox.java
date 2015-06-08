@@ -11,27 +11,25 @@ import javafx.scene.shape.Rectangle;
  * Created by jamie on 5/27/15.
  */
 public class DorfHitbox extends Hitbox {
-    Rectangle[] hitboxRectangles;
+    Rectangle hitboxRectangle;
     double x;
     double y;
 
     public DorfHitbox( double width, double height){
-        hitboxRectangles = new Rectangle[1];
-        hitboxRectangles[0] = new Rectangle(x, y, width, height);
+        //The x and y coordinates for the hitbox rectangle will be
+        //set later; we're just making sure that rectangle exists
+        //and is the right size.
+        hitboxRectangle = new Rectangle(0, 0, width, height);
     }
 
     void setX(double newx){
         this.x = newx;
-        for (Rectangle r : hitboxRectangles) {
-            r.setX(newx);
-        }
+        hitboxRectangle.setX(newx);
     }
 
     void setY(double newy){
         this.y = newy;
-        for (Rectangle r : hitboxRectangles){
-            r.setY(newy);
-        }
+        hitboxRectangle.setY(newy);
     }
 
     /**
@@ -40,10 +38,8 @@ public class DorfHitbox extends Hitbox {
      * that makes it up, and if any value returns true then it returns true.
      */
     public boolean intersects(Hitbox h){
-        for (Rectangle r : hitboxRectangles) {
-            if (h.intersects(r.getBoundsInLocal())){
-                return true;
-            }
+        if (h.intersects(hitboxRectangle.getBoundsInLocal())){
+            return true;
         }
         return false;
     }
@@ -54,14 +50,12 @@ public class DorfHitbox extends Hitbox {
       * looping through the rectangles that makes it up and determines if the
       * bounds intersect.
       **/
-    public boolean intersects(javafx.geometry.Bounds bounds) {
-        for (Rectangle r : hitboxRectangles) {
-            if (r.intersects(bounds)) {
-                return true;
-            }
-        }
-        return false;
-    }
+     public boolean intersects(javafx.geometry.Bounds bounds) {
+         if (hitboxRectangle.intersects(bounds)) {
+             return true;
+         }
+         return false;
+     }
 
     public double getX() {return x;};
     public double getY() {return y;};
