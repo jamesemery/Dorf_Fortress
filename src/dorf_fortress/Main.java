@@ -17,6 +17,7 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -40,8 +41,11 @@ public class Main extends Application {
     static MediaPlayer noisePlayer;
 
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
         //Set up the stage
         primaryStage.setTitle("Dorf Fortress");
         primaryStage.setResizable(false);
@@ -204,5 +208,4 @@ public class Main extends Application {
             System.exit(0);
         }
     }
-
 }
