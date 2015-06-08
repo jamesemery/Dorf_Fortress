@@ -22,6 +22,7 @@ import java.util.TimerTask;
  * A class representing the combined view and controller for a game level. The
  * GameController manages the game loop and passes input to the model as well
  * as displaying sprites and such.
+ *
  */
 public class GameController implements EventHandler<KeyEvent> {
 

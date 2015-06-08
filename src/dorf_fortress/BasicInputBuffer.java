@@ -12,7 +12,7 @@ import java.util.HashSet;
  * Uses singleton pattern for ease of reference.
  */
 public class BasicInputBuffer extends InputBuffer {
-    private static InputBuffer uniqueInstance;
+    private static BasicInputBuffer uniqueInstance;
     private Set<String> storedInput;
 
     /**
@@ -27,7 +27,7 @@ public class BasicInputBuffer extends InputBuffer {
      * exist. This is the only constructor that can be publicly accessed.
      * @return   the instance of InputBuffer.
      */
-    public static InputBuffer getInstance() {
+    public static BasicInputBuffer getInstance() {
         if (uniqueInstance == null) {
             uniqueInstance = new BasicInputBuffer();
         }
