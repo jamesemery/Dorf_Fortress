@@ -17,17 +17,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.io.File;
 import java.net.URL;
-
-/*
- * TODO LIST - do NOT submit until these are finished!
- * - Delete unused imports, methods, classes, etc.
- * - Delete all print statements.
- * - Double-check that every part of the code is commented.
- * - Check all inheritance trees for redundancies that can be deleted!
- */
 
 /**
  * The main application for DorfFortress. Main contains all the code that spans

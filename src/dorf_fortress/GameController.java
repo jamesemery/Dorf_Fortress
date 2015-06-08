@@ -117,8 +117,6 @@ public class GameController implements EventHandler<KeyEvent> {
 
     }
 
-    //TODO: move out of a controller to a view?
-
     /**
      * Draws the hard-coded help text into a Text object.
      * @return   A Text object to be added to the Scene's XML tree.
@@ -133,7 +131,6 @@ public class GameController implements EventHandler<KeyEvent> {
         return text;
     }
 
-    //TODO: move out of a controller to a view?
     /**
      * Draws the casualty count into a Text object.
      * @return   A Text object to be added to the Scene's XML tree.
@@ -148,7 +145,6 @@ public class GameController implements EventHandler<KeyEvent> {
         return text;
     }
 
-    //todo: move out of a controller to a view?
     /**
      * Draws the difficulty setting into a Text object.
      * @return   A Text object to be added to the Scene's XML tree.
@@ -167,8 +163,6 @@ public class GameController implements EventHandler<KeyEvent> {
         root.getChildren().add(text);
         return text;
     }
-
-    //todo: move out of a controller to a view?
 
     /**
      * Draws the timer into a Text object.
