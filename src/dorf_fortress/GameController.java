@@ -121,7 +121,7 @@ public class GameController implements EventHandler<KeyEvent> {
 
     //todo: move out of a controller to a view?
     private Text drawViewTimer() {
-        Text text = new Text(550,25, "Time left: " +
+        Text text = new Text(520,25, "Time left: " +
                 Integer.toString(simulation.getRemainingTime()));
         text.setFont(new Font("Alegreya SC", 20));
         text.setFill(new Color(1, 1, 1,1));
@@ -220,7 +220,8 @@ public class GameController implements EventHandler<KeyEvent> {
         this.helpText.setFill(new Color(1, 1, 1, textOpacity));
 
         String time_left = Integer.toString(simulation.getRemainingTime());
-        view_timer.setText(time_left.substring(0,time_left.length()-2));
+        view_timer.setText("Time left: " +
+                time_left.substring(0,time_left.length()-2));
 
         updateBackground(screenOffset);
     }
