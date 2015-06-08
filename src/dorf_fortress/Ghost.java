@@ -1,27 +1,25 @@
 package dorf_fortress;
 
 /**
- * Ghost object is used by the ObstacleBuilder and LevelBuilder in procedural
- * generation of the level by being able to execute inputs directly from the
- * GhostInputBuffer where inputs can be easily mimic those of the user.
- *
- * Created by jamie on 5/28/15.
+ * Ghost object used by the ObstacleBuilder and LevelBuilder in procedural
+ * generation of the level; it executes inputs directly from the
+ * GhostInputBuffer rather than user keystrokes. This allows us to mimic user
+ * input in order to create a solvable level.
  */
 public class Ghost extends Dorf {
     public boolean finishedLevel;
     public double finalX;
     public int frameFinished;
     public boolean liveSimulation;
-    //TODO change the security of these
 
     /**
-     * Calls Actor's constructor with no name.
-     *
-     * @param hitbox_width
-     * @param hitbox_height
-     * @param model
-     * @param x
-     * @param y
+     * Constructs a new Ghost, clearing the input in preparationg for the
+     * simulation.
+     * @param hitbox_width   The width of the Ghost's hitbox.
+     * @param hitbox_height   The height of the Ghost's hitbox.
+     * @param model   A reference to the model.
+     * @param x   The initial X-coordinate of the Ghost.
+     * @param y   The initial Y-coordinate of the Ghost.
      */
     public Ghost(int hitbox_width, int hitbox_height, double x, double y,
                  Model model, InputBuffer inputSource) {
@@ -30,12 +28,20 @@ public class Ghost extends Dorf {
         inputSource.clear();
     }
 
+    /**
+     * The step method for the Ghost. Checks for input from its InputBuffer,
+     * then calls Dorf's step() method.
+     */
     @Override
     public void step() {
         ((GhostInputBuffer)inputSource).nextFrame();
         super.step();
     }
 
+    /**
+     * The death method for the Ghost. This will happen during level generation.
+     * The Ghost records the frame and X-coordinate at which it died.
+     */
     @Override
     public void die() {
         finishedLevel = true;
@@ -43,11 +49,15 @@ public class Ghost extends Dorf {
         frameFinished = simulation.getCurrentFrame();
     }
 
+    /**
+     * The win method for the Ghost. If the Ghost is running visibly, i.e. the
+     * user clicked "show simulation", then it acts as if it were a
+     * user-controlled Dorf beating the level. If not, then it finishes the
+     * simulation.
+     */
     @Override
     public void win() {
         if (liveSimulation) {
-            //reset()
-            System.out.println("The Ghost is trying to win");
             super.win();
             reset();
 
@@ -58,6 +68,10 @@ public class Ghost extends Dorf {
         }
     }
 
+    /**
+     * Makes the sprite for the Ghost; it's a DorfSprite similar to that of
+     * the live Dorf.
+     */
     @Override
     protected void makeSprite() {
         String[] rightImages = {"sprites/MummyRight1.png",

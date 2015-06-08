@@ -5,14 +5,16 @@ import java.util.Random;
 /**
  * The simplest form of an obstacle, a static block that kills the player
  * when touched
- * Created by jamie on 5/28/15.
  */
 public class KillBlock extends Obstacle {
-
-  public KillBlock(int hitbox_width, int hitbox_height, double x, double y,
-                   Model simulation) {
-    super(hitbox_width, hitbox_height, x, y, simulation);
-  }
+    /**
+     * Constructor. Nothing special here; it passes its values straight to the
+     * superclass.
+     */
+    public KillBlock(int hitbox_width, int hitbox_height, double x, double y,
+                     Model simulation) {
+        super(hitbox_width, hitbox_height, x, y, simulation);
+    }
 
     @Override
     protected void makeSprite() {
@@ -35,13 +37,20 @@ public class KillBlock extends Obstacle {
         projectile.die();
     }
 
-    public Entity getCloseInstance(Hitbox target, int frameCount) {
+    /**
+     * Returns a KillBlock that lives close to the path, as opposed to one
+     * randomly generated anywhere in the level.
+     * @param target   The target hitbox the KillBlock needs to be near.
+     * @return   The random KillBlock
+     */
+    public Entity getCloseInstance(Hitbox target) {
         double xTarget = target.getX();
         double yTarget = target.getY();
         Random rand = new Random();
         return null;
     } //TODO finish filling this in
 
+    //TODO I'm assuming this still needs work. We'll see.
     public static Obstacle getInstance(ObstaclePlacer source, Hitbox target,
                                        Random rand) {
         double xTarget = target.getX();
