@@ -35,6 +35,7 @@ public class GameController implements EventHandler<KeyEvent> {
     private Text helpText;
     private Text view_timer;
     private Text difficulty;
+    private Text dead_dorfs;
     private Rectangle background;
     final String backgroundImageLoc = "sprites/BasicTile.png";
     Image tile;
@@ -65,6 +66,7 @@ public class GameController implements EventHandler<KeyEvent> {
         this.helpText = drawHelpText();
         this.view_timer = drawViewTimer();
         this.difficulty = drawDifficulty();
+        this.dead_dorfs = drawDeadDorfs();
     }
 
     /**
@@ -126,6 +128,17 @@ public class GameController implements EventHandler<KeyEvent> {
                 "Press P or Esc to pause.\n" + "Hold W/Up for a higher jump.");
         text.setFont(new Font("Georgia", 20));
         text.setFill(new Color(1, 1, 1,1));
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        root.getChildren().add(text);
+        return text;
+    }
+
+    //TODO: move out of a controller to a view?
+    private Text drawDeadDorfs() {
+        String displayText = "Dead dorfs: " + Main.deadDorfs;
+        Text text = new Text(25,25, displayText);
+        text.setFont(new Font("Georgia", 20));
+        text.setFill(new Color(1,1,1,1));
         text.setTextAlignment(TextAlignment.JUSTIFY);
         root.getChildren().add(text);
         return text;
@@ -260,6 +273,8 @@ public class GameController implements EventHandler<KeyEvent> {
 
         double timeLeft = simulation.getRemainingTime()/60;
         view_timer.setText("Time left: " + Integer.toString((int) timeLeft));
+
+        dead_dorfs.setText("Dead dorfs: " + Main.deadDorfs);
 
         updateBackground(dorf_x);
     }
