@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
 /**
- * Created by Joe Adkisson on 5/24/2015.
  * Controllable hero of the game; subclass of Entity.
  */
 public class Dorf extends Entity {

@@ -11,8 +11,9 @@ import javafx.scene.paint.*;
  * - The DorfSprite's animation is based not on time or the game loop, but on the
  * movement of the Dorf; whenever the Dorf moves [frameTolerance] pixels in a
  * direction, it updates its sprite.
- * - There is no forward-facing animation; when the character stops moving, it
- * will just stay on the same frame it was on.
+ * - There is no forward-facing animation (i.e., looking directly at the player)
+ * when the character stops moving, it will just stay on the same frame it was
+ * on.
  */
 public class DorfSprite extends Sprite {
     //Variables representing the animation's frames.
@@ -26,9 +27,7 @@ public class DorfSprite extends Sprite {
                             //at zero.
     double frameTolerance = 10.0; //how far the entity must move before updating
 
-
     /**
-     *
      * @param leftArray; an array of Strings containing the locations of the
      *                   left-facing sprites.
      * @param rightArray; ditto for right-facing sprites

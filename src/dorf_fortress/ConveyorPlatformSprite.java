@@ -2,7 +2,7 @@ package dorf_fortress;
 
 /**
  * Sprite for ConveyorPlatform that handles having multiple animated sprites
- * in a row for the display. Functions by being a node that contains several
+ * in a row for the display. It represents a node that contains several
  * children, all of which are animated sprites.
  */
 public class ConveyorPlatformSprite extends Sprite {
