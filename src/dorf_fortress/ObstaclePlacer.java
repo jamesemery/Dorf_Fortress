@@ -37,7 +37,7 @@ public class ObstaclePlacer {
 
         // Generates the specific types of obstacles
         if (n > 1) {
-            obstacleFactoryMehtod(n, params);
+            obstacleFactoryMethod(n, params);
         }
         simulation.addEntities(safeObstacles);
         simulation.setGhostMode(false);
@@ -50,7 +50,7 @@ public class ObstaclePlacer {
      * @param n
      * @param params
      */
-    private void obstacleFactoryMehtod(int n, List<Integer> params) {
+    private void obstacleFactoryMethod(int n, List<Integer> params) {
         Dictionary<String,Integer> obstacleOccurance = parseParams(n, params);
         Enumeration<String> keys = obstacleOccurance.keys();
 

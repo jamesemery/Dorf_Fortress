@@ -1,16 +1,16 @@
 package dorf_fortress;
 
 /**
- * FadingPlatform is a variety of platform that fades in and out of existence,
- * as does its hitbox. Dorfs beware!
+ * FadingPlatform is a variety of Platform that fades in and out of existence
+ * (by means of OpacityChanger), as does its hitbox. Dorfs beware!
  */
 public class FadingPlatform extends Platform implements OpacityChanger{
-    double currentOpacity;
-    int endVisibleFrame;
-    int startInvisibleFrame;
-    int endInvisibleFrame;
-    int cycleLength;
-    int offset;
+    private double currentOpacity;
+    private int endVisibleFrame = 120;
+    private int startInvisibleFrame = 180;
+    private int endInvisibleFrame = 240;
+    private int cycleLength = 300;
+    private int offset;
 
     /**
      * The constructor for FadingPlatform. Passes the information up the
@@ -22,30 +22,27 @@ public class FadingPlatform extends Platform implements OpacityChanger{
      * @param hitbox_height   The height of the hitbox.
      * @param x   The sprite's x-coordinate on the stage.
      * @param y   The sprite's y-coordinate on the stage.
+     * @param targetFrame   The frame during which the ghost reaches the
+     *                      platform. It must be visible then.
      * @param simulation   The singleton Model running in Main.
      */
     public FadingPlatform(int hitbox_width,
-                         int hitbox_height,
-                         double x,
-                         double y,
-                          int framesToExist,
-                          int framesToBeGone,
-                          int cycleLength,
-                          int targetFrame,
-                          Model simulation) {
+                          int hitbox_height,
+                          double x,
+                          double y,
+                          Model simulation,
+                          int targetFrame) {
         super(hitbox_width, hitbox_height, x, y, simulation);
-        endVisibleFrame = framesToExist;
-        int fadeLength = (cycleLength - framesToBeGone -framesToExist) / 2;
-        startInvisibleFrame = fadeLength + endVisibleFrame;
-        endInvisibleFrame = startInvisibleFrame + framesToBeGone;
-        this.cycleLength = cycleLength;
 
         // Sets the offset so the cycle will start 15 frames before the
-        // platform dissapears
-        int partOfCycle = targetFrame%cycleLength;
-        offset = cycleLength - (partOfCycle-15)%cycleLength;
+        // platform disappears
+        int partOfCycle = targetFrame%300;
+        this.offset = 300 - (partOfCycle-15)%300;
     }
 
+    /**
+     * Sets the platform's sprite to the default platform sprite.
+     */
     @Override
     public void makeSprite() {
         this.sprite = new SimpleOpacitySprite(
@@ -55,10 +52,10 @@ public class FadingPlatform extends Platform implements OpacityChanger{
 
     /**
      * Cycles the opacity of the platform based on the current part of the
-     * cycle, with the first block being completly visible, the second chunk
-     * linearly transitioning to zero opacity, and the foruth chunk setting
-     * the opacity back up. If the opacity is below a certian level it sets
-     * the hitbox to be under the stage.
+     * cycle, with the first block being completely visible, the second chunk
+     * linearly transitioning to zero opacity, and the fourth chunk increasing
+     * the opacity. If the opacity is below a certain level, the hitbox is
+     * moved to beneath the stage.
      */
     @Override
     public void step() {
@@ -68,21 +65,22 @@ public class FadingPlatform extends Platform implements OpacityChanger{
         if (currentFrame < endVisibleFrame) {
             currentOpacity = 1;
 
-            // If the ghost is between being visible and invisible
+        // If the ghost is between being visible and invisible
         } else if (currentFrame <= startInvisibleFrame) {
             double difference = startInvisibleFrame - endVisibleFrame;
             double opacityGradient = ((double)currentFrame - endVisibleFrame)
                     /difference;
             currentOpacity = 1.0 - opacityGradient;
 
-            // If it is appearing during the last phase of the cycle
+        // If it is appearing during the last phase of the cycle
         } else if (currentFrame > endVisibleFrame) {
             double difference = cycleLength - endInvisibleFrame;
             double opacityGradient = ((double)currentFrame - endInvisibleFrame)
                     /difference;
             currentOpacity = opacityGradient;
         }
-        // If its below a certian visiblity its hitbox is unreachable
+
+        // If it's below a certain visibility, its hitbox is unreachable.
         if (currentOpacity < .30) {
             hitbox.setY(simulation.SCENE_HEIGHT + 60);
         } else {
@@ -90,7 +88,9 @@ public class FadingPlatform extends Platform implements OpacityChanger{
         }
     }
 
-
+    /*
+     * Setters and getters.
+     */
     @Override
     public double getOpacity() {
         return currentOpacity;
