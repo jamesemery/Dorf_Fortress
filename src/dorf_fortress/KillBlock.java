@@ -4,8 +4,9 @@ import java.util.Random;
 
 /**
  * The simplest form of an obstacle, a static block that kills the player
- * when touched
- * Created by jamie on 5/28/15.
+ * when touched. This is the most generic obstacle and is capable of placing
+ * itself within an x y range of the player so that it will be at least
+ * somewhat challenging to the player
  */
 public class KillBlock extends Obstacle {
 
@@ -35,13 +36,17 @@ public class KillBlock extends Obstacle {
         projectile.die();
     }
 
-    public Entity getCloseInstance(Hitbox target, int frameCount) {
-        double xTarget = target.getX();
-        double yTarget = target.getY();
-        Random rand = new Random();
-        return null;
-    } //TODO finish filling this in
-
+    /**
+     * Creates an instance of killblock such that it does not intersect with
+     * the given killblock but is also within 200 pixels x and 150 pixels y
+     * of the players path for challenge.
+     *
+     * @param source ObstaclePlacer object that allow access to perameters
+     *               about the current state of the simulation
+     * @param target the Hitbox the Killblock is "aiming" for
+     * @param rand a random generator it uses to give parameters
+     * @return returns a KillBlock object that doesn't intersect with the hitbox
+     */
     public static Obstacle getInstance(ObstaclePlacer source, Hitbox target,
                                        Random rand) {
         double xTarget = target.getX();
@@ -53,7 +58,7 @@ public class KillBlock extends Obstacle {
             double x;
             double y;
             x = rand.nextInt(200);
-            y = rand.nextInt(150);
+            y = rand.nextInt(200);
             if (rand.nextBoolean()) {
                 x = -1*x;
             }

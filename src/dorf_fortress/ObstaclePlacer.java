@@ -11,8 +11,11 @@ import java.util.PriorityQueue;
 /**
  * ObstaclePlacer handles the random generation of obstacles on the map in
  * such a way that they will never impact the Ghosts path to completing the
- * level. The class takes an Integer list of parameters
- * Created by jamie on 5/28/15.
+ * level. It does this by repeatedly simulating the level to completion with
+ * the ghost and testing frame-by-frame whether or not the ghost intersects
+ * with each obstacles hitbox. Once enough valid obstacles of one type are
+ * made it moves on to another type before eventually putting all of the
+ * obstacles into the simulation entities.
  */
 public class ObstaclePlacer {
     Model simulation;
@@ -46,9 +49,11 @@ public class ObstaclePlacer {
     }
 
     /**
-     * Runs creates a dictornary corresponding to to how many objects must
-     * exist of each given type and then it creates specific instances of
-     * each type of obstacle and culls it with cull list before
+     * Calls determineDifficulty(n) to make a dictionary
+     * corresponding to the obstacles that must be placed and
+     * their frequency. exist of each given type and then it creates specific
+     * instances of each type of obstacle and culls it with cullList() so
+     * that none of the obstacles ever intersect with the ghost path.
      * @param n
      */
     private void obstacleFactoryMehtod(int n) {
@@ -154,7 +159,10 @@ public class ObstaclePlacer {
     /**
      * Runs through the given list of Obstacles and returns another list that
      * is equal or smaller in size to the first list that corresponds to only
-     * the obstacles that did NOT intersect with the ghost
+     * the obstacles that did NOT intersect with the ghost. It does this by
+     * resetting the simulation and placing the obstacles into the
+     * testEntities and then simulating the level to completion, removing any
+     * obstacles that intersect with the ghost along the path.
      */
     private List<Entity> cullList(List<Entity> testCases) {
         simulation.testingEntities = testCases;
@@ -184,6 +192,8 @@ public class ObstaclePlacer {
     */
     private void initializeGhost() {
         simulation.reset();
+        // Makes sure that the ghost nessicarly has determined the frame and
+        // x coordinate that it solves the level at
         while (simulation.getNextGhostHitbox() != null) {
         }
         simulation.reset();

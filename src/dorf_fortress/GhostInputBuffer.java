@@ -19,8 +19,6 @@ import java.io.File;
  * The class stores a list of length 4 boolean arrays corresponding to frame
  * by frame input in chronological order and when asked for input it merely
  * returns the corresponding value for the current frame.
- *
- * Created by jamie on 5/28/15.
  */
 public class GhostInputBuffer extends InputBuffer {
 //    private static GhostInputBuffer uniqueInstance;
