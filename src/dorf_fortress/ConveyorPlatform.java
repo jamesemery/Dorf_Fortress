@@ -46,7 +46,7 @@ public class ConveyorPlatform extends Platform {
     }
 
     /**
-     * Sets the conveyors sprite to be a ConveyorPlatformSprite object.
+     * Sets the conveyor's sprite to be a ConveyorPlatformSprite object.
      */
     @Override
     protected void makeSprite() {
