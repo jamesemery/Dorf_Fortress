@@ -22,7 +22,7 @@ public class SimpleUpwardsKillBall extends Obstacle{
     }
 
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
         this.sprite = new SimpleSprite("sprites/fireball.png", this);
     }
 

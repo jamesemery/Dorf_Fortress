@@ -63,7 +63,7 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
     }
 
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
         this.sprite = new SimpleOpacitySprite("sprites/Mummy.png", this);
     }
 

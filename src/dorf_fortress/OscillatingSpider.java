@@ -28,7 +28,7 @@ public class OscillatingSpider extends Obstacle{
     }
 
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
         //this.sprite = new SimpleSprite("sprites/BasicSpider.png", 35, 35, this);
         String[] imageList = {"sprites/SpiderForward1.png",
                 "sprites/SpiderForward2.png","sprites/SpiderForward3.png",

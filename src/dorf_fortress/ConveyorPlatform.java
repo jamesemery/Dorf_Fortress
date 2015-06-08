@@ -44,12 +44,9 @@ public class ConveyorPlatform extends Platform {
 
     /**
      * Sets the platform's sprite to the default sprite
-     * @param x   The platform's x-coordinate.
-     * @param y   The platform's x-coordinate.
-     * @param simulation   The singleton Model running in Main.
      */
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
         String[] images = {"sprites/conveyer1.png", "sprites/conveyer2.png",
                 "sprites/conveyer3.png", "sprites/conveyer4.png"};
         this.sprite = new AnimatedSprite(images, (int) this.width,

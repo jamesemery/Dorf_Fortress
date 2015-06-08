@@ -59,7 +59,7 @@ public class Ghost extends Dorf {
     }
 
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
         String[] rightImages = {"sprites/MummyRight1.png",
                 "sprites/MummyRight2.png","sprites/MummyRight3.png"};
         String[] leftImages = {"sprites/MummyLeft1.png",

@@ -54,7 +54,7 @@ public class Dorf extends Entity {
      * @param simulation
      */
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
         String[] rightImages = {"sprites/ColoredDorfRight1.png",
                 "sprites/ColoredDorfRight2.png","sprites/ColoredDorfRight3.png"};
         String[] leftImages = {"sprites/ColoredDorfLeft1.png",
