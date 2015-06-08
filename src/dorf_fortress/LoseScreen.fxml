@@ -10,7 +10,7 @@
    <children>
       <Text layoutX="123.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your dorf has suffered" textAlignment="CENTER">
          <font>
-            <Font name="Poor Richard" size="36.0" />
+            <Font name="Georgia" size="36.0" />
          </font>
       </Text>
       <Button layoutX="402.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
@@ -45,7 +45,7 @@
       </ImageView>
       <Text layoutX="159.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" a miner setback..." textAlignment="CENTER">
          <font>
-            <Font name="Poor Richard" size="36.0" />
+            <Font name="Georgia" size="36.0" />
          </font>
       </Text>
       <Text fill="#868686" layoutX="166.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(press space to retry level)" textAlignment="CENTER">
