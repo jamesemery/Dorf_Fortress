@@ -26,18 +26,10 @@ public class SolidPlatform extends Platform {
 
     /**
      * Sets the platform's sprite to the default sprite
-     * @param x   The platform's x-coordinate.
-     * @param y   The platform's x-coordinate.
-     * @param simulation   The singleton Model running in Main.
      */
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite(
-                "sprites/128x32platform.png",
-                (int)this.width,
-                (int)this.height,
-                this
-        );
+    protected void makeSprite() {
+        this.sprite = new SimpleSprite("sprites/128x32platform.png", this);
     }
 }
 

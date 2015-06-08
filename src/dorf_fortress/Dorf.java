@@ -5,51 +5,69 @@ import javafx.scene.paint.Color;
 
 /**
  * Created by Joe Adkisson on 5/24/2015.
- * Controllable hero of the game; subclass of Actor.
+ * Controllable hero of the game; subclass of Entity.
  */
 public class Dorf extends Entity {
-    double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
-    double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
+    public final double STEP_SIZE_X = 480/ GameController.FRAMES_PER_SECOND;
+    public final double STEP_SIZE_Y = 180/ GameController.FRAMES_PER_SECOND;
     public final double GRAVITY_CONSTANT = 10;
     public final double TERMINAL_VELOCITY = -600;
     public final double FRICTION_CONSTANT = 240 / GameController.FRAMES_PER_SECOND;
     public final double MAX_HORIZ_SPEED = 12000 / GameController.FRAMES_PER_SECOND;
-    Platform curPlatform;
+    protected Platform curPlatform;
     private boolean victorious = false;
-    String name;
-    InputBuffer inputSource;
+    protected InputBuffer inputSource;
     public Color hairColor;
 
 
     /**
-     * Calls Entity's constructor with no name.
-     * @param hitbox_width
-     * @param hitbox_height
+     * Constructor.
+     * @param hitbox_width   The width of the Dorf's hitbox.
+     * @param hitbox_height   The height of the Dorf's hitbox.
      */
     public Dorf(int hitbox_width, int hitbox_height, double x, double y,
                 Model model) {
         super(hitbox_width, hitbox_height, x, y, model);
-        this.name = "";
         inputSource = BasicInputBuffer.getInstance();
         hitbox = new DorfHitbox( hitbox_width, hitbox_height);
-        height = 32;
-        width = 22;
-        hitbox_checker = true;
-        this.screen_death = true;
+        hitbox_checker = true; //TODO comment saying what this does
+        this.screen_death = true; //TODO comment saying what this does
     }
 
+    /**
+     * Saves the type of the Dorf's current platform. This is used for two
+     * purposes:
+     * - to get the appropriate size jump boost when the Dorf leaves a platform
+     * - to ignore the maximum velocity constraints when on or leaving a
+     *   conveyor platform.
+     * @param platform   The platform on which the Dorf is standing.
+     */
+    public void setCurPlatform(Platform platform) {
+        curPlatform = platform;
+    }
+
+    /**
+     * Makes the Dorf's sprite, a special Sprite subclass called DorfSprite.
+     * The image sources are hard-coded in.
+     * @param x
+     * @param y
+     * @param simulation
+     */
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
         String[] rightImages = {"sprites/ColoredDorfRight1.png",
                 "sprites/ColoredDorfRight2.png","sprites/ColoredDorfRight3.png"};
         String[] leftImages = {"sprites/ColoredDorfLeft1.png",
                 "sprites/ColoredDorfLeft2.png","sprites/ColoredDorfLeft3.png"};
-        System.out.println("Calling makeSprite...");
-        this.sprite = new DorfSprite(leftImages,rightImages,(int)this.width,
-                (int)this.height, this);
-
+        this.sprite = new DorfSprite(leftImages,rightImages,22,
+                32, this);
     }
 
+    /**
+     * Colors the DorfSprite; this method simply passes the request for
+     * coloration, and the desired Color, to the sprite itself.
+     * @param hairColor   The new color for the Dorf's hair/beard.
+     */
     public void colorSprite(Color hairColor) {
         this.hairColor = hairColor;
         ((DorfSprite)this.sprite).colorSprites(hairColor);
@@ -198,7 +216,9 @@ public class Dorf extends Entity {
         }
     }
 
-    //does stuff
+    /**
+     * Resets the Dorf to its starting position, with no input.
+     */
     public void reset() {
         super.reset();
         this.victorious = false;
@@ -206,22 +226,19 @@ public class Dorf extends Entity {
     }
 
     /**
-     * Change in behavior for dorf so it doesn't worry about going off the top
+     * Checks whether the Dorf is off the bottom of the screen.
      */
     @Override
     protected boolean isOffScreen() {
-        //under the bottom first then over the top second
         return (this.getY() > simulation.SCENE_HEIGHT);
     }
 
-    // In the current implementation an Actor will never act upon something else
-    // colliding with it (it will instead call the collidesX/Y method of the
-    // object it's colliding with) but it might in the future, and it needs
-    // to fill the abstract methods from Entity.
-    public void collidesX(Entity projectile) {};
-    public void collidesY(Entity projectile) {};
-
-    public void setCurPlatform(Platform platform) {
-        curPlatform = platform;
-    }
+    /**
+     * Dorf will never actually have its collidesX/Y methods called; it's the
+     * collision methods of the thing it hits that matter. However, as a
+     * subclass of Entity, it can't NOT have them. So they're empty.
+     * @param projectile   A hypothetical, nonexistent entity.
+     */
+    public void collidesX(Entity projectile) {}
+    public void collidesY(Entity projectile) {}
 }

@@ -34,7 +34,7 @@ public class SpinningHead extends Obstacle{
     }
 
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
+    protected void makeSprite() {
 //        this.sprite = new spinningHeadSprite(x,y,this);
         this.sprite = new SpinningHeadSprite("sprites/Skull.png",
                 centerY, centerX, this);

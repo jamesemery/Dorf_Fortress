@@ -8,32 +8,32 @@
 
 <AnchorPane fx:id="primaryPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dorf_fortress.OverlayController">
    <children>
-      <Text layoutX="123.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your dorf has suffered" textAlignment="CENTER">
+      <Text layoutX="123.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your dorf has suffered" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya" size="36.0" />
+            <Font name="Georgia" size="40.0" />
          </font>
       </Text>
       <Button layoutX="402.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenMenuClicked" prefHeight="29.0" prefWidth="141.0" text="Return to Menu" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya SC" size="13.0" />
+            <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="250.0" layoutY="337.0" mnemonicParsing="false" onAction="#whenReplayClicked" prefHeight="29.0" prefWidth="141.0" style="-fx-padding: 10 20 10 20; -fx-background-radius: 9,8,5,4; -fx-background-insets: 0,1,4,5;" text="Replay Level" textAlignment="CENTER">
+      <Button layoutX="249.0" layoutY="337.0" mnemonicParsing="false" onAction="#whenReplayClicked" prefHeight="29.0" prefWidth="141.0" style="-fx-padding: 10 20 10 20; -fx-background-radius: 9,8,5,4; -fx-background-insets: 0,1,4,5;" text="Replay Level" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
       <Button layoutX="96.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenSolutionClicked" prefHeight="29.0" prefWidth="141.0" text="See Solution" textAlignment="CENTER">
          <font>
-            <Font name="Alegreya SC" size="13.0" />
+            <Font size="13.0" />
          </font>
       </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="242.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="395.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../sprites/basicArchway.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="394.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="242.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../sprites/basicArchway.png" />
          </image>
@@ -43,14 +43,14 @@
             <Image url="@../sprites/basicArchway.png" />
          </image>
       </ImageView>
-      <Text layoutX="159.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" a miner setback..." textAlignment="CENTER">
+      <Text layoutX="159.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" a miner setback..." textAlignment="CENTER">
          <font>
-            <Font name="Alegreya" size="36.0" />
+            <Font name="Georgia" size="40.0" />
          </font>
       </Text>
-      <Text fill="#868686" layoutX="166.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(press space to retry level)" textAlignment="CENTER">
+      <Text fill="#868686" layoutX="158.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(press space to retry level)" textAlignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font name="Georgia" size="28.0" />
          </font>
       </Text>
    </children>

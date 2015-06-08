@@ -1,8 +1,8 @@
 package dorf_fortress;
 
 /**
- * ConveyorPlatform is a type of platform. It adds x velocity while the Dorf is
- * on it, leading to some pretty cool moves.
+ * ConveyorPlatform is a type of platform. It adds rightwards x velocity while
+ * the Dorf is on it, leading to some pretty cool moves.
  */
 
 public class ConveyorPlatform extends Platform {
@@ -47,14 +47,9 @@ public class ConveyorPlatform extends Platform {
 
     /**
      * Sets the platform's sprite to the default sprite
-     * @param x   The platform's x-coordinate.
-     * @param y   The platform's x-coordinate.
-     * @param simulation   The singleton Model running in Main.
      */
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
-        //these are in reverse order because I screwed up the sprites, and
-        //it was easier to change the order here than to reorder the files.
+    protected void makeSprite() {
         String[] images = {"sprites/conveyer1.png", "sprites/conveyer2.png",
                 "sprites/conveyer3.png", "sprites/conveyer4.png"};
         this.sprite = new ConveyorPlatformSprite(images, 96,

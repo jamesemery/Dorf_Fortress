@@ -5,6 +5,7 @@ import com.oracle.webservices.internal.api.message.DistributedPropertySet;
 import java.util.Random;
 
 /**
+ * TODO COMMENT THIS
  * Created by jamie on 6/6/15.
  */
 public class DisappearingGhost extends Obstacle implements OpacityChanger {
@@ -66,12 +67,9 @@ public class DisappearingGhost extends Obstacle implements OpacityChanger {
         }
     }
 
-
-
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleOpacitySprite("sprites/Mummy.png",
-                (int)this.width, (int)this.height, this);
+    protected void makeSprite() {
+        this.sprite = new SimpleOpacitySprite("sprites/Mummy.png", this);
     }
 
     @Override

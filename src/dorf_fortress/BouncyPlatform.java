@@ -26,18 +26,10 @@ public class BouncyPlatform extends Platform {
 
     /**
      * Sets the platform's sprite to be distinct from the normal platform.
-     * @param x   The platform's x-coordinate.
-     * @param y   The platform's x-coordinate.
-     * @param simulation   The singleton Model running in Main.
      */
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite(
-                "sprites/basicPlatform.png",
-                (int)this.width,
-                (int)this.height,
-                this
-        );
+    protected void makeSprite() {
+        this.sprite = new SimpleSprite("sprites/basicPlatform.png", this);
     }
 }
 

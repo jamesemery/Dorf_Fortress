@@ -34,7 +34,7 @@ public abstract class Entity {
         hitbox_checker = false;
         this.height = hitbox_height;
         this.width = hitbox_width;
-        makeSprite(x,y,simulation);
+        makeSprite();
         makeHitbox();
         this.setX(x);
         this.setY(y);
@@ -46,7 +46,7 @@ public abstract class Entity {
 
     }
 
-    protected abstract void makeSprite(double x, double y, Model simulation);
+    protected abstract void makeSprite();
 
     protected abstract void makeHitbox();
 

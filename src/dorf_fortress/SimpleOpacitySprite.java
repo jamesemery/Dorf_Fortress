@@ -5,8 +5,8 @@ package dorf_fortress;
  * Created by jamie on 6/6/15.
  */
 public class SimpleOpacitySprite extends SimpleSprite {
-    public SimpleOpacitySprite(String s, int width, int height, Entity owner) {
-        super(s, width, height, owner);
+    public SimpleOpacitySprite(String s, Entity owner) {
+        super(s, owner);
     }
 
     @Override

@@ -32,18 +32,10 @@ public class TrampolinePlatform extends Platform {
 
     /**
      * Sets the platform's sprite to be distinct from the normal platform.
-     * @param x   The platform's x-coordinate.
-     * @param y   The platform's x-coordinate.
-     * @param simulation   The singleton Model running in Main.
      */
     @Override
-    protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite(
-                "sprites/basicPlatform.png", //TODO: get a TrampolinePlatform.png, use it here.
-                (int)this.width,
-                (int)this.height,
-                this
-        );
+    protected void makeSprite() {
+        this.sprite = new SimpleSprite("sprites/basicPlatform.png", this); //TODO: get a TrampolinePlatform.png, use it here.
     }
 
     /**
@@ -67,7 +59,7 @@ public class TrampolinePlatform extends Platform {
                 projectile.setY_velocity(this.maxSpeed);
             }
 
-            // bottom collision (by elimination)
+        // bottom collision (by elimination)
         } else {
             projectile.setY(this.getY() + this.height + 0.01);
             projectile.setY_velocity(-projectile.getY_velocity());
