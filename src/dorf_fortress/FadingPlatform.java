@@ -48,8 +48,8 @@ public class FadingPlatform extends Platform implements OpacityChanger{
 
     @Override
     public void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleOpacitySprite("sprites/128x32platform.png",
-                (int)this.width, (int)this.height, this);
+        this.sprite = new SimpleOpacitySprite(
+                "sprites/128x32platform.png", this);
     }
 
 

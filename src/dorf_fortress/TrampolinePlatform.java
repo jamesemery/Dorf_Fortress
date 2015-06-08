@@ -38,12 +38,7 @@ public class TrampolinePlatform extends Platform {
      */
     @Override
     protected void makeSprite(double x, double y, Model simulation) {
-        this.sprite = new SimpleSprite(
-                "sprites/basicPlatform.png", //TODO: get a TrampolinePlatform.png, use it here.
-                (int)this.width,
-                (int)this.height,
-                this
-        );
+        this.sprite = new SimpleSprite("sprites/basicPlatform.png", this); //TODO: get a TrampolinePlatform.png, use it here.
     }
 
     /**
@@ -67,7 +62,7 @@ public class TrampolinePlatform extends Platform {
                 projectile.setY_velocity(this.maxSpeed);
             }
 
-            // bottom collision (by elimination)
+        // bottom collision (by elimination)
         } else {
             projectile.setY(this.getY() + this.height + 0.01);
             projectile.setY_velocity(-projectile.getY_velocity());
